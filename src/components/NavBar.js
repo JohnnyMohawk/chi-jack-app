@@ -1,51 +1,80 @@
-import React, {useState} from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState, useEffect } from 'react';
+import { Button } from './Button';
+import { Link } from 'react-router-dom';
+import './NavBar.css';
 
-export default function NavBar() {
-    const [click, setClick] = useState(false)
+function Navbar() {
+    const [click, setClick] = useState(false);
+    const [button, setButton] = useState(true);
 
-    const handleClick = () => setClick(!click)
+    const handleClick = () => setClick(!click);
+    const closeMobileMenu = () => setClick(false);
 
-    const closeMobileMenu = () => setClick(false)
+    const showButton = () => {
+        if (window.innerWidth <= 960) {
+        setButton(false);
+        } else {
+        setButton(true);
+        }
+    };
+
+    useEffect(() => {
+        showButton();
+    }, []);
+
+    window.addEventListener('resize', showButton);
+
     return (
         <>
-            <nav className="navbar">
-                <div className="navbar-conatainer">
-                    <Link to="/" className="navbar-logo">
-                        Shy Jack <i className="fab fa-typo3" />
-                    </Link>
-                    <div className="menu-icon" onClick={handleClick}>
-                        <i className={click ? 'fas fa-times' : 'fas fa-bars'} />
-                    </div>
-                    <ul className={click ? 'nav-menu active' : 'nav-menu'}>
-                        <li className='nav-item'>
-                            <Link to='/' className='nav-links' onClick={closeMobileMenu}>
-                                Home
-                            </Link>
-                        </li>
-                        <li className='nav-item'>
-                            <Link to='/map' className='nav-links' onClick={closeMobileMenu}>
-                                Map
-                            </Link>
-                        </li>
-                        <li className='nav-item'>
-                            <Link to='/data' className='nav-links' onClick={closeMobileMenu}>
-                                Data
-                            </Link>
-                        </li>
-                        <li className='nav-item'>
-                            <Link to='/scanner' className='nav-links' onClick={closeMobileMenu}>
-                                Scanner
-                            </Link>
-                        </li>
-                        <li className='nav-item'>
-                            <Link to='/forum' className='nav-links' onClick={closeMobileMenu}>
-                                Forum
-                            </Link>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
+        <nav className='navbar'>
+            <div className='navbar-container'>
+            <Link to='/' className='navbar-logo' onClick={closeMobileMenu}>
+                Shy Jack
+                <i class='fab fa-typo3' />
+            </Link>
+            <div className='menu-icon' onClick={handleClick}>
+                <i className={click ? 'fas fa-times' : 'fas fa-bars'} />
+            </div>
+            <ul className={click ? 'nav-menu active' : 'nav-menu'}>
+                <li className='nav-item'>
+                <Link to='/map' className='nav-links' onClick={closeMobileMenu}>
+                    Map
+                </Link>
+                </li>
+                <li className='nav-item'>
+                <Link
+                    to='/data'
+                    className='nav-links'
+                    onClick={closeMobileMenu}
+                >
+                    Data
+                </Link>
+                </li>
+                <li className='nav-item'>
+                <Link
+                    to='/scanner'
+                    className='nav-links'
+                    onClick={closeMobileMenu}
+                >
+                    Scanner
+                </Link>
+                </li>
+
+                <li>
+                <Link
+                    to='/sign-up'
+                    className='nav-links-mobile'
+                    onClick={closeMobileMenu}
+                >
+                    Sign Up
+                </Link>
+                </li>
+            </ul>
+            {button && <Button buttonStyle='btn--outline'>SIGN UP</Button>}
+            </div>
+        </nav>
         </>
-    )
+    );
 }
+
+export default Navbar;
