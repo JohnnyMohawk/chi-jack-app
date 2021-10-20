@@ -6,8 +6,9 @@
 }
 
 .home,
-.services,
-.products,
+.graph,
+.map,
+.scanner,
 .sign-up {
   display: flex;
   height: 90vh;
@@ -16,8 +17,8 @@
   font-size: 3rem;
 }
 
-.services {
-  /* background-image: url('/images/img-2.jpg'); */
+.map {
+  background-image: url('background-images/chicago-map.jpeg');
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -25,10 +26,19 @@
   font-size: 100px;
 }
 
-.products {
-  /* background-image: url('/images/img-1.jpg'); */
+.graph {
+  background-image: url('background-images/navy-pier.jpeg');
   background-position: center;
-  background-size: fill;
+  background-size: cover;
+  background-repeat: no-repeat;
+  color: #fff;
+  font-size: 100px;
+}
+
+.scanner {
+  background-image: url('background-images/navy-pier.jpeg');
+  background-position: center;
+  background-size: cover;
   background-repeat: no-repeat;
   color: #fff;
   font-size: 100px;
