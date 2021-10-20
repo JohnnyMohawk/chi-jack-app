@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useState, useEffect } from 'react'
+import { GoogleMap, Marker, useLoadScript, InfoWindow } from '@react-google-maps/api';
+import mapStyles from './mapStyles';
 import '../../App.css'
 import '../pages/Map.css'
+require('dotenv').config()
 
 function Map() {
     return (
