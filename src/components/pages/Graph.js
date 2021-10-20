@@ -3,7 +3,7 @@ import '../../App.css'
 
 function Graph() {
     return (
-        <h1 className='graph'>Party</h1>
+        <h1 className='graph'>Graph Party</h1>
     )
 
 }

@@ -3,7 +3,7 @@ import '../../App.css'
 
 function Map() {
     return (
-        <h1 className='map'>Party</h1>
+        <h1 className='map'>Map Party</h1>
     )
 
 }

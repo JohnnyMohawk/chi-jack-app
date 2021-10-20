@@ -3,7 +3,7 @@ import '../../App.css'
 
 function Scanner() {
     return (
-        <h1 className='scanner'>Party</h1>
+        <h1 className='scanner'>Scanner Party</h1>
     )
 
 }

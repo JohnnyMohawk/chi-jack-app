@@ -11,8 +11,8 @@ function HeroSection() {
             <h2>City of Chicago Crime Data Visualizer</h2>
             <p>Explore the data for yourself!</p>
             <div className="hero-btns">
-                <Button className="btns" buttonStyle="btn--outline" buttonSize="btn--large">Map Data</Button>
-                <Button className="btns" buttonStyle="btn--primary" buttonSize="btn--large">Graph Data</Button>
+                <Button className="btns" buttonStyle="btn--outline" buttonSize="btn--large" to="/map">Map Data</Button>
+                <Button className="btns" buttonStyle="btn--primary" buttonSize="btn--large" to="/graph">Graph Data</Button>
             </div>
         </div>
     )
