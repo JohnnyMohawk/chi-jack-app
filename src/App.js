@@ -6,6 +6,7 @@ import Map from './components/pages/Map';
 import Graph from './components/pages/Graph';
 import Scanner from './components/pages/Scanner';
 import SignUp from './components/pages/SignUp';
+import Footer from './components/Footer';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path='/scanner' component={Scanner} />
         <Route path='/sign-up' component={SignUp} />
       </Switch>
+      <Footer />
     </Router>
     </>
   );
