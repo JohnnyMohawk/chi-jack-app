@@ -4,21 +4,24 @@ import '../../App.css'
 import '../pages/Graph.css'
 
 function Graph() {
+
+
+
     return (
         <>
             <div className="graph-container">
                 <h1>Chicago Carjacking Data Visualizer</h1>
                 <div className="graph-choice-bar">
                 <select>
-                    <option value="most recent">Bar Graph</option>
-                    <option value="week">Doughnut Chart</option>
-                    <option value="month">Line Graph</option>
-                    <option value="year">Pie Chart</option>
-                    <option value="year">Polar Area Chart</option>
-                    <option value="year">Radar Graph</option>
+                    <option value="bar">Bar Graph</option>
+                    <option value="doughnut">Doughnut Chart</option>
+                    <option value="line">Line Graph</option>
+                    <option value="pie">Pie Chart</option>
+                    <option value="polar">Polar Area Chart</option>
+                    <option value="radar">Radar Graph</option>
                 </select>
                     <div className="graph-text">
-                        <Bar
+                        <Pie
                             data={{
                             labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
                             datasets: [
