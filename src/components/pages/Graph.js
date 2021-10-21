@@ -28,10 +28,10 @@ function Graph() {
 
     useEffect(() => {
         makeApiCall()
-        // console.log("BUTTS", Object.values(annualCjData))
+        console.log(graphType)
     }, [graphType])
 
-    if (graphType === "bar") {return (
+    return (
         <>
             <div className="graph-container">
                 <h1>Chicago Carjacking Data Visualizer</h1>
@@ -48,7 +48,7 @@ function Graph() {
                     </select>
                 </div>
                 <div className="graph-text">
-                    <Bar
+                    {graphType === "bar" ? <Bar
                         data={{
                         labels: Object.keys(annualCjData),
                         datasets: [
@@ -94,337 +94,253 @@ function Graph() {
                             },
                         },
                         }}
-                    />
+                    /> :
+                    <></>}
+                    {graphType === "doughnut" ? <Doughnut
+                        data={{
+                        labels: Object.keys(annualCjData),
+                        datasets: [
+                            {
+                            label: 'Annual Carjackings in Chicago',
+                            data: Object.values(annualCjData),
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(255, 206, 86, 0.2)',
+                                'rgba(75, 192, 192, 0.2)',
+                                'rgba(153, 102, 255, 0.2)',
+                                'rgba(255, 159, 64, 0.2)',
+                            ],
+                            borderColor: [
+                                'rgba(255, 99, 132, 1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)',
+                                'rgba(255, 159, 64, 1)',
+                            ],
+                            borderWidth: 1,
+                            },
+                        ],
+                        }}
+                        height={400}
+                        width={600}
+                        options={{
+                        maintainAspectRatio: false,
+                        scales: {
+                            yAxes: [
+                            {
+                                ticks: {
+                                beginAtZero: true,
+                                },
+                            },
+                            ],
+                        },
+                        legend: {
+                            labels: {
+                            fontSize: 25,
+                            },
+                        },
+                        }}
+                    /> :
+                    <></>}
+                    {graphType === "line" ? <Line
+                        data={{
+                        labels: Object.keys(annualCjData),
+                        datasets: [
+                            {
+                            label: 'Annual Carjackings in Chicago',
+                            data: Object.values(annualCjData),
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(255, 206, 86, 0.2)',
+                                'rgba(75, 192, 192, 0.2)',
+                                'rgba(153, 102, 255, 0.2)',
+                                'rgba(255, 159, 64, 0.2)',
+                            ],
+                            borderColor: [
+                                'rgba(255, 99, 132, 1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)',
+                                'rgba(255, 159, 64, 1)',
+                            ],
+                            borderWidth: 1,
+                            },
+                        ],
+                        }}
+                        height={400}
+                        width={600}
+                        options={{
+                        maintainAspectRatio: false,
+                        scales: {
+                            yAxes: [
+                            {
+                                ticks: {
+                                beginAtZero: true,
+                                },
+                            },
+                            ],
+                        },
+                        legend: {
+                            labels: {
+                            fontSize: 25,
+                            },
+                        },
+                        }}
+                    /> :
+                    <></>}
+                    {graphType === "pie" ? <Pie
+                        data={{
+                        labels: Object.keys(annualCjData),
+                        datasets: [
+                            {
+                            label: 'Annual Carjackings in Chicago',
+                            data: Object.values(annualCjData),
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(255, 206, 86, 0.2)',
+                                'rgba(75, 192, 192, 0.2)',
+                                'rgba(153, 102, 255, 0.2)',
+                                'rgba(255, 159, 64, 0.2)',
+                            ],
+                            borderColor: [
+                                'rgba(255, 99, 132, 1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)',
+                                'rgba(255, 159, 64, 1)',
+                            ],
+                            borderWidth: 1,
+                            },
+                        ],
+                        }}
+                        height={400}
+                        width={600}
+                        options={{
+                        maintainAspectRatio: false,
+                        scales: {
+                            yAxes: [
+                            {
+                                ticks: {
+                                beginAtZero: true,
+                                },
+                            },
+                            ],
+                        },
+                        legend: {
+                            labels: {
+                            fontSize: 25,
+                            },
+                        },
+                        }}
+                    /> :
+                    <></>}
+                    {graphType === "polar" ? <PolarArea
+                        data={{
+                        labels: Object.keys(annualCjData),
+                        datasets: [
+                            {
+                            label: 'Annual Carjackings in Chicago',
+                            data: Object.values(annualCjData),
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(255, 206, 86, 0.2)',
+                                'rgba(75, 192, 192, 0.2)',
+                                'rgba(153, 102, 255, 0.2)',
+                                'rgba(255, 159, 64, 0.2)',
+                            ],
+                            borderColor: [
+                                'rgba(255, 99, 132, 1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)',
+                                'rgba(255, 159, 64, 1)',
+                            ],
+                            borderWidth: 1,
+                            },
+                        ],
+                        }}
+                        height={400}
+                        width={600}
+                        options={{
+                        maintainAspectRatio: false,
+                        scales: {
+                            yAxes: [
+                            {
+                                ticks: {
+                                beginAtZero: true,
+                                },
+                            },
+                            ],
+                        },
+                        legend: {
+                            labels: {
+                            fontSize: 25,
+                            },
+                        },
+                        }}
+                    /> :
+                    <></>}
+                    {graphType === "radar" ? <Radar
+                        data={{
+                        labels: Object.keys(annualCjData),
+                        datasets: [
+                            {
+                            label: 'Annual Carjackings in Chicago',
+                            data: Object.values(annualCjData),
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(255, 206, 86, 0.2)',
+                                'rgba(75, 192, 192, 0.2)',
+                                'rgba(153, 102, 255, 0.2)',
+                                'rgba(255, 159, 64, 0.2)',
+                            ],
+                            borderColor: [
+                                'rgba(255, 99, 132, 1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)',
+                                'rgba(255, 159, 64, 1)',
+                            ],
+                            borderWidth: 1,
+                            },
+                        ],
+                        }}
+                        height={400}
+                        width={600}
+                        options={{
+                        maintainAspectRatio: false,
+                        scales: {
+                            yAxes: [
+                            {
+                                ticks: {
+                                beginAtZero: true,
+                                },
+                            },
+                            ],
+                        },
+                        legend: {
+                            labels: {
+                            fontSize: 25,
+                            },
+                        },
+                        }}
+                    /> :
+                    <></>}
                 </div>
             </div>
         </>
     )
-}else if(graphType === "pie"){return (
-    <>
-        <div className="graph-container">
-            <h1>Chicago Carjacking Data Visualizer</h1>
-            <div className="graph-choice-bar">
-            <select>
-                <option value="bar">Bar Graph</option>
-                <option value="doughnut">Doughnut Chart</option>
-                <option value="line">Line Graph</option>
-                <option value="pie">Pie Chart</option>
-                <option value="polar">Polar Area Chart</option>
-                <option value="radar">Radar Graph</option>
-            </select>
-                <div className="graph-text">
-                    <Pie
-                        data={{
-                        labels: Object.keys(annualCjData),
-                        datasets: [
-                            {
-                            label: 'Annual Carjackings in Chicago',
-                            data: Object.values(annualCjData),
-                            backgroundColor: [
-                                'rgba(255, 99, 132, 0.2)',
-                                'rgba(54, 162, 235, 0.2)',
-                                'rgba(255, 206, 86, 0.2)',
-                                'rgba(75, 192, 192, 0.2)',
-                                'rgba(153, 102, 255, 0.2)',
-                                'rgba(255, 159, 64, 0.2)',
-                            ],
-                            borderColor: [
-                                'rgba(255, 99, 132, 1)',
-                                'rgba(54, 162, 235, 1)',
-                                'rgba(255, 206, 86, 1)',
-                                'rgba(75, 192, 192, 1)',
-                                'rgba(153, 102, 255, 1)',
-                                'rgba(255, 159, 64, 1)',
-                            ],
-                            borderWidth: 1,
-                            },
-                        ],
-                        }}
-                        height={400}
-                        width={600}
-                        options={{
-                        maintainAspectRatio: false,
-                        scales: {
-                            yAxes: [
-                            {
-                                ticks: {
-                                beginAtZero: true,
-                                },
-                            },
-                            ],
-                        },
-                        legend: {
-                            labels: {
-                            fontSize: 25,
-                            },
-                        },
-                        }}
-                    />
-                </div>
-            </div>
-        </div>
-    </>
-)}else if(graphType === "doughnut"){return (
-    <>
-        <div className="graph-container">
-            <h1>Chicago Carjacking Data Visualizer</h1>
-            <div className="graph-choice-bar">
-            <select>
-                <option value="bar">Bar Graph</option>
-                <option value="doughnut">Doughnut Chart</option>
-                <option value="line">Line Graph</option>
-                <option value="pie">Pie Chart</option>
-                <option value="polar">Polar Area Chart</option>
-                <option value="radar">Radar Graph</option>
-            </select>
-                <div className="graph-text">
-                    <Doughnut
-                        data={{
-                        labels: Object.keys(annualCjData),
-                        datasets: [
-                            {
-                            label: 'Annual Carjackings in Chicago',
-                            data: Object.values(annualCjData),
-                            backgroundColor: [
-                                'rgba(255, 99, 132, 0.2)',
-                                'rgba(54, 162, 235, 0.2)',
-                                'rgba(255, 206, 86, 0.2)',
-                                'rgba(75, 192, 192, 0.2)',
-                                'rgba(153, 102, 255, 0.2)',
-                                'rgba(255, 159, 64, 0.2)',
-                            ],
-                            borderColor: [
-                                'rgba(255, 99, 132, 1)',
-                                'rgba(54, 162, 235, 1)',
-                                'rgba(255, 206, 86, 1)',
-                                'rgba(75, 192, 192, 1)',
-                                'rgba(153, 102, 255, 1)',
-                                'rgba(255, 159, 64, 1)',
-                            ],
-                            borderWidth: 1,
-                            },
-                        ],
-                        }}
-                        height={400}
-                        width={600}
-                        options={{
-                        maintainAspectRatio: false,
-                        scales: {
-                            yAxes: [
-                            {
-                                ticks: {
-                                beginAtZero: true,
-                                },
-                            },
-                            ],
-                        },
-                        legend: {
-                            labels: {
-                            fontSize: 25,
-                            },
-                        },
-                        }}
-                    />
-                </div>
-            </div>
-        </div>
-    </>
-)}else if(graphType === "line"){return (
-    <>
-        <div className="graph-container">
-            <h1>Chicago Carjacking Data Visualizer</h1>
-            <div className="graph-choice-bar">
-            <select>
-                <option value="bar">Bar Graph</option>
-                <option value="doughnut">Doughnut Chart</option>
-                <option value="line">Line Graph</option>
-                <option value="pie">Pie Chart</option>
-                <option value="polar">Polar Area Chart</option>
-                <option value="radar">Radar Graph</option>
-            </select>
-                <div className="graph-text">
-                    <Line
-                        data={{
-                        labels: Object.keys(annualCjData),
-                        datasets: [
-                            {
-                            label: 'Annual Carjackings in Chicago',
-                            data: Object.values(annualCjData),
-                            backgroundColor: [
-                                'rgba(255, 99, 132, 0.2)',
-                                'rgba(54, 162, 235, 0.2)',
-                                'rgba(255, 206, 86, 0.2)',
-                                'rgba(75, 192, 192, 0.2)',
-                                'rgba(153, 102, 255, 0.2)',
-                                'rgba(255, 159, 64, 0.2)',
-                            ],
-                            borderColor: [
-                                'rgba(255, 99, 132, 1)',
-                                'rgba(54, 162, 235, 1)',
-                                'rgba(255, 206, 86, 1)',
-                                'rgba(75, 192, 192, 1)',
-                                'rgba(153, 102, 255, 1)',
-                                'rgba(255, 159, 64, 1)',
-                            ],
-                            borderWidth: 1,
-                            },
-                        ],
-                        }}
-                        height={400}
-                        width={600}
-                        options={{
-                        maintainAspectRatio: false,
-                        scales: {
-                            yAxes: [
-                            {
-                                ticks: {
-                                beginAtZero: true,
-                                },
-                            },
-                            ],
-                        },
-                        legend: {
-                            labels: {
-                            fontSize: 25,
-                            },
-                        },
-                        }}
-                    />
-                </div>
-            </div>
-        </div>
-    </>
-)}else if(graphType === "polar"){return (
-    <>
-        <div className="graph-container">
-            <h1>Chicago Carjacking Data Visualizer</h1>
-            <div className="graph-choice-bar">
-            <select>
-                <option value="bar">Bar Graph</option>
-                <option value="doughnut">Doughnut Chart</option>
-                <option value="line">Line Graph</option>
-                <option value="pie">Pie Chart</option>
-                <option value="polar">Polar Area Chart</option>
-                <option value="radar">Radar Graph</option>
-            </select>
-                <div className="graph-text">
-                    <PolarArea
-                        data={{
-                        labels: Object.keys(annualCjData),
-                        datasets: [
-                            {
-                            label: 'Annual Carjackings in Chicago',
-                            data: Object.values(annualCjData),
-                            backgroundColor: [
-                                'rgba(255, 99, 132, 0.2)',
-                                'rgba(54, 162, 235, 0.2)',
-                                'rgba(255, 206, 86, 0.2)',
-                                'rgba(75, 192, 192, 0.2)',
-                                'rgba(153, 102, 255, 0.2)',
-                                'rgba(255, 159, 64, 0.2)',
-                            ],
-                            borderColor: [
-                                'rgba(255, 99, 132, 1)',
-                                'rgba(54, 162, 235, 1)',
-                                'rgba(255, 206, 86, 1)',
-                                'rgba(75, 192, 192, 1)',
-                                'rgba(153, 102, 255, 1)',
-                                'rgba(255, 159, 64, 1)',
-                            ],
-                            borderWidth: 1,
-                            },
-                        ],
-                        }}
-                        height={400}
-                        width={600}
-                        options={{
-                        maintainAspectRatio: false,
-                        scales: {
-                            yAxes: [
-                            {
-                                ticks: {
-                                beginAtZero: true,
-                                },
-                            },
-                            ],
-                        },
-                        legend: {
-                            labels: {
-                            fontSize: 25,
-                            },
-                        },
-                        }}
-                    />
-                </div>
-            </div>
-        </div>
-    </>
-)}else if(graphType === "radar"){return (
-    <>
-        <div className="graph-container">
-            <h1>Chicago Carjacking Data Visualizer</h1>
-            <div className="graph-choice-bar">
-            <select>
-                <option value="bar">Bar Graph</option>
-                <option value="doughnut">Doughnut Chart</option>
-                <option value="line">Line Graph</option>
-                <option value="pie">Pie Chart</option>
-                <option value="polar">Polar Area Chart</option>
-                <option value="radar">Radar Graph</option>
-            </select>
-                <div className="graph-text">
-                    <Radar
-                        data={{
-                        labels: Object.keys(annualCjData),
-                        datasets: [
-                            {
-                            label: 'Annual Carjackings in Chicago',
-                            data: Object.values(annualCjData),
-                            backgroundColor: [
-                                'rgba(255, 99, 132, 0.2)',
-                                'rgba(54, 162, 235, 0.2)',
-                                'rgba(255, 206, 86, 0.2)',
-                                'rgba(75, 192, 192, 0.2)',
-                                'rgba(153, 102, 255, 0.2)',
-                                'rgba(255, 159, 64, 0.2)',
-                            ],
-                            borderColor: [
-                                'rgba(255, 99, 132, 1)',
-                                'rgba(54, 162, 235, 1)',
-                                'rgba(255, 206, 86, 1)',
-                                'rgba(75, 192, 192, 1)',
-                                'rgba(153, 102, 255, 1)',
-                                'rgba(255, 159, 64, 1)',
-                            ],
-                            borderWidth: 1,
-                            },
-                        ],
-                        }}
-                        height={400}
-                        width={600}
-                        options={{
-                        maintainAspectRatio: false,
-                        scales: {
-                            yAxes: [
-                            {
-                                ticks: {
-                                beginAtZero: true,
-                                },
-                            },
-                            ],
-                        },
-                        legend: {
-                            labels: {
-                            fontSize: 25,
-                            },
-                        },
-                        }}
-                    />
-                </div>
-            </div>
-        </div>
-    </>
-)}
+
 }
 
 export default Graph
