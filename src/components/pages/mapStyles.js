@@ -1,136 +1,124 @@
 export default [
     {
-        featureType: "all",
-        elementType: "geometry",
-        stylers: [
+        "featureType": "administrative",
+        "elementType": "all",
+        "stylers": [
             {
-                color: "#202c3e"
+                "saturation": "-100"
             }
         ]
     },
     {
-        featureType: "all",
-        elementType: "labels.text.fill",
-        stylers: [
+        "featureType": "administrative.province",
+        "elementType": "all",
+        "stylers": [
             {
-                gamma: 0.01
-            },
-            {
-                lightness: 20
-            },
-            {
-                weight: "1.39"
-            },
-            {
-                color: "#ffffff"
+                "visibility": "off"
             }
         ]
     },
     {
-        featureType: "all",
-        elementType: "labels.text.stroke",
-        stylers: [
+        "featureType": "landscape",
+        "elementType": "all",
+        "stylers": [
             {
-                weight: "0.96"
+                "saturation": -100
             },
             {
-                saturation: "9"
+                "lightness": 65
             },
             {
-                visibility: "on"
-            },
-            {
-                color: "#000000"
+                "visibility": "on"
             }
         ]
     },
     {
-        featureType: "all",
-        elementType: "labels.icon",
-        stylers: [
+        "featureType": "poi",
+        "elementType": "all",
+        "stylers": [
             {
-                visibility: "off"
-            }
-        ]
-    },
-    {
-        featureType: "landscape",
-        elementType: "geometry",
-        stylers: [
-            {
-                lightness: 30
+                "saturation": -100
             },
             {
-                saturation: "9"
+                "lightness": "50"
             },
             {
-                color: "#29446b"
+                "visibility": "simplified"
             }
         ]
     },
     {
-        featureType: "poi",
-        elementType: "geometry",
-        stylers: [
+        "featureType": "road",
+        "elementType": "all",
+        "stylers": [
             {
-                saturation: 20
+                "saturation": "-100"
             }
         ]
     },
     {
-        featureType: "poi.park",
-        elementType: "geometry",
-        stylers: [
+        "featureType": "road.highway",
+        "elementType": "all",
+        "stylers": [
             {
-                lightness: 20
+                "visibility": "simplified"
+            }
+        ]
+    },
+    {
+        "featureType": "road.arterial",
+        "elementType": "all",
+        "stylers": [
+            {
+                "lightness": "30"
+            }
+        ]
+    },
+    {
+        "featureType": "road.local",
+        "elementType": "all",
+        "stylers": [
+            {
+                "lightness": "40"
+            }
+        ]
+    },
+    {
+        "featureType": "transit",
+        "elementType": "all",
+        "stylers": [
+            {
+                "saturation": -100
             },
             {
-                saturation: -20
+                "visibility": "simplified"
             }
         ]
     },
     {
-        featureType: "road",
-        elementType: "geometry",
-        stylers: [
+        "featureType": "water",
+        "elementType": "geometry",
+        "stylers": [
             {
-                lightness: 10
+                "hue": "#ffff00"
             },
             {
-                saturation: -30
-            }
-        ]
-    },
-    {
-        featureType: "road",
-        elementType: "geometry.fill",
-        stylers: [
-            {
-                color: "#193a55"
-            }
-        ]
-    },
-    {
-        featureType: "road",
-        elementType: "geometry.stroke",
-        stylers: [
-            {
-                saturation: 25
+                "lightness": -25
             },
             {
-                lightness: 25
-            },
-            {
-                weight: "0.01"
+                "saturation": -97
             }
         ]
     },
     {
-        featureType: "water",
-        elementType: "all",
-        stylers: [
+        "featureType": "water",
+        "elementType": "labels",
+        "stylers": [
             {
-                lightness: -20
+                "lightness": -25
+            },
+            {
+                "saturation": -100
             }
         ]
     }
