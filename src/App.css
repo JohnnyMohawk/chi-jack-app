@@ -16,7 +16,7 @@
   justify-content: center;
   font-size: 3rem;
 }
-
+/* 
 .map {
   background-image: url('background-images/chicago-map.jpeg');
   background-position: center;
@@ -24,7 +24,7 @@
   background-repeat: no-repeat;
   color: #fff;
   font-size: 100px;
-}
+} */
 
 .graph {
   background-image: url('background-images/navy-pier.jpeg');
