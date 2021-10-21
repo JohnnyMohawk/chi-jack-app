@@ -145,7 +145,7 @@ const Map = () => {
                 {searchYear}
             </h2>
             <div className="search-bar">
-                <select name="status" id="status" className="statusDrop" defaultValue={searchSpan} onChange={event => {
+                <select defaultValue={searchSpan} onChange={event => {
                 setSearchSpan(event.target.value)
                 }}>
                     <option value="most recent">One Day</option>
@@ -160,7 +160,7 @@ const Map = () => {
                     let moNo = months.indexOf(event.target.value) + 1
                     formatDay(moNo)
                     setMonthNumber(moNo)
-                }}>
+                    }}>
                     {months.map(month => (
                         <option key={month} value={month}>
                             {month}
