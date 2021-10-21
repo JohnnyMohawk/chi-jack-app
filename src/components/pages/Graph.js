@@ -1,11 +1,34 @@
-import React from "react"
+import React, {useState, useEffect} from "react"
 import {Bar, Doughnut, Line, Pie, PolarArea, Radar} from 'react-chartjs-2'
+import {formatDay, getDaysInMonth, createWeekArr, yearRange} from '../services/mapService.js'
 import '../../App.css'
 import '../pages/Graph.css'
 
 function Graph() {
 
+    const currentYear = new Date().getFullYear()
 
+    const [yearArray, setYearArray] = useState([])
+    const [annualCjData, setAnnualCjData] = useState({})
+
+    const makeApiCall = async() => {
+        let annualDataObj = {}
+        let res = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?description=AGGRAVATED%20VEHICULAR%20HIJACKING&$limit=50000&$offset=0')
+        let data = await res.json()
+        let yearArr = yearRange(2001, currentYear)
+        setYearArray(yearArr)
+        // console.log(data.filter(crime => crime.date.includes(2020)).length)
+        yearArr.forEach(year => {
+            annualDataObj[year] = data.filter(crime => crime.date.includes(year)).length
+        });
+        // console.log(annualDataObj)
+        setAnnualCjData(annualDataObj)
+    }
+
+    useEffect(() => {
+        makeApiCall()
+        console.log("BUTTS", Object.values(annualCjData))
+    }, [])
 
     return (
         <>
@@ -21,13 +44,13 @@ function Graph() {
                     <option value="radar">Radar Graph</option>
                 </select>
                     <div className="graph-text">
-                        <Pie
+                        <Bar
                             data={{
-                            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                            labels: Object.keys(annualCjData),
                             datasets: [
                                 {
                                 label: '# of votes',
-                                data: [12, 19, 3, 5, 2, 3],
+                                data: Object.values(annualCjData),
                                 backgroundColor: [
                                     'rgba(255, 99, 132, 0.2)',
                                     'rgba(54, 162, 235, 0.2)',
