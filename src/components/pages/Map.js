@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { GoogleMap, Marker, useLoadScript, InfoWindow } from '@react-google-maps/api';
+import {formatDay, getDaysInMonth, createWeekArr, yearRange} from '../services/mapService.js'
 import mapStyles from './mapStyles';
 import '../../App.css'
 import '../pages/Map.css'
@@ -18,60 +19,7 @@ const options = {
 
 const googleMapsApiKey = process.env.REACT_APP_API_KEY_GOOGLE_MAPS
 
-const formatDate = (date) => {
-    var d = new Date(date),
-        month = '' + (d.getMonth() + 1),
-        day = '' + d.getDate(),
-        year = d.getFullYear();
-    if (month.length < 2) 
-        month = '0' + month;
-    if (day.length < 2) 
-        day = '0' + day;
-    return [year, month, day].join('-');
-}
-
-const formatDay = (day) => {
-    if (day.toString().length < 2) 
-        day = '0' + day;
-    return day
-}
-
-function getDaysInMonth(month, year) {
-    var date = new Date(year, month, 1);
-    var days = [];
-    while (date.getMonth() === month) {
-        let day = formatDate(new Date(date)).split("-")[2]
-        days.push(day);
-        date.setDate(date.getDate() + 1);
-    }
-    return days;
-}
-
-const yearRange = (start, end) => {
-    return Array(end - start + 1).fill().map((_, idx) => start + idx)
-}
-
-const getDaysArray = (start, end) => {
-    for(var weekArr=[],dt=new Date(start); dt<=end; dt.setDate(dt.getDate()+1)){
-        weekArr.push(new Date(dt));
-    }
-    return weekArr;
-};
-
-const createWeekArr = (date) => {
-    let weekStart = new Date(date)
-    weekStart.setDate(weekStart.getDate() - 5)
-    let weekEnd = new Date(date)
-    weekEnd.setDate(weekEnd.getDate() + 1)
-    let daysArray = getDaysArray(weekStart, weekEnd)
-    let formatDaysArr = []
-    daysArray.forEach(day => {
-        formatDaysArr.push(formatDate(day.toDateString()))
-    });
-    return formatDaysArr
-}
-
-function Map() {
+const Map = () => {
     const { isLoaded, loadError } = useLoadScript({
         id: 'google-map-script',
         googleMapsApiKey: googleMapsApiKey,
@@ -99,7 +47,7 @@ function Map() {
     const [monthNumber, setMonthNumber] = useState(currentMonth + 1)
     const [daysOfTheMonth, setDaysOfTheMonth] = useState(getDaysInMonth(currentMonth, currentYear))
 
-    const makeApiCall = async() => {
+    const createFormattedDate = () => {
         let formattedDate
         let formDateArr = []
         let dateArr = searchDate.split(" ")
@@ -137,7 +85,11 @@ function Map() {
                 formattedDate = searchYear + "-" + monthNumber + "-" + searchDay
             }
         }
-        // console.log(formattedDate)
+        return formattedDate
+    }
+
+    const makeApiCall = async() => {
+        let formattedDate = createFormattedDate()
         let res = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?description=AGGRAVATED%20VEHICULAR%20HIJACKING&$limit=50000&$offset=0')
         let data = await res.json()
         let yearArr = yearRange(2001, currentYear)
@@ -146,10 +98,8 @@ function Map() {
         setDaysOfTheMonth(createDaysOfMonthArray)
         if(searchSpan !== "week"){
             setCarjackStats(data.filter(crime => crime.date.includes(formattedDate)))
-            // console.log(data.filter(crime => crime.date.includes(formattedDate)))
         }else if(searchSpan === "week") {
             setCarjackStats(data.filter(crime => (crime.date.includes(formattedDate[0]) || crime.date.includes(formattedDate[1]) || crime.date.includes(formattedDate[2]) || crime.date.includes(formattedDate[3]) || crime.date.includes(formattedDate[4]) || crime.date.includes(formattedDate[5]) || crime.date.includes(formattedDate[6]))))
-            // console.log(data.filter(crime => (crime.date.includes(formattedDate[0]) || crime.date.includes(formattedDate[1]) || crime.date.includes(formattedDate[2]) || crime.date.includes(formattedDate[3]) || crime.date.includes(formattedDate[4]) || crime.date.includes(formattedDate[5]) || crime.date.includes(formattedDate[6]))))
         }
     }
 
@@ -182,10 +132,10 @@ function Map() {
         }, []);
     if (loadError) return "Error";
     if (!isLoaded) return "Loading...";
+    
     return carjackings ? (
+
         <div className="map-container">
-            {/* <video src="/videos/tulips.mp4" autoPlay loop muted /> */}
-            
             <h1 className="map-title">Interactive Chicago Carjacking Map</h1>
             <h2>{carjackStats.length} {" "}
                 Carjackings {" "}
@@ -296,7 +246,6 @@ function Map() {
             </div>
         </div>
     ) : <></>
-
 }
 
 export default Map
