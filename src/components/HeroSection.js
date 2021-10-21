@@ -7,8 +7,8 @@ function HeroSection() {
     return (
         <div className="hero-container">
             <video src="/videos/chicago.mp4" autoPlay loop muted />
-            <h1>Shy Jack</h1>
-            <h2>City of Chicago Crime Data Visualizer</h2>
+            <h1>Shy Jack<i class="fas fa-car-crash"></i></h1>
+            <h2>City of Chicago Carjacking Data Visualizer</h2>
             <p>Explore the data for yourself!</p>
             <div className="hero-btns">
                 <Button className="btns" buttonStyle="btn--outline" buttonSize="btn--large" to="/map">Map Data</Button>

@@ -6,7 +6,6 @@ import '../../App.css'
 import '../pages/Map.css'
 require('dotenv').config()
 
-
 const containerStyle = {
     width: '70vw',
     height: '65vh'
