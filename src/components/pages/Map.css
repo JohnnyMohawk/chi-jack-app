@@ -6,14 +6,21 @@
     align-items: center;
     object-fit: contain;
     padding-top: 30px;
+    background: linear-gradient(
+    90deg,
+    rgb(86,86,86) 0%,
+    rgb(204,204,204) 100%
+    );
 }
 
 .map-container > h1 {
     font-size: 55px;
+    color: #fff;
 }
 
 .map-container > h2 {
     font-size: 45px;
+    color: #fff;
 }
 
 select {
@@ -29,6 +36,7 @@ select {
     overflow: auto;
     margin: 15px 150px;
     color: rgb(22, 33, 62);
+    background-color: #fff;
     border-radius: 10px;
     box-shadow: 6px 6px 12px 6px rgba(0,0,0,0.2);
 }

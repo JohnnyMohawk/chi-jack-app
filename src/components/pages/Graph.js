@@ -31,7 +31,6 @@ function Graph() {
         setMonthlyCjData(monthDataObj)
     }
 
-
     useEffect(() => {
         setYearArray(yearArr)
     }, [])
