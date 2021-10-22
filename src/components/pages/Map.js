@@ -97,6 +97,15 @@ const Map = () => {
         )
     }
 
+    const getHoodLatLng = (selection) => {
+        console.log(neighborhoodObject[selection][0])
+        setLat(neighborhoodObject[selection][0])
+        setLng(neighborhoodObject[selection][1])
+        // Object.keys(neighborhoodObject).forEach(hood => {
+        //     console.log(neighborhoodObject[selection][0])
+        // });
+    }
+
     const makeApiCall = async() => {
         let formattedDate = createFormattedDate()
         let res = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?description=AGGRAVATED%20VEHICULAR%20HIJACKING&$limit=50000&$offset=0')
@@ -116,6 +125,7 @@ const Map = () => {
 
     useEffect(() => {
         makeApiCall()
+        // getHoodLatLng('Hermosa')
     }, [searchSpan, searchYear, searchMonth, searchDay])
 
     // useEffect(() => {
@@ -159,7 +169,8 @@ const Map = () => {
             <div className="search-bar">
                 <button onClick={() => {setMyLocation()}}>My Location</button>
                 <select defaultValue={dayOfTheMonth} onChange={event => {
-                setSearchDay(event.target.value)
+                    console.log(event.target.value)
+                    getHoodLatLng(event.target.value)
                 }}>
                     {Object.keys(neighborhoodObject).sort().map(neighborhood => (
                         <option key={neighborhood} value={neighborhood}>
