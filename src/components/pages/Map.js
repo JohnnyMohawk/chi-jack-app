@@ -97,6 +97,8 @@ const Map = () => {
         setDaysOfTheMonth(createDaysOfMonthArray)
         if(searchSpan !== "week"){
             setCarjackStats(data.filter(crime => crime.date.includes(formattedDate)))
+            console.log(data.filter(crime => crime.date.includes(formattedDate)))
+            console.log(formattedDate)
         }else if(searchSpan === "week") {
             setCarjackStats(data.filter(crime => (crime.date.includes(formattedDate[0]) || crime.date.includes(formattedDate[1]) || crime.date.includes(formattedDate[2]) || crime.date.includes(formattedDate[3]) || crime.date.includes(formattedDate[4]) || crime.date.includes(formattedDate[5]) || crime.date.includes(formattedDate[6]))))
         }
