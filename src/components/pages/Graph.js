@@ -137,7 +137,7 @@ function Graph() {
                         labels: Object.keys(monthlyCjData),
                         datasets: [
                             {
-                            label: 'Monthly Carjackings in Chicago',
+                            label: `Carjackings in Chicago by Month: ${searchYear}`,
                             data: Object.values(monthlyCjData),
                             backgroundColor: [
                                 'rgba(255,0,0, 0.5)',
@@ -244,7 +244,7 @@ function Graph() {
                         labels: Object.keys(monthlyCjData),
                         datasets: [
                             {
-                            label: 'Annual Carjackings in Chicago',
+                            label: `Carjackings in Chicago by Month: ${searchYear}`,
                             data: Object.values(monthlyCjData),
                             backgroundColor: [
                                 'rgba(255,0,0, 0.5)',
@@ -329,7 +329,7 @@ function Graph() {
                         labels: Object.keys(monthlyCjData),
                         datasets: [
                             {
-                            label: 'Annual Carjackings in Chicago',
+                            label: `Carjackings in Chicago by Month: ${searchYear}`,
                             data: Object.values(monthlyCjData),
                             borderColor: [
                                 'rgba(255,0,0, 1)',
@@ -414,7 +414,7 @@ function Graph() {
                         labels: Object.keys(monthlyCjData),
                         datasets: [
                             {
-                            label: 'Annual Carjackings in Chicago',
+                            label: `Carjackings in Chicago by Month: ${searchYear}`,
                             data: Object.values(monthlyCjData),
                             backgroundColor: [
                                 'rgba(255,0,0, 0.5)',
@@ -541,7 +541,7 @@ function Graph() {
                         labels: Object.keys(monthlyCjData),
                         datasets: [
                             {
-                            label: 'Annual Carjackings in Chicago',
+                            label: `Carjackings in Chicago by Month: ${searchYear}`,
                             data: Object.values(monthlyCjData),
                             backgroundColor: [
                                 'rgba(255,0,0, 0.5)',
@@ -618,7 +618,7 @@ function Graph() {
                         labels: Object.keys(monthlyCjData),
                         datasets: [
                             {
-                            label: 'Annual Carjackings in Chicago',
+                            label: `Carjackings in Chicago by Month: ${searchYear}`,
                             data: Object.values(monthlyCjData),
                             backgroundColor: [
                                 'rgba(255, 99, 132, 0.2)',
