@@ -7,16 +7,19 @@ import '../pages/Graph.css'
 function Graph() {
 
     const currentYear = new Date().getFullYear()
-
-    // const [yearArray, setYearArray] = useState([])
+    const yearArr = yearRange(2001, currentYear)
+    const [searchYear, setSearchYear] = useState(currentYear)
+    const [yearArray, setYearArray] = useState([])
     const [annualCjData, setAnnualCjData] = useState({})
     const [graphType, setGraphType] = useState('bar')
+
+    // setYearArray(yearArr)
 
     const makeApiCall = async() => {
         let annualDataObj = {}
         let res = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?description=AGGRAVATED%20VEHICULAR%20HIJACKING&$limit=50000&$offset=0')
         let data = await res.json()
-        let yearArr = yearRange(2001, currentYear)
+        // let yearArr = yearRange(2001, currentYear)
         // setYearArray(yearArr)
         // console.log(data.filter(crime => crime.date.includes(2020)).length)
         yearArr.forEach(year => {
@@ -27,6 +30,11 @@ function Graph() {
     }
 
     useEffect(() => {
+        setYearArray(yearArr)
+        // console.log(graphType)
+    }, [])
+
+    useEffect(() => {
         makeApiCall()
         // console.log(graphType)
     }, [graphType])
@@ -35,7 +43,7 @@ function Graph() {
         <>
             <div className="graph-container">
                 <h1>Chicago Carjacking Data Visualizer</h1>
-                <div className="graph-choice-bar">
+                <div className="search-bar">
                     <select defaultValue={graphType} onChange={event => {
                     setGraphType(event.target.value)
                     }}>
@@ -46,6 +54,15 @@ function Graph() {
                         <option value="polar">Polar Area Chart</option>
                         <option value="radar">Radar Graph</option>
                     </select>
+                    <select defaultValue={searchYear} onChange={event => {
+                setSearchYear(event.target.value)
+                }}>
+                    {yearArray.reverse().map(year => (
+                        <option key={year} value={year}>
+                            {year}
+                        </option>
+                    ))}
+                </select>
                 </div>
                 <div className="graph-text">
                     {graphType === "bar" ? <Bar
@@ -56,58 +73,31 @@ function Graph() {
                             label: 'Annual Carjackings in Chicago',
                             data: Object.values(annualCjData),
                             backgroundColor: [
-                                'rgba(255,0,0, 0.2)',
-                                'rgba(0,255,0, 0.2)',
-                                'rgba(0,0,255, 0.2)',
-                                'rgba(0,255,255, 0.2)',
-                                'rgba(255,0,255, 0.2)',
-                                'rgba(192,192,192, 0.2)',
-                                'rgba(128,128,128, 0.2)',
-                                'rgba(128,0,0, 0.2)',
-                                'rgba(128,128,0, 0.2)',
-                                'rgba(0,40,0, 0.2)',
-                                'rgba(128,0,128, 0.2)',
-                                'rgba(0,128,128, 0.2)',
-                                'rgba(0,0,128, 0.2)',
-                                'rgba(255,127,80, 0.2)',
-                                'rgba(255,140,0, 0.2)',
-                                'rgba(184,134,11, 0.2)',
-                                'rgba(34,139,34, 0.2)',
-                                'rgba(0,128,128, 0.2)',
-                                'rgba(255,105,180, 0.2)',
-                                'rgba(245,222,179, 0.2)',
-                                'rgba(139,69,19, 0.2)',
-                                'rgba(188,143,143, 0.2)',
-                                'rgba(112,128,144, 0.2)',
-                                'rgba(240,255,240, 0.2)',
+                                'rgba(255,0,0, 0.5)',
+                                'rgba(0,255,0, 0.5)',
+                                'rgba(0,0,255, 0.5)',
+                                'rgba(0,255,255, 0.5)',
+                                'rgba(255,0,255, 0.5)',
+                                'rgba(192,192,192, 0.5)',
+                                'rgba(128,128,128, 0.5)',
+                                'rgba(128,0,0, 0.5)',
+                                'rgba(128,128,0, 0.5)',
+                                'rgba(0,40,0, 0.5)',
+                                'rgba(128,0,128, 0.5)',
+                                'rgba(0,128,128, 0.5)',
+                                'rgba(0,0,128, 0.5)',
+                                'rgba(255,127,80, 0.5)',
+                                'rgba(95,50,130, 0.5)',
+                                'rgba(184,134,11, 0.5)',
+                                'rgba(34,139,34, 0.5)',
+                                'rgba(0,128,128, 0.5)',
+                                'rgba(255,105,180, 0.5)',
+                                'rgba(245,222,179, 0.5)',
+                                'rgba(139,69,19, 0.5)',
+                                'rgba(188,143,143, 0.5)',
+                                'rgba(112,128,144, 0.5)',
+                                'rgba(240,255,240, 0.5)',
                             ],
-                            borderColor: [
-                                'rgba(255,0,0, 1)',
-                                'rgba(0,255,0, 1)',
-                                'rgba(0,0,255, 1)',
-                                'rgba(0,255,255, 1)',
-                                'rgba(255,0,255, 1)',
-                                'rgba(192,192,192, 1)',
-                                'rgba(128,128,128, 1)',
-                                'rgba(128,0,0, 1)',
-                                'rgba(128,128,0, 1)',
-                                'rgba(0,40,0, 1)',
-                                'rgba(128,0,128, 1)',
-                                'rgba(0,128,128, 1)',
-                                'rgba(0,0,128, 1)',
-                                'rgba(255,127,80, 1)',
-                                'rgba(255,140,0, 1)',
-                                'rgba(184,134,11, 1)',
-                                'rgba(34,139,34, 1)',
-                                'rgba(0,128,128, 1)',
-                                'rgba(255,105,180, 1)',
-                                'rgba(245,222,179, 1)',
-                                'rgba(139,69,19, 1)',
-                                'rgba(188,143,143, 1)',
-                                'rgba(112,128,144, 1)',
-                                'rgba(240,255,240, 1)',
-                            ],
-                            borderWidth: 2,
                             },
                         ],
                         }}
@@ -140,58 +130,31 @@ function Graph() {
                             label: 'Annual Carjackings in Chicago',
                             data: Object.values(annualCjData),
                             backgroundColor: [
-                                'rgba(255,0,0, 0.2)',
-                                'rgba(0,255,0, 0.2)',
-                                'rgba(0,0,255, 0.2)',
-                                'rgba(0,255,255, 0.2)',
-                                'rgba(255,0,255, 0.2)',
-                                'rgba(192,192,192, 0.2)',
-                                'rgba(128,128,128, 0.2)',
-                                'rgba(128,0,0, 0.2)',
-                                'rgba(128,128,0, 0.2)',
-                                'rgba(0,40,0, 0.2)',
-                                'rgba(128,0,128, 0.2)',
-                                'rgba(0,128,128, 0.2)',
-                                'rgba(0,0,128, 0.2)',
-                                'rgba(255,127,80, 0.2)',
-                                'rgba(255,140,0, 0.2)',
-                                'rgba(184,134,11, 0.2)',
-                                'rgba(34,139,34, 0.2)',
-                                'rgba(0,128,128, 0.2)',
-                                'rgba(255,105,180, 0.2)',
-                                'rgba(245,222,179, 0.2)',
-                                'rgba(139,69,19, 0.2)',
-                                'rgba(188,143,143, 0.2)',
-                                'rgba(112,128,144, 0.2)',
-                                'rgba(240,255,240, 0.2)',
+                                'rgba(255,0,0, 0.5)',
+                                'rgba(0,255,0, 0.5)',
+                                'rgba(0,0,255, 0.5)',
+                                'rgba(0,255,255, 0.5)',
+                                'rgba(255,0,255, 0.5)',
+                                'rgba(192,192,192, 0.5)',
+                                'rgba(128,128,128, 0.5)',
+                                'rgba(128,0,0, 0.5)',
+                                'rgba(128,128,0, 0.5)',
+                                'rgba(0,40,0, 0.5)',
+                                'rgba(128,0,128, 0.5)',
+                                'rgba(0,128,128, 0.5)',
+                                'rgba(0,0,128, 0.5)',
+                                'rgba(255,127,80, 0.5)',
+                                'rgba(95,50,130, 0.5)',
+                                'rgba(184,134,11, 0.5)',
+                                'rgba(34,139,34, 0.5)',
+                                'rgba(0,128,128, 0.5)',
+                                'rgba(255,105,180, 0.5)',
+                                'rgba(245,222,179, 0.5)',
+                                'rgba(139,69,19, 0.5)',
+                                'rgba(188,143,143, 0.5)',
+                                'rgba(112,128,144, 0.5)',
+                                'rgba(240,255,240, 0.5)',
                             ],
-                            borderColor: [
-                                'rgba(255,0,0, 1)',
-                                'rgba(0,255,0, 1)',
-                                'rgba(0,0,255, 1)',
-                                'rgba(0,255,255, 1)',
-                                'rgba(255,0,255, 1)',
-                                'rgba(192,192,192, 1)',
-                                'rgba(128,128,128, 1)',
-                                'rgba(128,0,0, 1)',
-                                'rgba(128,128,0, 1)',
-                                'rgba(0,40,0, 1)',
-                                'rgba(128,0,128, 1)',
-                                'rgba(0,128,128, 1)',
-                                'rgba(0,0,128, 1)',
-                                'rgba(255,127,80, 1)',
-                                'rgba(255,140,0, 1)',
-                                'rgba(184,134,11, 1)',
-                                'rgba(34,139,34, 1)',
-                                'rgba(0,128,128, 1)',
-                                'rgba(255,105,180, 1)',
-                                'rgba(245,222,179, 1)',
-                                'rgba(139,69,19, 1)',
-                                'rgba(188,143,143, 1)',
-                                'rgba(112,128,144, 1)',
-                                'rgba(240,255,240, 1)',
-                            ],
-                            borderWidth: 2,
                             },
                         ],
                         }}
@@ -200,13 +163,6 @@ function Graph() {
                         options={{
                         maintainAspectRatio: false,
                         scales: {
-                            // yAxes: [
-                            // {
-                            //     ticks: {
-                            //     beginAtZero: true,
-                            //     },
-                            // },
-                            // ],
                         },
                         legend: {
                             labels: {
@@ -259,58 +215,31 @@ function Graph() {
                             label: 'Annual Carjackings in Chicago',
                             data: Object.values(annualCjData),
                             backgroundColor: [
-                                'rgba(255,0,0, 0.2)',
-                                'rgba(0,255,0, 0.2)',
-                                'rgba(0,0,255, 0.2)',
-                                'rgba(0,255,255, 0.2)',
-                                'rgba(255,0,255, 0.2)',
-                                'rgba(192,192,192, 0.2)',
-                                'rgba(128,128,128, 0.2)',
-                                'rgba(128,0,0, 0.2)',
-                                'rgba(128,128,0, 0.2)',
-                                'rgba(0,40,0, 0.2)',
-                                'rgba(128,0,128, 0.2)',
-                                'rgba(0,128,128, 0.2)',
-                                'rgba(0,0,128, 0.2)',
-                                'rgba(255,127,80, 0.2)',
-                                'rgba(255,140,0, 0.2)',
-                                'rgba(184,134,11, 0.2)',
-                                'rgba(34,139,34, 0.2)',
-                                'rgba(0,128,128, 0.2)',
-                                'rgba(255,105,180, 0.2)',
-                                'rgba(245,222,179, 0.2)',
-                                'rgba(139,69,19, 0.2)',
-                                'rgba(188,143,143, 0.2)',
-                                'rgba(112,128,144, 0.2)',
-                                'rgba(240,255,240, 0.2)',
+                                'rgba(255,0,0, 0.5)',
+                                'rgba(0,255,0, 0.5)',
+                                'rgba(0,0,255, 0.5)',
+                                'rgba(0,255,255, 0.5)',
+                                'rgba(255,0,255, 0.5)',
+                                'rgba(192,192,192, 0.5)',
+                                'rgba(128,128,128, 0.5)',
+                                'rgba(128,0,0, 0.5)',
+                                'rgba(128,128,0, 0.5)',
+                                'rgba(0,40,0, 0.5)',
+                                'rgba(128,0,128, 0.5)',
+                                'rgba(0,128,128, 0.5)',
+                                'rgba(0,0,128, 0.5)',
+                                'rgba(255,127,80, 0.5)',
+                                'rgba(95,50,130, 0.5)',
+                                'rgba(184,134,11, 0.5)',
+                                'rgba(34,139,34, 0.5)',
+                                'rgba(0,128,128, 0.5)',
+                                'rgba(255,105,180, 0.5)',
+                                'rgba(245,222,179, 0.5)',
+                                'rgba(139,69,19, 0.5)',
+                                'rgba(188,143,143, 0.5)',
+                                'rgba(112,128,144, 0.5)',
+                                'rgba(240,255,240, 0.5)',
                             ],
-                            borderColor: [
-                                'rgba(255,0,0, 1)',
-                                'rgba(0,255,0, 1)',
-                                'rgba(0,0,255, 1)',
-                                'rgba(0,255,255, 1)',
-                                'rgba(255,0,255, 1)',
-                                'rgba(192,192,192, 1)',
-                                'rgba(128,128,128, 1)',
-                                'rgba(128,0,0, 1)',
-                                'rgba(128,128,0, 1)',
-                                'rgba(0,40,0, 1)',
-                                'rgba(128,0,128, 1)',
-                                'rgba(0,128,128, 1)',
-                                'rgba(0,0,128, 1)',
-                                'rgba(255,127,80, 1)',
-                                'rgba(255,140,0, 1)',
-                                'rgba(184,134,11, 1)',
-                                'rgba(34,139,34, 1)',
-                                'rgba(0,128,128, 1)',
-                                'rgba(255,105,180, 1)',
-                                'rgba(245,222,179, 1)',
-                                'rgba(139,69,19, 1)',
-                                'rgba(188,143,143, 1)',
-                                'rgba(112,128,144, 1)',
-                                'rgba(240,255,240, 1)',
-                            ],
-                            borderWidth: 2,
                             },
                         ],
                         }}
@@ -319,13 +248,6 @@ function Graph() {
                         options={{
                         maintainAspectRatio: false,
                         scales: {
-                            // yAxes: [
-                            // {
-                            //     ticks: {
-                            //     beginAtZero: true,
-                            //     },
-                            // },
-                            // ],
                         },
                         legend: {
                             labels: {
@@ -343,30 +265,30 @@ function Graph() {
                             label: 'Annual Carjackings in Chicago',
                             data: Object.values(annualCjData),
                             backgroundColor: [
-                                'rgba(255,0,0, 0.2)',
-                                'rgba(0,255,0, 0.2)',
-                                'rgba(0,0,255, 0.2)',
-                                'rgba(0,255,255, 0.2)',
-                                'rgba(255,0,255, 0.2)',
-                                'rgba(192,192,192, 0.2)',
-                                'rgba(128,128,128, 0.2)',
-                                'rgba(128,0,0, 0.2)',
-                                'rgba(128,128,0, 0.2)',
-                                'rgba(0,40,0, 0.2)',
-                                'rgba(128,0,128, 0.2)',
-                                'rgba(0,128,128, 0.2)',
-                                'rgba(0,0,128, 0.2)',
-                                'rgba(255,127,80, 0.2)',
-                                'rgba(255,140,0, 0.2)',
-                                'rgba(184,134,11, 0.2)',
-                                'rgba(34,139,34, 0.2)',
-                                'rgba(0,128,128, 0.2)',
-                                'rgba(255,105,180, 0.2)',
-                                'rgba(245,222,179, 0.2)',
-                                'rgba(139,69,19, 0.2)',
-                                'rgba(188,143,143, 0.2)',
-                                'rgba(112,128,144, 0.2)',
-                                'rgba(240,255,240, 0.2)',
+                                'rgba(255,0,0, 0.5)',
+                                'rgba(0,255,0, 0.5)',
+                                'rgba(0,0,255, 0.5)',
+                                'rgba(0,255,255, 0.5)',
+                                'rgba(255,0,255, 0.5)',
+                                'rgba(192,192,192, 0.5)',
+                                'rgba(128,128,128, 0.5)',
+                                'rgba(128,0,0, 0.5)',
+                                'rgba(128,128,0, 0.5)',
+                                'rgba(0,40,0, 0.5)',
+                                'rgba(128,0,128, 0.5)',
+                                'rgba(0,128,128, 0.5)',
+                                'rgba(0,0,128, 0.5)',
+                                'rgba(255,127,80, 0.5)',
+                                'rgba(95,50,130, 0.5)',
+                                'rgba(184,134,11, 0.5)',
+                                'rgba(34,139,34, 0.5)',
+                                'rgba(0,128,128, 0.5)',
+                                'rgba(255,105,180, 0.5)',
+                                'rgba(245,222,179, 0.5)',
+                                'rgba(139,69,19, 0.5)',
+                                'rgba(188,143,143, 0.5)',
+                                'rgba(112,128,144, 0.5)',
+                                'rgba(240,255,240, 0.5)',
                             ],
                             borderColor: [
                                 'rgba(255,0,0, 1)',
@@ -383,7 +305,7 @@ function Graph() {
                                 'rgba(0,128,128, 1)',
                                 'rgba(0,0,128, 1)',
                                 'rgba(255,127,80, 1)',
-                                'rgba(255,140,0, 1)',
+                                'rgba(95,50,130, 1)',
                                 'rgba(184,134,11, 1)',
                                 'rgba(34,139,34, 1)',
                                 'rgba(0,128,128, 1)',
@@ -394,7 +316,7 @@ function Graph() {
                                 'rgba(112,128,144, 1)',
                                 'rgba(240,255,240, 1)',
                             ],
-                            borderWidth: 2,
+                            borderWidth: 1,
                             },
                         ],
                         }}
@@ -403,13 +325,6 @@ function Graph() {
                         options={{
                         maintainAspectRatio: false,
                         scales: {
-                            // yAxes: [
-                            // {
-                            //     ticks: {
-                            //     beginAtZero: true,
-                            //     },
-                            // },
-                            // ],
                         },
                         legend: {
                             labels: {
@@ -441,13 +356,6 @@ function Graph() {
                         options={{
                         maintainAspectRatio: false,
                         scales: {
-                            // yAxes: [
-                            // {
-                            //     ticks: {
-                            //     beginAtZero: true,
-                            //     },
-                            // },
-                            // ],
                         },
                         legend: {
                             labels: {
