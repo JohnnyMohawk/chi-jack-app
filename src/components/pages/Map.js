@@ -166,9 +166,10 @@ const Map = () => {
                 {searchSpan === "year" ? "in " : ""} {" "}
                 {searchYear}
             </h2>
+            <div className="search-bar-wrapper">
             <div className="search-bar">
-                <button onClick={() => {setMyLocation()}}>My Location</button>
-                <select defaultValue={dayOfTheMonth} onChange={event => {
+            <button className="sb-inputs" onClick={() => {setMyLocation()}}>My Location</button>
+                <select className="sb-inputs" defaultValue="Loop" onChange={event => {
                     console.log(event.target.value)
                     getHoodLatLng(event.target.value)
                 }}>
@@ -178,9 +179,9 @@ const Map = () => {
                         </option>
                     ))}
                 </select>
-            </div>
-            <div className="search-bar">
-                <select defaultValue={searchSpan} onChange={event => {
+                </div>
+                <div className="search-bar">
+                <select className="sb-inputs" defaultValue={searchSpan} onChange={event => {
                 setSearchSpan(event.target.value)
                 }}>
                     <option value="most recent">One Day</option>
@@ -190,7 +191,7 @@ const Map = () => {
                 </select>
                 {searchSpan === "week" || searchSpan === "most recent" || searchSpan === "month" ? 
                 <>
-                    <select defaultValue={searchMonth} onChange={event => {
+                    <select className="sb-inputs" defaultValue={searchMonth} onChange={event => {
                     setSearchMonth(event.target.value)
                     let moNo = months.indexOf(event.target.value) + 1
                     formatDay(moNo)
@@ -209,7 +210,7 @@ const Map = () => {
 
                 {searchSpan === "week" || searchSpan === "most recent" ? 
                 <>
-                <select defaultValue={dayOfTheMonth} onChange={event => {
+                <select className="sb-inputs" defaultValue={dayOfTheMonth} onChange={event => {
                 setSearchDay(event.target.value)
                 }}>
                     {daysOfTheMonth.map(day => (
@@ -222,7 +223,7 @@ const Map = () => {
                 :
                 <></>
                 }
-                <select defaultValue={searchYear} onChange={event => {
+                <select className="sb-inputs" defaultValue={searchYear} onChange={event => {
                 setSearchYear(event.target.value)
                 }}>
                     {yearArray.reverse().map(year => (
@@ -232,6 +233,7 @@ const Map = () => {
                     ))}
                 </select>
                 </div>
+                </div> 
             <div className="map-text">
                 <GoogleMap
                     mapContainerStyle={containerStyle}

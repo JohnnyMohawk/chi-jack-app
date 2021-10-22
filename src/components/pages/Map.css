@@ -16,6 +16,7 @@
 .map-container > h1 {
     font-size: 55px;
     color: #fff;
+    margin-bottom: 5px;
 }
 
 .map-container > h2 {
@@ -23,12 +24,23 @@
     color: #fff;
 }
 
-select,
-button {
+.search-bar-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.search-bar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.sb-inputs {
     margin: 5px;
     margin-top: 15px;
-    padding: 10px;
-    font-size: 18px;
+    padding: 6px;
+    font-size: 16px;
     background-color: rgb(207, 207, 207);
     border-radius: 5px;
 }
@@ -46,5 +58,21 @@ button {
     .map-container > h1,
     .map-container > h2 {
         font-size: 24px;
+        margin-bottom: 5px;
     }
+
+    .search-bar-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .sb-inputs {
+        margin: 3px;
+    }
+
+    .map-text {
+        margin-top: 10px;
+    }
+
 }
