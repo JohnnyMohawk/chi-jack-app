@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { GoogleMap, Marker, useLoadScript, InfoWindow } from '@react-google-maps/api';
-import {formatDay, getDaysInMonth, createWeekArr, yearRange} from '../services/mapService.js'
+import {formatDay, getDaysInMonth, createWeekArr, yearRange, neighborhoodObject} from '../services/mapService.js'
 import mapStyles from './mapStyles';
 import '../../App.css'
 import '../pages/Map.css'
@@ -34,8 +34,8 @@ const Map = () => {
     let dayOfTheMonth = formatDay(today.getDate())
 
     const [carjackStats, setCarjackStats] = useState([])
-    const [lat, setLat] = useState(null)
-    const [lng, setLng] = useState(null)
+    const [lat, setLat] = useState(41.878113)
+    const [lng, setLng] = useState(-87.629799)
     const [carjackings, setCarjackings] = useState([])
     const [selectedCrime, setSelectedCrime] = useState(null)
     const [searchSpan, setSearchSpan] = useState("month")
@@ -87,6 +87,16 @@ const Map = () => {
         return formattedDate
     }
 
+    const setMyLocation = async () => {
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                setLat(parseFloat(position.coords.latitude))
+                setLng(parseFloat(position.coords.longitude))
+            },
+            () => null
+        )
+    }
+
     const makeApiCall = async() => {
         let formattedDate = createFormattedDate()
         let res = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?description=AGGRAVATED%20VEHICULAR%20HIJACKING&$limit=50000&$offset=0')
@@ -108,17 +118,17 @@ const Map = () => {
         makeApiCall()
     }, [searchSpan, searchYear, searchMonth, searchDay])
 
-    useEffect(() => {
-        (async () => {
-            navigator.geolocation.getCurrentPosition(
-                (position) => {
-                    setLat(parseFloat(position.coords.latitude))
-                    setLng(parseFloat(position.coords.longitude))
-                },
-                () => null
-            )
-        })()
-    }, [])
+    // useEffect(() => {
+        // (async () => {
+        //     navigator.geolocation.getCurrentPosition(
+        //         (position) => {
+        //             setLat(parseFloat(position.coords.latitude))
+        //             setLng(parseFloat(position.coords.longitude))
+        //         },
+        //         () => null
+        //     )
+        // })()
+    // }, [])
 
     useEffect(() => {
         carjackStats &&
@@ -146,6 +156,18 @@ const Map = () => {
                 {searchSpan === "year" ? "in " : ""} {" "}
                 {searchYear}
             </h2>
+            <div className="search-bar">
+                <button onClick={() => {setMyLocation()}}>My Location</button>
+                <select defaultValue={dayOfTheMonth} onChange={event => {
+                setSearchDay(event.target.value)
+                }}>
+                    {Object.keys(neighborhoodObject).sort().map(neighborhood => (
+                        <option key={neighborhood} value={neighborhood}>
+                            {neighborhood}
+                        </option>
+                    ))}
+                </select>
+            </div>
             <div className="search-bar">
                 <select defaultValue={searchSpan} onChange={event => {
                 setSearchSpan(event.target.value)
@@ -198,9 +220,8 @@ const Map = () => {
                         </option>
                     ))}
                 </select>
-            </div>
+                </div>
             <div className="map-text">
-            
                 <GoogleMap
                     mapContainerStyle={containerStyle}
                     center={{lat: lat, lng: lng}}
