@@ -101,9 +101,6 @@ const Map = () => {
         console.log(neighborhoodObject[selection][0])
         setLat(neighborhoodObject[selection][0])
         setLng(neighborhoodObject[selection][1])
-        // Object.keys(neighborhoodObject).forEach(hood => {
-        //     console.log(neighborhoodObject[selection][0])
-        // });
     }
 
     const makeApiCall = async() => {
@@ -116,8 +113,6 @@ const Map = () => {
         setDaysOfTheMonth(createDaysOfMonthArray)
         if(searchSpan !== "week"){
             setCarjackStats(data.filter(crime => crime.date.includes(formattedDate)))
-            console.log(data.filter(crime => crime.date.includes(formattedDate)))
-            console.log(formattedDate)
         }else if(searchSpan === "week") {
             setCarjackStats(data.filter(crime => (crime.date.includes(formattedDate[0]) || crime.date.includes(formattedDate[1]) || crime.date.includes(formattedDate[2]) || crime.date.includes(formattedDate[3]) || crime.date.includes(formattedDate[4]) || crime.date.includes(formattedDate[5]) || crime.date.includes(formattedDate[6]))))
         }
@@ -125,20 +120,7 @@ const Map = () => {
 
     useEffect(() => {
         makeApiCall()
-        // getHoodLatLng('Hermosa')
     }, [searchSpan, searchYear, searchMonth, searchDay])
-
-    // useEffect(() => {
-        // (async () => {
-        //     navigator.geolocation.getCurrentPosition(
-        //         (position) => {
-        //             setLat(parseFloat(position.coords.latitude))
-        //             setLng(parseFloat(position.coords.longitude))
-        //         },
-        //         () => null
-        //     )
-        // })()
-    // }, [])
 
     useEffect(() => {
         carjackStats &&
@@ -158,7 +140,7 @@ const Map = () => {
 
         <div className="map-container">
             <h1 className="map-title">Interactive Chicago Carjacking Map</h1>
-            <h2>{carjackStats.length} {" "}
+            <h2><span className="carjack-numbers heart">{carjackStats.length}</span> {" "}
                 Carjackings {" "}
                 {searchSpan === "month" ? "in " + fullMonths[months.indexOf(searchMonth)] : ""} {" "}
                 {searchSpan === "week" ? "on the week ending "+ fullMonths[months.indexOf(searchMonth)] + " " + searchDay : ""}
@@ -169,71 +151,70 @@ const Map = () => {
             <div className="search-bar-wrapper">
             <div className="search-bar">
             <button className="sb-inputs" onClick={() => {setMyLocation()}}>My Location</button>
-                <select className="sb-inputs" defaultValue="Loop" onChange={event => {
-                    console.log(event.target.value)
-                    getHoodLatLng(event.target.value)
+            <select className="sb-inputs" defaultValue="Loop" onChange={event => {
+                getHoodLatLng(event.target.value)
                 }}>
-                    {Object.keys(neighborhoodObject).sort().map(neighborhood => (
-                        <option key={neighborhood} value={neighborhood}>
-                            {neighborhood}
-                        </option>
-                    ))}
-                </select>
-                </div>
+                {Object.keys(neighborhoodObject).sort().map(neighborhood => (
+                    <option key={neighborhood} value={neighborhood}>
+                        {neighborhood}
+                    </option>
+                ))}
+            </select>
+            </div>
                 <div className="search-bar">
-                <select className="sb-inputs" defaultValue={searchSpan} onChange={event => {
-                setSearchSpan(event.target.value)
-                }}>
-                    <option value="most recent">One Day</option>
-                    <option value="week">Weekly</option>
-                    <option value="month">Monthly</option>
-                    <option value="year">Annual</option>
-                </select>
-                {searchSpan === "week" || searchSpan === "most recent" || searchSpan === "month" ? 
-                <>
-                    <select className="sb-inputs" defaultValue={searchMonth} onChange={event => {
-                    setSearchMonth(event.target.value)
-                    let moNo = months.indexOf(event.target.value) + 1
-                    formatDay(moNo)
-                    setMonthNumber(moNo)
+                    <select className="sb-inputs" defaultValue={searchSpan} onChange={event => {
+                    setSearchSpan(event.target.value)
                     }}>
-                    {months.map(month => (
-                        <option key={month} value={month}>
-                            {month}
-                        </option>
-                    ))}
-                </select>
-                </>
-                :
-                <></>
-                }
+                        <option value="most recent">One Day</option>
+                        <option value="week">Weekly</option>
+                        <option value="month">Monthly</option>
+                        <option value="year">Annual</option>
+                    </select>
+                    {searchSpan === "week" || searchSpan === "most recent" || searchSpan === "month" ? 
+                    <>
+                        <select className="sb-inputs" defaultValue={searchMonth} onChange={event => {
+                        setSearchMonth(event.target.value)
+                        let moNo = months.indexOf(event.target.value) + 1
+                        formatDay(moNo)
+                        setMonthNumber(moNo)
+                        }}>
+                        {months.map(month => (
+                            <option key={month} value={month}>
+                                {month}
+                            </option>
+                        ))}
+                    </select>
+                    </>
+                    :
+                    <></>
+                    }
 
-                {searchSpan === "week" || searchSpan === "most recent" ? 
-                <>
-                <select className="sb-inputs" defaultValue={dayOfTheMonth} onChange={event => {
-                setSearchDay(event.target.value)
-                }}>
-                    {daysOfTheMonth.map(day => (
-                        <option key={day} value={day}>
-                            {day}
-                        </option>
-                    ))}
-                </select>
-                </>
-                :
-                <></>
-                }
-                <select className="sb-inputs" defaultValue={searchYear} onChange={event => {
-                setSearchYear(event.target.value)
-                }}>
-                    {yearArray.reverse().map(year => (
-                        <option key={year} value={year}>
-                            {year}
-                        </option>
-                    ))}
-                </select>
+                    {searchSpan === "week" || searchSpan === "most recent" ? 
+                    <>
+                    <select className="sb-inputs" defaultValue={dayOfTheMonth} onChange={event => {
+                    setSearchDay(event.target.value)
+                    }}>
+                        {daysOfTheMonth.map(day => (
+                            <option key={day} value={day}>
+                                {day}
+                            </option>
+                        ))}
+                    </select>
+                    </>
+                    :
+                    <></>
+                    }
+                    <select className="sb-inputs" defaultValue={searchYear} onChange={event => {
+                    setSearchYear(event.target.value)
+                    }}>
+                        {yearArray.reverse().map(year => (
+                            <option key={year} value={year}>
+                                {year}
+                            </option>
+                        ))}
+                    </select>
                 </div>
-                </div> 
+            </div> 
             <div className="map-text">
                 <GoogleMap
                     mapContainerStyle={containerStyle}

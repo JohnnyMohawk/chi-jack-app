@@ -13,6 +13,27 @@
     );
 }
 
+.carjack-numbers {
+    color: tomato;
+    font-size: 55px;
+    /* animation: heart-pulse 0.9s infinite ease-out; */
+}
+
+@keyframes heart-pulse {
+    0% {
+      transform: scale(0); /* scaling to 0 */
+    }
+    50% {
+      transform: scale(1.2); /* increasing the size */
+    }
+    70% {
+      transform: scale(0.65); /* decreasing the size */
+    }
+    100% {
+      transform: scale(0); /* seeting back to initial size */
+    }
+}
+
 .map-container > h1 {
     font-size: 55px;
     color: #fff;
@@ -73,6 +94,8 @@
 
     .map-text {
         margin-top: 10px;
+        /* margin-left: 10px;
+        margin-right: 10px; */
     }
 
 }
