@@ -88,8 +88,6 @@
     }
 
     .nav-menu {
-        /* display: flex;
-        flex-direction: column; */
         display: inline-block;
         vertical-align: top;
         width: 100%;
@@ -102,7 +100,6 @@
     }
 
     .nav-menu.active {
-        /* align-items: flex-start; */
         display: inline-block;
         vertical-align: top;
         background: #242222;

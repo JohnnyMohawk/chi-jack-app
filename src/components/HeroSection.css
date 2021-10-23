@@ -17,13 +17,6 @@ video {
     object-fit: contain;
 }
 
-/* .hero-container > h1 {
-    color: #fff;
-    font-family: 'Racing Sans One', cursive;
-    font-size: 120px;
-    margin-top: 240px;
-} */
-
 .hero-logo {
     color: #fff;
     font-family: 'Racing Sans One', cursive;
@@ -61,7 +54,6 @@ video {
 @media screen and (max-width: 960px) {
     .hero-container > h1 {
         font-size: 90px;
-        /* margin-top: 250px; */
     }
     
     .hero-container > h2 {
@@ -79,7 +71,6 @@ video {
     .hero-container > h1 {
         color: #fff;
         font-size: 90px;
-        /* margin-top: 350px; */
     }
     
     .hero-container > h2 {
