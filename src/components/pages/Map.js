@@ -228,6 +228,7 @@ const Map = () => {
             </div> 
             <div className="map-text">
                 <GoogleMap
+                    className="map-canvas"
                     mapContainerStyle={containerStyle}
                     center={{lat: lat, lng: lng}}
                     zoom={13}

@@ -1,10 +1,10 @@
 .graph-container {
     height: 100vh;
     width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    object-fit: contain;
+    /* display: flex; */
+    /* flex-direction: column; */
+    /* align-items: center; */
+    /* object-fit: contain; */
     padding-top: 30px;
     background: linear-gradient(
     90deg,
@@ -26,6 +26,10 @@
     font-size: 45px;
 }
 
+/* canvas {
+    max-width: 1500px;
+} */
+
 select {
     margin: 5px;
     margin-top: 15px;
@@ -34,6 +38,13 @@ select {
     background-color: rgb(207, 207, 207);
     border-radius: 5px;
     box-shadow: 10px 10px 12px -1px rgba(90, 90, 90, 0.63);
+}
+
+.search-bar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
 }
 
 .graph-text {
@@ -48,8 +59,11 @@ select {
 }
 
 @media screen and (max-width: 768px) {
-    .graph-container > h1,
-    .graph-container > h2 {
+    .graph-container > h1 {
         font-size: 24px;
+    }
+
+    .graph-text {
+        margin: 15px 20px;
     }
 }

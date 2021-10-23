@@ -26,8 +26,8 @@ function Footer() {
                 <div className="footer-link-wrapper">
                     <div className="footer-link-items">
                         <h2>About Jack</h2>
-                        <Link to="/sign-up" className="ft-link-class">Why Shy Jack</Link>
-                        <Link to="/sign-up" className="ft-link-class">How Shy Jack Knows</Link>
+                        <Link to="/who-is-jack" className="ft-link-class">Who is Shy Jack?</Link>
+                        <Link to="/sign-up" className="ft-link-class">How Shy Jack Knows?</Link>
                     </div>
                 </div>
                 <div className="footer-link-wrapper">

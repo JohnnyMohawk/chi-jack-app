@@ -7,6 +7,7 @@ import Graph from './components/pages/Graph';
 import Scanner from './components/pages/Scanner';
 import SignUp from './components/pages/SignUp';
 import Footer from './components/Footer';
+import WhoIsJack from './components/pages/WhoIsJack';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path='/graph' component={Graph} />
         <Route path='/scanner' component={Scanner} />
         <Route path='/sign-up' component={SignUp} />
+        <Route path='/who-is-jack' component={WhoIsJack} />
       </Switch>
       <Footer />
     </Router>

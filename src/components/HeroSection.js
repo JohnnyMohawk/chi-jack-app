@@ -8,7 +8,6 @@ function HeroSection() {
     return (
         <div className="hero-container">
             <video src="/videos/chicago.mp4" autoPlay loop muted />
-            {/* <h1>Shy Jack<i class="fas fa-car-crash"></i></h1> */}
             <Link to='/map' className='hero-logo'>
                 Shy Jack
                 <i class="fas fa-car-crash"></i>

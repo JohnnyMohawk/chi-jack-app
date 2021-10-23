@@ -47,7 +47,7 @@ function Navbar() {
                     className='nav-links'
                     onClick={closeMobileMenu}
                 >
-                    Data
+                    Graph
                 </Link>
                 </li>
                 <li className='nav-item'>
