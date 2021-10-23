@@ -35,6 +35,11 @@
   font-size: 100px;
 }
 
+iframe {
+  width: 100%;
+  height: 100vh;
+}
+
 .sign-up {
   background-image: url('background-images/navy-pier.jpeg');
   background-position: center;
