@@ -140,14 +140,25 @@ const Map = () => {
 
         <div className="map-container">
             <h1 className="map-title">Interactive Chicago Carjacking Map</h1>
-            <h2><span className="carjack-numbers heart">{carjackStats.length}</span> {" "}
+            {/* <h2><span className="carjack-numbers heart">{carjackStats.length}</span> {" "}
                 Carjackings {" "}
                 {searchSpan === "month" ? "in " + fullMonths[months.indexOf(searchMonth)] : ""} {" "}
                 {searchSpan === "week" ? "on the week ending "+ fullMonths[months.indexOf(searchMonth)] + " " + searchDay : ""}
                 {searchSpan === "most recent" ? "on " + fullMonths[months.indexOf(searchMonth)] + " " +  searchDay : ""} {" "}
                 {searchSpan === "year" ? "in " : ""} {" "}
                 {searchYear}
-            </h2>
+            </h2> */}
+            <div className="cj-number-wrapper">
+                <h2 className="carjack-numbers heart" id="cj-num-id">{carjackStats.length}</h2>
+                <h2 className="force-space">{"_"}</h2>
+                <h2 className="search-params">{`Carjackings
+                    ${searchSpan === "month" ? "in " + fullMonths[months.indexOf(searchMonth)] : ""}
+                    ${searchSpan === "week" ? "on the week ending "+ fullMonths[months.indexOf(searchMonth)] + " " + searchDay : ""}
+                    ${searchSpan === "most recent" ? "on " + fullMonths[months.indexOf(searchMonth)] + " " +  searchDay : ""}
+                    ${searchSpan === "year" ? "in " : ""}
+                    ${searchYear}`}
+                </h2>
+            </div>
             <div className="search-bar-wrapper">
             <div className="search-bar">
             <button className="sb-inputs" onClick={() => {setMyLocation()}}>My Location</button>

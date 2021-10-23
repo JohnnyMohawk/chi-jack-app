@@ -13,25 +13,10 @@
     );
 }
 
-.carjack-numbers {
-    color: tomato;
-    font-size: 55px;
-    /* animation: heart-pulse 0.9s infinite ease-out; */
-}
-
-@keyframes heart-pulse {
-    0% {
-      transform: scale(0); /* scaling to 0 */
-    }
-    50% {
-      transform: scale(1.2); /* increasing the size */
-    }
-    70% {
-      transform: scale(0.65); /* decreasing the size */
-    }
-    100% {
-      transform: scale(0); /* seeting back to initial size */
-    }
+.cj-number-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
 
 .map-container > h1 {
@@ -40,9 +25,35 @@
     margin-bottom: 5px;
 }
 
-.map-container > h2 {
+.search-params {
     font-size: 45px;
     color: #fff;
+}
+
+.carjack-numbers,
+#cj-num-id {
+    color: tomato;
+    font-size: 55px;
+    animation: heart-pulse 0.9s infinite ease-out;
+}
+
+@keyframes heart-pulse {
+    0% {
+      transform: scale(.9); /* scaling to 0 */
+    }
+    50% {
+      transform: scale(1.25); /* increasing the size */
+    }
+    70% {
+      transform: scale(0.65); /* decreasing the size */
+    }
+    100% {
+      transform: scale(.9); /* seeting back to initial size */
+    }
+}
+
+.force-space {
+    color: transparent;
 }
 
 .search-bar-wrapper {
@@ -97,5 +108,4 @@
         /* margin-left: 10px;
         margin-right: 10px; */
     }
-
 }
