@@ -25,8 +25,8 @@ function JackKnows () {
                         Disclaimer: These crimes may be based upon preliminary information supplied to the Police Department by the 
                         reporting parties that have not been verified. The preliminary crime classifications may be changed at a 
                         later date based upon additional investigation and there is always the possibility of mechanical or human 
-                        error. Therefore, the Chicago Police Department or Shy Jack do not guarantee (either expressed or implied) the accuracy, 
-                        completeness, timeliness, or correct sequencing of this information. The Chicago Police Department or Shy Jack will not be responsible for any error or omission, 
+                        error. Therefore, Shy Jack does not guarantee (either expressed or implied) the accuracy, 
+                        completeness, timeliness, or correct sequencing of this information. Shy Jack is not responsible for any error or omission, 
                         or for the use of, or the results obtained from the use of this information. All data visualizations on maps 
                         should be considered approximate and attempts to derive specific addresses are strictly prohibited. The user 
                         specifically acknowledges that Shy Jack is not responsible for any defamatory, offensive, 
