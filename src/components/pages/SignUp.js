@@ -1,9 +1,16 @@
 import React from "react";
+import Lottie from 'react-lottie-player'
+import carSafety from '../../assets/animations/carSafety.json'
 import '../../App.css'
 
 function SignUp() {
     return (
-        <h1 className='sign-up'>Sign Up Party</h1>
+        <Lottie
+            loop
+            animationData={carSafety}
+            play
+            style={{ width: 700, height: 700 }}
+        />
     )
 
 }

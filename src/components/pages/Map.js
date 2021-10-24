@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { GoogleMap, Marker, useLoadScript, InfoWindow } from '@react-google-maps/api';
+import Lottie from 'react-lottie-player'
+import carSafety from '../../assets/animations/carSafety.json'
 import {formatDay, getDaysInMonth, createWeekArr, yearRange, neighborhoodObject} from '../services/mapService.js'
 import mapStyles from './mapStyles';
 import '../../App.css'
@@ -34,8 +36,8 @@ const Map = () => {
     let dayOfTheMonth = formatDay(today.getDate())
 
     const [carjackStats, setCarjackStats] = useState([])
-    const [lat, setLat] = useState(41.878113)
-    const [lng, setLng] = useState(-87.629799)
+    const [lat, setLat] = useState(null)
+    const [lng, setLng] = useState(null)
     const [carjackings, setCarjackings] = useState([])
     const [selectedCrime, setSelectedCrime] = useState(null)
     const [searchSpan, setSearchSpan] = useState("month")
@@ -119,6 +121,10 @@ const Map = () => {
     }
 
     useEffect(() => {
+        getHoodLatLng("Loop")
+    }, [])
+
+    useEffect(() => {
         makeApiCall()
     }, [searchSpan, searchYear, searchMonth, searchDay])
 
@@ -136,7 +142,7 @@ const Map = () => {
     if (loadError) return "Error";
     if (!isLoaded) return "Loading...";
     
-    return carjackings ? (
+    return carjackings.length ? (
 
         <div className="map-container">
             <h1 className="map-title">Interactive Chicago Carjacking Map</h1>
@@ -264,7 +270,17 @@ const Map = () => {
                 </GoogleMap>
             </div>
         </div>
-    ) : <></>
+    ) : 
+    <>
+        <div className="map-container">
+            <Lottie
+                loop
+                animationData={carSafety}
+                play
+                style={{ width: 700, height: 700 }}
+            />
+        </div>
+    </>
 }
 
 export default Map
