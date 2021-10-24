@@ -58,6 +58,16 @@ select {
     padding: 20px;
 }
 
+@media screen and (max-width: 900px) {
+    .graph-container > h1 {
+        font-size: 44px;
+    }
+
+    .graph-text {
+        margin: 15px 20px;
+    }
+}
+
 @media screen and (max-width: 768px) {
     .graph-container > h1 {
         font-size: 24px;
