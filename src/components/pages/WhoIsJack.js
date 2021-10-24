@@ -1,9 +1,16 @@
-import React from 'react'
+import React, {useEffect} from 'react'
+import { Link } from 'react-router-dom'
 import '../../App.css'
 import '../pages/WhoIsJack.css'
+// import * from '../../../public/images/'
 
 
 function WhoIsJack () {
+
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [])
+
     return (
         <>
             <div className="about-container">
@@ -42,7 +49,11 @@ function WhoIsJack () {
                     “Eventually, I think Chicago will be the most beautiful great city left in the world.” ―Frank Lloyd Wright
                     </p>
                     <p>
-                    For information on how Shy Jack works click here.
+                    How does&nbsp;
+                    <Link to="/" className="inline-logo">
+                        Shy Jack<i class="fas fa-car-crash"></i>
+                    </Link> 
+                    &nbsp;work?
                     </p>
                 </div>
             </div>
