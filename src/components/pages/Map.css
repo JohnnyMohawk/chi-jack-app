@@ -1,6 +1,6 @@
 .map-container {
     height: 100vh;
-    width: 100%;
+    width: 100vw;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -86,7 +86,7 @@
 
 .map-text {
     overflow: auto;
-    margin: 15px 150px;
+    margin: 15px 0;
     color: rgb(22, 33, 62);
     background-color: #fff;
     border-radius: 10px;
@@ -144,6 +144,10 @@
     .map-text {
         margin-top: 10px;
     }
+
+    .map-canvas {
+        
+    }
 }
 
 @media screen and (max-width: 550px) {
@@ -162,6 +166,5 @@
     .force-space {
         font-size: 4px;
     }
-
 
 }
