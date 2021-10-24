@@ -8,6 +8,7 @@ import Scanner from './components/pages/Scanner';
 import SignUp from './components/pages/SignUp';
 import Footer from './components/Footer';
 import WhoIsJack from './components/pages/WhoIsJack';
+import JackKnows from './components/pages/JackKnows';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path='/scanner' component={Scanner} />
         <Route path='/sign-up' component={SignUp} />
         <Route path='/who-is-jack' component={WhoIsJack} />
+        <Route path='/how-it-works' component={JackKnows} />
       </Switch>
       <Footer />
     </Router>

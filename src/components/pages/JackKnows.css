@@ -1,4 +1,4 @@
-.about-container {
+.how-container {
     height: 100vh;
     width: 100%;
     display: flex;
@@ -13,7 +13,7 @@
     );
 }
 
-.about-container > h1 {
+.how-container > h1 {
     color: #fff;
     font-size: 45px;
     text-shadow:
@@ -22,11 +22,10 @@
     
 }
 
-
-.about-text {
-    max-width: 1100px;
+.how-text {
+    max-width: 750px;
     overflow: auto;
-    margin: 10px 150px;
+    margin: 20px 150px;
     color: rgb(22, 33, 62);
     background-color: #fff;
     border-radius: 10px;
@@ -43,26 +42,24 @@ p {
     color: black;
 }
 
-.inline-logo {
-    font-family: 'Racing Sans One', cursive;
+a {
     color: black;
     text-decoration: none;
     transition: 0.3s ease-out;
 }
 
-.inline-logo:hover {
-    font-size: 17px;
+a:hover {
     color: tomato;
     transition: 0.3s ease-out;
 }
 
 @media screen and (max-width: 768px) {
-    .about-container > h1,
-    .about-container > h2 {
+    .how-container > h1,
+    .how-container > h2 {
         font-size: 34px;
     }
 
-    .about-text {
+    .how-text {
         margin: 15px 20px;
         max-width: 90vw;
     }

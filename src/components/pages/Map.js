@@ -140,14 +140,6 @@ const Map = () => {
 
         <div className="map-container">
             <h1 className="map-title">Interactive Chicago Carjacking Map</h1>
-            {/* <h2><span className="carjack-numbers heart">{carjackStats.length}</span> {" "}
-                Carjackings {" "}
-                {searchSpan === "month" ? "in " + fullMonths[months.indexOf(searchMonth)] : ""} {" "}
-                {searchSpan === "week" ? "on the week ending "+ fullMonths[months.indexOf(searchMonth)] + " " + searchDay : ""}
-                {searchSpan === "most recent" ? "on " + fullMonths[months.indexOf(searchMonth)] + " " +  searchDay : ""} {" "}
-                {searchSpan === "year" ? "in " : ""} {" "}
-                {searchYear}
-            </h2> */}
             <div className="cj-number-wrapper">
                 <h2 className="carjack-numbers heart" id="cj-num-id">{carjackStats.length}</h2>
                 <h2 className="force-space">{"_"}</h2>
@@ -199,7 +191,6 @@ const Map = () => {
                     :
                     <></>
                     }
-
                     {searchSpan === "week" || searchSpan === "most recent" ? 
                     <>
                     <select className="sb-inputs" defaultValue={dayOfTheMonth} onChange={event => {

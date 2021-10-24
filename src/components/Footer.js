@@ -27,7 +27,7 @@ function Footer() {
                     <div className="footer-link-items">
                         <h2>About Jack</h2>
                         <Link to="/who-is-jack" className="ft-link-class">Who is Shy Jack?</Link>
-                        <Link to="/sign-up" className="ft-link-class">How Shy Jack Knows?</Link>
+                        <Link to="/how-it-works" className="ft-link-class">How Jack Knows?</Link>
                     </div>
                 </div>
                 <div className="footer-link-wrapper">
@@ -85,63 +85,5 @@ function Footer() {
         </div>
     )
 }
-// function Footer() {
-//     return (
-//         <div className="footer-container">
-//             <section className="footer-subscription">
-//                 <p className="footer-subscription-heading">
-//                     Join Shy Jack's newsletter to receive important updates on issues involving Chicago crime and policing.
-//                 </p>
-//                 <p className="footer-subscription-text">
-//                     You can unsubscribe at any time.
-//                 </p>
-//                 <div className="input-areas">
-//                     <form>
-//                         <input type="email" name="email" placeHolder="Your Email" className="footer-input" />
-//                         <Button buttonStyle="btn--outline">Subscribe</Button>
-//                     </form>
-//                 </div>
-//             </section>
-//             <div className="footer-links">
-//                 <div className="footer-link-wrapper">
-//                     <div className="footer-link-items">
-//                         <h2>About Shy Jack</h2>
-//                         <Link to="/sign-up">Why Shy Jack</Link>
-//                         <Link to="/sign-up">How Shy Jack Knows</Link>
-//                         <Link to="/sign-up">What Can I Do?</Link>
-//                         <Link to="/sign-up">Save Our City</Link>
-//                         <Link to="/sign-up">About the Developer</Link>
-//                     </div>
-//                     <div className="footer-link-items">
-//                         <h2>About Shy Jack</h2>
-//                         <Link to="/sign-up">Why Shy Jack</Link>
-//                         <Link to="/sign-up">How Shy Jack Knows</Link>
-//                         <Link to="/sign-up">What Can I Do?</Link>
-//                         <Link to="/sign-up">Save Our City</Link>
-//                         <Link to="/sign-up">About the Developer</Link>
-//                     </div>
-//                 </div>
-//                 <div className="footer-link-wrapper">
-//                     <div className="footer-link-items">
-//                         <h2>About Shy Jack</h2>
-//                         <Link to="/sign-up">Why Shy Jack</Link>
-//                         <Link to="/sign-up">How Shy Jack Knows</Link>
-//                         <Link to="/sign-up">What Can I Do?</Link>
-//                         <Link to="/sign-up">Save Our City</Link>
-//                         <Link to="/sign-up">About the Developer</Link>
-//                     </div>
-//                     <div className="footer-link-items">
-//                         <h2>About Shy Jack</h2>
-//                         <Link to="/sign-up">Why Shy Jack</Link>
-//                         <Link to="/sign-up">How Shy Jack Knows</Link>
-//                         <Link to="/sign-up">What Can I Do?</Link>
-//                         <Link to="/sign-up">Save Our City</Link>
-//                         <Link to="/sign-up">About the Developer</Link>
-//                     </div>
-//                 </div>
-//             </div>
-//         </div>
-//     )
-// }
 
 export default Footer

@@ -2,7 +2,6 @@ import React, {useEffect} from 'react'
 import { Link } from 'react-router-dom'
 import '../../App.css'
 import '../pages/WhoIsJack.css'
-// import * from '../../../public/images/'
 
 
 function WhoIsJack () {
@@ -50,7 +49,7 @@ function WhoIsJack () {
                     </p>
                     <p>
                     How does&nbsp;
-                    <Link to="/" className="inline-logo">
+                    <Link to="/how-it-works" className="inline-logo">
                         Shy Jack<i class="fas fa-car-crash"></i>
                     </Link> 
                     &nbsp;work?
@@ -61,6 +60,5 @@ function WhoIsJack () {
     )
 
 }
-
 
 export default WhoIsJack
