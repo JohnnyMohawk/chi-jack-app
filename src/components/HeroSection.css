@@ -37,10 +37,11 @@ video {
     font-size: 32px;
 }
 
-.hero-container > p {
+.slogan {
     margin: 8px 0;
     color: #fff;
     font-size: 25px;
+    font-family: 'Josefin Sans', sans-serif;
 }
 
 .hero-btns {
@@ -50,6 +51,37 @@ video {
 .hero-btns .btn {
     margin: 6px;
 }
+
+.hero-logo {
+    animation: transitionIn 2s;
+}
+
+.hero-container > h2 {
+    animation: transitionIn 3s;
+}
+
+.slogan {
+    animation: transitionIn 4s;
+}
+
+.hero-container > .hero-btns {
+    animation: transitionIn 5s;
+}
+
+@keyframes transitionIn {
+    from {
+        opacity: 0;
+        transform: rotateX(-10deg);
+    }
+
+    to {
+        opacity: 1;
+        transform: rotateX(0);
+    }
+
+}
+
+
 
 @media screen and (max-width: 960px) {
     .hero-container > h1 {
