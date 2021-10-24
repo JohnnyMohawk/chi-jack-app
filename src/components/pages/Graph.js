@@ -1,4 +1,6 @@
 import React, {useState, useEffect} from "react"
+import Lottie from 'react-lottie-player'
+import dataAnimation from '../../assets/animations/dataAnimation.json'
 import {Bar, Doughnut, Line, Pie, PolarArea, Radar} from 'react-chartjs-2'
 import {formatDay, yearRange} from '../services/mapService.js'
 import '../../App.css'
@@ -10,8 +12,8 @@ function Graph() {
     const yearArr = yearRange(2001, currentYear)
     const [searchYear, setSearchYear] = useState(currentYear)
     const [yearArray, setYearArray] = useState([])
-    const [annualCjData, setAnnualCjData] = useState({})
-    const [monthlyCjData, setMonthlyCjData] = useState({})
+    const [annualCjData, setAnnualCjData] = useState(null)
+    const [monthlyCjData, setMonthlyCjData] = useState(null)
     const [graphType, setGraphType] = useState('bar')
     const [searchSpan, setSearchSpan] = useState("year")
     const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
@@ -39,7 +41,7 @@ function Graph() {
         makeApiCall()
     }, [graphType, searchSpan, searchYear])
 
-    return (
+    return annualCjData ? (
         <>
             <div className="graph-container">
                 <h1>Chicago Carjacking Data Visualizer</h1>
@@ -678,7 +680,18 @@ function Graph() {
                 </div>
             </div>
         </>
-    )
+    ):
+    <>
+        <div className="map-container">
+        <h1 className="">Loading... Please Wait</h1>
+            <Lottie
+                loop
+                animationData={dataAnimation}
+                play
+                style={{ width: 700, height: 700 }}
+            />
+        </div>
+    </>
 
 }
 
