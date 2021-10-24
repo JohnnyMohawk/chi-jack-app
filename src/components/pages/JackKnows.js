@@ -21,8 +21,10 @@ function JackKnows () {
                         days. In order to protect the privacy of crime victims, addresses are shown at the block level only and 
                         specific locations are not identified. Should you have questions about this dataset, you may contact the 
                         Research & Development Division of the Chicago Police Department at
-                        &nbsp;<a href="mailto:PSITAdministration@ChicagoPolice.org">PSITAdministration@ChicagoPolice.org</a>.&nbsp;
-                        Disclaimer: These crimes may be based upon preliminary information supplied to the Police Department by the 
+                        &nbsp;<a href="mailto:PSITAdministration@ChicagoPolice.org">PSITAdministration@ChicagoPolice.org</a>.
+                    </p>
+                    <p>
+                    Disclaimer: These crimes may be based upon preliminary information supplied to the Police Department by the 
                         reporting parties that have not been verified. The preliminary crime classifications may be changed at a 
                         later date based upon additional investigation and there is always the possibility of mechanical or human 
                         error. Therefore, Shy Jack does not guarantee (either expressed or implied) the accuracy, 

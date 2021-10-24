@@ -48,3 +48,9 @@ iframe {
   color: #fff;
   font-size: 100px;
 }
+
+.construction {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

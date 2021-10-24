@@ -1,16 +1,28 @@
-import React from "react";
+import React, {useEffect} from "react";
 import Lottie from 'react-lottie-player'
-import carSafety from '../../assets/animations/carSafety.json'
+import underConstruction from '../../assets/animations/underConstruction.json'
 import '../../App.css'
 
 function SignUp() {
+
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [])
+
     return (
-        <Lottie
+        <>
+        <div className="map-container">
+            <h1 className="map-title">Membership & Member Pages Coming Soon!</h1>
+        <div className="construction">
+            <Lottie
             loop
-            animationData={carSafety}
+            animationData={underConstruction}
             play
-            style={{ width: 700, height: 700 }}
-        />
+            style={{ width: 700, height: 600 }}
+            />
+        </div>
+        </div>
+        </>
     )
 
 }
