@@ -82,8 +82,6 @@ video {
 
 }
 
-
-
 @media screen and (max-width: 960px) {
     .hero-logo {
         font-size: 90px;
@@ -95,11 +93,6 @@ video {
         transition: all 0.2s ease-in;
     }
     
-    .hero-container > p {
-        margin: 8px 0;
-        color: #fff;
-        font-size: 20px;
-    }
 }
 
 @media screen and (max-width: 768px) {
@@ -111,9 +104,4 @@ video {
         font-size: 19px;
     }
     
-    .hero-container > p {
-        margin: 8px 0;
-        color: #fff;
-        font-size: 20px;
-    }
 }
