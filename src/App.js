@@ -10,7 +10,7 @@ import SignUp from './components/pages/SignUp';
 import Footer from './components/Footer';
 import WhoIsJack from './components/pages/WhoIsJack';
 import JackKnows from './components/pages/JackKnows';
-import * as authService from './components/services/authService'
+import * as authService from './services/authService'
 
 function App() {
 
@@ -28,7 +28,6 @@ function App() {
 	}
 
   return (
-    <>
     <Router>
       <NavBar />
       <Switch>
@@ -44,7 +43,6 @@ function App() {
       </Switch>
       <Footer />
     </Router>
-    </>
   );
 }
 
