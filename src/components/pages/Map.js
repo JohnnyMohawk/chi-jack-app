@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { GoogleMap, Marker, useLoadScript, InfoWindow } from '@react-google-maps/api';
 import Lottie from 'react-lottie-player'
 import carSafety from '../../assets/animations/carSafety.json'
-import {formatDay, getDaysInMonth, createWeekArr, yearRange, neighborhoodObject} from '../services/mapService.js'
+import {formatDay, getDaysInMonth, createWeekArr, yearRange, neighborhoodObject, removeZeros, fullMonths, months} from '../services/mapService.js'
 import mapStyles from './mapStyles';
 import '../../App.css'
 import '../pages/Map.css'
@@ -26,8 +26,8 @@ const Map = () => {
         googleMapsApiKey: googleMapsApiKey,
     })
 
-    const fullMonths = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
-    const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+    // const fullMonths = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+    // const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
     const currentYear = new Date().getFullYear()
     const currentMonth = new Date().getMonth()
     const today = new Date()
@@ -47,6 +47,15 @@ const Map = () => {
     const [searchMonth, setSearchMonth] = useState(months[currentMonth])
     const [monthNumber, setMonthNumber] = useState(currentMonth + 1)
     const [daysOfTheMonth, setDaysOfTheMonth] = useState(getDaysInMonth(currentMonth, currentYear))
+    
+
+    // const removeZeros = (array) => {
+    //     if(parseInt(array[0]) === 0){
+    //         array.shift()
+    //         removeZeros(array)
+    //     }
+    //     return array.join('')
+    // }
 
     const createFormattedDate = () => {
         let formattedDate
@@ -260,10 +269,10 @@ const Map = () => {
                                 setSelectedCrime(null)
                             }}
                         >
-                            <div>
-                                <h2>{selectedCrime.description}</h2>
-                                <h3>{selectedCrime.date}</h3>
-                                <h3>{selectedCrime.block}</h3>
+                            <div className="info-window">
+                                <h2>{removeZeros(selectedCrime.block.split(''))}</h2>
+                                <h3>{new Date(selectedCrime.date.split('T')[0]).toDateString()}</h3>
+                                <h3>{"At "+selectedCrime.date.split('T')[1].split(':')[0]+":"+selectedCrime.date.split('T')[1].split(':')[1]+" Hours"}</h3>
                             </div>
                         </InfoWindow>
                     )}
