@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import styles from './SignupForm.module.css'
-import * as authService from '../../services/authService'
+import * as authService from '../services/authService'
 
 const SignupForm = (props) => {
     const history = useHistory()
@@ -100,5 +100,5 @@ const SignupForm = (props) => {
         </form>
     )
 }
- 
+
 export default SignupForm
