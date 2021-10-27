@@ -26,8 +26,6 @@ const Map = () => {
         googleMapsApiKey: googleMapsApiKey,
     })
 
-    // const fullMonths = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
-    // const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
     const currentYear = new Date().getFullYear()
     const currentMonth = new Date().getMonth()
     const today = new Date()
@@ -47,15 +45,6 @@ const Map = () => {
     const [searchMonth, setSearchMonth] = useState(months[currentMonth])
     const [monthNumber, setMonthNumber] = useState(currentMonth + 1)
     const [daysOfTheMonth, setDaysOfTheMonth] = useState(getDaysInMonth(currentMonth, currentYear))
-    
-
-    // const removeZeros = (array) => {
-    //     if(parseInt(array[0]) === 0){
-    //         array.shift()
-    //         removeZeros(array)
-    //     }
-    //     return array.join('')
-    // }
 
     const createFormattedDate = () => {
         let formattedDate
