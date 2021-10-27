@@ -1,9 +1,11 @@
 import { User } from '../models/user.js'
 import jwt from 'jsonwebtoken'
 
-export {
-    signup,
-    login,
+
+const SECRET = process.env.SECRET
+
+const createJWT = (user) => {
+    return jwt.sign({ user }, SECRET, { expiresIn: '24h' })
 }
 
 async function login(req, res) {
@@ -25,6 +27,7 @@ async function login(req, res) {
 
 function signup(req, res) {
     const user = new User(req.body)
+    console.log("USER!!!", user)
     user.save()
     .then(user =>{
         console.log(user)
@@ -37,10 +40,7 @@ function signup(req, res) {
 }
 
 
-function createJWT(user) {
-    return jwt.sign(
-        { user },
-        process.env.SECRET,
-        { expiresIn: '24h' }
-    )
+export {
+    signup,
+    login,
 }

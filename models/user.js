@@ -3,9 +3,9 @@ import bcrypt from 'bcrypt'
 const SALT_ROUNDS = 6
 
 const userSchema = new mongoose.Schema({
-    name: String,
+    name: {type: String},
     email: { type: String, required: true, lowercase: true, unique: true },
-    password: String,
+    password: {type: String},
     }, {
     timestamps: true,
 })

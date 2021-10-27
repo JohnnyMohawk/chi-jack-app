@@ -15,8 +15,8 @@ import * as authService from './services/authService'
 function App() {
 
   const history = useHistory()
-  
-	const [user, setUser] = useState(authService.getUser())
+
+	const [user, setUser] = useState()
 
 	const handleLogout = () => {
 		authService.logout()
@@ -25,8 +25,11 @@ function App() {
 	}
 
 	const handleSignupOrLogin = () => {
-		setUser(authService.getUser())
+		const user = authService.getUser()
+    setUser(user)
 	}
+
+  console.log(user)
 
   return (
     <Router>

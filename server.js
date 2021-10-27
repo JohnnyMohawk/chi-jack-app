@@ -8,10 +8,10 @@ import cors from 'cors'
 import { router as usersRouter } from './routes/users.js'
 import { router as authRouter } from './routes/auth.js'
 
-import './config/database.js'
+import ('./config/database.js')
 
 const app = express()
-
+console.log(app)
 
 app.use(cors())
 app.use(logger('dev'))
