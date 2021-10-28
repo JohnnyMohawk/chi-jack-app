@@ -118,13 +118,12 @@ function Graph() {
                         options={{
                         maintainAspectRatio: false,
                         scales: {
-                            yAxes: [
-                            {
-                                ticks: {
-                                beginAtZero: true,
-                                },
+                            y: {
+                                grid: {
+                                    drawTicks: false,
+                                    color: "rgb(65, 65, 65)"
+                                }
                             },
-                            ],
                         },
                         legend: {
                             labels: {
@@ -175,13 +174,12 @@ function Graph() {
                         options={{
                         maintainAspectRatio: false,
                         scales: {
-                            yAxes: [
-                            {
-                                ticks: {
-                                beginAtZero: true,
-                                },
+                            y: {
+                                grid: {
+                                    drawTicks: false,
+                                    color: "rgb(65, 65, 65)"
+                                }
                             },
-                            ],
                         },
                         legend: {
                             labels: {
@@ -310,13 +308,12 @@ function Graph() {
                         options={{
                         maintainAspectRatio: false,
                         scales: {
-                            yAxes: [
-                            {
-                                ticks: {
-                                beginAtZero: true,
-                                },
+                            y: {
+                                grid: {
+                                    drawTicks: false,
+                                    color: "rgb(65, 65, 65)"
+                                }
                             },
-                            ],
                         },
                         legend: {
                             labels: {
@@ -345,13 +342,12 @@ function Graph() {
                         options={{
                         maintainAspectRatio: false,
                         scales: {
-                            yAxes: [
-                            {
-                                ticks: {
-                                beginAtZero: true,
-                                },
+                            y: {
+                                grid: {
+                                    drawTicks: false,
+                                    color: "rgb(65, 65, 65)"
+                                }
                             },
-                            ],
                         },
                         legend: {
                             labels: {
@@ -529,6 +525,11 @@ function Graph() {
                         options={{
                         maintainAspectRatio: false,
                         scales: {
+                            r: {
+                                grid: {
+                                    color: "rgb(65, 65, 65)"
+                                }
+                            }
                         },
                         legend: {
                             labels: {
@@ -606,6 +607,11 @@ function Graph() {
                         options={{
                         maintainAspectRatio: false,
                         scales: {
+                            r: {
+                                grid: {
+                                    color: "rgb(65, 65, 65)"
+                                }
+                            }
                         },
                         legend: {
                             labels: {
@@ -626,7 +632,7 @@ function Graph() {
                                 'rgba(255, 99, 132, 0.2)',
                             ],
                             borderColor: [
-                                'rgba(255, 99, 132, 1)',
+                                'red',
                             ],
                             borderWidth: 4,
                             },
@@ -637,6 +643,11 @@ function Graph() {
                         options={{
                         maintainAspectRatio: false,
                         scales: {
+                            r: {
+                                grid: {
+                                    color: "rgb(65, 65, 65)"
+                                }
+                            }
                         },
                         legend: {
                             labels: {
@@ -657,7 +668,7 @@ function Graph() {
                                 'rgba(255, 99, 132, 0.2)',
                             ],
                             borderColor: [
-                                'rgba(255, 99, 132, 1)',
+                                'red',
                             ],
                             borderWidth: 4,
                             },
@@ -668,6 +679,11 @@ function Graph() {
                         options={{
                         maintainAspectRatio: false,
                         scales: {
+                            r: {
+                                grid: {
+                                    color: "rgb(65, 65, 65)"
+                                }
+                            }
                         },
                         legend: {
                             labels: {
