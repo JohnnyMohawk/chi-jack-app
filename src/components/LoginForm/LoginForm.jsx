@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import { Link, useHistory } from 'react-router-dom'
-import styles from './LoginForm.module.css'
+// import '../../SignupForm/SignupForm.css'
 import * as authService from '../../services/authService'
+import '../SignupForm/SignupForm.css'
 
 const LoginForm = (props) => {
     const history = useHistory()
@@ -27,13 +28,16 @@ const LoginForm = (props) => {
     }
 
     return (
+        <div className="signup-form-container">
+        <h1>Log In</h1>
+        <div className="signup-form-text">
         <form
         autoComplete="off"
         onSubmit={handleSubmit}
-        className={styles.container}
+        className="container"
         >
-        <div className={styles.inputContainer}>
-            <label htmlFor="email-input" className={styles.label}>
+        <div className="inputContainer">
+            <label htmlFor="email-input" className="label">
             Email
             </label>
             <input
@@ -45,8 +49,8 @@ const LoginForm = (props) => {
             onChange={handleChange}
             />
         </div>
-        <div className={styles.inputContainer}>
-            <label htmlFor="password-input" className={styles.label}>
+        <div className="inputContainer">
+            <label htmlFor="password-input" className="label">
             Password
             </label>
             <input
@@ -58,14 +62,93 @@ const LoginForm = (props) => {
             onChange={handleChange}
             />
         </div>
-        <div>
-            <button className={styles.button}>Log In</button>
+        <div className="buttonContainerWrapper">
+        <div className="buttonContainer">
+            <button className="button">Log In</button>
             <Link to="/">
-            <button>Cancel</button>
+            <button className="button">Cancel</button>
             </Link>
         </div>
+        </div>
         </form>
+        </div>
+        </div>
     )
 }
 
 export default LoginForm
+
+
+
+
+// import React, { useState } from 'react'
+// import { Link, useHistory } from 'react-router-dom'
+// import styles from './LoginForm.module.css'
+// import * as authService from '../../services/authService'
+
+// const LoginForm = (props) => {
+//     const history = useHistory()
+//     const [formData, setFormData] = useState({
+//         email: '',
+//         password: '',
+//     })
+
+//     const handleChange = evt => {
+//         setFormData({ ...formData, [evt.target.name]: evt.target.value })
+//     }
+
+//     const handleSubmit = evt => {
+//         evt.preventDefault()
+//         authService.login(formData)
+//         .then(() => {
+//         props.handleSignupOrLogin()
+//         history.push('/')
+//         })
+//         .catch(err => {
+//         alert('Invalid Credentials')
+//         })
+//     }
+
+//     return (
+//         <form
+//         autoComplete="off"
+//         onSubmit={handleSubmit}
+//         className={styles.container}
+//         >
+//         <div className={styles.inputContainer}>
+//             <label htmlFor="email-input" className={styles.label}>
+//             Email
+//             </label>
+//             <input
+//             type="text"
+//             autoComplete="off"
+//             id="email-input"
+//             value={formData.email}
+//             name="email"
+//             onChange={handleChange}
+//             />
+//         </div>
+//         <div className={styles.inputContainer}>
+//             <label htmlFor="password-input" className={styles.label}>
+//             Password
+//             </label>
+//             <input
+//             type="password"
+//             autoComplete="off"
+//             id="password-input"
+//             value={formData.password}
+//             name="password"
+//             onChange={handleChange}
+//             />
+//         </div>
+//         <div>
+//             <button className={styles.button}>Log In</button>
+//             <Link to="/">
+//             <button>Cancel</button>
+//             </Link>
+//         </div>
+//         </form>
+//     )
+// }
+
+// export default LoginForm

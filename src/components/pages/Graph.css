@@ -28,7 +28,7 @@ select {
     font-size: 16px;
     background-color: rgb(207, 207, 207);
     border-radius: 5px;
-    box-shadow: 10px 10px 12px -1px rgba(90, 90, 90, 0.63);
+    /* box-shadow: 10px 10px 12px -1px rgba(90, 90, 90, 0.63); */
 }
 
 .search-bar {

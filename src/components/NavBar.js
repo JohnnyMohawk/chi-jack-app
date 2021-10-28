@@ -87,7 +87,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Button } from './Button';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import './NavBar.css';
 
 function Navbar({ user, handleLogout }) {
@@ -223,4 +223,4 @@ function Navbar({ user, handleLogout }) {
     );
 }
 
-export default Navbar;
+export default withRouter(Navbar);
