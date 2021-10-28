@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import './App.css';
 import NavBar from './components/NavBar';
-import {BrowserRouter as Router, Switch, Route, Redirect, useHistory} from 'react-router-dom'
+import {BrowserRouter as Router, Switch, Route, useHistory} from 'react-router-dom'
 import Home from './components/pages/Home';
 import Map from './components/pages/Map';
 import Graph from './components/pages/Graph';
@@ -34,7 +34,7 @@ function App() {
 
   return (
     <Router>
-      <NavBar user={user} handleLogout={handleLogout}/>
+      <NavBar history={history} user={user} handleLogout={handleLogout}/>
       <Switch>
         <Route path='/' exact component={Home} />
         <Route path='/map' component={Map} />

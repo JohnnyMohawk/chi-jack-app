@@ -65,6 +65,16 @@
     height: 100%;
 }
 
+.nav-user {
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+}
+
 .nav-links:hover {
     border-bottom: 4px solid tomato;
     transition: all 0.2s ease-out;
