@@ -53,7 +53,9 @@ const login = async (creds) => {
     })
     if (res.ok) {
         const data = await res.json()
+        console.log(data)
         tokenService.setToken(data.token)
+        console.log("BOOM", data.token)
     } else {
         throw new Error()
     }

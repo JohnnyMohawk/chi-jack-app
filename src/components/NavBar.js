@@ -3,7 +3,7 @@ import { Button } from './Button';
 import { Link } from 'react-router-dom';
 import './NavBar.css';
 
-function Navbar() {
+function Navbar({ user, handleLogout }) {
     const [click, setClick] = useState(false);
     const [button, setButton] = useState(true);
 
@@ -35,7 +35,9 @@ function Navbar() {
             <div className='menu-icon' onClick={handleClick}>
                 <i className={click ? 'fas fa-times' : 'fas fa-bars'} />
             </div>
+            {user ? (
             <ul className={click ? 'nav-menu active' : 'nav-menu'}>
+                <li className='nav-links'>Welcome, {user.name}</li>
                 <li className='nav-item'>
                 <Link to='/map' className='nav-links' onClick={closeMobileMenu}>
                     Map
@@ -59,7 +61,59 @@ function Navbar() {
                     Scanner
                 </Link>
                 </li>
-
+                {/* <li className='nav-item'>
+                <Link
+                    to='/log-in'
+                    className='nav-links'
+                    onClick={closeMobileMenu}
+                >
+                    Log In
+                </Link>
+                </li> */}
+                <li>
+                <Link
+                    to='/sign-up'
+                    className='nav-links-mobile'
+                    onClick={closeMobileMenu}
+                >
+                    Log Out
+                </Link>
+                </li>
+            </ul>
+            ):(
+                <ul className={click ? 'nav-menu active' : 'nav-menu'}>
+                <li className='nav-item'>
+                <Link to='/map' className='nav-links' onClick={closeMobileMenu}>
+                    Map
+                </Link>
+                </li>
+                <li className='nav-item'>
+                <Link
+                    to='/graph'
+                    className='nav-links'
+                    onClick={closeMobileMenu}
+                >
+                    Graph
+                </Link>
+                </li>
+                <li className='nav-item'>
+                <Link
+                    to='/scanner'
+                    className='nav-links'
+                    onClick={closeMobileMenu}
+                >
+                    Scanner
+                </Link>
+                </li>
+                <li className='nav-item'>
+                <Link
+                    to='/log-in'
+                    className='nav-links'
+                    onClick={closeMobileMenu}
+                >
+                    Log In
+                </Link>
+                </li>
                 <li>
                 <Link
                     to='/sign-up'
@@ -70,7 +124,8 @@ function Navbar() {
                 </Link>
                 </li>
             </ul>
-            {button && <Button buttonStyle='btn--outline' to="sign-up">SIGN UP</Button>}
+            )}
+            {user ? <Button buttonStyle='btn--outline' onClick={handleLogout}>LOG OUT</Button> : <Button buttonStyle='btn--outline' to="sign-up">SIGN UP</Button>}
             </div>
         </nav>
         </>

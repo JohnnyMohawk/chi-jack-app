@@ -15,9 +15,6 @@
 
 .input-field,
 .button {
-    /* width: 100%; */
-    /* margin: 5px; */
-    /* margin-top: 8px; */
     padding: 6px;
     font-size: 16px;
     background-color: rgb(207, 207, 207);
@@ -25,7 +22,6 @@
 }
 
 #name {
-    /* padding-right: 94px; */
     width: 256px;
 }
 
@@ -52,12 +48,6 @@
     );
 }
 
-/* .cj-number-wrapper {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-} */
-
 .signup-form-container > h1 {
     font-size: 45px;
     color: #fff;
@@ -68,163 +58,13 @@
 
 .buttonContainerWrapper {
     margin: 0 auto;
-    /* flex-direction: row;
-    align-items: flex-end; */
 }
-
-/* 
-.search-params {
-    font-size: 40px;
-    color: #fff;
-    text-shadow:
-        10px 10px 4px rgba(90, 90, 90, 0.3),
-        10px 10px 4px rgba(90, 90, 90, 0.3);
-}
-
-.carjack-numbers,
-#cj-num-id {
-    color: tomato;
-    font-size: 45px;
-    animation: heart-pulse 0.9s infinite ease-out;
-    text-shadow:
-        10px 10px 4px rgba(90, 90, 90, 0.3),
-        10px 10px 4px rgba(90, 90, 90, 0.3);
-}
-
-@keyframes heart-pulse {
-    0% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.08);
-    }
-    100% {
-        transform: scale(1);
-    }
-}
-
-.force-space {
-    color: transparent;
-}
-
-.search-bar-wrapper {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
-
-.search-bar {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
-
-.sb-inputs {
-    margin: 5px;
-    margin-top: 8px;
-    padding: 6px;
-    font-size: 16px;
-    background-color: rgb(207, 207, 207);
-    border-radius: 5px;
-    box-shadow: 10px 10px 12px -1px rgba(90, 90, 90, 0.63);
-} */
 
 .signup-form-text {
-    /* overflow: auto; */
     margin-top: 20px;
     color: rgb(22, 33, 62);
     background-color: #fff;
     border-radius: 10px;
     box-shadow: 10px 10px 12px -1px rgba(90, 90, 90, 0.63);
     padding: 30px 30px 20px 30px;
-    /* display: inline-flex;
-    flex-direction: column;
-    align-items: flex-start; */
-    /* display: block; */
 }
-/* 
-.info-window {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.info-window > h3 {
-    margin-top: 10px;
-} */
-/* 
-@media screen and (max-width: 1100px) {
-    .signup-form-container > h1 {
-        font-size: 41px;
-    }
-    .signup-form-container > h2,
-    .search-params {
-        font-size: 28px;
-        margin-bottom: 5px;
-    }
-
-    .force-space {
-        font-size: 14px;
-    }
-
-    #cj-num-id {
-        font-size: 36px;
-    }
-}
-
-@media screen and (max-width: 768px) {
-    .signup-form-container > h1 {
-        font-size: 32px;
-    }
-
-    .signup-form-container > h2,
-    .search-params {
-        font-size: 22px;
-        margin-bottom: 5px;
-    }
-
-    .force-space {
-        font-size: 14px;
-    }
-
-    #cj-num-id {
-        font-size: 32px;
-    }
-
-    .search-bar-wrapper {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .sb-inputs {
-        margin: 3px;
-    }
-
-    .signup-form-text {
-        margin-top: 10px;
-    }
-
-    .signup-form-canvas {
-        
-    }
-}
-
-@media screen and (max-width: 550px) {
-    .signup-form-container > h1 {
-        font-size: 20px;
-    }
-
-    #cj-num-id {
-        font-size: 22px;
-    }
-
-    .search-params {
-        font-size: 14px;
-    }
-
-    .force-space {
-        font-size: 4px;
-    }
-
-} */
