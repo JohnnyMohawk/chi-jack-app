@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import './App.css';
 import NavBar from './components/NavBar';
-import {BrowserRouter as Router, Switch, Route, useHistory} from 'react-router-dom'
+import {BrowserRouter as Router, Switch, Route, useHistory, withRouter} from 'react-router-dom'
 import Home from './components/pages/Home';
 import Map from './components/pages/Map';
 import Graph from './components/pages/Graph';
@@ -13,9 +13,11 @@ import JackKnows from './components/pages/JackKnows';
 import LoginPage from './components/pages/LoginPage';
 import * as authService from './services/authService'
 
-function App() {
+function App(props) {
 
   const history = useHistory()
+
+  console.log("HISTORY", history)
 
 	const [user, setUser] = useState()
 
@@ -31,6 +33,7 @@ function App() {
 	}
 
   console.log(user)
+  console.log("PROPS", props)
 
   return (
     <Router>
@@ -54,4 +57,4 @@ function App() {
   );
 }
 
-export default App;
+export default withRouter(App);

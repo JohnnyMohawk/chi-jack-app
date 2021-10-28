@@ -214,7 +214,7 @@ export default [
                 "color": "#000000"
             },
             {
-                "lightness": 17
+                "lightness": 8
             }
         ]
     }

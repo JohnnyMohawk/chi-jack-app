@@ -214,7 +214,7 @@ function Navbar({ user, handleLogout }) {
             )}
             {button && 
                 <div>
-                {user ? <Button buttonStyle='btn--outline' onClick={handleLogout}>LOG OUT</Button> : <Button buttonStyle='btn--outline' to="sign-up">SIGN UP</Button>}
+                {user ? <Button buttonStyle='btn--outline' onClick={handleLogout} to="/">LOG OUT</Button> : <Button buttonStyle='btn--outline' to="sign-up">SIGN UP</Button>}
                 </div>
                 }
             </div>
