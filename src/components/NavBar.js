@@ -159,14 +159,17 @@ function Navbar({ user, handleLogout }) {
                 </li> */}
                 <li>
                 <Link
-                    to='/sign-up'
+                    to='/'
                     className='nav-links-mobile'
-                    onClick={closeMobileMenu}
+                    // onClick={closeMobileMenu}
+                    onClick={() => { handleLogout(); closeMobileMenu();}}
                 >
                     Log Out
                 </Link>
                 </li>
+                
             </ul>
+            
             ):(
                 <ul className={click ? 'nav-menu active' : 'nav-menu'}>
                 <li className='nav-item'>
@@ -201,7 +204,7 @@ function Navbar({ user, handleLogout }) {
                     Log In
                 </Link>
                 </li>
-                {/* <li>
+                <li>
                 <Link
                     to='/sign-up'
                     className='nav-links-mobile'
@@ -209,14 +212,14 @@ function Navbar({ user, handleLogout }) {
                 >
                     Sign Up
                 </Link>
-                </li> */}
+                </li>
             </ul>
             )}
             {button && 
                 <div>
-                {user ? <Button buttonStyle='btn--outline' onClick={handleLogout} to="/">LOG OUT</Button> : <Button buttonStyle='btn--outline' to="sign-up">SIGN UP</Button>}
+                    {user ? <Button buttonStyle='btn--outline' onClick={handleLogout} to="/">LOG OUT</Button> : <Button buttonStyle='btn--outline' to="sign-up">SIGN UP</Button>}
                 </div>
-                }
+            }
             </div>
         </nav>
         </>
