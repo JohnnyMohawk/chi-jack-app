@@ -19,7 +19,6 @@ function SignUp(props) {
     return (
 
         <main>
-        <h1>Sign Up</h1>
         {message && <p>{message}</p> }
         <SignupForm 
             updateMessage={updateMessage}

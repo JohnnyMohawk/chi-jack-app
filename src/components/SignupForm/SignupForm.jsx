@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useHistory } from 'react-router-dom'
-import styles from './SignupForm.module.css'
+// import styles from './SignupForm.css'
 import * as authService from '../../services/authService'
+import "../SignupForm/SignupForm.css"
 
 const SignupForm = (props) => {
     const history = useHistory()
@@ -36,16 +37,20 @@ const SignupForm = (props) => {
         }, [formData])
 
     return (
+        <div className="signup-form-container">
+        <h1>Sign Up</h1>
+        <div className="signup-form-text">
         <form
         autoComplete="off"
         onSubmit={handleSubmit}
-        className={styles.container}
+        className="container"
         >
-        <div className={styles.inputContainer}>
-            <label htmlFor="name" className={styles.label}>
+        <div className="inputContainer">
+            <label htmlFor="name" className="label">
             Name
             </label>
             <input
+            className="input-field"
             type="text"
             autoComplete="off"
             id="name"
@@ -54,9 +59,10 @@ const SignupForm = (props) => {
             onChange={handleChange}
             />
         </div>
-        <div className={styles.inputContainer}>
-            <label htmlFor="email-input" className={styles.label}>Email</label>
+        <div className="inputContainer">
+            <label htmlFor="email-input" className="label">Email</label>
             <input
+            className="input-field"
             type="text"
             autoComplete="off"
             id="email"
@@ -65,11 +71,12 @@ const SignupForm = (props) => {
             onChange={handleChange}
             />
         </div>
-        <div className={styles.inputContainer}>
-            <label htmlFor="password-input" className={styles.label}>
+        <div className="inputContainer">
+            <label htmlFor="password-input" className="label">
             Password
             </label>
             <input
+            className="input-field"
             type="password"
             autoComplete="off"
             id="password"
@@ -78,11 +85,12 @@ const SignupForm = (props) => {
             onChange={handleChange}
             />
         </div>
-        <div className={styles.inputContainer}>
-            <label htmlFor="confirm-input" className={styles.label}>
+        <div className="inputContainer">
+            <label htmlFor="confirm-input" className="label">
             Confirm Password
             </label>
             <input
+            className="input-field"
             type="password"
             autoComplete="off"
             id="confirm-input"
@@ -91,13 +99,17 @@ const SignupForm = (props) => {
             onChange={handleChange}
             />
         </div>
-        <div className={styles.inputContainer}>
-            <button disabled={validForm} className={styles.button}>Sign Up</button>
+        <div className="buttonContainerWrapper">
+        <div className="buttonContainer">
+            <button disabled={validForm} className="button">Sign Up</button>
             <Link to="/">
-            <button>Cancel</button>
+            <button className="button">Cancel</button>
             </Link>
         </div>
+        </div>
         </form>
+        </div>
+        </div>
     )
 }
 
