@@ -19,7 +19,7 @@ function App(props) {
 
   console.log("HISTORY", history)
 
-	const [user, setUser] = useState()
+	const [user, setUser] = useState(authService.getUser())
 
 	const handleLogout = () => {
 		authService.logout()
