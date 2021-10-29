@@ -1,3 +1,9 @@
+<img src="public/images/readme-images/shy-jack-banner.png" width=100% height=auto>
+
+
+## Author
+
+**John Nelson-Alden**
 
 ## Built With
 
@@ -18,6 +24,3 @@
 * [Chart.js](https://www.chartjs.org/)
 * [LottieFiles](https://lottiefiles.com/)
 
-## Author
-
-**John Nelson-Alden**
