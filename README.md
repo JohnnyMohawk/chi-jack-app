@@ -3,6 +3,7 @@
 
 ## Author
 
+<img src="public/images/readme-images/jna-logo.png" width=25% height=auto>
 **John Nelson-Alden**
 
 ## Built With
