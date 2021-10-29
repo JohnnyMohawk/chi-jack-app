@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Link, useHistory } from 'react-router-dom'
-import styles from './LoginForm.module.css'
 import * as authService from '../../services/authService'
+import '../SignupForm/SignupForm.css'
 
 const LoginForm = (props) => {
     const history = useHistory()
@@ -18,53 +18,62 @@ const LoginForm = (props) => {
         evt.preventDefault()
         authService.login(formData)
         .then(() => {
-        props.handleSignupOrLogin()
-        history.push('/')
+            props.handleSignupOrLogin()
+            history.push('/')
         })
         .catch(err => {
-        alert('Invalid Credentials')
+            alert('Invalid Credentials')
         })
     }
 
     return (
-        <form
-        autoComplete="off"
-        onSubmit={handleSubmit}
-        className={styles.container}
-        >
-        <div className={styles.inputContainer}>
-            <label htmlFor="email-input" className={styles.label}>
-            Email
-            </label>
-            <input
-            type="text"
-            autoComplete="off"
-            id="email-input"
-            value={formData.email}
-            name="email"
-            onChange={handleChange}
-            />
+        <div className="signup-form-container">
+            <h1>Log In</h1>
+            <div className="signup-form-text">
+                <form
+                autoComplete="off"
+                onSubmit={handleSubmit}
+                className="container"
+                >
+                    <div className="inputContainer">
+                        <label htmlFor="email-input" className="label">
+                            Email
+                        </label>
+                        <input
+                            className="input-field"
+                            type="text"
+                            autoComplete="off"
+                            id="email-input"
+                            value={formData.email}
+                            name="email"
+                            onChange={handleChange}
+                        />
+                    </div>
+                    <div className="inputContainer">
+                        <label htmlFor="password-input" className="label">
+                            Password
+                        </label>
+                        <input
+                            className="input-field"
+                            type="password"
+                            autoComplete="off"
+                            id="password-input"
+                            value={formData.password}
+                            name="password"
+                            onChange={handleChange}
+                        />
+                    </div>
+                    <div className="buttonContainerWrapper">
+                        <div className="buttonContainer">
+                            <button className="button">Log In</button>
+                            <Link to="/">
+                                <button className="button">Cancel</button>
+                            </Link>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
-        <div className={styles.inputContainer}>
-            <label htmlFor="password-input" className={styles.label}>
-            Password
-            </label>
-            <input
-            type="password"
-            autoComplete="off"
-            id="password-input"
-            value={formData.password}
-            name="password"
-            onChange={handleChange}
-            />
-        </div>
-        <div>
-            <button className={styles.button}>Log In</button>
-            <Link to="/">
-            <button>Cancel</button>
-            </Link>
-        </div>
-        </form>
     )
 }
 

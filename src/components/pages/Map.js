@@ -2,15 +2,14 @@ import React, { useState, useEffect } from 'react'
 import { GoogleMap, Marker, useLoadScript, InfoWindow } from '@react-google-maps/api';
 import Lottie from 'react-lottie-player'
 import carSafety from '../../assets/animations/carSafety.json'
-import {formatDay, getDaysInMonth, createWeekArr, yearRange, neighborhoodObject, removeZeros, fullMonths, months} from '../services/mapService.js'
+import {formatDay, getDaysInMonth, createWeekArr, yearRange, neighborhoodObject, removeZeros, fullMonths, months} from '../../services/mapService.js'
 import mapStyles from './mapStyles';
-import '../../App.css'
 import '../pages/Map.css'
 require('dotenv').config()
 
 const containerStyle = {
-    width: '70vw',
-    height: '65vh'
+    width: '100vw',
+    height: '68vh'
 }
 
 const options = {
@@ -241,7 +240,7 @@ const Map = () => {
                                 setSelectedCrime(jacking)
                             }}
                             icon={{
-                                url: `/carjacking.png`,
+                                url: `/carjacking-red.png`,
                                 origin: new window.google.maps.Point(0, 0),
                                 anchor: new window.google.maps.Point(15, 15),
                                 scaledSize: new window.google.maps.Size(70, 70),
