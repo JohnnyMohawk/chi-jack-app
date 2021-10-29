@@ -5,6 +5,8 @@
 
 <img src="public/images/readme-images/languages.png" width=100% height=auto>
 
+<img src="public/images/readme-images/chart-react-api.png" width=100% height=auto>
+
 * [MongoDB](https://www.mongodb.com/)
 * [Mongoose](https://mongoosejs.com/)
 * [Express](https://expressjs.com/)
