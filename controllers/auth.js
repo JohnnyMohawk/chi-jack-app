@@ -27,10 +27,8 @@ async function login(req, res) {
 
 function signup(req, res) {
     const user = new User(req.body)
-    console.log("USER!!!", user)
     user.save()
     .then(user =>{
-        console.log(user)
         const token = createJWT(user)
         res.status(200).json({ token })
     })
@@ -38,7 +36,6 @@ function signup(req, res) {
         res.status(400).send({ err: err.errmsg })
     })
 }
-
 
 export {
     signup,

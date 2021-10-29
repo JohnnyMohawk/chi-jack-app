@@ -172,4 +172,8 @@
     .social-media-wrap {
         flex-direction: column;
     }
+
+    .footer-subscription-heading {
+        font-size: 20px;
+    }
 }

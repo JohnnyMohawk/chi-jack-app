@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useHistory } from 'react-router-dom'
-// import styles from './SignupForm.css'
 import * as authService from '../../services/authService'
 import "../SignupForm/SignupForm.css"
 

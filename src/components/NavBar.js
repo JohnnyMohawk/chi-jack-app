@@ -1,90 +1,3 @@
-// import React, { useState, useEffect } from 'react';
-// import { Button } from './Button';
-// import { Link } from 'react-router-dom';
-// import './NavBar.css';
-
-// function Navbar() {
-//     const [click, setClick] = useState(false);
-//     const [button, setButton] = useState(true);
-
-//     const handleClick = () => setClick(!click);
-//     const closeMobileMenu = () => setClick(false);
-
-//     const showButton = () => {
-//         if (window.innerWidth <= 960) {
-//         setButton(false);
-//         } else {
-//         setButton(true);
-//         }
-//     };
-
-//     useEffect(() => {
-//         showButton();
-//     }, []);
-
-//     window.addEventListener('resize', showButton);
-
-//     return (
-//         <>
-//         <nav className='navbar'>
-//             <div className='navbar-container'>
-//             <Link to='/' className='navbar-logo' onClick={closeMobileMenu}>
-//                 Shy Jack
-//                 <i class="fas fa-car-crash"></i>
-//             </Link>
-//             <div className='menu-icon' onClick={handleClick}>
-//                 <i className={click ? 'fas fa-times' : 'fas fa-bars'} />
-//             </div>
-//             <ul className={click ? 'nav-menu active' : 'nav-menu'}>
-//                 <li className='nav-item'>
-//                 <Link to='/map' className='nav-links' onClick={closeMobileMenu}>
-//                     Map
-//                 </Link>
-//                 </li>
-//                 <li className='nav-item'>
-//                 <Link
-//                     to='/graph'
-//                     className='nav-links'
-//                     onClick={closeMobileMenu}
-//                 >
-//                     Graph
-//                 </Link>
-//                 </li>
-//                 <li className='nav-item'>
-//                 <Link
-//                     to='/scanner'
-//                     className='nav-links'
-//                     onClick={closeMobileMenu}
-//                 >
-//                     Scanner
-//                 </Link>
-//                 </li>
-
-//                 <li>
-//                 <Link
-//                     to='/sign-up'
-//                     className='nav-links-mobile'
-//                     onClick={closeMobileMenu}
-//                 >
-//                     Sign Up
-//                 </Link>
-//                 </li>
-//             </ul>
-//             {button && 
-//                 <div>
-//                     {user ? <Button buttonStyle='btn--outline' to="sign-up">SIGN UP</Button> : <Button buttonStyle='btn--outline' to="sign-up">SIGN UP</Button>}
-//                 </div>
-//             }
-//             </div>
-//         </nav>
-//         </>
-//     );
-// }
-
-// export default Navbar;
-
-
-
 import React, { useState, useEffect } from 'react';
 import { Button } from './Button';
 import { Link, withRouter } from 'react-router-dom';
@@ -126,56 +39,44 @@ function Navbar({ user, handleLogout }) {
             <ul className={click ? 'nav-menu active' : 'nav-menu'}>
                 <li className='nav-user'>Welcome, {user.name}</li>
                 <li className='nav-item'>
-                <Link to='/map' className='nav-links' onClick={closeMobileMenu}>
-                    Map
-                </Link>
+                    <Link to='/map' className='nav-links' onClick={closeMobileMenu}>
+                        Map
+                    </Link>
                 </li>
                 <li className='nav-item'>
-                <Link
-                    to='/graph'
-                    className='nav-links'
-                    onClick={closeMobileMenu}
-                >
-                    Graph
-                </Link>
+                    <Link
+                        to='/graph'
+                        className='nav-links'
+                        onClick={closeMobileMenu}
+                    >
+                        Graph
+                    </Link>
                 </li>
                 <li className='nav-item'>
-                <Link
-                    to='/scanner'
-                    className='nav-links'
-                    onClick={closeMobileMenu}
-                >
-                    Scanner
-                </Link>
+                    <Link
+                        to='/scanner'
+                        className='nav-links'
+                        onClick={closeMobileMenu}
+                    >
+                        Scanner
+                    </Link>
                 </li>
-                {/* <li className='nav-item'>
-                <Link
-                    to='/log-in'
-                    className='nav-links'
-                    onClick={closeMobileMenu}
-                >
-                    Log In
-                </Link>
-                </li> */}
                 <li>
-                <Link
-                    to='/'
-                    className='nav-links-mobile'
-                    // onClick={closeMobileMenu}
-                    onClick={() => { handleLogout(); closeMobileMenu();}}
-                >
-                    Log Out
-                </Link>
+                    <Link
+                        to='/'
+                        className='nav-links-mobile'
+                        onClick={() => { handleLogout(); closeMobileMenu();}}
+                    >
+                        Log Out
+                    </Link>
                 </li>
-                
             </ul>
-            
             ):(
                 <ul className={click ? 'nav-menu active' : 'nav-menu'}>
                 <li className='nav-item'>
-                <Link to='/map' className='nav-links' onClick={closeMobileMenu}>
-                    Map
-                </Link>
+                    <Link to='/map' className='nav-links' onClick={closeMobileMenu}>
+                        Map
+                    </Link>
                 </li>
                 <li className='nav-item'>
                 <Link
@@ -187,31 +88,31 @@ function Navbar({ user, handleLogout }) {
                 </Link>
                 </li>
                 <li className='nav-item'>
-                <Link
-                    to='/scanner'
-                    className='nav-links'
-                    onClick={closeMobileMenu}
-                >
-                    Scanner
-                </Link>
+                    <Link
+                        to='/scanner'
+                        className='nav-links'
+                        onClick={closeMobileMenu}
+                    >
+                        Scanner
+                    </Link>
                 </li>
                 <li className='nav-item'>
-                <Link
-                    to='/log-in'
-                    className='nav-links'
-                    onClick={closeMobileMenu}
-                >
-                    Log In
-                </Link>
+                    <Link
+                        to='/log-in'
+                        className='nav-links'
+                        onClick={closeMobileMenu}
+                    >
+                        Log In
+                    </Link>
                 </li>
                 <li>
-                <Link
-                    to='/sign-up'
-                    className='nav-links-mobile'
-                    onClick={closeMobileMenu}
-                >
-                    Sign Up
-                </Link>
+                    <Link
+                        to='/sign-up'
+                        className='nav-links-mobile'
+                        onClick={closeMobileMenu}
+                    >
+                        Sign Up
+                    </Link>
                 </li>
             </ul>
             )}

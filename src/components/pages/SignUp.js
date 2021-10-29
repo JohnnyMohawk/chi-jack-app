@@ -1,9 +1,7 @@
 import React, {useEffect, useState} from "react";
-import Lottie from 'react-lottie-player'
 import SignupForm from "../SignupForm/SignupForm";
-import underConstruction from '../../assets/animations/underConstruction.json'
-import '../../App.css'
-// import styles from './Signup.module.css'
+// import Lottie from 'react-lottie-player'
+// import underConstruction from '../../assets/animations/underConstruction.json'
 
 function SignUp(props) {
     const [message, setMessage] = useState()

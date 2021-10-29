@@ -11,7 +11,6 @@ import { router as authRouter } from './routes/auth.js'
 import ('./config/database.js')
 
 const app = express()
-console.log(app)
 
 app.use(cors())
 app.use(logger('dev'))

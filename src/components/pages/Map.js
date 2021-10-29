@@ -4,7 +4,6 @@ import Lottie from 'react-lottie-player'
 import carSafety from '../../assets/animations/carSafety.json'
 import {formatDay, getDaysInMonth, createWeekArr, yearRange, neighborhoodObject, removeZeros, fullMonths, months} from '../../services/mapService.js'
 import mapStyles from './mapStyles';
-// import '../../App.css'
 import '../pages/Map.css'
 require('dotenv').config()
 

@@ -33,6 +33,10 @@
     width: 232px;
 }
 
+#email-input {
+    width: 195px;
+}
+
 .signup-form-container {
     height: 100vh;
     width: 100vw;
