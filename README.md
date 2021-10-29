@@ -38,4 +38,7 @@ I created Shy Jack to bring this important data directly to the great people of 
 * [React Google Maps API](https://www.npmjs.com/package/@react-google-maps/api)
 * [Chart.js](https://www.chartjs.org/)
 * [LottieFiles](https://lottiefiles.com/)
-
+* [Font Awesome](https://fontawesome.com/)
+* [Google Fonts](https://fonts.google.com/)
+* [Chicago Data Portal](https://data.cityofchicago.org/)
+* [Pixabay](https://pixabay.com/)
