@@ -10,7 +10,7 @@ function Footer() {
         <div className="footer-container">
             <section className="footer-subscription">
                 <p className="footer-subscription-heading">
-                Join Shy Jack's newsletter to receive important updates on issues involving Chicago crime and policing.
+                Join Shy Jack's newsletter to receive important updates on issues involving Chicago carjackings, policing and policy.
                 </p>
                 <p className="footer-subscription-text">
                     You can unsubscribe at any time.

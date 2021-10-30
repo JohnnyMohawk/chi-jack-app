@@ -44,17 +44,19 @@
 
 .nav-menu {
     display: grid;
-    grid-template-columns: repeat(5, auto);
+    grid-template-columns: repeat(6, auto);
     grid-gap: 10px;
     list-style: none;
     text-align: center;
-    width: 60vw;
+    width: 65vw;
     justify-content: end;
     margin-right: 2rem;
 }
 
-.nav-item {
+.nav-item,
+.nav-user {
     height: 80px;
+    /* margin: auto 0; */
 }
 
 .nav-links {
