@@ -107,6 +107,8 @@ const UserPage = (props) => {
         setLng(neighborhoodObject[selection][1])
     }
 
+    // console.log(neighborhoodObject[user.homeHood][0])
+
     const makeApiCall = async() => {
         let formattedDate = createFormattedDate()
         let res = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?description=AGGRAVATED%20VEHICULAR%20HIJACKING&$limit=50000&$offset=0')
@@ -147,7 +149,8 @@ const UserPage = (props) => {
     return carjackings.length ? (
 
         <div className="map-container">
-            <h1>{user.name}'s Dashboard</h1>
+            <h1 className="user-page-title">{user.name}'s Dashboard</h1>
+            <h4>Select What Data To Display</h4>
             <div className="search-bar-wrapper">
                 <div className="search-bar">
                     <select className="sb-inputs" defaultValue={searchSpan} onChange={event => {
@@ -205,173 +208,180 @@ const UserPage = (props) => {
             {window.innerWidth >= 960 ? 
             <div className="user-map-text">
                 <div className="hood-map">
-                    <h3>{user.homeHood}</h3>
-                <GoogleMap
-                    className="map-canvas"
-                    mapContainerStyle={{
-                        width: '33.3vw',
-                        height: '68vh'
-                    }}
-                    center={{lat: lat, lng: lng}}
-                    zoom={13}
-                    options={options}
-                    onLoad={onMapLoad}
-                >
-                    {carjackings?.map((jacking) => (
-                        <Marker 
-                            key={jacking.id} 
-                            position={{ 
-                                lat: parseFloat(jacking.latitude), 
-                                lng: parseFloat(jacking.longitude) 
-                            }}
-                            onClick={() => {
-                                setSelectedCrime(jacking)
-                            }}
-                            icon={{
-                                url: `/carjacking-red.png`,
-                                origin: new window.google.maps.Point(0, 0),
-                                anchor: new window.google.maps.Point(15, 15),
-                                scaledSize: new window.google.maps.Size(70, 70),
-                            }}
-                        />
-                    ))}
-                    {selectedCrime && (
-                        <InfoWindow
-                            position={{ 
-                                lat: parseFloat(selectedCrime.latitude), 
-                                lng: parseFloat(selectedCrime.longitude) 
-                            }}
-                            onCloseClick={() => {
-                                setSelectedCrime(null)
-                            }}
-                        >
-                            <div className="info-window">
-                                <h2>{removeZeros(selectedCrime.block.split(''))}</h2>
-                                <h3>{new Date(selectedCrime.date.split('T')[0]).toDateString()}</h3>
-                                <h3>{"At "+selectedCrime.date.split('T')[1].split(':')[0]+":"+selectedCrime.date.split('T')[1].split(':')[1]+" Hours"}</h3>
-                            </div>
-                        </InfoWindow>
-                    )}
-                </GoogleMap>
+                    <div className="hood-name-title">
+                        <h3>{user.homeHood}</h3>
+                    </div>
+                    <GoogleMap
+                        className="map-canvas"
+                        mapContainerStyle={{
+                            width: '33.3vw',
+                            height: '68vh'
+                        }}
+                        center={{lat: neighborhoodObject[user.homeHood][0], lng: neighborhoodObject[user.homeHood][1]}}
+                        zoom={13}
+                        options={options}
+                        onLoad={onMapLoad}
+                    >
+                        {carjackings?.map((jacking) => (
+                            <Marker 
+                                key={jacking.id} 
+                                position={{ 
+                                    lat: parseFloat(jacking.latitude), 
+                                    lng: parseFloat(jacking.longitude) 
+                                }}
+                                onClick={() => {
+                                    setSelectedCrime(jacking)
+                                }}
+                                icon={{
+                                    url: `/carjacking-red.png`,
+                                    origin: new window.google.maps.Point(0, 0),
+                                    anchor: new window.google.maps.Point(15, 15),
+                                    scaledSize: new window.google.maps.Size(70, 70),
+                                }}
+                            />
+                        ))}
+                        {selectedCrime && (
+                            <InfoWindow
+                                position={{ 
+                                    lat: parseFloat(selectedCrime.latitude), 
+                                    lng: parseFloat(selectedCrime.longitude) 
+                                }}
+                                onCloseClick={() => {
+                                    setSelectedCrime(null)
+                                }}
+                            >
+                                <div className="info-window">
+                                    <h2>{removeZeros(selectedCrime.block.split(''))}</h2>
+                                    <h3>{new Date(selectedCrime.date.split('T')[0]).toDateString()}</h3>
+                                    <h3>{"At "+selectedCrime.date.split('T')[1].split(':')[0]+":"+selectedCrime.date.split('T')[1].split(':')[1]+" Hours"}</h3>
+                                </div>
+                            </InfoWindow>
+                        )}
+                    </GoogleMap>
                 </div>
                 <div className="hood-map">
-                <h3>{user.workHood}</h3>
-                <GoogleMap
-                    className="map-canvas"
-                    mapContainerStyle={{
-                        width: '33.3vw',
-                        height: '68vh'
-                    }}
-                    center={{lat: lat, lng: lng}}
-                    zoom={13}
-                    options={{
-                        styles: mapStyles1,
-                        disableDefaultUI: true,
-                    }}
-                    onLoad={onMapLoad}
-                >
-                    {carjackings?.map((jacking) => (
-                        <Marker 
-                            key={jacking.id} 
-                            position={{ 
-                                lat: parseFloat(jacking.latitude), 
-                                lng: parseFloat(jacking.longitude) 
-                            }}
-                            onClick={() => {
-                                setSelectedCrime(jacking)
-                            }}
-                            icon={{
-                                url: `/carjacking-red.png`,
-                                origin: new window.google.maps.Point(0, 0),
-                                anchor: new window.google.maps.Point(15, 15),
-                                scaledSize: new window.google.maps.Size(70, 70),
-                            }}
-                        />
-                    ))}
-                    {selectedCrime && (
-                        <InfoWindow
-                            position={{ 
-                                lat: parseFloat(selectedCrime.latitude), 
-                                lng: parseFloat(selectedCrime.longitude) 
-                            }}
-                            onCloseClick={() => {
-                                setSelectedCrime(null)
-                            }}
-                        >
-                            <div className="info-window">
-                                <h2>{removeZeros(selectedCrime.block.split(''))}</h2>
-                                <h3>{new Date(selectedCrime.date.split('T')[0]).toDateString()}</h3>
-                                <h3>{"At "+selectedCrime.date.split('T')[1].split(':')[0]+":"+selectedCrime.date.split('T')[1].split(':')[1]+" Hours"}</h3>
-                            </div>
-                        </InfoWindow>
-                    )}
-                </GoogleMap>
+                    <div className="hood-name-title-mid">
+                        <h3>{user.workHood}</h3>
+                    </div>
+                    <GoogleMap
+                        className="map-canvas"
+                        mapContainerStyle={{
+                            width: '33.3vw',
+                            height: '68vh'
+                        }}
+                        center={{lat: neighborhoodObject[user.workHood][0], lng: neighborhoodObject[user.workHood][1]}}
+                        zoom={13}
+                        options={{
+                            styles: mapStyles1,
+                            disableDefaultUI: true,
+                        }}
+                        onLoad={onMapLoad}
+                    >
+                        {carjackings?.map((jacking) => (
+                            <Marker 
+                                key={jacking.id} 
+                                position={{ 
+                                    lat: parseFloat(jacking.latitude), 
+                                    lng: parseFloat(jacking.longitude) 
+                                }}
+                                onClick={() => {
+                                    setSelectedCrime(jacking)
+                                }}
+                                icon={{
+                                    url: `/carjacking-red.png`,
+                                    origin: new window.google.maps.Point(0, 0),
+                                    anchor: new window.google.maps.Point(15, 15),
+                                    scaledSize: new window.google.maps.Size(70, 70),
+                                }}
+                            />
+                        ))}
+                        {selectedCrime && (
+                            <InfoWindow
+                                position={{ 
+                                    lat: parseFloat(selectedCrime.latitude), 
+                                    lng: parseFloat(selectedCrime.longitude) 
+                                }}
+                                onCloseClick={() => {
+                                    setSelectedCrime(null)
+                                }}
+                            >
+                                <div className="info-window">
+                                    <h2>{removeZeros(selectedCrime.block.split(''))}</h2>
+                                    <h3>{new Date(selectedCrime.date.split('T')[0]).toDateString()}</h3>
+                                    <h3>{"At "+selectedCrime.date.split('T')[1].split(':')[0]+":"+selectedCrime.date.split('T')[1].split(':')[1]+" Hours"}</h3>
+                                </div>
+                            </InfoWindow>
+                        )}
+                    </GoogleMap>
                 </div>
                 <div className="hood-map">
-                <h3>{user.checkHood}</h3>
-                <GoogleMap
-                    className="map-canvas"
-                    mapContainerStyle={{
-                        width: '33.3vw',
-                        height: '68vh'
-                    }}
-                    center={{lat: lat, lng: lng}}
-                    zoom={13}
-                    options={options}
-                    onLoad={onMapLoad}
-                >
-                    {carjackings?.map((jacking) => (
-                        <Marker 
-                            key={jacking.id} 
-                            position={{ 
-                                lat: parseFloat(jacking.latitude), 
-                                lng: parseFloat(jacking.longitude) 
-                            }}
-                            onClick={() => {
-                                setSelectedCrime(jacking)
-                            }}
-                            icon={{
-                                url: `/carjacking-red.png`,
-                                origin: new window.google.maps.Point(0, 0),
-                                anchor: new window.google.maps.Point(15, 15),
-                                scaledSize: new window.google.maps.Size(70, 70),
-                            }}
-                        />
-                    ))}
-                    {selectedCrime && (
-                        <InfoWindow
-                            position={{ 
-                                lat: parseFloat(selectedCrime.latitude), 
-                                lng: parseFloat(selectedCrime.longitude) 
-                            }}
-                            onCloseClick={() => {
-                                setSelectedCrime(null)
-                            }}
-                        >
-                            <div className="info-window">
-                                <h2>{removeZeros(selectedCrime.block.split(''))}</h2>
-                                <h3>{new Date(selectedCrime.date.split('T')[0]).toDateString()}</h3>
-                                <h3>{"At "+selectedCrime.date.split('T')[1].split(':')[0]+":"+selectedCrime.date.split('T')[1].split(':')[1]+" Hours"}</h3>
-                            </div>
-                        </InfoWindow>
-                    )}
-                </GoogleMap>
+                    <div className="hood-name-title">
+                        <h3>{user.checkHood}</h3>
+                    </div>
+                    <GoogleMap
+                        className="map-canvas"
+                        mapContainerStyle={{
+                            width: '33.3vw',
+                            height: '68vh'
+                        }}
+                        center={{lat: neighborhoodObject[user.checkHood][0], lng: neighborhoodObject[user.checkHood][1]}}
+                        zoom={13}
+                        options={options}
+                        onLoad={onMapLoad}
+                    >
+                        {carjackings?.map((jacking) => (
+                            <Marker 
+                                key={jacking.id} 
+                                position={{ 
+                                    lat: parseFloat(jacking.latitude), 
+                                    lng: parseFloat(jacking.longitude) 
+                                }}
+                                onClick={() => {
+                                    setSelectedCrime(jacking)
+                                }}
+                                icon={{
+                                    url: `/carjacking-red.png`,
+                                    origin: new window.google.maps.Point(0, 0),
+                                    anchor: new window.google.maps.Point(15, 15),
+                                    scaledSize: new window.google.maps.Size(70, 70),
+                                }}
+                            />
+                        ))}
+                        {selectedCrime && (
+                            <InfoWindow
+                                position={{ 
+                                    lat: parseFloat(selectedCrime.latitude), 
+                                    lng: parseFloat(selectedCrime.longitude) 
+                                }}
+                                onCloseClick={() => {
+                                    setSelectedCrime(null)
+                                }}
+                            >
+                                <div className="info-window">
+                                    <h2>{removeZeros(selectedCrime.block.split(''))}</h2>
+                                    <h3>{new Date(selectedCrime.date.split('T')[0]).toDateString()}</h3>
+                                    <h3>{"At "+selectedCrime.date.split('T')[1].split(':')[0]+":"+selectedCrime.date.split('T')[1].split(':')[1]+" Hours"}</h3>
+                                </div>
+                            </InfoWindow>
+                        )}
+                    </GoogleMap>
                 </div>
             </div>
             
         :
         <>
         <div className="user-map-text-mobile">
-                <div className="hood-map">
-
+            <div className="hood-map">
+                <div className="hood-name-title">
                     <h3>{user.homeHood}</h3>
+                </div>
                 <GoogleMap
                     className="map-canvas"
                     mapContainerStyle={{
                         width: '100vw',
                         height: '68vh'
                     }}
-                    center={{lat: lat, lng: lng}}
+                    center={{lat: neighborhoodObject[user.homeHood][0], lng: neighborhoodObject[user.homeHood][1]}}
                     zoom={13}
                     options={options}
                     onLoad={onMapLoad}
@@ -414,14 +424,16 @@ const UserPage = (props) => {
                 </GoogleMap>
                 </div>
                 <div className="hood-map">
-                <h3>{user.workHood}</h3>
+                <div className="hood-name-title">
+                    <h3>{user.workHood}</h3>
+                </div>
                 <GoogleMap
                     className="map-canvas"
                     mapContainerStyle={{
                         width: '100vw',
                         height: '68vh'
                     }}
-                    center={{lat: lat, lng: lng}}
+                    center={{lat: neighborhoodObject[user.workHood][0], lng: neighborhoodObject[user.workHood][1]}}
                     zoom={13}
                     options={{
                         styles: mapStyles1,
@@ -467,14 +479,16 @@ const UserPage = (props) => {
                 </GoogleMap>
                 </div>
                 <div className="hood-map">
-                <h3>{user.checkHood}</h3>
+                <div className="hood-name-title">
+                    <h3>{user.checkHood}</h3>
+                </div>
                 <GoogleMap
                     className="map-canvas"
                     mapContainerStyle={{
                         width: '100vw',
                         height: '68vh'
                     }}
-                    center={{lat: lat, lng: lng}}
+                    center={{lat: neighborhoodObject[user.checkHood][0], lng: neighborhoodObject[user.checkHood][1]}}
                     zoom={13}
                     options={options}
                     onLoad={onMapLoad}

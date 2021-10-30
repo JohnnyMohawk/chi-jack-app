@@ -19,7 +19,7 @@
     align-items: center;
 }
 
-.map-container > h1 {
+.map-title {
     font-size: 45px;
     color: #fff;
 }
@@ -99,7 +99,7 @@
 }
 
 @media screen and (max-width: 1100px) {
-    .map-container > h1 {
+    .map-title {
         font-size: 41px;
     }
     .map-container > h2,
@@ -118,7 +118,7 @@
 }
 
 @media screen and (max-width: 768px) {
-    .map-container > h1 {
+    .map-title {
         font-size: 32px;
     }
 
@@ -153,7 +153,7 @@
 }
 
 @media screen and (max-width: 550px) {
-    .map-container > h1 {
+    .map-title {
         font-size: 20px;
     }
 
