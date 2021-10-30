@@ -10,10 +10,10 @@ import '../pages/UserPage.css'
 import userEvent from '@testing-library/user-event';
 require('dotenv').config()
 
-const containerStyle = {
-    width: '33.3vw',
-    height: '68vh'
-}
+// const containerStyle = {
+//     width: '33.3vw',
+//     height: '68vh'
+// }
 
 const options = {
     styles: mapStyles,
@@ -218,7 +218,7 @@ const UserPage = (props) => {
                             height: '68vh'
                         }}
                         center={{lat: neighborhoodObject[user.homeHood][0], lng: neighborhoodObject[user.homeHood][1]}}
-                        zoom={13}
+                        zoom={14}
                         options={options}
                         onLoad={onMapLoad}
                     >
@@ -270,7 +270,7 @@ const UserPage = (props) => {
                             height: '68vh'
                         }}
                         center={{lat: neighborhoodObject[user.workHood][0], lng: neighborhoodObject[user.workHood][1]}}
-                        zoom={13}
+                        zoom={14}
                         options={{
                             styles: mapStyles1,
                             disableDefaultUI: true,
@@ -325,7 +325,7 @@ const UserPage = (props) => {
                             height: '68vh'
                         }}
                         center={{lat: neighborhoodObject[user.checkHood][0], lng: neighborhoodObject[user.checkHood][1]}}
-                        zoom={13}
+                        zoom={14}
                         options={options}
                         onLoad={onMapLoad}
                     >
@@ -379,10 +379,10 @@ const UserPage = (props) => {
                     className="map-canvas"
                     mapContainerStyle={{
                         width: '100vw',
-                        height: '68vh'
+                        height: '70vh'
                     }}
                     center={{lat: neighborhoodObject[user.homeHood][0], lng: neighborhoodObject[user.homeHood][1]}}
-                    zoom={13}
+                    zoom={14}
                     options={options}
                     onLoad={onMapLoad}
                 >
@@ -431,10 +431,10 @@ const UserPage = (props) => {
                     className="map-canvas"
                     mapContainerStyle={{
                         width: '100vw',
-                        height: '68vh'
+                        height: '70vh'
                     }}
                     center={{lat: neighborhoodObject[user.workHood][0], lng: neighborhoodObject[user.workHood][1]}}
-                    zoom={13}
+                    zoom={14}
                     options={{
                         styles: mapStyles1,
                         disableDefaultUI: true,
@@ -486,10 +486,10 @@ const UserPage = (props) => {
                     className="map-canvas"
                     mapContainerStyle={{
                         width: '100vw',
-                        height: '68vh'
+                        height: '70vh'
                     }}
                     center={{lat: neighborhoodObject[user.checkHood][0], lng: neighborhoodObject[user.checkHood][1]}}
-                    zoom={13}
+                    zoom={14}
                     options={options}
                     onLoad={onMapLoad}
                 >
