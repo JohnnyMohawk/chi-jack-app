@@ -5,6 +5,7 @@ import carSafety from '../../assets/animations/carSafety.json'
 import {formatDay, getDaysInMonth, createWeekArr, yearRange, neighborhoodObject, removeZeros, fullMonths, months} from '../../services/mapService.js'
 import * as authService from '../../services/authService'
 import mapStyles from './mapStyles';
+import mapStyles1 from './mapStyles1';
 import '../pages/UserPage.css'
 import userEvent from '@testing-library/user-event';
 require('dotenv').config()
@@ -263,7 +264,10 @@ const UserPage = (props) => {
                     }}
                     center={{lat: lat, lng: lng}}
                     zoom={13}
-                    options={options}
+                    options={{
+                        styles: mapStyles1,
+                        disableDefaultUI: true,
+                    }}
                     onLoad={onMapLoad}
                 >
                     {carjackings?.map((jacking) => (
@@ -359,6 +363,7 @@ const UserPage = (props) => {
         <>
         <div className="user-map-text-mobile">
                 <div className="hood-map">
+
                     <h3>{user.homeHood}</h3>
                 <GoogleMap
                     className="map-canvas"
@@ -418,7 +423,10 @@ const UserPage = (props) => {
                     }}
                     center={{lat: lat, lng: lng}}
                     zoom={13}
-                    options={options}
+                    options={{
+                        styles: mapStyles1,
+                        disableDefaultUI: true,
+                    }}
                     onLoad={onMapLoad}
                 >
                     {carjackings?.map((jacking) => (
