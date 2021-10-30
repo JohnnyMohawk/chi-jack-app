@@ -18,8 +18,6 @@ function App(props) {
 
   const history = useHistory()
 
-  // console.log("HISTORY", history)
-
 	const [user, setUser] = useState(authService.getUser())
 
 	const handleLogout = () => {
@@ -32,9 +30,6 @@ function App(props) {
 		const user = authService.getUser()
     setUser(user)
 	}
-
-  // console.log("!!!!USER!!!", user.checkHood)
-  // console.log("PROPS", props)
 
   return (
     <Router>
@@ -53,7 +48,6 @@ function App(props) {
         <Route path='/who-is-jack' component={WhoIsJack} />
         <Route path='/how-it-works' component={JackKnows} />
         <Route path='/my-page' component={UserPage} />
-        <Route path='/my-page' history={history} user={user} component={UserPage} />
       </Switch>
       <Footer />
     </Router>

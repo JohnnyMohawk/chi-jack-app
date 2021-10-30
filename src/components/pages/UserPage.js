@@ -3,12 +3,14 @@ import { GoogleMap, Marker, useLoadScript, InfoWindow } from '@react-google-maps
 import Lottie from 'react-lottie-player'
 import carSafety from '../../assets/animations/carSafety.json'
 import {formatDay, getDaysInMonth, createWeekArr, yearRange, neighborhoodObject, removeZeros, fullMonths, months} from '../../services/mapService.js'
+import * as authService from '../../services/authService'
 import mapStyles from './mapStyles';
-import '../pages/Map.css'
+import '../pages/UserPage.css'
+import userEvent from '@testing-library/user-event';
 require('dotenv').config()
 
 const containerStyle = {
-    width: '33vw',
+    width: '33.3vw',
     height: '68vh'
 }
 
@@ -19,9 +21,20 @@ const options = {
 
 const googleMapsApiKey = process.env.REACT_APP_API_KEY_GOOGLE_MAPS
 
-const UserPage = ({user, history}) => {
+const UserPage = (props) => {
     
-    
+    const [user, setUser] = useState(authService.getUser())
+
+    const userPageResponse = () => {
+        if(window.innerWidth >= 960){
+            window.location.reload()
+        }else if(window.innerWidth <= 960){
+            window.location.reload()
+        }
+    }
+
+    window.addEventListener('resize', userPageResponse);
+
     const { isLoaded, loadError } = useLoadScript({
         id: 'google-map-script',
         googleMapsApiKey: googleMapsApiKey,
@@ -88,18 +101,7 @@ const UserPage = ({user, history}) => {
         return formattedDate
     }
 
-    const setMyLocation = async () => {
-        navigator.geolocation.getCurrentPosition(
-            (position) => {
-                setLat(parseFloat(position.coords.latitude))
-                setLng(parseFloat(position.coords.longitude))
-            },
-            () => null
-        )
-    }
-
     const getHoodLatLng = (selection) => {
-        console.log(neighborhoodObject[selection][0])
         setLat(neighborhoodObject[selection][0])
         setLng(neighborhoodObject[selection][1])
     }
@@ -120,7 +122,6 @@ const UserPage = ({user, history}) => {
     }
 
     useEffect(() => {
-        console.log("USER!!!!", history, user)
         getHoodLatLng("Loop")
     }, [])
 
@@ -145,31 +146,8 @@ const UserPage = ({user, history}) => {
     return carjackings.length ? (
 
         <div className="map-container">
-            {/* <h1 className="map-title">Interactive Chicago Carjacking Map</h1>
-            <div className="cj-number-wrapper">
-                <h2 className="carjack-numbers heart" id="cj-num-id">{carjackStats.length}</h2>
-                <h2 className="force-space">{"_"}</h2>
-                <h2 className="search-params">{`Carjackings
-                    ${searchSpan === "month" ? "in " + fullMonths[months.indexOf(searchMonth)] : ""}
-                    ${searchSpan === "week" ? "on the week ending "+ fullMonths[months.indexOf(searchMonth)] + " " + searchDay : ""}
-                    ${searchSpan === "most recent" ? "on " + fullMonths[months.indexOf(searchMonth)] + " " +  searchDay : ""}
-                    ${searchSpan === "year" ? "in " : ""}
-                    ${searchYear}`}
-                </h2>
-            </div> */}
+            <h1>{user.name}'s Dashboard</h1>
             <div className="search-bar-wrapper">
-            {/* <div className="search-bar">
-
-            <select className="sb-inputs" defaultValue="Loop" onChange={event => {
-                getHoodLatLng(event.target.value)
-                }}>
-                {Object.keys(neighborhoodObject).sort().map(neighborhood => (
-                    <option key={neighborhood} value={neighborhood}>
-                        {neighborhood}
-                    </option>
-                ))}
-            </select>
-            </div> */}
                 <div className="search-bar">
                     <select className="sb-inputs" defaultValue={searchSpan} onChange={event => {
                     setSearchSpan(event.target.value)
@@ -223,10 +201,16 @@ const UserPage = ({user, history}) => {
                     </select>
                 </div>
             </div> 
+            {window.innerWidth >= 960 ? 
             <div className="user-map-text">
+                <div className="hood-map">
+                    <h3>{user.homeHood}</h3>
                 <GoogleMap
                     className="map-canvas"
-                    mapContainerStyle={containerStyle}
+                    mapContainerStyle={{
+                        width: '33.3vw',
+                        height: '68vh'
+                    }}
                     center={{lat: lat, lng: lng}}
                     zoom={13}
                     options={options}
@@ -268,9 +252,15 @@ const UserPage = ({user, history}) => {
                         </InfoWindow>
                     )}
                 </GoogleMap>
+                </div>
+                <div className="hood-map">
+                <h3>{user.workHood}</h3>
                 <GoogleMap
                     className="map-canvas"
-                    mapContainerStyle={containerStyle}
+                    mapContainerStyle={{
+                        width: '33.3vw',
+                        height: '68vh'
+                    }}
                     center={{lat: lat, lng: lng}}
                     zoom={13}
                     options={options}
@@ -312,7 +302,215 @@ const UserPage = ({user, history}) => {
                         </InfoWindow>
                     )}
                 </GoogleMap>
+                </div>
+                <div className="hood-map">
+                <h3>{user.checkHood}</h3>
+                <GoogleMap
+                    className="map-canvas"
+                    mapContainerStyle={{
+                        width: '33.3vw',
+                        height: '68vh'
+                    }}
+                    center={{lat: lat, lng: lng}}
+                    zoom={13}
+                    options={options}
+                    onLoad={onMapLoad}
+                >
+                    {carjackings?.map((jacking) => (
+                        <Marker 
+                            key={jacking.id} 
+                            position={{ 
+                                lat: parseFloat(jacking.latitude), 
+                                lng: parseFloat(jacking.longitude) 
+                            }}
+                            onClick={() => {
+                                setSelectedCrime(jacking)
+                            }}
+                            icon={{
+                                url: `/carjacking-red.png`,
+                                origin: new window.google.maps.Point(0, 0),
+                                anchor: new window.google.maps.Point(15, 15),
+                                scaledSize: new window.google.maps.Size(70, 70),
+                            }}
+                        />
+                    ))}
+                    {selectedCrime && (
+                        <InfoWindow
+                            position={{ 
+                                lat: parseFloat(selectedCrime.latitude), 
+                                lng: parseFloat(selectedCrime.longitude) 
+                            }}
+                            onCloseClick={() => {
+                                setSelectedCrime(null)
+                            }}
+                        >
+                            <div className="info-window">
+                                <h2>{removeZeros(selectedCrime.block.split(''))}</h2>
+                                <h3>{new Date(selectedCrime.date.split('T')[0]).toDateString()}</h3>
+                                <h3>{"At "+selectedCrime.date.split('T')[1].split(':')[0]+":"+selectedCrime.date.split('T')[1].split(':')[1]+" Hours"}</h3>
+                            </div>
+                        </InfoWindow>
+                    )}
+                </GoogleMap>
+                </div>
             </div>
+            
+        :
+        <>
+        <div className="user-map-text-mobile">
+                <div className="hood-map">
+                    <h3>{user.homeHood}</h3>
+                <GoogleMap
+                    className="map-canvas"
+                    mapContainerStyle={{
+                        width: '100vw',
+                        height: '68vh'
+                    }}
+                    center={{lat: lat, lng: lng}}
+                    zoom={13}
+                    options={options}
+                    onLoad={onMapLoad}
+                >
+                    {carjackings?.map((jacking) => (
+                        <Marker 
+                            key={jacking.id} 
+                            position={{ 
+                                lat: parseFloat(jacking.latitude), 
+                                lng: parseFloat(jacking.longitude) 
+                            }}
+                            onClick={() => {
+                                setSelectedCrime(jacking)
+                            }}
+                            icon={{
+                                url: `/carjacking-red.png`,
+                                origin: new window.google.maps.Point(0, 0),
+                                anchor: new window.google.maps.Point(15, 15),
+                                scaledSize: new window.google.maps.Size(70, 70),
+                            }}
+                        />
+                    ))}
+                    {selectedCrime && (
+                        <InfoWindow
+                            position={{ 
+                                lat: parseFloat(selectedCrime.latitude), 
+                                lng: parseFloat(selectedCrime.longitude) 
+                            }}
+                            onCloseClick={() => {
+                                setSelectedCrime(null)
+                            }}
+                        >
+                            <div className="info-window">
+                                <h2>{removeZeros(selectedCrime.block.split(''))}</h2>
+                                <h3>{new Date(selectedCrime.date.split('T')[0]).toDateString()}</h3>
+                                <h3>{"At "+selectedCrime.date.split('T')[1].split(':')[0]+":"+selectedCrime.date.split('T')[1].split(':')[1]+" Hours"}</h3>
+                            </div>
+                        </InfoWindow>
+                    )}
+                </GoogleMap>
+                </div>
+                <div className="hood-map">
+                <h3>{user.workHood}</h3>
+                <GoogleMap
+                    className="map-canvas"
+                    mapContainerStyle={{
+                        width: '100vw',
+                        height: '68vh'
+                    }}
+                    center={{lat: lat, lng: lng}}
+                    zoom={13}
+                    options={options}
+                    onLoad={onMapLoad}
+                >
+                    {carjackings?.map((jacking) => (
+                        <Marker 
+                            key={jacking.id} 
+                            position={{ 
+                                lat: parseFloat(jacking.latitude), 
+                                lng: parseFloat(jacking.longitude) 
+                            }}
+                            onClick={() => {
+                                setSelectedCrime(jacking)
+                            }}
+                            icon={{
+                                url: `/carjacking-red.png`,
+                                origin: new window.google.maps.Point(0, 0),
+                                anchor: new window.google.maps.Point(15, 15),
+                                scaledSize: new window.google.maps.Size(70, 70),
+                            }}
+                        />
+                    ))}
+                    {selectedCrime && (
+                        <InfoWindow
+                            position={{ 
+                                lat: parseFloat(selectedCrime.latitude), 
+                                lng: parseFloat(selectedCrime.longitude) 
+                            }}
+                            onCloseClick={() => {
+                                setSelectedCrime(null)
+                            }}
+                        >
+                            <div className="info-window">
+                                <h2>{removeZeros(selectedCrime.block.split(''))}</h2>
+                                <h3>{new Date(selectedCrime.date.split('T')[0]).toDateString()}</h3>
+                                <h3>{"At "+selectedCrime.date.split('T')[1].split(':')[0]+":"+selectedCrime.date.split('T')[1].split(':')[1]+" Hours"}</h3>
+                            </div>
+                        </InfoWindow>
+                    )}
+                </GoogleMap>
+                </div>
+                <div className="hood-map">
+                <h3>{user.checkHood}</h3>
+                <GoogleMap
+                    className="map-canvas"
+                    mapContainerStyle={{
+                        width: '100vw',
+                        height: '68vh'
+                    }}
+                    center={{lat: lat, lng: lng}}
+                    zoom={13}
+                    options={options}
+                    onLoad={onMapLoad}
+                >
+                    {carjackings?.map((jacking) => (
+                        <Marker 
+                            key={jacking.id} 
+                            position={{ 
+                                lat: parseFloat(jacking.latitude), 
+                                lng: parseFloat(jacking.longitude) 
+                            }}
+                            onClick={() => {
+                                setSelectedCrime(jacking)
+                            }}
+                            icon={{
+                                url: `/carjacking-red.png`,
+                                origin: new window.google.maps.Point(0, 0),
+                                anchor: new window.google.maps.Point(15, 15),
+                                scaledSize: new window.google.maps.Size(70, 70),
+                            }}
+                        />
+                    ))}
+                    {selectedCrime && (
+                        <InfoWindow
+                            position={{ 
+                                lat: parseFloat(selectedCrime.latitude), 
+                                lng: parseFloat(selectedCrime.longitude) 
+                            }}
+                            onCloseClick={() => {
+                                setSelectedCrime(null)
+                            }}
+                        >
+                            <div className="info-window">
+                                <h2>{removeZeros(selectedCrime.block.split(''))}</h2>
+                                <h3>{new Date(selectedCrime.date.split('T')[0]).toDateString()}</h3>
+                                <h3>{"At "+selectedCrime.date.split('T')[1].split(':')[0]+":"+selectedCrime.date.split('T')[1].split(':')[1]+" Hours"}</h3>
+                            </div>
+                        </InfoWindow>
+                    )}
+                </GoogleMap>
+                </div>
+            </div>
+        </>
+        }
         </div>
     ) : 
     <>
