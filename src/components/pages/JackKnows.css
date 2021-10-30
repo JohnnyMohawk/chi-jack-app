@@ -30,8 +30,14 @@
     background-color: #fff;
     border-radius: 10px;
     box-shadow: 10px 10px 12px -1px rgba(90, 90, 90, 0.63);
-    padding: 40px 20px 10px 20px;
+    padding: 30px 30px 20px 40px;
     
+}
+
+h3 {
+    font-family: 'Roboto', sans-serif;
+    color: black;
+    margin-bottom: 10px;
 }
 
 p {
@@ -39,6 +45,18 @@ p {
     margin-bottom: 16px;
     font-family: 'Roboto', sans-serif;
     line-height: 24px;
+    color: black;
+}
+
+ul {
+    margin: 0 40px;
+}
+
+li {
+    /* padding: 0 20px; */
+    margin-bottom: 10px;
+    font-family: 'Roboto', sans-serif;
+    line-height: 16px;
     color: black;
 }
 

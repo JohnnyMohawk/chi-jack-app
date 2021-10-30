@@ -13,6 +13,7 @@ import JackKnows from './components/pages/JackKnows';
 import LoginPage from './components/pages/LoginPage';
 import UserPage from './components/pages/UserPage';
 import * as authService from './services/authService'
+import WhatToDo from './components/pages/WhatToDo';
 
 function App(props) {
 
@@ -48,6 +49,7 @@ function App(props) {
         <Route path='/who-is-jack' component={WhoIsJack} />
         <Route path='/how-it-works' component={JackKnows} />
         <Route path='/my-page' component={UserPage} />
+        <Route path='/what-to-do' component={WhatToDo} />
       </Switch>
       <Footer />
     </Router>
