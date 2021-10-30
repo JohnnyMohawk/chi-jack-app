@@ -153,7 +153,7 @@ const UserPage = (props) => {
             <h4>Select What Data To Display</h4>
             <div className="search-bar-wrapper">
                 <div className="search-bar">
-                    <select className="sb-inputs" defaultValue={searchSpan} onChange={event => {
+                    <select className="sb-inputs" defaultValue="week" onChange={event => {
                     setSearchSpan(event.target.value)
                     }}>
                         <option value="most recent">One Day</option>
@@ -288,7 +288,7 @@ const UserPage = (props) => {
                                     setSelectedCrime(jacking)
                                 }}
                                 icon={{
-                                    url: `/carjacking-red.png`,
+                                    url: `/carjack-icon-black-outline.png`,
                                     origin: new window.google.maps.Point(0, 0),
                                     anchor: new window.google.maps.Point(15, 15),
                                     scaledSize: new window.google.maps.Size(70, 70),
@@ -452,7 +452,7 @@ const UserPage = (props) => {
                                 setSelectedCrime(jacking)
                             }}
                             icon={{
-                                url: `/carjacking-red.png`,
+                                url: `/carjack-icon-black-outline.png`,
                                 origin: new window.google.maps.Point(0, 0),
                                 anchor: new window.google.maps.Point(15, 15),
                                 scaledSize: new window.google.maps.Size(70, 70),
