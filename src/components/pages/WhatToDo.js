@@ -16,7 +16,7 @@ function WhatToDo () {
                     
                     <div>
                         <h3>In order to prevent a carjacking, here's what police say to do:</h3>
-                        <ul>
+                        <ul className="todo-list">
                             <li>
                                 Do not wait in your car in the driveway of your home
                             </li>
@@ -39,7 +39,7 @@ function WhatToDo () {
                     </div>
                     <div>
                     <h3>If you find yourself a victim of a carjacking, here's what police say to remember:</h3>
-                        <ul>
+                        <ul className="todo-list">
                             <li>
                                 Give up your car and leave the scene
                             </li>
