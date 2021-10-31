@@ -84,38 +84,18 @@ function Footer(props) {
                 </div>
                 <small className="website-rights">John Nelson-Alden © 2021</small>
                 <div className="social-icons">
-                    <Link
-                        className="social-icon-link instagram"
-                        to="/"
-                        target="_blank"
-                        aria-label="Instagram"
-                    >
+                    <a className="social-icon-link instagram" href="https://www.instagram.com/ShyJack312/" target="_blank" rel="noopennernoreferrer">
                         <i className="fab fa-instagram" />
-                    </Link>
-                    <Link
-                        className="social-icon-link youtube"
-                        to="/"
-                        target="_blank"
-                        aria-label="Youtube"
-                    >
+                    </a>
+                    <a className="social-icon-link youtube" href="https://www.youtube.com/channel/UCICVa9m2nDCVNuIIUzW9nmg" target="_blank" rel="noopennernoreferrer">
                         <i className="fab fa-youtube" />
-                    </Link>
-                    <Link
-                        className="social-icon-link twitter"
-                        to="/"
-                        target="_blank"
-                        aria-label="Twitter"
-                    >
+                    </a>
+                    <a className="social-icon-link twitter" href="https://twitter.com/ShyJack312" target="_blank" rel="noopennernoreferrer">
                         <i className="fab fa-twitter" />
-                    </Link>
-                    <Link
-                        className="social-icon-link linkedin"
-                        to="/"
-                        target="_blank"
-                        aria-label="Linkedin"
-                    >
+                    </a>
+                    <a className="social-icon-link linkedin" href="https://www.linkedin.com/in/john-nelson-alden/" target="_blank" rel="noopennernoreferrer">
                         <i className="fab fa-linkedin" />
-                    </Link>
+                    </a>
                 </div>
             </div>
         </section>
