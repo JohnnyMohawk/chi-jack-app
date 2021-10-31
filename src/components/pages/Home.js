@@ -4,9 +4,11 @@ import Cards from '../Cards'
 import HeroSection from '../HeroSection'
 
 function Home () {
+
     useEffect(() => {
         window.scrollTo(0, 0)
     })
+    
     return (
         <>
             <HeroSection />

@@ -3,7 +3,6 @@ import Lottie from 'react-lottie-player'
 import dataAnimation from '../../assets/animations/dataAnimation.json'
 import {Bar, Doughnut, Line, Pie, PolarArea, Radar} from 'react-chartjs-2'
 import {formatDay, yearRange} from '../../services/mapService.js'
-import '../../App.css'
 import '../pages/Graph.css'
 
 function Graph() {
