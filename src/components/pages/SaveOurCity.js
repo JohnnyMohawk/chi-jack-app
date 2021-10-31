@@ -1,8 +1,8 @@
 import React, {useEffect} from "react";
 import Lottie from 'react-lottie-player'
-import underConstruction from '../../assets/animations/underConstruction.json'
 import cityView from '../../assets/animations/cityView.json'
-import '../../App.css'
+import '../pages/SaveOurCity.css'
+// import '../../App.css'
 
 function SaveOurCity() {
 
