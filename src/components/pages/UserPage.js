@@ -203,7 +203,7 @@ const UserPage = (props) => {
             <div className="user-map-text">
                 <div className="hood-map">
                     <div className="hood-name-title">
-                        <h3>{user.homeHood}</h3>
+                        <h3 className="user-hoods-h3">{user.homeHood}</h3>
                     </div>
                     <GoogleMap
                         className="map-canvas"
@@ -254,8 +254,8 @@ const UserPage = (props) => {
                     </GoogleMap>
                 </div>
                 <div className="hood-map">
-                    <div className="hood-name-title-mid">
-                        <h3>{user.workHood}</h3>
+                    <div className="hood-name-title">
+                        <h3 className="user-hoods-h3">{user.workHood}</h3>
                     </div>
                     <GoogleMap
                         className="map-canvas"
@@ -310,7 +310,7 @@ const UserPage = (props) => {
                 </div>
                 <div className="hood-map">
                     <div className="hood-name-title">
-                        <h3>{user.checkHood}</h3>
+                        <h3 className="user-hoods-h3">{user.checkHood}</h3>
                     </div>
                     <GoogleMap
                         className="map-canvas"
@@ -367,7 +367,7 @@ const UserPage = (props) => {
             <div className="user-map-text-mobile">
                 <div className="hood-map">
                     <div className="hood-name-title">
-                        <h3>{user.homeHood}</h3>
+                        <h3 className="user-hoods-h3">{user.homeHood}</h3>
                     </div>
                     <GoogleMap
                         className="map-canvas"
@@ -419,7 +419,7 @@ const UserPage = (props) => {
                 </div>
                 <div className="hood-map">
                     <div className="hood-name-title">
-                        <h3>{user.workHood}</h3>
+                        <h3 className="user-hoods-h3">{user.workHood}</h3>
                     </div>
                     <GoogleMap
                         className="map-canvas"
@@ -474,7 +474,7 @@ const UserPage = (props) => {
                 </div>
                 <div className="hood-map">
                     <div className="hood-name-title">
-                        <h3>{user.checkHood}</h3>
+                        <h3 className="user-hoods-h3">{user.checkHood}</h3>
                     </div>
                     <GoogleMap
                         className="map-canvas"

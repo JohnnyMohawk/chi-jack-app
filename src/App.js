@@ -12,8 +12,9 @@ import WhoIsJack from './components/pages/WhoIsJack';
 import JackKnows from './components/pages/JackKnows';
 import LoginPage from './components/pages/LoginPage';
 import UserPage from './components/pages/UserPage';
-import * as authService from './services/authService'
 import WhatToDo from './components/pages/WhatToDo';
+import SaveOurCity from './components/pages/SaveOurCity';
+import * as authService from './services/authService'
 
 function App(props) {
 
@@ -50,6 +51,7 @@ function App(props) {
         <Route path='/how-it-works' component={JackKnows} />
         <Route path='/my-page' component={UserPage} />
         <Route path='/what-to-do' component={WhatToDo} />
+        <Route path='/save-our-city' component={SaveOurCity} />
       </Switch>
       <Footer />
     </Router>

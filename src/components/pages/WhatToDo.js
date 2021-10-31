@@ -13,6 +13,7 @@ function WhatToDo () {
             <div className="how-container">
                 <h1>What Can I Do?</h1>
                 <div className="how-text">
+                    
                     <div>
                         <h3>In order to prevent a carjacking, here's what police say to do:</h3>
                         <ul>
@@ -56,6 +57,20 @@ function WhatToDo () {
                             </li>
                         </ul>
                     </div>
+                    <h3>Be On The Look Out For:</h3>
+                    <p>
+                        Chicago police warned residents to be aware of anywhere a driver slows down or stops as it could be a sign 
+                        of an attempted carjacking. Other common areas of carjackings, according to officials, are in residential 
+                        driveways, parking lots and garages, gas stations, ATMs and intersections with stop lights.
+                    </p>
+                    <p>
+                        Some carjackers will bump into the rear end of another car so the driver pulls over and leaves the vehicle to 
+                        asses the damages, which gives an opportunity for someone to easily steal the car, police said.
+                    </p>
+                    <p>
+                        Officials also warned to not stop for stranded vehicles on the side of the road as it could be someone waiting to 
+                        carjack another vehicle. Instead, police said to call 9-1-1 and note the location of the vehicle.
+                    </p>
                 </div>
             </div>
         </>

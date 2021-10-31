@@ -34,7 +34,7 @@ function Footer() {
                     <div className="footer-link-items">
                         <h2>Get Involved</h2>
                         <Link to="/what-to-do">What Can I Do?</Link>
-                        <Link to="/sign-up">Save Our City</Link>
+                        <Link to="/save-our-city">Save Our City</Link>
                     </div>
                 </div>
             </div>
