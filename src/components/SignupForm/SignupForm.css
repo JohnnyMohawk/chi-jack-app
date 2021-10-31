@@ -11,30 +11,29 @@
 
 .inputContainer {
     margin-bottom: 1rem;
+    display: flex;
+    flex-flow: column;
+    align-items: flex-start;
 }
 
 .input-field,
 .button {
     padding: 6px;
     font-size: 16px;
-    background-color: rgb(207, 207, 207);
     border-radius: 5px;
 }
 
-#name {
-    width: 256px;
+.input-field {
+    width: 206px;
+    background-color: rgb(233, 240, 253);
 }
 
-#email {
-    width: 258px;
+.button {
+    background-color: rgb(207, 207, 207);
 }
 
-#password {
-    width: 232px;
-}
-
-#email-input {
-    width: 195px;
+select {
+    margin-left: -2px;
 }
 
 .signup-form-container {

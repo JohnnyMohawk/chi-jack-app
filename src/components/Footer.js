@@ -10,7 +10,7 @@ function Footer() {
         <div className="footer-container">
             <section className="footer-subscription">
                 <p className="footer-subscription-heading">
-                Join Shy Jack's newsletter to receive important updates on issues involving Chicago crime and policing.
+                Join Shy Jack's newsletter to receive important updates on issues involving Chicago carjackings, policing and policy.
                 </p>
                 <p className="footer-subscription-text">
                     You can unsubscribe at any time.
@@ -33,8 +33,8 @@ function Footer() {
                 <div className="footer-link-wrapper">
                     <div className="footer-link-items">
                         <h2>Get Involved</h2>
-                        <Link to="/sign-up">What Can I Do?</Link>
-                        <Link to="/sign-up">Save Our City</Link>
+                        <Link to="/what-to-do">What Can I Do?</Link>
+                        <Link to="/save-our-city">Save Our City</Link>
                     </div>
                 </div>
             </div>

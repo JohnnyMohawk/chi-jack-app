@@ -11,13 +11,14 @@ import Footer from './components/Footer';
 import WhoIsJack from './components/pages/WhoIsJack';
 import JackKnows from './components/pages/JackKnows';
 import LoginPage from './components/pages/LoginPage';
+import UserPage from './components/pages/UserPage';
+import WhatToDo from './components/pages/WhatToDo';
+import SaveOurCity from './components/pages/SaveOurCity';
 import * as authService from './services/authService'
 
 function App(props) {
 
   const history = useHistory()
-
-  console.log("HISTORY", history)
 
 	const [user, setUser] = useState(authService.getUser())
 
@@ -31,9 +32,6 @@ function App(props) {
 		const user = authService.getUser()
     setUser(user)
 	}
-
-  console.log(user)
-  console.log("PROPS", props)
 
   return (
     <Router>
@@ -51,6 +49,9 @@ function App(props) {
         </Route>
         <Route path='/who-is-jack' component={WhoIsJack} />
         <Route path='/how-it-works' component={JackKnows} />
+        <Route path='/my-page' component={UserPage} />
+        <Route path='/what-to-do' component={WhatToDo} />
+        <Route path='/save-our-city' component={SaveOurCity} />
       </Switch>
       <Footer />
     </Router>

@@ -61,6 +61,15 @@ function Navbar({ user, handleLogout }) {
                         Scanner
                     </Link>
                 </li>
+                <li className='nav-item'>
+                    <Link
+                        to='/my-page'
+                        className='nav-links'
+                        onClick={closeMobileMenu}
+                    >
+                        {user.name}'s Page
+                    </Link>
+                </li>
                 <li>
                     <Link
                         to='/'
