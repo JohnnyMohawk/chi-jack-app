@@ -1,10 +1,46 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, {useState, useEffect} from 'react'
+import * as authService from '../services/authService'
+import { Link, useHistory } from 'react-router-dom'
 import { Button } from './Button'
 import './Footer.css'
 
 
-function Footer() {
+function Footer(props) {
+
+    // const history = useHistory()
+    // const [validForm, setValidForm] = useState(false)
+    // const [formData, setFormData] = useState({
+    //     name: '',
+    //     email: '',
+    //     homeHood: '',
+    //     workHood: '',
+    //     checkHood: '',
+    //     password: '',
+    //     passwordConf: '',
+    // })
+
+    // const handleChange = evt => {
+    //     setFormData({ ...formData, [evt.target.name]: evt.target.value })
+    // }
+
+    // const handleSubmit = evt => {
+    //     evt.preventDefault()
+    //     authService.signup(formData)
+    //     .then(() => {
+    //     props.handleSignupOrLogin()
+    //     history.push('/')
+    //     })
+    //     .catch(err => {
+    //     props.updateMessage(err.message)
+    //     })
+    // }
+
+    // useEffect(() => {
+    //     const { name, email, homeHood, workHood, checkHood, password, passwordConf } = formData
+    //     const isFormInvalid = !(name && email && homeHood && workHood && checkHood && password === passwordConf)
+    //         setValidForm(isFormInvalid)
+    //     }, [formData])
+
     return (
         <div className="footer-container">
             <section className="footer-subscription">
@@ -15,7 +51,15 @@ function Footer() {
                     You can unsubscribe at any time.
                 </p>
                 <div className="input-areas">
-                    <form>
+                    <form
+                        // className="input-field"
+                        // type="text"
+                        // autoComplete="off"
+                        // id="email"
+                        // value={formData.email}
+                        // name="email"
+                        // onChange={handleChange}
+                    >
                         <input type="email" name="email" placeholder="Your Email" className="footer-input" />
                         <Button to="/sign-up" buttonStyle='btn--outline'>Subscribe</Button>
                     </form>
