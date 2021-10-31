@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import * as authService from '../services/authService'
+import * as emailService from '../services/emailService'
 import { Link, useHistory } from 'react-router-dom'
 import { Button } from './Button'
 import './Footer.css'
@@ -7,39 +7,28 @@ import './Footer.css'
 
 function Footer(props) {
 
-    // const history = useHistory()
-    // const [validForm, setValidForm] = useState(false)
-    // const [formData, setFormData] = useState({
-    //     name: '',
-    //     email: '',
-    //     homeHood: '',
-    //     workHood: '',
-    //     checkHood: '',
-    //     password: '',
-    //     passwordConf: '',
-    // })
+    const history = useHistory()
+    const [validForm, setValidForm] = useState(false)
+    const [formData, setFormData] = useState({
+        email: ''
+    })
 
-    // const handleChange = evt => {
-    //     setFormData({ ...formData, [evt.target.name]: evt.target.value })
-    // }
+    const handleChange = evt => {
+        setFormData({ ...formData, [evt.target.name]: evt.target.value })
+    }
 
-    // const handleSubmit = evt => {
-    //     evt.preventDefault()
-    //     authService.signup(formData)
-    //     .then(() => {
-    //     props.handleSignupOrLogin()
-    //     history.push('/')
-    //     })
-    //     .catch(err => {
-    //     props.updateMessage(err.message)
-    //     })
-    // }
+    const handleSubmit = evt => {
+        evt.preventDefault()
+        emailService.createEmail(formData)
+        setFormData({...formData, email: '' })
+        alert("Thank you very much for joining the Shy Jack Mailing List!")
+    }
 
-    // useEffect(() => {
-    //     const { name, email, homeHood, workHood, checkHood, password, passwordConf } = formData
-    //     const isFormInvalid = !(name && email && homeHood && workHood && checkHood && password === passwordConf)
-    //         setValidForm(isFormInvalid)
-    //     }, [formData])
+    useEffect(() => {
+        const { email } = formData
+        const isFormInvalid = !(email)
+            setValidForm(isFormInvalid)
+        }, [formData])
 
     return (
         <div className="footer-container">
@@ -52,16 +41,21 @@ function Footer(props) {
                 </p>
                 <div className="input-areas">
                     <form
-                        // className="input-field"
-                        // type="text"
-                        // autoComplete="off"
-                        // id="email"
-                        // value={formData.email}
-                        // name="email"
-                        // onChange={handleChange}
+                        autoComplete="off"
+                        onSubmit={handleSubmit}
+                        // className="container"
                     >
-                        <input type="email" name="email" placeholder="Your Email" className="footer-input" />
-                        <Button to="/sign-up" buttonStyle='btn--outline'>Subscribe</Button>
+                        {/* <input type="email" name="email" placeholder="Your Email" className="footer-input" /> */}
+                        <input 
+                            type="email" 
+                            name="email" 
+                            placeholder="Your Email" 
+                            className="footer-input"
+                            autoComplete="off"
+                            id="email"
+                            value={formData.email}
+                            onChange={handleChange} />
+                        <Button to="/sign-up" onClick={handleSubmit} buttonStyle='btn--outline'>Subscribe</Button>
                     </form>
                 </div>
             </section>
