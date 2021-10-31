@@ -7,7 +7,6 @@ import * as authService from '../../services/authService'
 import mapStyles from './mapStyles';
 import mapStyles1 from './mapStyles1';
 import '../pages/UserPage.css'
-// import userEvent from '@testing-library/user-event';
 require('dotenv').config()
 
 

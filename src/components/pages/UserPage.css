@@ -13,43 +13,9 @@
     );
 }
 
-.cj-number-wrapper {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
-
 .user-page-title {
     font-size: 45px;
     color: #fff;
-}
-
-.search-params {
-    font-size: 40px;
-    color: #fff;
-}
-
-.carjack-numbers,
-#cj-num-id {
-    color: tomato;
-    font-size: 45px;
-    animation: heart-pulse 0.9s infinite ease-out;
-}
-
-@keyframes heart-pulse {
-    0% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.08);
-    }
-    100% {
-        transform: scale(1);
-    }
-}
-
-.force-space {
-    color: transparent;
 }
 
 .map-container > h4 {
@@ -102,14 +68,6 @@
     justify-content: center;
 }
 
-.map-text {
-    overflow: auto;
-    margin-top: 10px;
-    color: rgb(22, 33, 62);
-    background-color: #fff;
-    border-top: 1px solid rgb(65, 65, 65);
-}
-
 .user-map-text {
     margin-top: 10px;
     display: flex;
@@ -138,38 +96,8 @@
     margin-top: 10px;
 }
 
-@media screen and (max-width: 1100px) {
-    .map-container > h2,
-    .search-params {
-        font-size: 28px;
-        margin-bottom: 5px;
-    }
-
-    .force-space {
-        font-size: 14px;
-    }
-
-    #cj-num-id {
-        font-size: 36px;
-    }
-}
-
 @media screen and (max-width: 768px) {
     .user-page-title {
-        font-size: 32px;
-    }
-
-    .map-container > h2,
-    .search-params {
-        font-size: 22px;
-        margin-bottom: 5px;
-    }
-
-    .force-space {
-        font-size: 14px;
-    }
-
-    #cj-num-id {
         font-size: 32px;
     }
 
@@ -181,25 +109,6 @@
 
     .sb-inputs {
         margin: 3px;
-    }
-
-    .map-text {
-        margin-top: 10px;
-    }
-
-}
-
-@media screen and (max-width: 550px) {
-    #cj-num-id {
-        font-size: 22px;
-    }
-
-    .search-params {
-        font-size: 14px;
-    }
-
-    .force-space {
-        font-size: 4px;
     }
 
 }
