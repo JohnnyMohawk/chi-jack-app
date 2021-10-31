@@ -42,109 +42,109 @@ const SignupForm = (props) => {
     return (
         <div className="signup-form-container">
         <h1>Sign Up</h1>
-        <div className="signup-form-text">
-        <form
-        autoComplete="off"
-        onSubmit={handleSubmit}
-        className="container"
-        >
-        <div className="inputContainer">
-            <label htmlFor="name" className="label">
-            Name
-            </label>
-            <input
-            className="input-field"
-            type="text"
-            autoComplete="off"
-            id="name"
-            value={formData.name}
-            name="name"
-            onChange={handleChange}
-            />
-        </div>
-        <div className="inputContainer">
-            <label htmlFor="email-input" className="label">Email</label>
-            <input
-            className="input-field"
-            type="text"
-            autoComplete="off"
-            id="email"
-            value={formData.email}
-            name="email"
-            onChange={handleChange}
-            />
-        </div>
-        <div className="inputContainer">
-            <label htmlFor="homeHood-input" className="label">Home Neighborhood</label>
-            <select className="input-field" id="homeHood" value={formData.homeHood} name="homeHood" onChange={handleChange}>
-                {Object.keys(neighborhoodObject).sort().map(neighborhood => (
-                    <option key={neighborhood} value={neighborhood}>
-                        {neighborhood}
-                    </option>
-                ))}
-            </select>
-        </div>
+            <div className="signup-form-text">
+                <form
+                    autoComplete="off"
+                    onSubmit={handleSubmit}
+                    className="container"
+                >
+                    <div className="inputContainer">
+                        <label htmlFor="name" className="label">
+                        Name
+                        </label>
+                        <input
+                            className="input-field"
+                            type="text"
+                            autoComplete="off"
+                            id="name"
+                            value={formData.name}
+                            name="name"
+                            onChange={handleChange}
+                        />
+                    </div>
+                    <div className="inputContainer">
+                        <label htmlFor="email-input" className="label">Email</label>
+                        <input
+                            className="input-field"
+                            type="text"
+                            autoComplete="off"
+                            id="email"
+                            value={formData.email}
+                            name="email"
+                            onChange={handleChange}
+                        />
+                    </div>
+                    <div className="inputContainer">
+                        <label htmlFor="homeHood-input" className="label">Home Neighborhood</label>
+                        <select className="input-field" id="homeHood" value={formData.homeHood} name="homeHood" onChange={handleChange}>
+                            {Object.keys(neighborhoodObject).sort().map(neighborhood => (
+                                <option key={neighborhood} value={neighborhood}>
+                                    {neighborhood}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
 
-        <div className="inputContainer">
-            <label htmlFor="workHood-input" className="label">Work Neighborhood</label>
-            <select className="input-field" id="workHood" value={formData.workHood} name="workHood" onChange={handleChange}>
-                {Object.keys(neighborhoodObject).sort().map(neighborhood => (
-                    <option key={neighborhood} value={neighborhood}>
-                        {neighborhood}
-                    </option>
-                ))}
-            </select>
-        </div>
+                    <div className="inputContainer">
+                        <label htmlFor="workHood-input" className="label">Work Neighborhood</label>
+                        <select className="input-field" id="workHood" value={formData.workHood} name="workHood" onChange={handleChange}>
+                            {Object.keys(neighborhoodObject).sort().map(neighborhood => (
+                                <option key={neighborhood} value={neighborhood}>
+                                    {neighborhood}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
 
-        <div className="inputContainer">
-            <label htmlFor="checkHood-input" className="label">Spot Watch</label>
-            <select className="input-field" id="checkHood" value={formData.checkHood} name="checkHood" onChange={handleChange}>
-                {Object.keys(neighborhoodObject).sort().map(neighborhood => (
-                    <option key={neighborhood} value={neighborhood}>
-                        {neighborhood}
-                    </option>
-                ))}
-            </select>
-        </div>
+                    <div className="inputContainer">
+                        <label htmlFor="checkHood-input" className="label">Spot Watch</label>
+                        <select className="input-field" id="checkHood" value={formData.checkHood} name="checkHood" onChange={handleChange}>
+                            {Object.keys(neighborhoodObject).sort().map(neighborhood => (
+                                <option key={neighborhood} value={neighborhood}>
+                                    {neighborhood}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
 
-        <div className="inputContainer">
-            <label htmlFor="password-input" className="label">
-            Password
-            </label>
-            <input
-            className="input-field"
-            type="password"
-            autoComplete="off"
-            id="password"
-            value={formData.password}
-            name="password"
-            onChange={handleChange}
-            />
-        </div>
-        <div className="inputContainer">
-            <label htmlFor="confirm-input" className="label">
-            Confirm Password
-            </label>
-            <input
-            className="input-field"
-            type="password"
-            autoComplete="off"
-            id="confirm-input"
-            value={formData.passwordConf}
-            name="passwordConf"
-            onChange={handleChange}
-            />
-        </div>
-        <div className="buttonContainerWrapper">
-        <div className="buttonContainer">
-            <button disabled={validForm} className="button">Sign Up</button>
-            <Link to="/">
-            <button className="button">Cancel</button>
-            </Link>
-        </div>
-        </div>
-        </form>
-        </div>
+                    <div className="inputContainer">
+                        <label htmlFor="password-input" className="label">
+                            Password
+                        </label>
+                        <input
+                            className="input-field"
+                            type="password"
+                            autoComplete="off"
+                            id="password"
+                            value={formData.password}
+                            name="password"
+                            onChange={handleChange}
+                        />
+                    </div>
+                    <div className="inputContainer">
+                        <label htmlFor="confirm-input" className="label">
+                            Confirm Password
+                        </label>
+                        <input
+                            className="input-field"
+                            type="password"
+                            autoComplete="off"
+                            id="confirm-input"
+                            value={formData.passwordConf}
+                            name="passwordConf"
+                            onChange={handleChange}
+                        />
+                    </div>
+                    <div className="buttonContainerWrapper">
+                        <div className="buttonContainer">
+                        <button disabled={validForm} className="button">Sign Up</button>
+                        <Link to="/">
+                            <button className="button">Cancel</button>
+                        </Link>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
     )
 }
