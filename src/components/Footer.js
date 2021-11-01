@@ -1,10 +1,35 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, {useState, useEffect} from 'react'
+import * as emailService from '../services/emailService'
+import { Link, useHistory } from 'react-router-dom'
 import { Button } from './Button'
 import './Footer.css'
 
 
-function Footer() {
+function Footer(props) {
+
+    const history = useHistory()
+    const [validForm, setValidForm] = useState(false)
+    const [formData, setFormData] = useState({
+        email: ''
+    })
+
+    const handleChange = evt => {
+        setFormData({ ...formData, [evt.target.name]: evt.target.value })
+    }
+
+    const handleSubmit = evt => {
+        evt.preventDefault()
+        emailService.createEmail(formData)
+        setFormData({...formData, email: '' })
+        alert("Thank you very much for joining the Shy Jack Mailing List!")
+    }
+
+    useEffect(() => {
+        const { email } = formData
+        const isFormInvalid = !(email)
+            setValidForm(isFormInvalid)
+        }, [formData])
+
     return (
         <div className="footer-container">
             <section className="footer-subscription">
@@ -15,9 +40,22 @@ function Footer() {
                     You can unsubscribe at any time.
                 </p>
                 <div className="input-areas">
-                    <form>
-                        <input type="email" name="email" placeholder="Your Email" className="footer-input" />
-                        <Button to="/sign-up" buttonStyle='btn--outline'>Subscribe</Button>
+                    <form
+                        autoComplete="off"
+                        onSubmit={handleSubmit}
+                        // className="container"
+                    >
+                        {/* <input type="email" name="email" placeholder="Your Email" className="footer-input" /> */}
+                        <input 
+                            type="email" 
+                            name="email" 
+                            placeholder="Your Email" 
+                            className="footer-input"
+                            autoComplete="off"
+                            id="email"
+                            value={formData.email}
+                            onChange={handleChange} />
+                        <Button to="/sign-up" onClick={handleSubmit} buttonStyle='btn--outline'>Subscribe</Button>
                     </form>
                 </div>
             </section>
@@ -46,38 +84,18 @@ function Footer() {
                 </div>
                 <small className="website-rights">John Nelson-Alden © 2021</small>
                 <div className="social-icons">
-                    <Link
-                        className="social-icon-link instagram"
-                        to="/"
-                        target="_blank"
-                        aria-label="Instagram"
-                    >
+                    <a className="social-icon-link instagram" href="https://www.instagram.com/ShyJack312/" target="_blank" rel="noopennernoreferrer">
                         <i className="fab fa-instagram" />
-                    </Link>
-                    <Link
-                        className="social-icon-link youtube"
-                        to="/"
-                        target="_blank"
-                        aria-label="Youtube"
-                    >
+                    </a>
+                    <a className="social-icon-link youtube" href="https://www.youtube.com/channel/UCICVa9m2nDCVNuIIUzW9nmg" target="_blank" rel="noopennernoreferrer">
                         <i className="fab fa-youtube" />
-                    </Link>
-                    <Link
-                        className="social-icon-link twitter"
-                        to="/"
-                        target="_blank"
-                        aria-label="Twitter"
-                    >
+                    </a>
+                    <a className="social-icon-link twitter" href="https://twitter.com/ShyJack312" target="_blank" rel="noopennernoreferrer">
                         <i className="fab fa-twitter" />
-                    </Link>
-                    <Link
-                        className="social-icon-link linkedin"
-                        to="/"
-                        target="_blank"
-                        aria-label="Linkedin"
-                    >
+                    </a>
+                    <a className="social-icon-link linkedin" href="https://www.linkedin.com/in/john-nelson-alden/" target="_blank" rel="noopennernoreferrer">
                         <i className="fab fa-linkedin" />
-                    </Link>
+                    </a>
                 </div>
             </div>
         </section>

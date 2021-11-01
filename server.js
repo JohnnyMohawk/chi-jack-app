@@ -7,6 +7,7 @@ import cors from 'cors'
 
 import { router as usersRouter } from './routes/users.js'
 import { router as authRouter } from './routes/auth.js'
+import { router as emailsRouter } from './routes/emails.js'
 
 import ('./config/database.js')
 
@@ -18,6 +19,7 @@ app.use(express.json())
 
 app.use('/api/auth', authRouter)
 app.use('/api/users', usersRouter)
+app.use('/api/emails', emailsRouter)
 
 
 app.get('/*', function (req, res) {
