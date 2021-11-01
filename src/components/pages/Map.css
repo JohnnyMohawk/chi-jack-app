@@ -13,6 +13,40 @@
     );
 }
 
+.loading-title {
+    font-size: 45px;
+    color: #fff;
+    margin-top: 10px;
+    margin-bottom: -10px;
+}
+
+.lottie-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+}
+
+.lottie-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    align-self: flex-end;
+    margin-bottom: -38px;
+}
+
+/* .lottie-container > h1 {
+    margin-bottom: -100px;
+} */
+
+/* svg {
+    margin-top: 0px;
+} */
+
 .cj-number-wrapper {
     display: flex;
     flex-direction: row;

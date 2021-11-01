@@ -273,15 +273,17 @@ const Map = () => {
             </>
             :
             <>
-            <div className="map-container">
-                <h1 className="map-title">Loading... Please Wait</h1>
-                <Lottie
-                    loop
-                    animationData={carSafety}
-                    play
-                    style={{ width: 700, height: 700 }}
-                />
-            </div>
+                <div className="lottie-wrapper">
+                    <div className="lottie-container">
+                        <h1 className="loading-title">Loading... Please Wait</h1>
+                        <Lottie
+                            loop
+                            animationData={carSafety}
+                            play
+                            style={{ width: 700, height: 700 }}
+                        />
+                    </div>
+                </div>
             </>
             }
         </div>
