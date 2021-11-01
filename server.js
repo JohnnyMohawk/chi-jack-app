@@ -22,9 +22,13 @@ app.use('/api/users', usersRouter)
 app.use('/api/emails', emailsRouter)
 
 
-app.get('/*', function (req, res) {
+app.get('/*', (req, res) => {
     res.sendFile(
-        path.dirname(fileURLToPath(import.meta.url), 'build', 'index.html')
+        path.join(
+            path.dirname(fileURLToPath(import.meta.url)),
+            'build',
+            'index.html'
+        )
     )
 })
 
