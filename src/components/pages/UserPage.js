@@ -51,9 +51,9 @@ const UserPage = (props) => {
     const [searchSpan, setSearchSpan] = useState("month")
     const [yearArray, setYearArray] = useState([])
     const [searchDay, setSearchDay] = useState(dayOfTheMonth)
-    const [searchYear, setSearchYear] = useState(currentYear)
+    const [searchYear, setSearchYear] = useState(searchDate.split(' ')[3])
     const [searchMonth, setSearchMonth] = useState(months[currentMonth])
-    const [monthNumber, setMonthNumber] = useState(currentMonth + 1)
+    const [monthNumber, setMonthNumber] = useState(months.indexOf(searchDate.split(' ')[1]) + 1)
     const [daysOfTheMonth, setDaysOfTheMonth] = useState(getDaysInMonth(currentMonth, currentYear))
 
     const createFormattedDate = () => {
