@@ -26,11 +26,15 @@ const Map = () => {
     })
 
     const currentYear = new Date().getFullYear()
-    const currentMonth = new Date().getMonth()
     const today = new Date()
     today.setDate(today.getDate() - 8)
     let searchDate = today.toDateString()
     let dayOfTheMonth = formatDay(today.getDate())
+    const currentMonth = months.indexOf(searchDate.split(' ')[1])
+    
+    console.log("SEARCH MONTH", months.indexOf(searchDate.split(' ')[1]))
+    console.log(searchDate.split(' ')[3])
+    console.log("CURRENT MONTH", currentMonth)
 
     const [carjackStats, setCarjackStats] = useState([])
     const [lat, setLat] = useState(null)
@@ -40,10 +44,12 @@ const Map = () => {
     const [searchSpan, setSearchSpan] = useState("month")
     const [yearArray, setYearArray] = useState([])
     const [searchDay, setSearchDay] = useState(dayOfTheMonth)
-    const [searchYear, setSearchYear] = useState(currentYear)
+    const [searchYear, setSearchYear] = useState(searchDate.split(' ')[3])
     const [searchMonth, setSearchMonth] = useState(months[currentMonth])
-    const [monthNumber, setMonthNumber] = useState(currentMonth + 1)
+    const [monthNumber, setMonthNumber] = useState(months.indexOf(searchDate.split(' ')[1]) + 1)
     const [daysOfTheMonth, setDaysOfTheMonth] = useState(getDaysInMonth(currentMonth, currentYear))
+
+    console.log(searchMonth)
 
     const createFormattedDate = () => {
         let formattedDate
@@ -104,16 +110,23 @@ const Map = () => {
 
     const makeApiCall = async() => {
         let formattedDate = createFormattedDate()
+        console.log(formattedDate)
         let res = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?description=AGGRAVATED%20VEHICULAR%20HIJACKING&$limit=50000&$offset=0')
         let data = await res.json()
+        console.log(data)
         let yearArr = yearRange(2001, currentYear)
         setYearArray(yearArr)
         let createDaysOfMonthArray = getDaysInMonth(months.indexOf(searchMonth), searchYear)
         setDaysOfTheMonth(createDaysOfMonthArray)
+        console.log(formatDay(today.getDate()))
         if(searchSpan !== "week"){
+            // console.log(data.filter(crime => crime.date.includes('2021-10')))
+            // setCarjackStats(data.filter(crime => crime.date.includes(`${searchDate.split(' ')[3]}-${months.indexOf(searchDate.split(' ')[1]) + 1}`)))
             setCarjackStats(data.filter(crime => crime.date.includes(formattedDate)))
+            console.log("NOT WEEK", carjackStats)
         }else if(searchSpan === "week") {
             setCarjackStats(data.filter(crime => (crime.date.includes(formattedDate[0]) || crime.date.includes(formattedDate[1]) || crime.date.includes(formattedDate[2]) || crime.date.includes(formattedDate[3]) || crime.date.includes(formattedDate[4]) || crime.date.includes(formattedDate[5]) || crime.date.includes(formattedDate[6]))))
+            console.log("WEEK", carjackStats)
         }
     }
 
@@ -138,6 +151,8 @@ const Map = () => {
         }, []);
     if (loadError) return "Error";
     if (!isLoaded) return "Loading...";
+
+    // console.log(makeApiCall())
     
     return carjackings.length ? (
 
