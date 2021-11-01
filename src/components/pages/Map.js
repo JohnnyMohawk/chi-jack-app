@@ -47,6 +47,9 @@ const Map = () => {
     const [monthNumber, setMonthNumber] = useState(months.indexOf(searchDate.split(' ')[1]) + 1)
     const [daysOfTheMonth, setDaysOfTheMonth] = useState(getDaysInMonth(currentMonth, currentYear))
 
+    console.log(typeof searchYear)
+    console.log(typeof new Date().getFullYear())
+
     const createFormattedDate = () => {
         let formattedDate
         let formDateArr = []
@@ -211,8 +214,9 @@ const Map = () => {
                     :
                     <></>
                     }
-                    <select className="sb-inputs" defaultValue={searchYear} onChange={event => {
+                    <select className="sb-inputs" value={searchYear} onChange={event => {
                     setSearchYear(event.target.value)
+                    console.log(searchYear)
                     }}>
                         {yearArray.reverse().map(year => (
                             <option key={year} value={year}>

@@ -193,7 +193,7 @@ const UserPage = (props) => {
                     :
                     <></>
                     }
-                    <select className="sb-inputs" defaultValue={searchYear} onChange={event => {
+                    <select className="sb-inputs" value={searchYear} onChange={event => {
                     setSearchYear(event.target.value)
                     }}>
                         {yearArray.reverse().map(year => (
