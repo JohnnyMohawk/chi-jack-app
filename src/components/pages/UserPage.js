@@ -138,12 +138,6 @@ const UserPage = (props) => {
         }, []);
     if (loadError) return "Error";
     if (!isLoaded) return "Loading...";
-
-
-
-
-
-
     
     return (
 

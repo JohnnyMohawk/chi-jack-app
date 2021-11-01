@@ -43,9 +43,7 @@ function Footer(props) {
                     <form
                         autoComplete="off"
                         onSubmit={handleSubmit}
-                        // className="container"
                     >
-                        {/* <input type="email" name="email" placeholder="Your Email" className="footer-input" /> */}
                         <input 
                             type="email" 
                             name="email" 
