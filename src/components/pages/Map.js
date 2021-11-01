@@ -47,8 +47,6 @@ const Map = () => {
     const [monthNumber, setMonthNumber] = useState(months.indexOf(searchDate.split(' ')[1]) + 1)
     const [daysOfTheMonth, setDaysOfTheMonth] = useState(getDaysInMonth(currentMonth, currentYear))
 
-    console.log(typeof searchYear)
-    console.log(typeof new Date().getFullYear())
 
     const createFormattedDate = () => {
         let formattedDate

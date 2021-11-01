@@ -87,6 +87,11 @@ video {
         font-size: 90px;
         transition: all 0.2s ease-in;
     }
+
+    .hero-logo:hover {
+        font-size: 92px;
+        transition: all 0.2s ease-in;
+    }
     
     .hero-container > h2 {
         font-size: 24px;
@@ -98,6 +103,11 @@ video {
 @media screen and (max-width: 768px) {
     .hero-logo {
         font-size: 70px;
+    }
+
+    .hero-logo:hover {
+        font-size: 72px;
+        transition: all 0.2s ease-in;
     }
     
     .hero-container > h2 {
