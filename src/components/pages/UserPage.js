@@ -37,12 +37,12 @@ const UserPage = (props) => {
     })
 
     const currentYear = new Date().getFullYear()
-    const currentMonth = new Date().getMonth()
     const today = new Date()
     today.setDate(today.getDate() - 8)
     let searchDate = today.toDateString()
     let dayOfTheMonth = formatDay(today.getDate())
-
+    const currentMonth = months.indexOf(searchDate.split(' ')[1])
+    
     const [carjackStats, setCarjackStats] = useState([])
     const [lat, setLat] = useState(null)
     const [lng, setLng] = useState(null)
@@ -138,8 +138,14 @@ const UserPage = (props) => {
         }, []);
     if (loadError) return "Error";
     if (!isLoaded) return "Loading...";
+
+
+
+
+
+
     
-    return carjackings.length ? (
+    return (
 
         <div className="map-container">
             <h1 className="user-page-title">{user.name}'s Dashboard</h1>
@@ -198,6 +204,9 @@ const UserPage = (props) => {
                     </select>
                 </div>
             </div> 
+
+            {carjackings.length ? 
+            <>
             {window.innerWidth >= 960 ? 
             <div className="user-map-text">
                 <div className="hood-map">
@@ -526,19 +535,23 @@ const UserPage = (props) => {
             </div>
         </>
         }
+        </>
+        :
+        <>
+            <div className="map-container">
+                <h1 className="map-title">Loading... Please Wait</h1>
+                <Lottie
+                    loop
+                    animationData={carSafety}
+                    play
+                    style={{ width: 700, height: 700 }}
+                />
+            </div>
+        </>
+        }
         </div>
-    ) : 
-    <>
-        <div className="map-container">
-        <h1 className="map-title">Loading... Please Wait</h1>
-            <Lottie
-                loop
-                animationData={carSafety}
-                play
-                style={{ width: 700, height: 700 }}
-            />
-        </div>
-    </>
+    ) 
+    
 }
 
 export default UserPage
