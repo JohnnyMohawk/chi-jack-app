@@ -130,8 +130,13 @@ video {
     .hero-container > h2 {
         font-size: 13px;
     }
-/* 
-    .hero-container > button {
-        width: 50px;
+
+    video {
+        margin-top: -45px;
+        object-fit: none;
+    }
+
+    /* .hero-container {
+        background-color: tomato;
     } */
 }
