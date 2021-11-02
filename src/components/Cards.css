@@ -116,3 +116,9 @@ h1 {
         margin-bottom: 2rem;
     }
 }
+
+@media screen and (max-width: 500px) {
+    .cards {
+        padding: 20px 0px;
+    }
+}
