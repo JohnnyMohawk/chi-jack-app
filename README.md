@@ -13,12 +13,31 @@ Shy Jack taps into the Chicago Police Department's CLEAR (Citizen Law Enforcemen
 Crime in Chicago often gets politicized and too frequently ends up on the national stage. Chicagoans end up wondering if things are as bad as they seem on the news... Could they be even worse than being reported? Why does the narrative being told by the news, politicians, and leaders in law enforcement seem to differ so greatly? In this city, it can be hard to know, but the raw data is publicly available via CLEAR (The Citizen Law Enforcement Analysis and Reporting) system.
 I created Shy Jack to bring this important data directly to the great people of Chicago, free of any political or ideological spin. The numbers tell the story, Shy Jack illustrates it.
 
+## Launch Shy Jack
+
+Click [HERE](https://shy-jack-app.herokuapp.com/)
 
 ## Author
 
 <img src="public/images/readme-images/jna-logo.png" width=25% height=auto>
 
 **John Nelson-Alden**
+
+## Screenshots
+<p float="left">
+    <img src="public/images/readme-images/sj-landing-ss.png" width=45% />
+    <img src="public/images/readme-images/sj-news-ss.png"  width=45% /> 
+</p>
+
+<p float="left">
+    <img src="public/images/readme-images/sj-main-map-ss.png" width=45% />
+    <img src="public/images/readme-images/sj-user-map-ss"  width=45% /> 
+</p>
+
+<p float="left">
+    <img src="public/images/readme-images/sj-bar-graph-ss.png" width=45% />
+    <img src="public/images/readme-images/sj-polar-graph-ss"  width=45% /> 
+</p>
 
 ## Built With
 
@@ -35,10 +54,11 @@ I created Shy Jack to bring this important data directly to the great people of 
 * [Express](https://expressjs.com/)
 * [React](https://reactjs.org/)
 * [Node.js](https://nodejs.org/)
+* [Heroku](https://www.heroku.com/)
 * [React Google Maps API](https://www.npmjs.com/package/@react-google-maps/api)
 * [Chart.js](https://www.chartjs.org/)
+* [Chicago Data Portal](https://data.cityofchicago.org/)
 * [LottieFiles](https://lottiefiles.com/)
 * [Font Awesome](https://fontawesome.com/)
 * [Google Fonts](https://fonts.google.com/)
-* [Chicago Data Portal](https://data.cityofchicago.org/)
 * [Pixabay](https://pixabay.com/)
