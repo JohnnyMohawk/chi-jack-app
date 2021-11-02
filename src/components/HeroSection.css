@@ -69,6 +69,7 @@ video {
     animation: transitionIn 5s;
 }
 
+
 @keyframes transitionIn {
     from {
         opacity: 0;
@@ -114,4 +115,23 @@ video {
         font-size: 19px;
     }
     
+}
+
+@media screen and (max-width: 500px) {
+    .hero-logo {
+        font-size: 40px;
+    }
+
+    .hero-logo:hover {
+        font-size: 42px;
+        transition: all 0.2s ease-in;
+    }
+
+    .hero-container > h2 {
+        font-size: 13px;
+    }
+/* 
+    .hero-container > button {
+        width: 50px;
+    } */
 }
