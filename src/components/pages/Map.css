@@ -179,6 +179,10 @@
 }
 
 @media screen and (max-width: 550px) {
+    .map-container {
+        max-width: 100vw;
+    }
+
     .map-title {
         font-size: 20px;
     }

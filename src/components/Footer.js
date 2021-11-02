@@ -53,7 +53,7 @@ function Footer(props) {
                             id="email"
                             value={formData.email}
                             onChange={handleChange} />
-                        <Button to="/sign-up" onClick={handleSubmit} buttonStyle='btn--outline' buttonSize="btn--large">Subscribe</Button>
+                        <Button to="/sign-up" onClick={handleSubmit} buttonStyle='btn--outline' buttonSize="btn--medium">Subscribe</Button>
                     </form>
                 </div>
             </section>
