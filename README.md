@@ -31,12 +31,12 @@ Click [HERE](https://shy-jack-app.herokuapp.com/)
 
 <p float="left">
     <img src="public/images/readme-images/sj-main-map-ss.png" width=45% />
-    <img src="public/images/readme-images/sj-user-map-ss"  width=45% /> 
+    <img src="public/images/readme-images/sj-user-map-ss.png"  width=45% /> 
 </p>
 
 <p float="left">
     <img src="public/images/readme-images/sj-bar-graph-ss.png" width=45% />
-    <img src="public/images/readme-images/sj-polar-graph-ss"  width=45% /> 
+    <img src="public/images/readme-images/sj-polar-graph-ss.png"  width=45% /> 
 </p>
 
 ## Built With
