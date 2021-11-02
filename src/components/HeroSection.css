@@ -144,4 +144,20 @@ video {
         margin: 0 0 14px 0;
     }
 
+    .hero-logo {
+        animation: none;
+    }
+    
+    .hero-container > h2 {
+        animation: none;
+    }
+    
+    .slogan {
+        animation: none;
+    }
+    
+    .hero-container > .hero-btns {
+        animation: none;
+    }
+
 }
