@@ -6,6 +6,14 @@ video {
     z-index: -1;
 }
 
+img {
+    /* object-fit: none; */
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: -1;
+}
+
 .hero-container {
     height: 100vh;
     width: 100%;
@@ -120,7 +128,7 @@ video {
 @media screen and (max-width: 500px) {
     .hero-logo {
         font-size: 50px;
-        margin-top: 90px;
+        margin-top: 120px;
     }
 
     .hero-logo:hover {
@@ -131,14 +139,25 @@ video {
     .hero-container > h2 {
         font-size: 13px;
     }
-
-    video {
-        margin-top: -45px;
-        object-fit: none;
-    }
     
     .hero-btns .btn {
         margin: 0 0 14px 0;
     }
+/* 
+    .hero-logo {
+        animation: none;
+    }
+    
+    .hero-container > h2 {
+        animation: none;
+    }
+    
+    .slogan {
+        animation: none;
+    }
+    
+    .hero-container > .hero-btns {
+        animation: none;
+    } */
 
 }
