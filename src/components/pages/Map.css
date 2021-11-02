@@ -123,6 +123,7 @@
 .info-window > h3 {
     font-family: 'Josefin Sans', sans-serif;
     line-height: 4px;
+    margin-top: 10px;
 }
 
 @media screen and (max-width: 1100px) {
