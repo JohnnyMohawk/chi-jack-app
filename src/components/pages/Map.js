@@ -23,7 +23,7 @@ const googleMapsApiKey = process.env.REACT_APP_API_KEY_GOOGLE_MAPS
 const Map = () => {
     const { isLoaded, loadError } = useLoadScript({
         id: 'google-map-script',
-        googleMapsApiKey: googleMapsApiKey,
+        googleMapsApiKey: "AIzaSyAFDto1wJDYt-pVSCrN3f_DN12L9qA9ucA",
     })
 
     const currentYear = new Date().getFullYear()
