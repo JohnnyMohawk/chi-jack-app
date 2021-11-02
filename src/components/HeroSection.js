@@ -31,7 +31,7 @@ function HeroSection() {
         </div>
     ) : (
         <div className="hero-container">
-            <img src="/images/skyline-still-mobile1.png" />
+            <img src="/images/skyline-still-mobile1.png" className="mobile-background" />
             <Link to='/map' className='hero-logo'>
                 Shy Jack
                 <i class="fas fa-car-crash"></i>
