@@ -41,13 +41,21 @@ Click [HERE](https://shy-jack-app.herokuapp.com/)
 
 ## Built With
 
-<img src="public/images/readme-images/mern-stack.png" width=100% height=auto>
+<p float="left">
+    <img src="public/images/readme-images/mern-stack.png" width=45% />
+    <img src="public/images/readme-images/languages.png" width=45% /> 
+</p>
 
-<img src="public/images/readme-images/languages.png" width=100% height=auto>
+<!-- <img src="public/images/readme-images/mern-stack.png" width=100% height=auto>
+<img src="public/images/readme-images/languages.png" width=100% height=auto> -->
 
-<img src="public/images/readme-images/chart-react-api.png" width=100% height=auto>
+<p float="left">
+    <img src="public/images/readme-images/chart-react-api.png" width=45% />
+    <img src="public/images/readme-images/react-google-maps.png"  width=45% /> 
+</p>
 
-<img src="public/images/readme-images/react-google-maps.png" width=100% height=auto>
+<!-- <img src="public/images/readme-images/chart-react-api.png" width=100% height=auto>
+<img src="public/images/readme-images/react-google-maps.png" width=100% height=auto> -->
 
 * [MongoDB](https://www.mongodb.com/)
 * [Mongoose](https://mongoosejs.com/)
