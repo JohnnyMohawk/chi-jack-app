@@ -35,7 +35,7 @@ const SignupForm = (props) => {
 
     useEffect(() => {
         const { name, email, homeHood, workHood, checkHood, password, passwordConf } = formData
-        const isFormInvalid = !(name && email && homeHood && workHood && checkHood && password === passwordConf)
+        const isFormInvalid = !(name && email && homeHood && workHood && checkHood && password !== "" && password === passwordConf)
             setValidForm(isFormInvalid)
         }, [formData])
 
@@ -76,7 +76,7 @@ const SignupForm = (props) => {
                     </div>
                     <div className="inputContainer">
                         <label htmlFor="homeHood-input" className="label">Home Neighborhood</label>
-                        <select className="input-field" id="homeHood" value={formData.homeHood} name="homeHood" onChange={handleChange}>
+                        <select className="input-field" id="homeHood" defaultValue="Select Neighborhood" name="homeHood" onChange={handleChange}>
                             {Object.keys(neighborhoodObject).sort().map(neighborhood => (
                                 <option key={neighborhood} value={neighborhood}>
                                     {neighborhood}
@@ -87,7 +87,7 @@ const SignupForm = (props) => {
 
                     <div className="inputContainer">
                         <label htmlFor="workHood-input" className="label">Work Neighborhood</label>
-                        <select className="input-field" id="workHood" value={formData.workHood} name="workHood" onChange={handleChange}>
+                        <select className="input-field" id="workHood" defaultValue="Select Neighborhood" name="workHood" onChange={handleChange}>
                             {Object.keys(neighborhoodObject).sort().map(neighborhood => (
                                 <option key={neighborhood} value={neighborhood}>
                                     {neighborhood}
@@ -98,7 +98,7 @@ const SignupForm = (props) => {
 
                     <div className="inputContainer">
                         <label htmlFor="checkHood-input" className="label">Spot Watch</label>
-                        <select className="input-field" id="checkHood" value={formData.checkHood} name="checkHood" onChange={handleChange}>
+                        <select className="input-field" id="checkHood" defaultValue="Select Neighborhood" name="checkHood" onChange={handleChange}>
                             {Object.keys(neighborhoodObject).sort().map(neighborhood => (
                                 <option key={neighborhood} value={neighborhood}>
                                     {neighborhood}
