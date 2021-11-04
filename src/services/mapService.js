@@ -60,7 +60,7 @@ export const removeZeros = (array) => {
     return array.join('')
 }
 
-export const neighborhoodObject = {'Rogers Park': [42.009390, -87.676413], 'Washington Park': [41.793904, -87.618180], 'West Ridge': [42.003876, -87.696190], 'Hyde Park': [41.794544, -87.594070], 'Uptown': [41.966832, -87.655495], 'Woodlawn': [41.780785, -87.599069],
+export const neighborhoodObject = {'Select Neighborhood': [41.881952, -87.629439], 'Rogers Park': [42.009390, -87.676413], 'Washington Park': [41.793904, -87.618180], 'West Ridge': [42.003876, -87.696190], 'Hyde Park': [41.794544, -87.594070], 'Uptown': [41.966832, -87.655495], 'Woodlawn': [41.780785, -87.599069],
 'Lincoln Square': [41.969446, -87.689728], 'South Shore': [41.759234, -87.575587], 'North Center': [41.956640, -87.679314], 'Chatham': [41.741420, -87.612382], 'Lake View': [41.940720, -87.652870], 'Avalon Park': [41.745920, -87.594160], 'Lincoln Park': [41.920180, -87.636390], 'South Chicago': [41.735134, -87.551309], 
 'Near North Side': [41.901219, -87.634505], 'Burnside': [41.730202, -87.596861], 'Edison Park': [42.004662, -87.811923], 'Calumet Heights': [41.730207, -87.579359], 'Norwood Park': [41.988588, -87.803159], 'Roseland': [41.693720, -87.623130], 'Jefferson Park': [41.969934, -87.763186], 'Pullman': [41.692737, -87.606391], 
 'Forest Glen': [41.986070, -87.747150], 'South Deering': [41.701596, -87.557132], 'North Park': [41.981595, -87.720694], 'East Side': [41.714303, -87.532713], 'Albany Park': [41.970499, -87.715989], 'West Pullman': [41.675784, -87.638601], 'Portage Park': [41.958214, -87.765554], 'Riverdale': [41.668232, -87.605052], 
