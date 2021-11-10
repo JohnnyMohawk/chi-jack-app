@@ -109,6 +109,10 @@ const Map = () => {
         let formattedDate = createFormattedDate()
         let res1 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=0325&$limit=50000&$offset=0')
         let res2 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=0326&$limit=50000&$offset=0')
+        // let res3 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=1544&$limit=50000&$offset=0')
+        // let data3 = await res3.json()
+        // console.log(data3)
+        // let data = data3
         let data1 = await res1.json()
         let data2 = await res2.json()
         let data = [...data1, ...data2]
