@@ -20,8 +20,11 @@ function Graph() {
     const makeApiCall = async() => {
         let annualDataObj = {}
         let monthDataObj = {}
-        let res = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?description=AGGRAVATED%20VEHICULAR%20HIJACKING&$limit=50000&$offset=0')
-        let data = await res.json()
+        let res1 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=0325&$limit=50000&$offset=0')
+        let res2 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=0326&$limit=50000&$offset=0')
+        let data1 = await res1.json()
+        let data2 = await res2.json()
+        let data = [...data1, ...data2]
         yearArr.forEach(year => {
             annualDataObj[year] = data.filter(crime => crime.date.includes(year)).length
         });
