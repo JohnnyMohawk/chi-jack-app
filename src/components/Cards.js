@@ -1,50 +1,73 @@
-import React from "react"
+import React, {useState, useEffect} from "react"
 import CardItem from "./CardItem"
 import './Cards.css'
 
 function Cards() {
+
+    const [news, setNews] = useState(null)
+
+    const makeNewsApiCall = async() => {
+        let res = await fetch('https://newsapi.org/v2/everything?q=chicago+carjacking&sortBy=publishedAt&pageSize=5&page=1&domains=wgntv.com,abc7chicago.com,foxnews.com,nbcnews.com,nypost.com,chicagotribune.com,abcnews.go.com,apnews.com,chicago.suntimes.com,wbez.org&apiKey=fca7629171c143338ccaa74f5c0bb383')
+        // let res = await fetch('https://newsapi.org/v2/everything?q=carjacking chicago&sortBy=publishedAt&pageSize=5&domains=wgntv.com,abc7chicago.com,foxnews.com,nbcnews.com,nypost.com,chicagotribune.com,abcnews.go.com,apnews.com,chicago.suntimes.com,wbez.org&apiKey=fca7629171c143338ccaa74f5c0bb383')
+        // let res = await fetch('https://newsapi.org/v2/everything?q=carjackings+chicago&pageSize=5&apiKey=fca7629171c143338ccaa74f5c0bb383')
+        const newsData = await res.json()
+        setNews(newsData)
+        console.log(newsData.articles[0])        
+    }
+
+    console.log('news', news)
+
+    useEffect(() => {
+        makeNewsApiCall()
+    }, [])
+
     return (
+        news ? 
+        <>
         <div className='cards'>
             <h1>Chicago Carjackings in the News</h1>
             <div className='cards__container'>
                 <div className='cards__wrapper'>
                     <ul className='cards__items'>
                         <CardItem 
-                            src="images/sun-times-10-8.png"
-                            text="Cook County carjackings on pace to be the worst in 2 decades: Camry is No. 1, most victims are men, Sunday’s the worst day"
-                            label="Sun-Times 10/8/21"
-                            path="https://chicago.suntimes.com/2021/10/8/22704266/carjackings-carjacking-crisis-chicago-cook-county-sheriff-tom-dart-toyota-camry-sunday-worst-day"
+                            src={news.articles[0].urlToImage}
+                            text={news.articles[0].content}
+                            label={`${news.articles[0].source.name} ${new Date(news.articles[0].publishedAt.split('T')[0]).toDateString()}`}
+                            path={news.articles[0].url}
                         />
                         <CardItem 
-                            src="images/nbc-10-4.png"
-                            text="3 Carjackings Reported Within Hours of Each Other, 2 at Same Time Just Blocks Apart: CPD"
-                            label="NBC 10/4/21"
-                            path="https://www.nbcchicago.com/news/local/3-carjackings-reported-within-hours-of-each-other-2-at-same-time-just-blocks-apart-cpd/2627925/"
+                            src={news.articles[1].urlToImage}
+                            text={news.articles[1].content}
+                            label={`${news.articles[1].source.name} ${new Date(news.articles[1].publishedAt.split('T')[0]).toDateString()}`}
+                            path={news.articles[1].url}
                         />
                     </ul>
                     <ul className='cards__items'>
                         <CardItem 
-                            src="images/sun-times-10-4.png"
-                            text="Three armed carjackings within hours on North and Northwest sides, one person critically wounded"
-                            label="Sun-Times 10/4/21"
-                            path="https://chicago.suntimes.com/crime/2021/10/4/22708411/armed-carjackings-occur-about-same-time-about-a-mile-apart-on-north-side"
+                            src={news.articles[2].urlToImage}
+                            text={news.articles[2].content}
+                            label={`${news.articles[2].source.name} ${new Date(news.articles[2].publishedAt.split('T')[0]).toDateString()}`}
+                            path={news.articles[2].url}
                         />
                         <CardItem 
-                            src="images/bump-run.png"
-                            text="19 Carjackings, Including 5 Bump-And-Run Incidents, Reported In Chicago In Recent Days; Police Urge Caution"
-                            label="CBS 8/24/21"
-                            path="https://chicago.cbslocal.com/2021/08/24/chicago-carjackings-bump-and-run-crisis/"
+                            src={news.articles[3].urlToImage}
+                            text={news.articles[3].content}
+                            label={`${news.articles[3].source.name} ${new Date(news.articles[3].publishedAt.split('T')[0]).toDateString()}`}
+                            path={news.articles[3].url}
                         />
                         <CardItem 
-                            src="images/carjacking.png"
-                            text="As Chicago carjackings soar, police arresting more kids"
-                            label="WGN 7/8/21"
-                            path="https://wgntv.com/news/wgn-investigates/as-chicago-carjackings-soar-police-arresting-more-kids/"
+                            src={news.articles[4].urlToImage}
+                            text={news.articles[4].content}
+                            label={`${news.articles[4].source.name} ${new Date(news.articles[4].publishedAt.split('T')[0]).toDateString()}`}
+                            path={news.articles[4].url}
                         />
                     </ul>
                 </div>
             </div>
         </div>
+        </>
+        :
+        <></>
     )
 }
 
