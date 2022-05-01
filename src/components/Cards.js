@@ -7,15 +7,11 @@ function Cards() {
     const [news, setNews] = useState(null)
 
     const makeNewsApiCall = async() => {
-        let res = await fetch('https://newsapi.org/v2/everything?q=chicago+carjacking&sortBy=publishedAt&pageSize=5&page=1&domains=wgntv.com,abc7chicago.com,foxnews.com,nbcnews.com,nypost.com,chicagotribune.com,abcnews.go.com,apnews.com,chicago.suntimes.com,wbez.org&apiKey=fca7629171c143338ccaa74f5c0bb383')
-        // let res = await fetch('https://newsapi.org/v2/everything?q=carjacking chicago&sortBy=publishedAt&pageSize=5&domains=wgntv.com,abc7chicago.com,foxnews.com,nbcnews.com,nypost.com,chicagotribune.com,abcnews.go.com,apnews.com,chicago.suntimes.com,wbez.org&apiKey=fca7629171c143338ccaa74f5c0bb383')
-        // let res = await fetch('https://newsapi.org/v2/everything?q=carjackings+chicago&pageSize=5&apiKey=fca7629171c143338ccaa74f5c0bb383')
+        let res = await fetch('https://newsapi.org/v2/everything?q=chicago+carjacking&sortBy=publishedAt&domains=wgntv.com,abc7chicago.com,foxnews.com,nbcnews.com,nypost.com,chicagotribune.com,abcnews.go.com,chicago.suntimes.com,wbez.org&apiKey=fca7629171c143338ccaa74f5c0bb383')
         const newsData = await res.json()
         setNews(newsData)
-        console.log(newsData.articles[0])        
+        console.log(newsData)        
     }
-
-    console.log('news', news)
 
     useEffect(() => {
         makeNewsApiCall()
