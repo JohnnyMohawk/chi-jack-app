@@ -1,20 +1,68 @@
 import React, {useState, useEffect} from "react"
 import CardItem from "./CardItem"
 import './Cards.css'
+import * as newsService from '../services/newsService'
+
+// import { News } from '../../models'
 
 function Cards() {
 
     const [news, setNews] = useState(null)
+    // const [validForm, setValidForm] = useState(false)
+    // const [formData, setFormData] = useState({
+    //     status: '',
+    //     totalResults: null,
+    //     articles: [],
+    // })
+
+
+    // const handleChange = evt => {
+    //     setFormData({ ...formData, [evt.target.name]: evt.target.value })
+    // }
+
+    // const handleSubmit = evt => {
+    //     evt.preventDefault()
+    //     newsService.todaysNews(formData)
+    //     setFormData({status: '', totalResults: null, articles: []})
+    // }
 
     const makeNewsApiCall = async() => {
         let res = await fetch('https://newsapi.org/v2/everything?q=chicago+carjacking&sortBy=publishedAt&domains=wgntv.com,abc7chicago.com,foxnews.com,nbcnews.com,nypost.com,chicagotribune.com,abcnews.go.com,chicago.suntimes.com,wbez.org&apiKey=fca7629171c143338ccaa74f5c0bb383')
         const newsData = await res.json()
         setNews(newsData)
-        console.log(newsData)        
+        // console.log(newsData.status, newsData.totalResults, newsData.articles)
+        // setFormData({status: newsData.status, totalResults: newsData.totalResults, articles: newsData.articles})
+        newsService.todaysNews({status: newsData.status, totalResults: newsData.totalResults, articles: newsData.articles})
+        // setFormData({status: '', totalResults: null, articles: []})
     }
+
+    // useEffect(() => {
+    //     const { news } = formData
+    //     const isFormInvalid = !(news)
+    //         setValidForm(isFormInvalid)
+    //     }, [formData])
 
     useEffect(() => {
         makeNewsApiCall()
+        const currentTime = new Date().getTime();  //current unix timestamp
+        const execTime = new Date().setHours(20,0,0,0);  //API call time = today at 20:00
+        let timeLeft;
+        if(currentTime < execTime) {
+            //it's currently earlier than 20:00
+            timeLeft = execTime - currentTime;
+            console.log(currentTime, execTime, timeLeft)
+        } else {
+            //it's currently later than 20:00, schedule for tomorrow at 20:00
+            timeLeft = execTime + 86400000 - currentTime
+            console.log(currentTime, execTime, timeLeft)
+        }
+        setTimeout(function() {
+            setInterval(function() {
+
+                makeNewsApiCall()
+
+            }, 86400000);  //repeat every 24h
+        }, timeLeft);  //wait until 20:00 as calculated above
     }, [])
 
     return (
