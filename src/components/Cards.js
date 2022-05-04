@@ -2,6 +2,7 @@ import React, {useState, useEffect} from "react"
 import CardItem from "./CardItem"
 import './Cards.css'
 import * as newsService from '../services/newsService'
+// import { News } from '../../models/news.js'
 
 // import { News } from '../../models'
 
@@ -36,6 +37,10 @@ function Cards() {
         // setFormData({status: '', totalResults: null, articles: []})
     }
 
+    // const pullDbNews = async() => {
+    //     newsService.getNews()
+    // }
+
     // useEffect(() => {
     //     const { news } = formData
     //     const isFormInvalid = !(news)
@@ -44,6 +49,7 @@ function Cards() {
 
     useEffect(() => {
         makeNewsApiCall()
+        // pullDbNews()
         const currentTime = new Date().getTime();  //current unix timestamp
         const execTime = new Date().setHours(20,0,0,0);  //API call time = today at 20:00
         let timeLeft;
