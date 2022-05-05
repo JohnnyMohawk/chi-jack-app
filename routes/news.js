@@ -5,6 +5,8 @@ const router = Router()
 
 router.post('/', newsCtrl.create)
 
+router.get('/', newsCtrl.newsIndex)
+
 export {
     router
 }

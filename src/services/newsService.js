@@ -17,15 +17,15 @@ export const todaysNews = async (news) => {
     }
 }
 
-// export const getNews = async () => {
-//     try {
-//         const res = await fetch(BASE_URL, { mode: "cors" })
-//         const data = await res.json()
-//         return data
-//     } catch (error) {
-//         throw error
-//     }
-// }
+export const getNews = async () => {
+    try {
+        const res = await fetch(BASE_URL, { mode: "cors" })
+        const data = await res.json()
+        return data
+    } catch (error) {
+        throw error
+    }
+}
 
 // export const indexNews = async (req, res) => {
 //     // console.log(req.body)
