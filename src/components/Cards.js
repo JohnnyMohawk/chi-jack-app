@@ -12,6 +12,7 @@ function Cards() {
     const makeNewsApiCall = async() => {
         let res = await fetch('https://newsapi.org/v2/everything?q=chicago+carjacking&sortBy=publishedAt&domains=wgntv.com,abc7chicago.com,foxnews.com,nbcnews.com,nypost.com,chicagotribune.com,abcnews.go.com,chicago.suntimes.com,wbez.org&apiKey=fca7629171c143338ccaa74f5c0bb383')
         const newsData = await res.json()
+        console.log("Inner makeNewsApiCall Log", newsData)
         setNews(newsData)
         newsService.todaysNews({status: newsData.status, totalResults: newsData.totalResults, articles: newsData.articles})
     }
@@ -19,7 +20,7 @@ function Cards() {
     const getNews = async() => {
         let res = await fetch('api/news')
         const newsDbData = await res.json()
-        console.log("Inner Function Log", newsDbData)
+        console.log("Inner getNews Log", newsDbData)
         setNews(newsDbData)
         setPullDate(newsDbData.updatedAt.split('T')[0])
     }
@@ -30,10 +31,10 @@ function Cards() {
         const today = new Date().toISOString().split('T')[0]
 
         // const yesterday = new Date('2022-05-01')
+        // console.log(yesterday)
 
         if(new Date(pullDate) > new Date(today)){
             makeNewsApiCall()
-            console.log('FARTS')
         }
 
     }, [])
