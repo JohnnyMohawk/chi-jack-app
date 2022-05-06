@@ -8,12 +8,15 @@ function Cards() {
 
     const [news, setNews] = useState(null)
     const [pullDate, setPullDate] = useState(null)
+    const [numPages, setNumPages] = useState(null)
+    const [pages, setPages] = useState(null)
 
     const makeNewsApiCall = async() => {
         let res = await fetch('https://newsapi.org/v2/everything?q=chicago+carjacking&sortBy=publishedAt&domains=wgntv.com,abc7chicago.com,foxnews.com,nbcnews.com,nypost.com,chicagotribune.com,abcnews.go.com,chicago.suntimes.com,wbez.org&apiKey=fca7629171c143338ccaa74f5c0bb383')
         const newsData = await res.json()
         console.log("Inner makeNewsApiCall Log", newsData)
         setNews(newsData)
+        setNumPages(Math.floor(newsData.articles.length / 5))
         newsService.todaysNews({status: newsData.status, totalResults: newsData.totalResults, articles: newsData.articles})
     }
 
@@ -22,16 +25,44 @@ function Cards() {
         const newsDbData = await res.json()
         console.log("Inner getNews Log", newsDbData)
         setNews(newsDbData)
+        setNumPages(Math.floor(newsDbData.articles.length / 5))
+        let iArray = indexArray(newsDbData.articles)
+        console.log(iArray)
+        console.log(chunkArray(iArray, 5))
+        setPages(chunkArray(iArray, 5))
         setPullDate(newsDbData.updatedAt.split('T')[0])
+    }
+
+    const indexArray = (array) => {
+        let iArray = []
+        for (let index = 0; index < array.length; index++) {
+            iArray.push(index)
+        }
+        return iArray
+    }
+
+    const chunkArray = (myArray, chunk_size) => {
+        var index = 0;
+        var arrayLength = myArray.length;
+        var tempArray = [];
+        
+        for (index = 0; index < arrayLength; index += chunk_size) {
+            let myChunk = myArray.slice(index, index + chunk_size);
+            // Do something if you want with the group
+            tempArray.push(myChunk);
+        }
+    
+        return tempArray;
     }
 
     useEffect(() => {
         getNews()
+        // console.log(chunkArray(news.articles))
+        // console.log(numPages)
 
         const today = new Date().toISOString().split('T')[0]
 
         // const yesterday = new Date('2022-05-01')
-        // console.log(yesterday)
 
         if(new Date(pullDate) > new Date(today)){
             makeNewsApiCall()
