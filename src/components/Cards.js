@@ -11,13 +11,35 @@ function Cards() {
     const [numPages, setNumPages] = useState(null)
     const [pages, setPages] = useState(null)
 
+    const today = new Date().toISOString().split('T')[0]
+
+    const yesterday = new Date('2022-05-07')
+
+    // const makeNewsApiCall = async() => {
+    //     let res = await fetch('https://newsapi.org/v2/everything?q=chicago+carjacking&sortBy=publishedAt&domains=wgntv.com,abc7chicago.com,foxnews.com,nbcnews.com,nypost.com,chicagotribune.com,abcnews.go.com,chicago.suntimes.com,wbez.org&apiKey=fca7629171c143338ccaa74f5c0bb383')
+    //     const newsData = await res.json()
+    //     console.log("Inner makeNewsApiCall Log", newsData)
+    //     newsService.todaysNews({status: newsData.status, totalResults: newsData.totalResults, articles: newsData.articles})
+    //     setNews(newsData)
+    //     setNumPages(Math.floor(newsData.articles.length / 5))
+    // }
+
+
     const makeNewsApiCall = async() => {
-        let res = await fetch('https://newsapi.org/v2/everything?q=chicago+carjacking&sortBy=publishedAt&domains=wgntv.com,abc7chicago.com,foxnews.com,nbcnews.com,nypost.com,chicagotribune.com,abcnews.go.com,chicago.suntimes.com,wbez.org&apiKey=fca7629171c143338ccaa74f5c0bb383')
-        const newsData = await res.json()
-        console.log("Inner makeNewsApiCall Log", newsData)
-        setNews(newsData)
-        setNumPages(Math.floor(newsData.articles.length / 5))
-        newsService.todaysNews({status: newsData.status, totalResults: newsData.totalResults, articles: newsData.articles})
+        let livePullDate = await getPullDate()
+        console.log(new Date(yesterday) > new Date(livePullDate))
+        console.log(new Date(yesterday), new Date(livePullDate))
+        console.log(yesterday, livePullDate)
+        if(new Date(today) > new Date(livePullDate)){
+            let res = await fetch('https://newsapi.org/v2/everything?q=chicago+carjacking&sortBy=publishedAt&domains=wgntv.com,abc7chicago.com,foxnews.com,nbcnews.com,nypost.com,chicagotribune.com,abcnews.go.com,chicago.suntimes.com,wbez.org&apiKey=fca7629171c143338ccaa74f5c0bb383')
+            const newsData = await res.json()
+            console.log("Inner makeNewsApiCall Log", newsData)
+            newsService.todaysNews({status: newsData.status, totalResults: newsData.totalResults, articles: newsData.articles})
+            setNews(newsData)
+            setNumPages(Math.floor(newsData.articles.length / 5))
+        }else{
+            getNews()
+        }
     }
 
     const getNews = async() => {
@@ -31,6 +53,13 @@ function Cards() {
         console.log(chunkArray(iArray, 5))
         setPages(chunkArray(iArray, 5))
         setPullDate(newsDbData.updatedAt.split('T')[0])
+    }
+
+    const getPullDate = async() => {
+        let res = await fetch('api/news')
+        const newsDbData = await res.json()
+        console.log("BOOYA GRANDMA", new Date(newsDbData.updatedAt.split('T')[0]))
+        return new Date(newsDbData.updatedAt.split('T')[0])
     }
 
     const indexArray = (array) => {
@@ -56,17 +85,18 @@ function Cards() {
     }
 
     useEffect(() => {
-        getNews()
-        // console.log(chunkArray(news.articles))
-        // console.log(numPages)
 
-        const today = new Date().toISOString().split('T')[0]
+        makeNewsApiCall()
 
-        // const yesterday = new Date('2022-05-01')
-
-        if(new Date(pullDate) > new Date(today)){
-            makeNewsApiCall()
-        }
+        // console.log(yesterday, new Date(today))
+        // console.log("SHITTTTYYY")
+        // if(new Date(yesterday) < new Date(pullDate)){
+        //     // makeNewsApiCall()
+        //     console.log("FFUUUCCCKK")
+        //     console.log(new Date(pullDate) > new Date(yesterday))
+        // }else{
+        //     getNews()
+        // }
 
     }, [])
 
