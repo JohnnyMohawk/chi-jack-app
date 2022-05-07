@@ -38,6 +38,9 @@ function Cards() {
         setNumPages(pullDate.numPages)
         setPages(pullDate.pages)
 
+        console.log("POOOOOOP", new Date(today) > new Date(pullDate.pullDate))
+        console.log("PEEEEEEE", new Date(today), new Date(pullDate.pullDate))
+
         if(new Date(today) > new Date(pullDate.pullDate)){
             let res = await fetch('https://newsapi.org/v2/everything?q=chicago+carjacking&sortBy=publishedAt&domains=wgntv.com,abc7chicago.com,foxnews.com,nbcnews.com,nypost.com,chicagotribune.com,abcnews.go.com,chicago.suntimes.com,wbez.org&apiKey=fca7629171c143338ccaa74f5c0bb383')
             const newsData = await res.json()
@@ -122,40 +125,40 @@ function Cards() {
                         <CardItem 
                         src={news.articles[pages[counter][0]].urlToImage}
                             // src={news.articles[0].urlToImage}
-                            text={news.articles[0].content}
-                            label={`${news.articles[0].source.name} ${new Date(news.articles[0].publishedAt.split('T')[0]).toDateString()}`}
-                            path={news.articles[0].url}
+                            text={news.articles[pages[counter][0]].content}
+                            label={`${news.articles[pages[counter][0]].source.name} ${new Date(news.articles[0].publishedAt.split('T')[0]).toDateString()}`}
+                            path={news.articles[pages[counter][0]].url}
                         />
                         <CardItem 
-                            src={news.articles[1].urlToImage}
-                            text={news.articles[1].content}
-                            label={`${news.articles[1].source.name} ${new Date(news.articles[1].publishedAt.split('T')[0]).toDateString()}`}
-                            path={news.articles[1].url}
+                            src={news.articles[pages[counter][1]].urlToImage}
+                            text={news.articles[pages[counter][1]].content}
+                            label={`${news.articles[pages[counter][1]].source.name} ${new Date(news.articles[1].publishedAt.split('T')[0]).toDateString()}`}
+                            path={news.articles[pages[counter][1]].url}
                         />
                     </ul>
                     <ul className='cards__items'>
                         <CardItem 
-                            src={news.articles[2].urlToImage}
-                            text={news.articles[2].content}
-                            label={`${news.articles[2].source.name} ${new Date(news.articles[2].publishedAt.split('T')[0]).toDateString()}`}
-                            path={news.articles[2].url}
+                            src={news.articles[pages[counter][2]].urlToImage}
+                            text={news.articles[pages[counter][2]].content}
+                            label={`${news.articles[pages[counter][2]].source.name} ${new Date(news.articles[2].publishedAt.split('T')[0]).toDateString()}`}
+                            path={news.articles[pages[counter][2]].url}
                         />
                         <CardItem 
-                            src={news.articles[3].urlToImage}
-                            text={news.articles[3].content}
-                            label={`${news.articles[3].source.name} ${new Date(news.articles[3].publishedAt.split('T')[0]).toDateString()}`}
-                            path={news.articles[3].url}
+                            src={news.articles[pages[counter][3]].urlToImage}
+                            text={news.articles[pages[counter][3]].content}
+                            label={`${news.articles[pages[counter][3]].source.name} ${new Date(news.articles[3].publishedAt.split('T')[0]).toDateString()}`}
+                            path={news.articles[pages[counter][3]].url}
                         />
                         <CardItem 
-                            src={news.articles[4].urlToImage}
-                            text={news.articles[4].content}
-                            label={`${news.articles[4].source.name} ${new Date(news.articles[4].publishedAt.split('T')[0]).toDateString()}`}
-                            path={news.articles[4].url}
+                            src={news.articles[pages[counter][4]].urlToImage}
+                            text={news.articles[pages[counter][4]].content}
+                            label={`${news.articles[pages[counter][4]].source.name} ${new Date(news.articles[4].publishedAt.split('T')[0]).toDateString()}`}
+                            path={news.articles[pages[counter][4]].url}
                         />
                     </ul>
                 </div>
-                <button onClick={() => setCounter(counter + 1)}>Increase Counter</button>
-                <button onClick={() => setCounter(counter - 1)}>Decrease Counter</button>
+                <button onClick={() => counter < numPages - 1 ? setCounter(counter + 1) : setCounter(0)}>Increase Counter</button>
+                <button onClick={() => counter > 0 ? setCounter(counter - 1) : setCounter(numPages - 1)}>Decrease Counter</button>
             </div>
         </div>
         </>
