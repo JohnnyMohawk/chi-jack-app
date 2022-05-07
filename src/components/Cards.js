@@ -12,34 +12,12 @@ function Cards() {
     const [counter, setCounter] = useState(0)
 
     const today = new Date().toISOString().split('T')[0]
-
-    // const yesterday = new Date('2022-05-07')
-
-    const checkCount = () => {
-        if (counter > numPages - 1){
-            setCounter(0)
-        }else if (counter < 0) {
-            setCounter(numPages - 1)
-        }
-    }
-
-    // const makeNewsApiCall = async() => {
-    //     let res = await fetch('https://newsapi.org/v2/everything?q=chicago+carjacking&sortBy=publishedAt&domains=wgntv.com,abc7chicago.com,foxnews.com,nbcnews.com,nypost.com,chicagotribune.com,abcnews.go.com,chicago.suntimes.com,wbez.org&apiKey=fca7629171c143338ccaa74f5c0bb383')
-    //     const newsData = await res.json()
-    //     console.log("Inner makeNewsApiCall Log", newsData)
-    //     newsService.todaysNews({status: newsData.status, totalResults: newsData.totalResults, articles: newsData.articles})
-    //     setNews(newsData)
-    //     setNumPages(Math.floor(newsData.articles.length / 5))
-    // }
-
+    // const yesterday = new Date('2022-05-09') 
 
     const makeNewsApiCall = async() => {
         let pullDate = await getPullDate()
         setNumPages(pullDate.numPages)
         setPages(pullDate.pages)
-
-        console.log("POOOOOOP", new Date(today) > new Date(pullDate.pullDate))
-        console.log("PEEEEEEE", new Date(today), new Date(pullDate.pullDate))
 
         if(new Date(today) > new Date(pullDate.pullDate)){
             let res = await fetch('https://newsapi.org/v2/everything?q=chicago+carjacking&sortBy=publishedAt&domains=wgntv.com,abc7chicago.com,foxnews.com,nbcnews.com,nypost.com,chicagotribune.com,abcnews.go.com,chicago.suntimes.com,wbez.org&apiKey=fca7629171c143338ccaa74f5c0bb383')
@@ -47,9 +25,6 @@ function Cards() {
             console.log("Inner makeNewsApiCall Log", newsData)
             newsService.todaysNews({status: newsData.status, totalResults: newsData.totalResults, articles: newsData.articles})
             setNews(newsData)
-            // setNumPages(Math.floor(newsData.articles.length / 5))
-            // let iArray = indexArray(newsData.articles)
-            // setPages(chunkArray(iArray, 5))
         }else{
             getNews()
         }
@@ -65,11 +40,6 @@ function Cards() {
     const getPullDate = async() => {
         let res = await fetch('api/news')
         const newsDbData = await res.json()
-        // setNumPages(Math.floor(newsDbData.articles.length / 5))
-        // let numPages = Math.floor(newsDbData.articles.length / 5)
-        // let iArray = indexArray(newsDbData.articles)
-        // let pages = chunkArray(iArray, 5)
-        // setPages(chunkArray(iArray, 5))
         return (
             {
                 pullDate: new Date(newsDbData.updatedAt.split('T')[0]),
@@ -77,7 +47,6 @@ function Cards() {
                 pages: chunkArray(indexArray(newsDbData.articles), 5)
             }
         )
-
     }
 
     const indexArray = (array) => {
@@ -92,28 +61,17 @@ function Cards() {
         var index = 0;
         var arrayLength = myArray.length;
         var tempArray = [];
-        
         for (index = 0; index < arrayLength; index += chunk_size) {
             let myChunk = myArray.slice(index, index + chunk_size);
-            // Do something if you want with the group
             tempArray.push(myChunk);
         }
-    
         return tempArray;
     }
 
     useEffect(() => {
-        checkCount()
-        console.log(counter)
-    }, [counter])
-
-
-    useEffect(() => {
-
         makeNewsApiCall()
-
     }, [])
-    console.log(pages, numPages)
+
     return (
         news ? 
         <>
@@ -124,7 +82,6 @@ function Cards() {
                     <ul className='cards__items'>
                         <CardItem 
                         src={news.articles[pages[counter][0]].urlToImage}
-                            // src={news.articles[0].urlToImage}
                             text={news.articles[pages[counter][0]].content}
                             label={`${news.articles[pages[counter][0]].source.name} ${new Date(news.articles[0].publishedAt.split('T')[0]).toDateString()}`}
                             path={news.articles[pages[counter][0]].url}
@@ -157,8 +114,10 @@ function Cards() {
                         />
                     </ul>
                 </div>
-                <button onClick={() => counter < numPages - 1 ? setCounter(counter + 1) : setCounter(0)}>Increase Counter</button>
-                <button onClick={() => counter > 0 ? setCounter(counter - 1) : setCounter(numPages - 1)}>Decrease Counter</button>
+                <div className="newsButtWrap">
+                    <button className="newsButtons" onClick={() => counter > 0 ? setCounter(counter - 1) : setCounter(numPages - 1)}><i class="fas fa-minus"></i></button>
+                    <button className="newsButtons" onClick={() => counter < numPages - 1 ? setCounter(counter + 1) : setCounter(0)}><i class="fas fa-plus"></i></button>
+                </div>
             </div>
         </div>
         </>
