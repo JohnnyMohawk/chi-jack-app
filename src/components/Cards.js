@@ -7,13 +7,21 @@ import * as newsService from '../services/newsService'
 function Cards() {
 
     const [news, setNews] = useState(null)
-    const [pullDate, setPullDate] = useState(null)
-    const [numPages, setNumPages] = useState(null)
-    const [pages, setPages] = useState(null)
+    const [numPages, setNumPages] = useState(0)
+    const [pages, setPages] = useState(0)
+    const [counter, setCounter] = useState(0)
 
     const today = new Date().toISOString().split('T')[0]
 
-    const yesterday = new Date('2022-05-07')
+    // const yesterday = new Date('2022-05-07')
+
+    const checkCount = () => {
+        if (counter > numPages - 1){
+            setCounter(0)
+        }else if (counter < 0) {
+            setCounter(numPages - 1)
+        }
+    }
 
     // const makeNewsApiCall = async() => {
     //     let res = await fetch('https://newsapi.org/v2/everything?q=chicago+carjacking&sortBy=publishedAt&domains=wgntv.com,abc7chicago.com,foxnews.com,nbcnews.com,nypost.com,chicagotribune.com,abcnews.go.com,chicago.suntimes.com,wbez.org&apiKey=fca7629171c143338ccaa74f5c0bb383')
@@ -26,17 +34,19 @@ function Cards() {
 
 
     const makeNewsApiCall = async() => {
-        let livePullDate = await getPullDate()
-        console.log(new Date(yesterday) > new Date(livePullDate))
-        console.log(new Date(yesterday), new Date(livePullDate))
-        console.log(yesterday, livePullDate)
-        if(new Date(today) > new Date(livePullDate)){
+        let pullDate = await getPullDate()
+        setNumPages(pullDate.numPages)
+        setPages(pullDate.pages)
+
+        if(new Date(today) > new Date(pullDate.pullDate)){
             let res = await fetch('https://newsapi.org/v2/everything?q=chicago+carjacking&sortBy=publishedAt&domains=wgntv.com,abc7chicago.com,foxnews.com,nbcnews.com,nypost.com,chicagotribune.com,abcnews.go.com,chicago.suntimes.com,wbez.org&apiKey=fca7629171c143338ccaa74f5c0bb383')
             const newsData = await res.json()
             console.log("Inner makeNewsApiCall Log", newsData)
             newsService.todaysNews({status: newsData.status, totalResults: newsData.totalResults, articles: newsData.articles})
             setNews(newsData)
-            setNumPages(Math.floor(newsData.articles.length / 5))
+            // setNumPages(Math.floor(newsData.articles.length / 5))
+            // let iArray = indexArray(newsData.articles)
+            // setPages(chunkArray(iArray, 5))
         }else{
             getNews()
         }
@@ -47,19 +57,24 @@ function Cards() {
         const newsDbData = await res.json()
         console.log("Inner getNews Log", newsDbData)
         setNews(newsDbData)
-        setNumPages(Math.floor(newsDbData.articles.length / 5))
-        let iArray = indexArray(newsDbData.articles)
-        console.log(iArray)
-        console.log(chunkArray(iArray, 5))
-        setPages(chunkArray(iArray, 5))
-        setPullDate(newsDbData.updatedAt.split('T')[0])
     }
 
     const getPullDate = async() => {
         let res = await fetch('api/news')
         const newsDbData = await res.json()
-        console.log("BOOYA GRANDMA", new Date(newsDbData.updatedAt.split('T')[0]))
-        return new Date(newsDbData.updatedAt.split('T')[0])
+        // setNumPages(Math.floor(newsDbData.articles.length / 5))
+        // let numPages = Math.floor(newsDbData.articles.length / 5)
+        // let iArray = indexArray(newsDbData.articles)
+        // let pages = chunkArray(iArray, 5)
+        // setPages(chunkArray(iArray, 5))
+        return (
+            {
+                pullDate: new Date(newsDbData.updatedAt.split('T')[0]),
+                numPages: Math.floor(newsDbData.articles.length / 5),
+                pages: chunkArray(indexArray(newsDbData.articles), 5)
+            }
+        )
+
     }
 
     const indexArray = (array) => {
@@ -85,21 +100,17 @@ function Cards() {
     }
 
     useEffect(() => {
+        checkCount()
+        console.log(counter)
+    }, [counter])
+
+
+    useEffect(() => {
 
         makeNewsApiCall()
 
-        // console.log(yesterday, new Date(today))
-        // console.log("SHITTTTYYY")
-        // if(new Date(yesterday) < new Date(pullDate)){
-        //     // makeNewsApiCall()
-        //     console.log("FFUUUCCCKK")
-        //     console.log(new Date(pullDate) > new Date(yesterday))
-        // }else{
-        //     getNews()
-        // }
-
     }, [])
-
+    console.log(pages, numPages)
     return (
         news ? 
         <>
@@ -109,7 +120,8 @@ function Cards() {
                 <div className='cards__wrapper'>
                     <ul className='cards__items'>
                         <CardItem 
-                            src={news.articles[0].urlToImage}
+                        src={news.articles[pages[counter][0]].urlToImage}
+                            // src={news.articles[0].urlToImage}
                             text={news.articles[0].content}
                             label={`${news.articles[0].source.name} ${new Date(news.articles[0].publishedAt.split('T')[0]).toDateString()}`}
                             path={news.articles[0].url}
@@ -142,6 +154,8 @@ function Cards() {
                         />
                     </ul>
                 </div>
+                <button onClick={() => setCounter(counter + 1)}>Increase Counter</button>
+                <button onClick={() => setCounter(counter - 1)}>Decrease Counter</button>
             </div>
         </div>
         </>
