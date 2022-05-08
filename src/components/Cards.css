@@ -150,8 +150,12 @@ h1 {
         margin-top: -50px;
     }
 
+    .newsButtons {
+        color: black !important;
+    }
+
     .newsButtons:hover {
-        color: black;
+        color: black !important;
         font-size: 32px;
     }
 }
