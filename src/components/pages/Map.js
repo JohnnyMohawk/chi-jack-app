@@ -107,8 +107,8 @@ const Map = () => {
 
     const makeApiCall = async() => {
         let formattedDate = createFormattedDate()
-        let res1 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=0325&$limit=50000&$offset=0')
-        let res2 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=0326&$limit=50000&$offset=0')
+        let res1 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=0110&$limit=50000&$offset=0')
+        let res2 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=0130&$limit=50000&$offset=0')
         let data1 = await res1.json()
         let data2 = await res2.json()
         let data = [...data1, ...data2]

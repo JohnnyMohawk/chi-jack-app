@@ -11,14 +11,14 @@ function Cards() {
     const [pages, setPages] = useState(0)
     const [counter, setCounter] = useState(0)
 
-    // const yesterday = new Date('2022-05-30').toISOString().split('T')[0]
+    // const yesterday = new Date('2022-06-30').toISOString().split('T')[0]
 
     const makeNewsApiCall = async() => {
         let pullDate = await getPullDate()
         setNumPages(pullDate.numPages)
         setPages(pullDate.pages)
         try {
-            if(new Date().toISOString().split('T')[0] > new Date(pullDate.pullDate).toISOString().split('T')[0]){
+            if(new Date('2022-06-30').toISOString().split('T')[0] > new Date(pullDate.pullDate).toISOString().split('T')[0]){
                 let res = await fetch('https://newsapi.org/v2/everything?q=chicago+carjacking&sortBy=publishedAt&domains=wgntv.com,abc7chicago.com,foxnews.com,nbcnews.com,nypost.com,chicagotribune.com,abcnews.go.com,chicago.suntimes.com,wbez.org,thedailybeast.com,dailycaller.com,nypost.com&apiKey=fca7629171c143338ccaa74f5c0bb383')
                 const newsData = await res.json()
                 console.log("Inner makeNewsApiCall Log", newsData)
