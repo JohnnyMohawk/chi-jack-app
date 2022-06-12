@@ -11,7 +11,7 @@ function Cards() {
     const [pages, setPages] = useState(0)
     const [counter, setCounter] = useState(0)
 
-    // const yesterday = new Date('2022-05-30').toISOString().split('T')[0]
+    // const yesterday = new Date('2022-06-30').toISOString().split('T')[0]
 
     const makeNewsApiCall = async() => {
         let pullDate = await getPullDate()
