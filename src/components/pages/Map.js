@@ -135,6 +135,7 @@ const Map = () => {
         carjackStats &&
             (async () => {
                 setCarjackings(carjackStats)
+                console.log(carjackStats)
             })();
     }, [carjackStats]);
 
