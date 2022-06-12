@@ -34,10 +34,11 @@ const Map = () => {
     const currentMonth = months.indexOf(searchDate.split(' ')[1])
     
 
-    const [carjackStats, setCarjackStats] = useState([])
+    const [homicideStats, setHomicideStats] = useState([])
+    const [sexAssaultStats, setSexAssaultStats] = useState([])
     const [lat, setLat] = useState(null)
     const [lng, setLng] = useState(null)
-    const [carjackings, setCarjackings] = useState([])
+    // const [carjackings, setCarjackings] = useState([])
     const [selectedCrime, setSelectedCrime] = useState(null)
     const [searchSpan, setSearchSpan] = useState("month")
     const [yearArray, setYearArray] = useState([])
@@ -105,21 +106,47 @@ const Map = () => {
         setLng(neighborhoodObject[selection][1])
     }
 
-    const makeApiCall = async() => {
+    const homicideApiCall = async() => {
         let formattedDate = createFormattedDate()
         let res1 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=0110&$limit=50000&$offset=0')
         let res2 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=0130&$limit=50000&$offset=0')
+        let res3 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=0141&$limit=50000&$offset=0')
+        let res4 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=0142&$limit=50000&$offset=0')
         let data1 = await res1.json()
         let data2 = await res2.json()
-        let data = [...data1, ...data2]
+        let data3 = await res3.json()
+        let data4 = await res4.json()
+        let data = [...data1, ...data2, ...data3, ...data4]
         let yearArr = yearRange(2001, currentYear)
         setYearArray(yearArr)
         let createDaysOfMonthArray = getDaysInMonth(months.indexOf(searchMonth), searchYear)
         setDaysOfTheMonth(createDaysOfMonthArray)
         if(searchSpan !== "week"){
-            setCarjackStats(data.filter(crime => crime.date.includes(formattedDate)))
+            setHomicideStats(data.filter(crime => crime.date.includes(formattedDate)))
         }else if(searchSpan === "week") {
-            setCarjackStats(data.filter(crime => (crime.date.includes(formattedDate[0]) || crime.date.includes(formattedDate[1]) || crime.date.includes(formattedDate[2]) || crime.date.includes(formattedDate[3]) || crime.date.includes(formattedDate[4]) || crime.date.includes(formattedDate[5]) || crime.date.includes(formattedDate[6]))))
+            setHomicideStats(data.filter(crime => (crime.date.includes(formattedDate[0]) || crime.date.includes(formattedDate[1]) || crime.date.includes(formattedDate[2]) || crime.date.includes(formattedDate[3]) || crime.date.includes(formattedDate[4]) || crime.date.includes(formattedDate[5]) || crime.date.includes(formattedDate[6]))))
+        }
+    }
+
+    const sexAssaultApiCall = async() => {
+        let formattedDate = createFormattedDate()
+        let res1 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=0261&$limit=50000&$offset=0')
+        let res2 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=0262&$limit=50000&$offset=0')
+        let res3 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=0271&$limit=50000&$offset=0')
+        let res4 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=0272&$limit=50000&$offset=0')
+        let data1 = await res1.json()
+        let data2 = await res2.json()
+        let data3 = await res3.json()
+        let data4 = await res4.json()
+        let data = [...data1, ...data2, ...data3, ...data4]
+        let yearArr = yearRange(2001, currentYear)
+        setYearArray(yearArr)
+        let createDaysOfMonthArray = getDaysInMonth(months.indexOf(searchMonth), searchYear)
+        setDaysOfTheMonth(createDaysOfMonthArray)
+        if(searchSpan !== "week"){
+            setSexAssaultStats(data.filter(crime => crime.date.includes(formattedDate)))
+        }else if(searchSpan === "week") {
+            setSexAssaultStats(data.filter(crime => (crime.date.includes(formattedDate[0]) || crime.date.includes(formattedDate[1]) || crime.date.includes(formattedDate[2]) || crime.date.includes(formattedDate[3]) || crime.date.includes(formattedDate[4]) || crime.date.includes(formattedDate[5]) || crime.date.includes(formattedDate[6]))))
         }
     }
 
@@ -128,16 +155,17 @@ const Map = () => {
     }, [])
 
     useEffect(() => {
-        makeApiCall()
+        homicideApiCall()
+        sexAssaultApiCall()
     }, [searchSpan, searchYear, searchMonth, searchDay])
 
     useEffect(() => {
-        carjackStats &&
+        homicideStats &&
             (async () => {
-                setCarjackings(carjackStats)
-                console.log(carjackStats)
+                // setCarjackings(homicideStats)
+                console.log(homicideStats)
             })();
-    }, [carjackStats]);
+    }, [homicideStats]);
 
     const mapRef = React.useRef();
         const onMapLoad = React.useCallback((map) => {
@@ -151,7 +179,7 @@ const Map = () => {
         <div className="map-container">
             <h1 className="map-title">Interactive Chicago Carjacking Map</h1>
             <div className="cj-number-wrapper">
-                <h2 className="carjack-numbers heart" id="cj-num-id">{carjackStats.length}</h2>
+                <h2 className="carjack-numbers heart" id="cj-num-id">{homicideStats.length + sexAssaultStats.length}</h2>
                 <h2 className="force-space">{"_"}</h2>
                 <h2 className="search-params">{`Carjackings
                     ${searchSpan === "month" ? "in " + fullMonths[months.indexOf(searchMonth)] : ""}
@@ -228,7 +256,7 @@ const Map = () => {
                     </select>
                 </div>
             </div> 
-            {carjackings.length ? 
+            {homicideStats.length ? 
             <>
                 <div className="map-text">
                     <GoogleMap
@@ -239,18 +267,36 @@ const Map = () => {
                         options={options}
                         onLoad={onMapLoad}
                     >
-                        {carjackings?.map((jacking) => (
+                        {homicideStats?.map((homicide) => (
                             <Marker 
-                                key={jacking.id} 
+                                key={homicide.id} 
                                 position={{ 
-                                    lat: parseFloat(jacking.latitude), 
-                                    lng: parseFloat(jacking.longitude) 
+                                    lat: parseFloat(homicide.latitude), 
+                                    lng: parseFloat(homicide.longitude) 
                                 }}
                                 onClick={() => {
-                                    setSelectedCrime(jacking)
+                                    setSelectedCrime(homicide)
                                 }}
                                 icon={{
                                     url: `/carjacking-red.png`,
+                                    origin: new window.google.maps.Point(0, 0),
+                                    anchor: new window.google.maps.Point(15, 15),
+                                    scaledSize: new window.google.maps.Size(70, 70),
+                                }}
+                            />
+                        ))}
+                        {sexAssaultStats?.map((sexAssault) => (
+                            <Marker 
+                                key={sexAssault.id} 
+                                position={{ 
+                                    lat: parseFloat(sexAssault.latitude), 
+                                    lng: parseFloat(sexAssault.longitude) 
+                                }}
+                                onClick={() => {
+                                    setSelectedCrime(sexAssault)
+                                }}
+                                icon={{
+                                    url: `/carjack-icon-black-outline.png`,
                                     origin: new window.google.maps.Point(0, 0),
                                     anchor: new window.google.maps.Point(15, 15),
                                     scaledSize: new window.google.maps.Size(70, 70),
