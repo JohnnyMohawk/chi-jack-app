@@ -36,6 +36,10 @@ const Map = () => {
 
     const [homicideStats, setHomicideStats] = useState([])
     const [sexAssaultStats, setSexAssaultStats] = useState([])
+    const [robberyStats, setRobberyStats] = useState([])
+    const [batteryStats, setBatteryStats] = useState([])
+    const [assaultStats, setAssaultStats] = useState([])
+    const [violationStats, setViolationStats] = useState([])
     const [lat, setLat] = useState(null)
     const [lng, setLng] = useState(null)
     // const [carjackings, setCarjackings] = useState([])
@@ -150,6 +154,144 @@ const Map = () => {
         }
     }
 
+    const robberyApiCall = async() => {
+        let formattedDate = createFormattedDate()
+        let res1 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=031A&$limit=50000&$offset=0')
+        let res2 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=031B&$limit=50000&$offset=0')
+        let res3 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=033A&$limit=50000&$offset=0')
+        let res4 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=033B&$limit=50000&$offset=0')
+        let data1 = await res1.json()
+        let data2 = await res2.json()
+        let data3 = await res3.json()
+        let data4 = await res4.json()
+        let data = [...data1, ...data2, ...data3, ...data4]
+        let yearArr = yearRange(2001, currentYear)
+        setYearArray(yearArr)
+        let createDaysOfMonthArray = getDaysInMonth(months.indexOf(searchMonth), searchYear)
+        setDaysOfTheMonth(createDaysOfMonthArray)
+        if(searchSpan !== "week"){
+            setRobberyStats(data.filter(crime => crime.date.includes(formattedDate)))
+        }else if(searchSpan === "week") {
+            setRobberyStats(data.filter(crime => (crime.date.includes(formattedDate[0]) || crime.date.includes(formattedDate[1]) || crime.date.includes(formattedDate[2]) || crime.date.includes(formattedDate[3]) || crime.date.includes(formattedDate[4]) || crime.date.includes(formattedDate[5]) || crime.date.includes(formattedDate[6]))))
+        }
+    }
+
+    const batteryApiCall = async() => {
+        let formattedDate = createFormattedDate()
+        let res1 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=041A&$limit=50000&$offset=0')
+        let res2 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=041B&$limit=50000&$offset=0')
+        let res3 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=0450&$limit=50000&$offset=0')
+        let res4 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=0451&$limit=50000&$offset=0')
+        let res5 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=0480&$limit=50000&$offset=0')
+        let res6 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=0481&$limit=50000&$offset=0')
+        let res7 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=0488&$limit=50000&$offset=0')
+        let res8 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=0489&$limit=50000&$offset=0')
+        let res9 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=0490&$limit=50000&$offset=0')
+        let res10 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=0491&$limit=50000&$offset=0')
+        let data1 = await res1.json()
+        let data2 = await res2.json()
+        let data3 = await res3.json()
+        let data4 = await res4.json()
+        let data5 = await res5.json()
+        let data6 = await res6.json()
+        let data7 = await res7.json()
+        let data8 = await res8.json()
+        let data9 = await res9.json()
+        let data10 = await res10.json()
+        let data = [...data1, ...data2, ...data3, ...data4, ...data5, ...data6, ...data7, ...data8, ...data9, ...data10]
+        let yearArr = yearRange(2001, currentYear)
+        setYearArray(yearArr)
+        let createDaysOfMonthArray = getDaysInMonth(months.indexOf(searchMonth), searchYear)
+        setDaysOfTheMonth(createDaysOfMonthArray)
+        if(searchSpan !== "week"){
+            setBatteryStats(data.filter(crime => crime.date.includes(formattedDate)))
+        }else if(searchSpan === "week") {
+            setBatteryStats(data.filter(crime => (crime.date.includes(formattedDate[0]) || crime.date.includes(formattedDate[1]) || crime.date.includes(formattedDate[2]) || crime.date.includes(formattedDate[3]) || crime.date.includes(formattedDate[4]) || crime.date.includes(formattedDate[5]) || crime.date.includes(formattedDate[6]))))
+        }
+    }
+
+    const assaultApiCall = async() => {
+        let formattedDate = createFormattedDate()
+        let res1 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=051A&$limit=50000&$offset=0')
+        let res2 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=051B&$limit=50000&$offset=0')
+        let res3 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=0550&$limit=50000&$offset=0')
+        let res4 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=0551&$limit=50000&$offset=0')
+        let res5 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=0555&$limit=50000&$offset=0')
+        let res6 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=0556&$limit=50000&$offset=0')
+        let data1 = await res1.json()
+        let data2 = await res2.json()
+        let data3 = await res3.json()
+        let data4 = await res4.json()
+        let data5 = await res5.json()
+        let data6 = await res6.json()
+        let data = [...data1, ...data2, ...data3, ...data4, ...data5, ...data6]
+        let yearArr = yearRange(2001, currentYear)
+        setYearArray(yearArr)
+        let createDaysOfMonthArray = getDaysInMonth(months.indexOf(searchMonth), searchYear)
+        setDaysOfTheMonth(createDaysOfMonthArray)
+        if(searchSpan !== "week"){
+            setAssaultStats(data.filter(crime => crime.date.includes(formattedDate)))
+        }else if(searchSpan === "week") {
+            setAssaultStats(data.filter(crime => (crime.date.includes(formattedDate[0]) || crime.date.includes(formattedDate[1]) || crime.date.includes(formattedDate[2]) || crime.date.includes(formattedDate[3]) || crime.date.includes(formattedDate[4]) || crime.date.includes(formattedDate[5]) || crime.date.includes(formattedDate[6]))))
+        }
+    }
+
+    const gunViolationApiCall = async() => {
+        let formattedDate = createFormattedDate()
+        let res1 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=141A&$limit=50000&$offset=0')
+        let res2 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=141B&$limit=50000&$offset=0')
+        let res3 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=142A&$limit=50000&$offset=0')
+        let res4 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=142B&$limit=50000&$offset=0')
+        let res5 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=143A&$limit=50000&$offset=0')
+        let res6 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=143B&$limit=50000&$offset=0')
+        let res7 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=143C&$limit=50000&$offset=0')
+        let res8 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=1450&$limit=50000&$offset=0')
+        let res9 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=1460&$limit=50000&$offset=0')
+        let res10 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=1475&$limit=50000&$offset=0')
+        let res11 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=1476&$limit=50000&$offset=0')
+        let res12 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=1477&$limit=50000&$offset=0')
+        let res13 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=1478&$limit=50000&$offset=0')
+        let res14 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=1479&$limit=50000&$offset=0')
+        let res15 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=1480&$limit=50000&$offset=0')
+        let res16 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=1481&$limit=50000&$offset=0')
+        let res17 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=2900&$limit=50000&$offset=0')
+        let res18 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=5008&$limit=50000&$offset=0')
+        let res19 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=5110&$limit=50000&$offset=0')
+        let res20 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=5111&$limit=50000&$offset=0')
+        let res21 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=5112&$limit=50000&$offset=0')
+        let data1 = await res1.json()
+        let data2 = await res2.json()
+        let data3 = await res3.json()
+        let data4 = await res4.json()
+        let data5 = await res5.json()
+        let data6 = await res6.json()
+        let data7 = await res7.json()
+        let data8 = await res8.json()
+        let data9 = await res9.json()
+        let data10 = await res10.json()
+        let data11 = await res11.json()
+        let data12 = await res12.json()
+        let data13 = await res13.json()
+        let data14 = await res14.json()
+        let data15 = await res15.json()
+        let data16 = await res16.json()
+        let data17 = await res17.json()
+        let data18 = await res18.json()
+        let data19 = await res19.json()
+        let data20 = await res20.json()
+        let data21 = await res21.json()
+        let data = [...data1, ...data2, ...data3, ...data4, ...data5, ...data6, ...data7, ...data8, ...data9, ...data10, ...data11, ...data12, ...data13, ...data14, ...data15, ...data16, ...data17, ...data18, ...data19, ...data20, ...data21]
+        let yearArr = yearRange(2001, currentYear)
+        setYearArray(yearArr)
+        let createDaysOfMonthArray = getDaysInMonth(months.indexOf(searchMonth), searchYear)
+        setDaysOfTheMonth(createDaysOfMonthArray)
+        if(searchSpan !== "week"){
+            setViolationStats(data.filter(crime => crime.date.includes(formattedDate)))
+        }else if(searchSpan === "week") {
+            setViolationStats(data.filter(crime => (crime.date.includes(formattedDate[0]) || crime.date.includes(formattedDate[1]) || crime.date.includes(formattedDate[2]) || crime.date.includes(formattedDate[3]) || crime.date.includes(formattedDate[4]) || crime.date.includes(formattedDate[5]) || crime.date.includes(formattedDate[6]))))
+        }
+    }
+
     useEffect(() => {
         getHoodLatLng("Loop")
     }, [])
@@ -157,13 +299,17 @@ const Map = () => {
     useEffect(() => {
         homicideApiCall()
         sexAssaultApiCall()
+        robberyApiCall()
+        batteryApiCall()
+        assaultApiCall()
+        gunViolationApiCall()
     }, [searchSpan, searchYear, searchMonth, searchDay])
 
     useEffect(() => {
         homicideStats &&
             (async () => {
                 // setCarjackings(homicideStats)
-                console.log(homicideStats)
+                console.log(homicideStats, sexAssaultStats, robberyStats, batteryStats, assaultStats, violationStats)
             })();
     }, [homicideStats]);
 
@@ -179,7 +325,7 @@ const Map = () => {
         <div className="map-container">
             <h1 className="map-title">Interactive Chicago Carjacking Map</h1>
             <div className="cj-number-wrapper">
-                <h2 className="carjack-numbers heart" id="cj-num-id">{homicideStats.length + sexAssaultStats.length}</h2>
+                <h2 className="carjack-numbers heart" id="cj-num-id">{homicideStats.length + sexAssaultStats.length + robberyStats.length + batteryStats.length + assaultStats.length + violationStats.length}</h2>
                 <h2 className="force-space">{"_"}</h2>
                 <h2 className="search-params">{`Carjackings
                     ${searchSpan === "month" ? "in " + fullMonths[months.indexOf(searchMonth)] : ""}
@@ -256,7 +402,7 @@ const Map = () => {
                     </select>
                 </div>
             </div> 
-            {homicideStats.length ? 
+            {violationStats.length ? 
             <>
                 <div className="map-text">
                     <GoogleMap
@@ -303,6 +449,78 @@ const Map = () => {
                                 }}
                             />
                         ))}
+                        {robberyStats?.map((robbery) => (
+                            <Marker 
+                                key={robbery.id} 
+                                position={{ 
+                                    lat: parseFloat(robbery.latitude), 
+                                    lng: parseFloat(robbery.longitude) 
+                                }}
+                                onClick={() => {
+                                    setSelectedCrime(robbery)
+                                }}
+                                icon={{
+                                    url: `/carjack-icon-black-outline.png`,
+                                    origin: new window.google.maps.Point(0, 0),
+                                    anchor: new window.google.maps.Point(15, 15),
+                                    scaledSize: new window.google.maps.Size(70, 70),
+                                }}
+                            />
+                        ))}
+                        {batteryStats?.map((battery) => (
+                            <Marker 
+                                key={battery.id} 
+                                position={{ 
+                                    lat: parseFloat(battery.latitude), 
+                                    lng: parseFloat(battery.longitude) 
+                                }}
+                                onClick={() => {
+                                    setSelectedCrime(battery)
+                                }}
+                                icon={{
+                                    url: `/carjack-icon-black-outline.png`,
+                                    origin: new window.google.maps.Point(0, 0),
+                                    anchor: new window.google.maps.Point(15, 15),
+                                    scaledSize: new window.google.maps.Size(70, 70),
+                                }}
+                            />
+                        ))}
+                        {assaultStats?.map((assault) => (
+                            <Marker 
+                                key={assault.id} 
+                                position={{ 
+                                    lat: parseFloat(assault.latitude), 
+                                    lng: parseFloat(assault.longitude) 
+                                }}
+                                onClick={() => {
+                                    setSelectedCrime(assault)
+                                }}
+                                icon={{
+                                    url: `/carjack-icon-black-outline.png`,
+                                    origin: new window.google.maps.Point(0, 0),
+                                    anchor: new window.google.maps.Point(15, 15),
+                                    scaledSize: new window.google.maps.Size(70, 70),
+                                }}
+                            />
+                        ))}
+                        {violationStats?.map((violation) => (
+                            <Marker 
+                                key={violation.id} 
+                                position={{ 
+                                    lat: parseFloat(violation.latitude), 
+                                    lng: parseFloat(violation.longitude) 
+                                }}
+                                onClick={() => {
+                                    setSelectedCrime(violation)
+                                }}
+                                icon={{
+                                    url: `/carjack-icon-black-outline.png`,
+                                    origin: new window.google.maps.Point(0, 0),
+                                    anchor: new window.google.maps.Point(15, 15),
+                                    scaledSize: new window.google.maps.Size(70, 70),
+                                }}
+                            />
+                        ))}
                         {selectedCrime && (
                             <InfoWindow
                                 position={{ 
@@ -317,6 +535,9 @@ const Map = () => {
                                     <h2>{removeZeros(selectedCrime.block.split(''))}</h2>
                                     <h3>{new Date(selectedCrime.date.split('T')[0]).toDateString()}</h3>
                                     <h3>{"At "+selectedCrime.date.split('T')[1].split(':')[0]+":"+selectedCrime.date.split('T')[1].split(':')[1]+" Hours"}</h3>
+                                    <h3>{selectedCrime.primary_type}</h3>
+                                    <h3>{selectedCrime.description}</h3>
+                                    <h3>{selectedCrime.location_description}</h3>
                                 </div>
                             </InfoWindow>
                         )}
