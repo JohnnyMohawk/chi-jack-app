@@ -20,6 +20,7 @@ function Cards() {
 
     useEffect(() => {
         serverSideApiCall()
+        // newsService.nodeNewsApiCall()
     }, [])
 
     return (
