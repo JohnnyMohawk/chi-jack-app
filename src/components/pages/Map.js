@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { GoogleMap, Marker, useLoadScript, InfoWindow } from '@react-google-maps/api';
 import Lottie from 'react-lottie-player'
 import carSafety from '../../assets/animations/carSafety.json'
-import {formatDay, getDaysInMonth, createWeekArr, yearRange, neighborhoodObject, removeZeros, fullMonths, months} from '../../services/mapService.js'
+import {formatDay, getDaysInMonth, createWeekArr, yearRange, neighborhoodObject, removeZeros, fullMonths, months, homicideApiCall, sexAssaultApiCall, robberyApiCall, batteryApiCall, assaultApiCall, gunViolationApiCall, carjackApiCall, filterApiCallData} from '../../services/mapService.js'
 import mapStyles from './mapStyles';
 import '../pages/Map.css'
 require('dotenv').config()
@@ -42,7 +42,7 @@ const Map = () => {
     const [violationStats, setViolationStats] = useState([])
     const [lat, setLat] = useState(null)
     const [lng, setLng] = useState(null)
-    // const [carjackings, setCarjackings] = useState([])
+    const [carjackStats, setCarjackStats] = useState([])
     const [selectedCrime, setSelectedCrime] = useState(null)
     const [searchSpan, setSearchSpan] = useState("month")
     const [yearArray, setYearArray] = useState([])
@@ -110,186 +110,29 @@ const Map = () => {
         setLng(neighborhoodObject[selection][1])
     }
 
-    const homicideApiCall = async() => {
-        let formattedDate = createFormattedDate()
-        let res1 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=0110&$limit=50000&$offset=0')
-        let res2 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=0130&$limit=50000&$offset=0')
-        let res3 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=0141&$limit=50000&$offset=0')
-        let res4 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=0142&$limit=50000&$offset=0')
-        let data1 = await res1.json()
-        let data2 = await res2.json()
-        let data3 = await res3.json()
-        let data4 = await res4.json()
-        let data = [...data1, ...data2, ...data3, ...data4]
-        let yearArr = yearRange(2001, currentYear)
-        setYearArray(yearArr)
-        let createDaysOfMonthArray = getDaysInMonth(months.indexOf(searchMonth), searchYear)
-        setDaysOfTheMonth(createDaysOfMonthArray)
-        if(searchSpan !== "week"){
-            setHomicideStats(data.filter(crime => crime.date.includes(formattedDate)))
-        }else if(searchSpan === "week") {
-            setHomicideStats(data.filter(crime => (crime.date.includes(formattedDate[0]) || crime.date.includes(formattedDate[1]) || crime.date.includes(formattedDate[2]) || crime.date.includes(formattedDate[3]) || crime.date.includes(formattedDate[4]) || crime.date.includes(formattedDate[5]) || crime.date.includes(formattedDate[6]))))
-        }
+
+    const yearMonthArray = () => {
+        setYearArray(yearRange(2001, new Date().getFullYear()))
+        setDaysOfTheMonth(getDaysInMonth(months.indexOf(searchMonth), searchYear))
     }
 
-    const sexAssaultApiCall = async() => {
-        let formattedDate = createFormattedDate()
-        let res1 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=0261&$limit=50000&$offset=0')
-        let res2 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=0262&$limit=50000&$offset=0')
-        let res3 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=0271&$limit=50000&$offset=0')
-        let res4 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=0272&$limit=50000&$offset=0')
-        let data1 = await res1.json()
-        let data2 = await res2.json()
-        let data3 = await res3.json()
-        let data4 = await res4.json()
-        let data = [...data1, ...data2, ...data3, ...data4]
-        let yearArr = yearRange(2001, currentYear)
-        setYearArray(yearArr)
-        let createDaysOfMonthArray = getDaysInMonth(months.indexOf(searchMonth), searchYear)
-        setDaysOfTheMonth(createDaysOfMonthArray)
-        if(searchSpan !== "week"){
-            setSexAssaultStats(data.filter(crime => crime.date.includes(formattedDate)))
-        }else if(searchSpan === "week") {
-            setSexAssaultStats(data.filter(crime => (crime.date.includes(formattedDate[0]) || crime.date.includes(formattedDate[1]) || crime.date.includes(formattedDate[2]) || crime.date.includes(formattedDate[3]) || crime.date.includes(formattedDate[4]) || crime.date.includes(formattedDate[5]) || crime.date.includes(formattedDate[6]))))
-        }
-    }
 
-    const robberyApiCall = async() => {
+    const serverSideApiCall = async() => {
         let formattedDate = createFormattedDate()
-        let res1 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=031A&$limit=50000&$offset=0')
-        let res2 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=031B&$limit=50000&$offset=0')
-        let res3 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=033A&$limit=50000&$offset=0')
-        let res4 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=033B&$limit=50000&$offset=0')
-        let data1 = await res1.json()
-        let data2 = await res2.json()
-        let data3 = await res3.json()
-        let data4 = await res4.json()
-        let data = [...data1, ...data2, ...data3, ...data4]
-        let yearArr = yearRange(2001, currentYear)
-        setYearArray(yearArr)
-        let createDaysOfMonthArray = getDaysInMonth(months.indexOf(searchMonth), searchYear)
-        setDaysOfTheMonth(createDaysOfMonthArray)
-        if(searchSpan !== "week"){
-            setRobberyStats(data.filter(crime => crime.date.includes(formattedDate)))
-        }else if(searchSpan === "week") {
-            setRobberyStats(data.filter(crime => (crime.date.includes(formattedDate[0]) || crime.date.includes(formattedDate[1]) || crime.date.includes(formattedDate[2]) || crime.date.includes(formattedDate[3]) || crime.date.includes(formattedDate[4]) || crime.date.includes(formattedDate[5]) || crime.date.includes(formattedDate[6]))))
-        }
-    }
-
-    const batteryApiCall = async() => {
-        let formattedDate = createFormattedDate()
-        let res1 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=041A&$limit=50000&$offset=0')
-        let res2 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=041B&$limit=50000&$offset=0')
-        let res3 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=0450&$limit=50000&$offset=0')
-        let res4 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=0451&$limit=50000&$offset=0')
-        let res5 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=0480&$limit=50000&$offset=0')
-        let res6 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=0481&$limit=50000&$offset=0')
-        let res7 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=0488&$limit=50000&$offset=0')
-        let res8 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=0489&$limit=50000&$offset=0')
-        let res9 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=0490&$limit=50000&$offset=0')
-        let res10 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=0491&$limit=50000&$offset=0')
-        let data1 = await res1.json()
-        let data2 = await res2.json()
-        let data3 = await res3.json()
-        let data4 = await res4.json()
-        let data5 = await res5.json()
-        let data6 = await res6.json()
-        let data7 = await res7.json()
-        let data8 = await res8.json()
-        let data9 = await res9.json()
-        let data10 = await res10.json()
-        let data = [...data1, ...data2, ...data3, ...data4, ...data5, ...data6, ...data7, ...data8, ...data9, ...data10]
-        let yearArr = yearRange(2001, currentYear)
-        setYearArray(yearArr)
-        let createDaysOfMonthArray = getDaysInMonth(months.indexOf(searchMonth), searchYear)
-        setDaysOfTheMonth(createDaysOfMonthArray)
-        if(searchSpan !== "week"){
-            setBatteryStats(data.filter(crime => crime.date.includes(formattedDate)))
-        }else if(searchSpan === "week") {
-            setBatteryStats(data.filter(crime => (crime.date.includes(formattedDate[0]) || crime.date.includes(formattedDate[1]) || crime.date.includes(formattedDate[2]) || crime.date.includes(formattedDate[3]) || crime.date.includes(formattedDate[4]) || crime.date.includes(formattedDate[5]) || crime.date.includes(formattedDate[6]))))
-        }
-    }
-
-    const assaultApiCall = async() => {
-        let formattedDate = createFormattedDate()
-        let res1 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=051A&$limit=50000&$offset=0')
-        let res2 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=051B&$limit=50000&$offset=0')
-        let res3 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=0550&$limit=50000&$offset=0')
-        let res4 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=0551&$limit=50000&$offset=0')
-        let res5 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=0555&$limit=50000&$offset=0')
-        let res6 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=0556&$limit=50000&$offset=0')
-        let data1 = await res1.json()
-        let data2 = await res2.json()
-        let data3 = await res3.json()
-        let data4 = await res4.json()
-        let data5 = await res5.json()
-        let data6 = await res6.json()
-        let data = [...data1, ...data2, ...data3, ...data4, ...data5, ...data6]
-        let yearArr = yearRange(2001, currentYear)
-        setYearArray(yearArr)
-        let createDaysOfMonthArray = getDaysInMonth(months.indexOf(searchMonth), searchYear)
-        setDaysOfTheMonth(createDaysOfMonthArray)
-        if(searchSpan !== "week"){
-            setAssaultStats(data.filter(crime => crime.date.includes(formattedDate)))
-        }else if(searchSpan === "week") {
-            setAssaultStats(data.filter(crime => (crime.date.includes(formattedDate[0]) || crime.date.includes(formattedDate[1]) || crime.date.includes(formattedDate[2]) || crime.date.includes(formattedDate[3]) || crime.date.includes(formattedDate[4]) || crime.date.includes(formattedDate[5]) || crime.date.includes(formattedDate[6]))))
-        }
-    }
-
-    const gunViolationApiCall = async() => {
-        let formattedDate = createFormattedDate()
-        let res1 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=141A&$limit=50000&$offset=0')
-        let res2 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=141B&$limit=50000&$offset=0')
-        let res3 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=142A&$limit=50000&$offset=0')
-        let res4 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=142B&$limit=50000&$offset=0')
-        let res5 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=143A&$limit=50000&$offset=0')
-        let res6 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=143B&$limit=50000&$offset=0')
-        let res7 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=143C&$limit=50000&$offset=0')
-        let res8 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=1450&$limit=50000&$offset=0')
-        let res9 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=1460&$limit=50000&$offset=0')
-        let res10 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=1475&$limit=50000&$offset=0')
-        let res11 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=1476&$limit=50000&$offset=0')
-        let res12 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=1477&$limit=50000&$offset=0')
-        let res13 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=1478&$limit=50000&$offset=0')
-        let res14 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=1479&$limit=50000&$offset=0')
-        let res15 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=1480&$limit=50000&$offset=0')
-        let res16 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=1481&$limit=50000&$offset=0')
-        let res17 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=2900&$limit=50000&$offset=0')
-        let res18 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=5008&$limit=50000&$offset=0')
-        let res19 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=5110&$limit=50000&$offset=0')
-        let res20 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=5111&$limit=50000&$offset=0')
-        let res21 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=5112&$limit=50000&$offset=0')
-        let data1 = await res1.json()
-        let data2 = await res2.json()
-        let data3 = await res3.json()
-        let data4 = await res4.json()
-        let data5 = await res5.json()
-        let data6 = await res6.json()
-        let data7 = await res7.json()
-        let data8 = await res8.json()
-        let data9 = await res9.json()
-        let data10 = await res10.json()
-        let data11 = await res11.json()
-        let data12 = await res12.json()
-        let data13 = await res13.json()
-        let data14 = await res14.json()
-        let data15 = await res15.json()
-        let data16 = await res16.json()
-        let data17 = await res17.json()
-        let data18 = await res18.json()
-        let data19 = await res19.json()
-        let data20 = await res20.json()
-        let data21 = await res21.json()
-        let data = [...data1, ...data2, ...data3, ...data4, ...data5, ...data6, ...data7, ...data8, ...data9, ...data10, ...data11, ...data12, ...data13, ...data14, ...data15, ...data16, ...data17, ...data18, ...data19, ...data20, ...data21]
-        let yearArr = yearRange(2001, currentYear)
-        setYearArray(yearArr)
-        let createDaysOfMonthArray = getDaysInMonth(months.indexOf(searchMonth), searchYear)
-        setDaysOfTheMonth(createDaysOfMonthArray)
-        if(searchSpan !== "week"){
-            setViolationStats(data.filter(crime => crime.date.includes(formattedDate)))
-        }else if(searchSpan === "week") {
-            setViolationStats(data.filter(crime => (crime.date.includes(formattedDate[0]) || crime.date.includes(formattedDate[1]) || crime.date.includes(formattedDate[2]) || crime.date.includes(formattedDate[3]) || crime.date.includes(formattedDate[4]) || crime.date.includes(formattedDate[5]) || crime.date.includes(formattedDate[6]))))
-        }
+        let homicides = await homicideApiCall()
+        let sexualAssaults = await sexAssaultApiCall()
+        let robberies = await robberyApiCall()
+        let batteries = await batteryApiCall()
+        let assaults = await assaultApiCall()
+        let gunViolations = await gunViolationApiCall()
+        let carjackings = await carjackApiCall()
+        setHomicideStats(filterApiCallData(homicides, formattedDate, searchSpan))
+        setSexAssaultStats(filterApiCallData(sexualAssaults, formattedDate, searchSpan))
+        setRobberyStats(filterApiCallData(robberies, formattedDate, searchSpan))
+        setBatteryStats(filterApiCallData(batteries, formattedDate, searchSpan))
+        setAssaultStats(filterApiCallData(assaults, formattedDate, searchSpan))
+        setViolationStats(filterApiCallData(gunViolations, formattedDate, searchSpan))
+        setCarjackStats(filterApiCallData(carjackings, formattedDate, searchSpan))
     }
 
     useEffect(() => {
@@ -297,21 +140,10 @@ const Map = () => {
     }, [])
 
     useEffect(() => {
-        homicideApiCall()
-        sexAssaultApiCall()
-        robberyApiCall()
-        batteryApiCall()
-        assaultApiCall()
-        gunViolationApiCall()
+        yearMonthArray()
+        serverSideApiCall()
     }, [searchSpan, searchYear, searchMonth, searchDay])
 
-    useEffect(() => {
-        homicideStats &&
-            (async () => {
-                // setCarjackings(homicideStats)
-                console.log(homicideStats, sexAssaultStats, robberyStats, batteryStats, assaultStats, violationStats)
-            })();
-    }, [homicideStats]);
 
     const mapRef = React.useRef();
         const onMapLoad = React.useCallback((map) => {
@@ -325,7 +157,7 @@ const Map = () => {
         <div className="map-container">
             <h1 className="map-title">Interactive Chicago Carjacking Map</h1>
             <div className="cj-number-wrapper">
-                <h2 className="carjack-numbers heart" id="cj-num-id">{homicideStats.length + sexAssaultStats.length + robberyStats.length + batteryStats.length + assaultStats.length + violationStats.length}</h2>
+                <h2 className="carjack-numbers heart" id="cj-num-id">{homicideStats.length + sexAssaultStats.length + robberyStats.length + batteryStats.length + assaultStats.length + violationStats.length + carjackStats.length}</h2>
                 <h2 className="force-space">{"_"}</h2>
                 <h2 className="search-params">{`Carjackings
                     ${searchSpan === "month" ? "in " + fullMonths[months.indexOf(searchMonth)] : ""}
