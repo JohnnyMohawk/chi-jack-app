@@ -105,6 +105,13 @@ const Map = () => {
         setLng(neighborhoodObject[selection][1])
     }
 
+    const mapCenterOnSelect = () => {
+        if(selectedCrime !== null){
+            setLat(selectedCrime.location.latitude)
+            setLng(selectedCrime.location.longitude)
+        }
+    }
+
     const makeApiCall = async() => {
         let formattedDate = createFormattedDate()
         let res1 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=0325&$limit=50000&$offset=0')
@@ -126,6 +133,10 @@ const Map = () => {
     useEffect(() => {
         getHoodLatLng("Loop")
     }, [])
+
+    useEffect(() => {
+        mapCenterOnSelect()
+    }, [selectedCrime])
 
     useEffect(() => {
         makeApiCall()
