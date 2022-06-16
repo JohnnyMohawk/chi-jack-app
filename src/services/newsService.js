@@ -32,7 +32,7 @@ export const mediastackApiCall = async() => {
 export const makeNewsApiCall = async() => {
     let dbNews = await getNews()
     try {
-        if(new Date().toISOString().split('T')[0] > new Date(dbNews.pullDate).toISOString().split('T')[0]){
+        if(new Date("2022-06-30").toISOString().split('T')[0] > new Date(dbNews.pullDate).toISOString().split('T')[0]){
             let res = await fetch(`http://newsapi.org/v2/everything?q=chicago+carjacking&sortBy=publishedAt&domains=wgntv.com,abc7chicago.com,foxnews.com,nbcnews.com,nypost.com,chicagotribune.com,abcnews.go.com,chicago.suntimes.com,wbez.org,thedailybeast.com,dailycaller.com,nypost.com&apiKey=fca7629171c143338ccaa74f5c0bb383`)
             const newsData = await res.json()
             console.log("Inner makeNewsApiCall Log", newsData)
@@ -58,14 +58,14 @@ export const makeNewsApiCall = async() => {
 // export const makeNewsApiCall = async() => {
 //     let dbNews = await getNews()
 //     try {
-//         if(new Date().toISOString().split('T')[0] > new Date(dbNews.pullDate).toISOString().split('T')[0]){
+//         if(new Date("2022-06-30").toISOString().split('T')[0] > new Date(dbNews.pullDate).toISOString().split('T')[0]){
 //             let res = await fetch(`http://api.mediastack.com/v1/news?access_key=67fb6298650d9284d96d6a56696f1ec7&keywords=carjacking chicago&countries=us`)
 //             const newsData = await res.json()
-//             console.log("Inner makeNewsApiCall Log", newsData)
+//             console.log(newsData.data.length, "Inner makeNewsApiCall Log", newsData)
 //             todaysNews({status: "ok", totalResults: newsData.data.length, articles: newsData.data})
 //             return (
 //                 {
-//                     news: newsData,
+//                     news: newsData.data,
 //                     numPages: Math.floor(newsData.data.length / 5),
 //                     pages: chunkArray(indexArray(newsData.data), 5),
 //                 }

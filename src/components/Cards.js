@@ -22,7 +22,7 @@ function Cards() {
         serverSideApiCall()
         newsService.mediastackApiCall()
     }, [])
-
+    console.log(news)
     return (
         
         news ? 
@@ -33,36 +33,36 @@ function Cards() {
                 <div className='cards__wrapper'>
                     {/* <ul className='cards__items'>
                         <CardItem 
-                        src={news.articles[pages[counter][0]].image}
-                            text={news.articles[pages[counter][0]].description}
-                            label={`${news.articles[pages[counter][0]].source} ${new Date(news.articles[pages[counter][0]].published_at).toDateString()}`}
-                            path={news.articles[pages[counter][0]].url}
+                        src={news[pages[counter][0]].image}
+                            text={news[pages[counter][0]].description}
+                            label={`${news[pages[counter][0]].source} ${new Date(news[pages[counter][0]].published_at).toDateString()}`}
+                            path={news[pages[counter][0]].url}
                         />
                         <CardItem 
-                            src={news.articles[pages[counter][1]].image}
-                            text={news.articles[pages[counter][1]].description}
-                            label={`${news.articles[pages[counter][1]].source} ${new Date(news.articles[pages[counter][1]].published_at).toDateString()}`}
-                            path={news.articles[pages[counter][1]].url}
+                            src={news[pages[counter][1]].image}
+                            text={news[pages[counter][1]].description}
+                            label={`${news[pages[counter][1]].source} ${new Date(news[pages[counter][1]].published_at).toDateString()}`}
+                            path={news[pages[counter][1]].url}
                         />
                     </ul>
                     <ul className='cards__items'>
                         <CardItem 
-                            src={news.articles[pages[counter][2]].image}
-                            text={news.articles[pages[counter][2]].description}
-                            label={`${news.articles[pages[counter][2]].source} ${new Date(news.articles[pages[counter][2]].published_at).toDateString()}`}
-                            path={news.articles[pages[counter][2]].url}
+                            src={news[pages[counter][2]].image}
+                            text={news[pages[counter][2]].description}
+                            label={`${news[pages[counter][2]].source} ${new Date(news[pages[counter][2]].published_at).toDateString()}`}
+                            path={news[pages[counter][2]].url}
                         />
                         <CardItem 
-                            src={news.articles[pages[counter][3]].image}
-                            text={news.articles[pages[counter][3]].description}
-                            label={`${news.articles[pages[counter][3]].source} ${new Date(news.articles[pages[counter][3]].published_at).toDateString()}`}
-                            path={news.articles[pages[counter][3]].url}
+                            src={news[pages[counter][3]].image}
+                            text={news[pages[counter][3]].description}
+                            label={`${news[pages[counter][3]].source} ${new Date(news[pages[counter][3]].published_at).toDateString()}`}
+                            path={news[pages[counter][3]].url}
                         />
                         <CardItem 
-                            src={news.articles[pages[counter][4]].image}
-                            text={news.articles[pages[counter][4]].description}
-                            label={`${news.articles[pages[counter][4]].source} ${new Date(news.articles[pages[counter][4]].published_at).toDateString()}`}
-                            path={news.articles[pages[counter][4]].url}
+                            src={news[pages[counter][4]].image}
+                            text={news[pages[counter][4]].description}
+                            label={`${news[pages[counter][4]].source} ${new Date(news[pages[counter][4]].published_at).toDateString()}`}
+                            path={news[pages[counter][4]].url}
                         />
                     </ul> */}
 
