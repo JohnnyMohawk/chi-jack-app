@@ -105,17 +105,21 @@ const Map = () => {
     }
 
     const getHoodLatLng = (selection) => {
-        console.log(neighborhoodObject[selection][0])
         setLat(neighborhoodObject[selection][0])
         setLng(neighborhoodObject[selection][1])
     }
 
+    const mapCenterOnSelect = () => {
+        if(selectedCrime !== null){
+            setLat(selectedCrime.location.latitude)
+            setLng(selectedCrime.location.longitude)
+        }
+    }
 
     const yearMonthArray = () => {
         setYearArray(yearRange(2001, new Date().getFullYear()))
         setDaysOfTheMonth(getDaysInMonth(months.indexOf(searchMonth), searchYear))
     }
-
 
     const serverSideApiCall = async() => {
         let formattedDate = createFormattedDate()
@@ -140,10 +144,13 @@ const Map = () => {
     }, [])
 
     useEffect(() => {
+        mapCenterOnSelect()
+    }, [selectedCrime])
+
+    useEffect(() => {
         yearMonthArray()
         serverSideApiCall()
     }, [searchSpan, searchYear, searchMonth, searchDay])
-
 
     const mapRef = React.useRef();
         const onMapLoad = React.useCallback((map) => {
@@ -151,7 +158,7 @@ const Map = () => {
         }, []);
     if (loadError) return "Error";
     if (!isLoaded) return "Loading...";
-    
+
     return (
 
         <div className="map-container">
