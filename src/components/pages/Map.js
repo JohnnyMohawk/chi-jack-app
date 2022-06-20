@@ -2,7 +2,10 @@ import React, { useState, useEffect } from 'react'
 import { GoogleMap, Marker, useLoadScript, InfoWindow } from '@react-google-maps/api';
 import Lottie from 'react-lottie-player'
 import carSafety from '../../assets/animations/carSafety.json'
-import {formatDay, getDaysInMonth, createWeekArr, yearRange, neighborhoodObject, removeZeros, fullMonths, months, homicideApiCall, sexAssaultApiCall, robberyApiCall, batteryApiCall, assaultApiCall, gunViolationApiCall, carjackApiCall, filterApiCallData} from '../../services/mapService.js'
+import {formatDay, getDaysInMonth, createWeekArr, yearRange, neighborhoodObject, removeZeros, fullMonths, months, 
+        homicideApiCall, sexAssaultApiCall, robberyApiCall, batteryApiCall, assaultApiCall, gunViolationApiCall, 
+        gunFireViolation, gunNoFireViolation, ammoViolation, illegalGunSale, gunInSchool, gunAttackOnCops, attackOnCops, 
+        airGunCrime, carjackApiCall, filterApiCallData} from '../../services/mapService.js'
 import mapStyles from './mapStyles';
 import '../pages/Map.css'
 require('dotenv').config()
@@ -40,9 +43,17 @@ const Map = () => {
     const [batteryStats, setBatteryStats] = useState([])
     const [assaultStats, setAssaultStats] = useState([])
     const [violationStats, setViolationStats] = useState([])
+    const [shotsFiredStats, setShotsFiredStats] = useState([])
+    const [gunPossessionStats, setGunPossessionStats] = useState([])
+    const [ammoViolationStats, setAmmoViolationStats] = useState([])
+    const [gunSaleStats, setGunSaleStats] = useState([])
+    const [gunInSchoolStats, setGunInSchoolStats] = useState([])
+    const [gunAttackOnCopsStats, setGunAttackOnCopsStats] = useState([])
+    const [attackOnCopsStats, setAttackOnCopsStats] = useState([])
+    const [airGunCrimeStats, setAirGunCrimeStats] = useState([])
+    const [carjackStats, setCarjackStats] = useState([])
     const [lat, setLat] = useState(null)
     const [lng, setLng] = useState(null)
-    const [carjackStats, setCarjackStats] = useState([])
     const [selectedCrime, setSelectedCrime] = useState(null)
     const [searchSpan, setSearchSpan] = useState("month")
     const [yearArray, setYearArray] = useState([])
@@ -129,6 +140,14 @@ const Map = () => {
         let batteries = await batteryApiCall()
         let assaults = await assaultApiCall()
         let gunViolations = await gunViolationApiCall()
+        let gunFireViolations = await gunFireViolation()
+        let gunPossessionViolations = await gunNoFireViolation()
+        let ammoViolations = await ammoViolation()
+        let illegalGunSales = await illegalGunSale()
+        let gunInSchools = await gunInSchool()
+        let gunAttackOnCop = await gunAttackOnCops()
+        let attackOnCop = await attackOnCops()
+        let airGunCrimes = await airGunCrime()
         let carjackings = await carjackApiCall()
         setHomicideStats(filterApiCallData(homicides, formattedDate, searchSpan))
         setSexAssaultStats(filterApiCallData(sexualAssaults, formattedDate, searchSpan))
@@ -136,6 +155,14 @@ const Map = () => {
         setBatteryStats(filterApiCallData(batteries, formattedDate, searchSpan))
         setAssaultStats(filterApiCallData(assaults, formattedDate, searchSpan))
         setViolationStats(filterApiCallData(gunViolations, formattedDate, searchSpan))
+        setShotsFiredStats(filterApiCallData(gunFireViolations, formattedDate, searchSpan))
+        setGunPossessionStats(filterApiCallData(gunPossessionViolations, formattedDate, searchSpan))
+        setAmmoViolationStats(filterApiCallData(ammoViolations, formattedDate, searchSpan))
+        setGunSaleStats(filterApiCallData(illegalGunSales, formattedDate, searchSpan))
+        setGunInSchoolStats(filterApiCallData(gunInSchools, formattedDate, searchSpan))
+        setGunAttackOnCopsStats(filterApiCallData(gunAttackOnCop, formattedDate, searchSpan))
+        setAttackOnCopsStats(filterApiCallData(attackOnCop, formattedDate, searchSpan))
+        setAirGunCrimeStats(filterApiCallData(airGunCrimes, formattedDate, searchSpan))
         setCarjackStats(filterApiCallData(carjackings, formattedDate, searchSpan))
     }
 
@@ -164,7 +191,7 @@ const Map = () => {
         <div className="map-container">
             <h1 className="map-title">Interactive Chicago Carjacking Map</h1>
             <div className="cj-number-wrapper">
-                <h2 className="carjack-numbers heart" id="cj-num-id">{homicideStats.length + sexAssaultStats.length + robberyStats.length + batteryStats.length + assaultStats.length + violationStats.length + carjackStats.length}</h2>
+                <h2 className="carjack-numbers heart" id="cj-num-id">{homicideStats.length + sexAssaultStats.length + robberyStats.length + batteryStats.length + assaultStats.length + violationStats.length + carjackStats.length + shotsFiredStats.length + gunPossessionStats.length + ammoViolationStats.length + gunSaleStats.length + gunInSchoolStats.length + gunAttackOnCopsStats.length + attackOnCopsStats.length + airGunCrimeStats.length}</h2>
                 <h2 className="force-space">{"_"}</h2>
                 <h2 className="search-params">{`Carjackings
                     ${searchSpan === "month" ? "in " + fullMonths[months.indexOf(searchMonth)] : ""}
@@ -263,7 +290,7 @@ const Map = () => {
                                     setSelectedCrime(homicide)
                                 }}
                                 icon={{
-                                    url: `/carjacking-red.png`,
+                                    url: `/homicide.png`,
                                     origin: new window.google.maps.Point(0, 0),
                                     anchor: new window.google.maps.Point(15, 15),
                                     scaledSize: new window.google.maps.Size(70, 70),
@@ -281,7 +308,7 @@ const Map = () => {
                                     setSelectedCrime(sexAssault)
                                 }}
                                 icon={{
-                                    url: `/carjack-icon-black-outline.png`,
+                                    url: `/gun-assault.png`,
                                     origin: new window.google.maps.Point(0, 0),
                                     anchor: new window.google.maps.Point(15, 15),
                                     scaledSize: new window.google.maps.Size(70, 70),
@@ -299,7 +326,7 @@ const Map = () => {
                                     setSelectedCrime(robbery)
                                 }}
                                 icon={{
-                                    url: `/carjack-icon-black-outline.png`,
+                                    url: `/gun-robbery.png`,
                                     origin: new window.google.maps.Point(0, 0),
                                     anchor: new window.google.maps.Point(15, 15),
                                     scaledSize: new window.google.maps.Size(70, 70),
@@ -317,7 +344,7 @@ const Map = () => {
                                     setSelectedCrime(battery)
                                 }}
                                 icon={{
-                                    url: `/carjack-icon-black-outline.png`,
+                                    url: `/gun-battery.png`,
                                     origin: new window.google.maps.Point(0, 0),
                                     anchor: new window.google.maps.Point(15, 15),
                                     scaledSize: new window.google.maps.Size(70, 70),
@@ -335,7 +362,7 @@ const Map = () => {
                                     setSelectedCrime(assault)
                                 }}
                                 icon={{
-                                    url: `/carjack-icon-black-outline.png`,
+                                    url: `/gun-assault.png`,
                                     origin: new window.google.maps.Point(0, 0),
                                     anchor: new window.google.maps.Point(15, 15),
                                     scaledSize: new window.google.maps.Size(70, 70),
@@ -353,7 +380,151 @@ const Map = () => {
                                     setSelectedCrime(violation)
                                 }}
                                 icon={{
-                                    url: `/carjack-icon-black-outline.png`,
+                                    url: `/gun-law-violation.png`,
+                                    origin: new window.google.maps.Point(0, 0),
+                                    anchor: new window.google.maps.Point(15, 15),
+                                    scaledSize: new window.google.maps.Size(70, 70),
+                                }}
+                            />
+                        ))}
+                        {shotsFiredStats?.map((shots) => (
+                            <Marker 
+                                key={shots.id} 
+                                position={{ 
+                                    lat: parseFloat(shots.latitude), 
+                                    lng: parseFloat(shots.longitude) 
+                                }}
+                                onClick={() => {
+                                    setSelectedCrime(shots)
+                                }}
+                                icon={{
+                                    url: `/gun-firing.png`,
+                                    origin: new window.google.maps.Point(0, 0),
+                                    anchor: new window.google.maps.Point(15, 15),
+                                    scaledSize: new window.google.maps.Size(70, 70),
+                                }}
+                            />
+                        ))}
+                        {gunPossessionStats?.map((gun) => (
+                            <Marker 
+                                key={gun.id} 
+                                position={{ 
+                                    lat: parseFloat(gun.latitude), 
+                                    lng: parseFloat(gun.longitude) 
+                                }}
+                                onClick={() => {
+                                    setSelectedCrime(gun)
+                                }}
+                                icon={{
+                                    url: `/gun-no-fire.png`,
+                                    origin: new window.google.maps.Point(0, 0),
+                                    anchor: new window.google.maps.Point(15, 15),
+                                    scaledSize: new window.google.maps.Size(70, 70),
+                                }}
+                            />
+                        ))}
+                        {ammoViolationStats?.map((ammo) => (
+                            <Marker 
+                                key={ammo.id} 
+                                position={{ 
+                                    lat: parseFloat(ammo.latitude), 
+                                    lng: parseFloat(ammo.longitude) 
+                                }}
+                                onClick={() => {
+                                    setSelectedCrime(ammo)
+                                }}
+                                icon={{
+                                    url: `/ammo-violation.png`,
+                                    origin: new window.google.maps.Point(0, 0),
+                                    anchor: new window.google.maps.Point(15, 15),
+                                    scaledSize: new window.google.maps.Size(70, 70),
+                                }}
+                            />
+                        ))}
+                        {gunSaleStats?.map((sale) => (
+                            <Marker 
+                                key={sale.id} 
+                                position={{ 
+                                    lat: parseFloat(sale.latitude), 
+                                    lng: parseFloat(sale.longitude) 
+                                }}
+                                onClick={() => {
+                                    setSelectedCrime(sale)
+                                }}
+                                icon={{
+                                    url: `/gun-sale.png`,
+                                    origin: new window.google.maps.Point(0, 0),
+                                    anchor: new window.google.maps.Point(15, 15),
+                                    scaledSize: new window.google.maps.Size(70, 70),
+                                }}
+                            />
+                        ))}
+                        {gunInSchoolStats?.map((guns) => (
+                            <Marker 
+                                key={guns.id} 
+                                position={{ 
+                                    lat: parseFloat(guns.latitude), 
+                                    lng: parseFloat(guns.longitude) 
+                                }}
+                                onClick={() => {
+                                    setSelectedCrime(guns)
+                                }}
+                                icon={{
+                                    url: `/gun-in-school.png`,
+                                    origin: new window.google.maps.Point(0, 0),
+                                    anchor: new window.google.maps.Point(15, 15),
+                                    scaledSize: new window.google.maps.Size(70, 70),
+                                }}
+                            />
+                        ))}
+                        {gunAttackOnCopsStats?.map((attacks) => (
+                            <Marker 
+                                key={attacks.id} 
+                                position={{ 
+                                    lat: parseFloat(attacks.latitude), 
+                                    lng: parseFloat(attacks.longitude) 
+                                }}
+                                onClick={() => {
+                                    setSelectedCrime(attacks)
+                                }}
+                                icon={{
+                                    url: `/shots-on-police.png`,
+                                    origin: new window.google.maps.Point(0, 0),
+                                    anchor: new window.google.maps.Point(15, 15),
+                                    scaledSize: new window.google.maps.Size(70, 70),
+                                }}
+                            />
+                        ))}
+                        {attackOnCopsStats?.map((attacks) => (
+                            <Marker 
+                                key={attacks.id} 
+                                position={{ 
+                                    lat: parseFloat(attacks.latitude), 
+                                    lng: parseFloat(attacks.longitude) 
+                                }}
+                                onClick={() => {
+                                    setSelectedCrime(attacks)
+                                }}
+                                icon={{
+                                    url: `/attack-on-police.png`,
+                                    origin: new window.google.maps.Point(0, 0),
+                                    anchor: new window.google.maps.Point(15, 15),
+                                    scaledSize: new window.google.maps.Size(70, 70),
+                                }}
+                            />
+                        ))}
+                        {airGunCrimeStats?.map((airguns) => (
+                            <Marker 
+                                key={airguns.id} 
+                                position={{ 
+                                    lat: parseFloat(airguns.latitude), 
+                                    lng: parseFloat(airguns.longitude) 
+                                }}
+                                onClick={() => {
+                                    setSelectedCrime(airguns)
+                                }}
+                                icon={{
+                                    url: `/airgun-crime.png`,
                                     origin: new window.google.maps.Point(0, 0),
                                     anchor: new window.google.maps.Point(15, 15),
                                     scaledSize: new window.google.maps.Size(70, 70),

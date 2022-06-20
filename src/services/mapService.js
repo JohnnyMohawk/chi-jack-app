@@ -147,27 +147,14 @@ export const assaultApiCall = async() => {
 }
 
 export const gunViolationApiCall = async() => {
-    let res1 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=141A&$limit=50000&$offset=0')
-    let res2 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=141B&$limit=50000&$offset=0')
-    let res3 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=142A&$limit=50000&$offset=0')
-    let res4 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=142B&$limit=50000&$offset=0')
-    let res5 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=143A&$limit=50000&$offset=0')
-    let res6 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=143B&$limit=50000&$offset=0')
-    let res7 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=143C&$limit=50000&$offset=0')
-    let res8 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=1450&$limit=50000&$offset=0')
-    let res9 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=1460&$limit=50000&$offset=0')
-    let res10 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=1475&$limit=50000&$offset=0')
-    let res11 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=1476&$limit=50000&$offset=0')
-    let res12 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=1477&$limit=50000&$offset=0')
-    let res13 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=1478&$limit=50000&$offset=0')
-    let res14 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=1479&$limit=50000&$offset=0')
-    let res15 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=1480&$limit=50000&$offset=0')
-    let res16 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=1481&$limit=50000&$offset=0')
-    let res17 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=2900&$limit=50000&$offset=0')
-    let res18 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=5008&$limit=50000&$offset=0')
-    let res19 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=5110&$limit=50000&$offset=0')
-    let res20 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=5111&$limit=50000&$offset=0')
-    let res21 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=5112&$limit=50000&$offset=0')
+    let res1 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=1478&$limit=50000&$offset=0')
+    let res2 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=1479&$limit=50000&$offset=0')
+    let res3 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=1481&$limit=50000&$offset=0')
+    let res4 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=5008&$limit=50000&$offset=0')
+    let res5 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=5110&$limit=50000&$offset=0')
+    let res6 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=5111&$limit=50000&$offset=0')
+    let res7 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=5112&$limit=50000&$offset=0')
+    let res8 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=1480&$limit=50000&$offset=0')
     let data1 = await res1.json()
     let data2 = await res2.json()
     let data3 = await res3.json()
@@ -176,20 +163,86 @@ export const gunViolationApiCall = async() => {
     let data6 = await res6.json()
     let data7 = await res7.json()
     let data8 = await res8.json()
-    let data9 = await res9.json()
-    let data10 = await res10.json()
-    let data11 = await res11.json()
-    let data12 = await res12.json()
-    let data13 = await res13.json()
-    let data14 = await res14.json()
-    let data15 = await res15.json()
-    let data16 = await res16.json()
-    let data17 = await res17.json()
-    let data18 = await res18.json()
-    let data19 = await res19.json()
-    let data20 = await res20.json()
-    let data21 = await res21.json()
-    return [...data1, ...data2, ...data3, ...data4, ...data5, ...data6, ...data7, ...data8, ...data9, ...data10, ...data11, ...data12, ...data13, ...data14, ...data15, ...data16, ...data17, ...data18, ...data19, ...data20, ...data21]
+    return [...data1, ...data2, ...data3, ...data4, ...data5, ...data6, ...data7, ...data8]
+}
+
+export const gunFireViolation = async() => {
+    let res1 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=141A&$limit=50000&$offset=0')
+    let res2 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=141B&$limit=50000&$offset=0')
+    let res3 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=1477&$limit=50000&$offset=0')
+    let data1 = await res1.json()
+    let data2 = await res2.json()
+    let data3 = await res3.json()
+    return [...data1, ...data2, ...data3]
+}
+
+export const gunNoFireViolation = async() => {
+    let res1 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=143A&$limit=50000&$offset=0')
+    let res2 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=143B&$limit=50000&$offset=0')
+    let res3 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=1450&$limit=50000&$offset=0')
+    let res4 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=1460&$limit=50000&$offset=0')
+    let data1 = await res1.json()
+    let data2 = await res2.json()
+    let data3 = await res3.json()
+    let data4 = await res4.json()
+    return [...data1, ...data2, ...data3, ...data4]
+}
+
+export const ammoViolation = async() => {
+    let res1 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=143C&$limit=50000&$offset=0')
+    let res2 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=1475&$limit=50000&$offset=0')
+    let res3 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=1476&$limit=50000&$offset=0')
+    let data1 = await res1.json()
+    let data2 = await res2.json()
+    let data3 = await res3.json()
+    return [...data1, ...data2, ...data3]
+}
+
+
+export const illegalGunSale = async() => {
+    let res1 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=142A&$limit=50000&$offset=0')
+    let res2 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=142B&$limit=50000&$offset=0')
+    let data1 = await res1.json()
+    let data2 = await res2.json()
+    return [...data1, ...data2]
+}
+
+export const gunInSchool = async() => {
+    let res1 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=1435&$limit=50000&$offset=0')
+    let data1 = await res1.json()
+    return data1
+}
+
+export const gunAttackOnCops = async() => {
+    let res1 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=0450&$limit=50000&$offset=0')
+    let res2 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=0451&$limit=50000&$offset=0')
+    let res3 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=0550&$limit=50000&$offset=0')
+    let res4 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=0551&$limit=50000&$offset=0')
+    let data1 = await res1.json()
+    let data2 = await res2.json()
+    let data3 = await res3.json()
+    let data4 = await res4.json()
+    return [...data1, ...data2, ...data3, ...data4]
+}
+
+export const attackOnCops = async() => {
+    let res1 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=0452&$limit=50000&$offset=0')
+    let res2 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=0453&$limit=50000&$offset=0')
+    let res3 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=0552&$limit=50000&$offset=0')
+    let res4 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=0553&$limit=50000&$offset=0')
+    let res5 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=3710&$limit=50000&$offset=0')
+    let data1 = await res1.json()
+    let data2 = await res2.json()
+    let data3 = await res3.json()
+    let data4 = await res4.json()
+    let data5 = await res5.json()
+    return [...data1, ...data2, ...data3, ...data4, ...data5]
+}
+
+export const airGunCrime = async() => {
+    let res = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=2900&$limit=50000&$offset=0')
+    let data = await res.json()
+    return data
 }
 
 export const carjackApiCall = async() => {
