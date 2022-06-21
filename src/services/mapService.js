@@ -60,14 +60,45 @@ export const removeZeros = (array) => {
     return array.join('')
 }
 
-export const filterApiCallData = (data, formattedDate, searchSpan) => {
+export const filterApiCallData = (data, formattedDate, searchSpan, arrestMade) => {
+    let filteredData
     if(searchSpan !== "week"){
-        return data.filter(crime => crime.date.includes(formattedDate))
+        filteredData = data.filter(crime => crime.date.includes(formattedDate))
+        if(arrestMade === "All"){
+            console.log(filteredData)
+            return filteredData
+        }else if(arrestMade === "Yes"){
+            console.log(filteredData.filter(crime => crime.arrest === true))
+            return filteredData.filter(crime => crime.arrest === true)
+        }else if(arrestMade === "No"){
+            console.log(filteredData.filter(crime => crime.arrest === false))
+            return filteredData.filter(crime => crime.arrest === false)
+        }
     }else if(searchSpan === "week") {
-        return data.filter(crime => (crime.date.includes(formattedDate[0]) || crime.date.includes(formattedDate[1]) || crime.date.includes(formattedDate[2]) || crime.date.includes(formattedDate[3]) || crime.date.includes(formattedDate[4]) || crime.date.includes(formattedDate[5]) || crime.date.includes(formattedDate[6])))
+        filteredData = data.filter(crime => (crime.date.includes(formattedDate[0]) || crime.date.includes(formattedDate[1]) || crime.date.includes(formattedDate[2]) || crime.date.includes(formattedDate[3]) || crime.date.includes(formattedDate[4]) || crime.date.includes(formattedDate[5]) || crime.date.includes(formattedDate[6])))
+        if(arrestMade === "all"){
+            console.log(filteredData)
+            return filteredData
+        }else if(arrestMade === "Yes"){
+            console.log(filteredData.filter(crime => crime.arrest === true))
+            return filteredData.filter(crime => crime.arrest === true)
+        }else if(arrestMade === "No"){
+            console.log(filteredData.filter(crime => crime.arrest === false))
+            return filteredData.filter(crime => crime.arrest === false)
+        }
     }
 }
 
+// export const filterApiCallData = (data, formattedDate, searchSpan) => {
+//     if(searchSpan !== "week"){
+//         let filteredData = data.filter(crime => crime.date.includes(formattedDate))
+//         console.log("CRIKEY", filteredData.filter(crime => crime.arrest === true))
+//         return data.filter(crime => crime.date.includes(formattedDate))
+//     }else if(searchSpan === "week") {
+//         console.log("DEUCES", data.filter(crime => (crime.date.includes(formattedDate[0]) || crime.date.includes(formattedDate[1]) || crime.date.includes(formattedDate[2]) || crime.date.includes(formattedDate[3]) || crime.date.includes(formattedDate[4]) || crime.date.includes(formattedDate[5]) || crime.date.includes(formattedDate[6]))))
+//         return data.filter(crime => (crime.date.includes(formattedDate[0]) || crime.date.includes(formattedDate[1]) || crime.date.includes(formattedDate[2]) || crime.date.includes(formattedDate[3]) || crime.date.includes(formattedDate[4]) || crime.date.includes(formattedDate[5]) || crime.date.includes(formattedDate[6])))
+//     }
+// }
 
 export const homicideApiCall = async(props) => {
     let res1 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=0110&$limit=50000&$offset=0')

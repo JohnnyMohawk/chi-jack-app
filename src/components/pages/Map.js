@@ -62,6 +62,8 @@ const Map = () => {
     const [searchMonth, setSearchMonth] = useState(months[currentMonth])
     const [monthNumber, setMonthNumber] = useState(months.indexOf(searchDate.split(' ')[1]) + 1)
     const [daysOfTheMonth, setDaysOfTheMonth] = useState(getDaysInMonth(currentMonth, currentYear))
+    const [arrestMade, setArrestMade] = useState("All")
+
 
 
     const createFormattedDate = () => {
@@ -149,21 +151,21 @@ const Map = () => {
         let attackOnCop = await attackOnCops()
         let airGunCrimes = await airGunCrime()
         let carjackings = await carjackApiCall()
-        setHomicideStats(filterApiCallData(homicides, formattedDate, searchSpan))
-        setSexAssaultStats(filterApiCallData(sexualAssaults, formattedDate, searchSpan))
-        setRobberyStats(filterApiCallData(robberies, formattedDate, searchSpan))
-        setBatteryStats(filterApiCallData(batteries, formattedDate, searchSpan))
-        setAssaultStats(filterApiCallData(assaults, formattedDate, searchSpan))
-        setViolationStats(filterApiCallData(gunViolations, formattedDate, searchSpan))
-        setShotsFiredStats(filterApiCallData(gunFireViolations, formattedDate, searchSpan))
-        setGunPossessionStats(filterApiCallData(gunPossessionViolations, formattedDate, searchSpan))
-        setAmmoViolationStats(filterApiCallData(ammoViolations, formattedDate, searchSpan))
-        setGunSaleStats(filterApiCallData(illegalGunSales, formattedDate, searchSpan))
-        setGunInSchoolStats(filterApiCallData(gunInSchools, formattedDate, searchSpan))
-        setGunAttackOnCopsStats(filterApiCallData(gunAttackOnCop, formattedDate, searchSpan))
-        setAttackOnCopsStats(filterApiCallData(attackOnCop, formattedDate, searchSpan))
-        setAirGunCrimeStats(filterApiCallData(airGunCrimes, formattedDate, searchSpan))
-        setCarjackStats(filterApiCallData(carjackings, formattedDate, searchSpan))
+        setHomicideStats(filterApiCallData(homicides, formattedDate, searchSpan, arrestMade))
+        setSexAssaultStats(filterApiCallData(sexualAssaults, formattedDate, searchSpan, arrestMade))
+        setRobberyStats(filterApiCallData(robberies, formattedDate, searchSpan, arrestMade))
+        setBatteryStats(filterApiCallData(batteries, formattedDate, searchSpan, arrestMade))
+        setAssaultStats(filterApiCallData(assaults, formattedDate, searchSpan, arrestMade))
+        setViolationStats(filterApiCallData(gunViolations, formattedDate, searchSpan, arrestMade))
+        setShotsFiredStats(filterApiCallData(gunFireViolations, formattedDate, searchSpan, arrestMade))
+        setGunPossessionStats(filterApiCallData(gunPossessionViolations, formattedDate, searchSpan, arrestMade))
+        setAmmoViolationStats(filterApiCallData(ammoViolations, formattedDate, searchSpan, arrestMade))
+        setGunSaleStats(filterApiCallData(illegalGunSales, formattedDate, searchSpan, arrestMade))
+        setGunInSchoolStats(filterApiCallData(gunInSchools, formattedDate, searchSpan, arrestMade))
+        setGunAttackOnCopsStats(filterApiCallData(gunAttackOnCop, formattedDate, searchSpan, arrestMade))
+        setAttackOnCopsStats(filterApiCallData(attackOnCop, formattedDate, searchSpan, arrestMade))
+        setAirGunCrimeStats(filterApiCallData(airGunCrimes, formattedDate, searchSpan, arrestMade))
+        setCarjackStats(filterApiCallData(carjackings, formattedDate, searchSpan, arrestMade))
     }
 
     useEffect(() => {
@@ -189,11 +191,10 @@ const Map = () => {
     return (
 
         <div className="map-container">
-            <h1 className="map-title">Interactive Chicago Carjacking Map</h1>
             <div className="cj-number-wrapper">
-                <h2 className="carjack-numbers heart" id="cj-num-id">{homicideStats.length + sexAssaultStats.length + robberyStats.length + batteryStats.length + assaultStats.length + violationStats.length + carjackStats.length + shotsFiredStats.length + gunPossessionStats.length + ammoViolationStats.length + gunSaleStats.length + gunInSchoolStats.length + gunAttackOnCopsStats.length + attackOnCopsStats.length + airGunCrimeStats.length}</h2>
-                <h2 className="force-space">{"_"}</h2>
-                <h2 className="search-params">{`Carjackings
+                <h2 className="search-params">Your Results:&nbsp;</h2>
+                <h2 className="carjack-numbers heart" id="cj-num-id">{homicideStats.length + sexAssaultStats.length + robberyStats.length + batteryStats.length + assaultStats.length + violationStats.length + carjackStats.length + shotsFiredStats.length + gunPossessionStats.length + ammoViolationStats.length + gunSaleStats.length + gunInSchoolStats.length + gunAttackOnCopsStats.length + attackOnCopsStats.length + airGunCrimeStats.length}&nbsp;</h2>
+                <h2 className="search-params">{`Gun Crimes
                     ${searchSpan === "month" ? "in " + fullMonths[months.indexOf(searchMonth)] : ""}
                     ${searchSpan === "week" ? "on the week ending "+ fullMonths[months.indexOf(searchMonth)] + " " + searchDay : ""}
                     ${searchSpan === "most recent" ? "on " + fullMonths[months.indexOf(searchMonth)] + " " +  searchDay : ""}
