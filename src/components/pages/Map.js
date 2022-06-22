@@ -8,6 +8,8 @@ import {formatDay, getDaysInMonth, createWeekArr, yearRange, neighborhoodObject,
         airGunCrime, carjackApiCall, filterApiCallData} from '../../services/mapService.js'
 import mapStyles from './mapStyles';
 import '../pages/Map.css'
+import CustomizedSwitches from '../ToggleSwitch'
+import Button from '@mui/material/Button';
 require('dotenv').config()
 
 const containerStyle = {
@@ -110,12 +112,19 @@ const Map = () => {
     const setMyLocation = async () => {
         navigator.geolocation.getCurrentPosition(
             (position) => {
+                console.log(position)
                 setLat(parseFloat(position.coords.latitude))
                 setLng(parseFloat(position.coords.longitude))
             },
             () => null
         )
     }
+
+    // const setMyLocation = async () => {
+
+    //             console.log(navigator.geolocation.getCurrentPosition)
+
+    // }
 
     const getHoodLatLng = (selection) => {
         setLat(neighborhoodObject[selection][0])
@@ -202,6 +211,7 @@ const Map = () => {
                     ${searchYear}`}
                 </h2>
             </div>
+            <CustomizedSwitches />
             <div className="search-bar-wrapper">
             <div className="search-bar">
             <button className="sb-inputs" onClick={() => {setMyLocation()}}>My Location</button>
