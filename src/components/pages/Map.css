@@ -1,8 +1,8 @@
 .map-container {
-    height: 90vh;
+    /* height: 90vh;
     width: 100vw;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     object-fit: contain;
     padding-top: 20px;
@@ -10,7 +10,18 @@
     90deg,
     rgb(26, 23, 23) 0%,
     rgb(28, 27, 27) 100%
-    );
+    ); */
+    position: relative;
+}
+
+.control-panel-wrap {
+    width:400px;
+    /* display: flex;
+    flex-direction: column;
+    align-items: left; */
+    position: absolute;
+    left: 0;
+    padding-left: 50px;
 }
 
 .loading-title {
@@ -20,14 +31,14 @@
     margin-bottom: -10px;
 }
 
-.lottie-wrapper {
+/* .lottie-wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
     overflow: hidden;
-}
+} */
 
-.lottie-container {
+/* .lottie-container {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -37,7 +48,7 @@
     height: 100%;
     align-self: flex-end;
     margin-bottom: -38px;
-}
+} */
 
 .cj-number-wrapper {
     display: flex;
@@ -45,20 +56,27 @@
     align-items: center;
 }
 
-.map-title {
+/* .map-title {
     font-size: 45px;
+    color: #fff;
+} */
+
+.search-results {
+    margin: 0 0 5px 20px;
+    font-size: 25px;
     color: #fff;
 }
 
 .search-params {
-    font-size: 40px;
+    font-size: 22px;
     color: #fff;
 }
 
 .carjack-numbers,
 #cj-num-id {
+    margin-left: 20px;
     color: tomato;
-    font-size: 45px;
+    font-size: 30px;
     animation: heart-pulse 0.9s infinite ease-out;
 }
 
@@ -74,44 +92,53 @@
     }
 }
 
-.force-space {
+/* .force-space {
     color: transparent;
-}
+} */
 
-.search-bar-wrapper {
+/* .search-bar-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+} */
+
+/* .search-bar {
     display: flex;
     flex-direction: row;
     align-items: center;
-}
+} */
 
-.search-bar {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+#my-location {
+    min-width: 150px;
 }
 
 .sb-inputs {
-    margin: 5px;
-    margin-top: 8px;
-    padding: 6px;
-    font-size: 16px;
-    background-color: rgb(207, 207, 207);
-    border-radius: 5px;
+    /* margin: 5px; */
+    /* margin-top: 8px; */
+    /* padding: 6px; */
+    /* font-size: 16px; */
+    /* background-color: rgb(251, 158, 158) !important; */
+    /* border-radius: 5px; */
+    height: 40px !important;
+    /* min-width: 200px !important; */
 }
 
 .map-text {
     overflow: auto;
-    margin-top: 10px;
-    color: rgb(22, 33, 62);
-    background-color: #fff;
-    border-top: 1px solid rgb(65, 65, 65);
+    position: absolute;
+    right: 0;
+    top: 0;
+    margin-top: -2px;
+    /* color: rgb(22, 33, 62); */
+    /* background-color: #fff; */
+    /* border-top: 1px solid rgb(65, 65, 65); */
 }
 
 .user-map-text {
-    margin-top: 20px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+    /* margin-top: 20px; */
+    /* display: flex; */
+    /* flex-direction: row; */
+    /* align-items: center; */
 }
 
 .info-window {
@@ -164,7 +191,7 @@
         font-size: 32px;
     }
 
-    .search-bar-wrapper {
+    .search-bar-wrap {
         display: flex;
         flex-direction: column;
         align-items: center;

@@ -11,15 +11,14 @@ import '../pages/Map.css'
 import CustomizedSwitches from '../ToggleSwitch'
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
-import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 require('dotenv').config()
 
 const containerStyle = {
-    width: '100vw',
-    height: '68vh'
+    width: 'calc(100vw - 450px)',
+    height: '90vh'
 }
 
 const options = {
@@ -198,83 +197,87 @@ const Map = () => {
     return (
 
         <div className="map-container">
-            <div className="cj-number-wrapper">
-                <h2 className="search-params">Your Results:&nbsp;</h2>
-                <h2 className="carjack-numbers heart" id="cj-num-id">{homicideStats.length + sexAssaultStats.length + robberyStats.length + batteryStats.length + assaultStats.length + violationStats.length + carjackStats.length + shotsFiredStats.length + gunPossessionStats.length + ammoViolationStats.length + gunSaleStats.length + gunInSchoolStats.length + gunAttackOnCopsStats.length + attackOnCopsStats.length + airGunCrimeStats.length}&nbsp;</h2>
-                <h2 className="search-params">{`Gun Crimes
-                    ${searchSpan === "month" ? "in " + fullMonths[months.indexOf(searchMonth)] : ""}
-                    ${searchSpan === "week" ? "on the week ending "+ fullMonths[months.indexOf(searchMonth)] + " " + searchDay : ""}
-                    ${searchSpan === "most recent" ? "on " + fullMonths[months.indexOf(searchMonth)] + " " +  searchDay : ""}
-                    ${searchSpan === "year" ? "in " : ""}
-                    ${searchYear}`}
-                </h2>
-            </div>
-            <CustomizedSwitches />
-            <div className="search-bar-wrapper">
-            <div className="search-bar">
-            <Button className="sb-inputs" onClick={() => {setMyLocation()}}>My Location</Button>
-            <select className="sb-inputs" defaultValue="Loop" onChange={event => {
-                getHoodLatLng(event.target.value)
-                }}>
-                {Object.keys(neighborhoodObject).sort().map(neighborhood => (
-                    <option key={neighborhood} value={neighborhood}>
-                        {neighborhood}
-                    </option>
-                ))}
-            </select>
-            </div>
-                <div className="search-bar">
-                    <select className="sb-inputs" defaultValue={searchSpan} onChange={event => {
-                    setSearchSpan(event.target.value)
-                    }}>
-                        <option value="most recent">One Day</option>
-                        <option value="week">Weekly</option>
-                        <option value="month">Monthly</option>
-                        <option value="year">Annual</option>
-                    </select>
-                    {searchSpan === "week" || searchSpan === "most recent" || searchSpan === "month" ? 
-                    <>
-                        <select className="sb-inputs" defaultValue={searchMonth} onChange={event => {
-                        setSearchMonth(event.target.value)
-                        let moNo = months.indexOf(event.target.value) + 1
-                        formatDay(moNo)
-                        setMonthNumber(moNo)
+            <div className="control-panel-wrap">
+                <h2 className="search-results">Your Results:&nbsp;</h2>
+                <div className="cj-number-wrapper">
+                    <h2 className="carjack-numbers heart" id="cj-num-id">{homicideStats.length + sexAssaultStats.length + robberyStats.length + batteryStats.length + assaultStats.length + violationStats.length + carjackStats.length + shotsFiredStats.length + gunPossessionStats.length + ammoViolationStats.length + gunSaleStats.length + gunInSchoolStats.length + gunAttackOnCopsStats.length + attackOnCopsStats.length + airGunCrimeStats.length}&nbsp;</h2>
+                    <h2 className="search-params">{`Gun Crimes
+                        ${searchSpan === "month" ? "in " + fullMonths[months.indexOf(searchMonth)] : ""}
+                        ${searchSpan === "week" ? "on the week ending "+ fullMonths[months.indexOf(searchMonth)] + " " + searchDay : ""}
+                        ${searchSpan === "most recent" ? "on " + fullMonths[months.indexOf(searchMonth)] + " " +  searchDay : ""}
+                        ${searchSpan === "year" ? "in " : ""}
+                        ${searchYear}`}
+                    </h2>
+                </div>
+                {/* <CustomizedSwitches /> */}
+                <div className="search-bar-wrap">
+                    <div className="search-bar">
+                        <Button variant="contained" className="sb-inputs" id="my-location" size="large" onClick={() => {setMyLocation()}}>My Location</Button>
+                        <FormControl sx={{ m: 0, minWidth: 238 }} size="small">
+                            <Select className="sb-inputs" id="demo-select-small" defaultValue="Loop" onChange={event => {
+                                getHoodLatLng(event.target.value)
+                                }}>
+                                {Object.keys(neighborhoodObject).sort().map(neighborhood => (
+                                    <MenuItem key={neighborhood} value={neighborhood}>
+                                        {neighborhood}
+                                    </MenuItem>
+                                ))}
+                            </Select>
+                        </FormControl>
+                    </div>
+                    <div className="search-bar">
+                        <Select className="sb-inputs" defaultValue={searchSpan} onChange={event => {
+                        setSearchSpan(event.target.value)
                         }}>
-                        {months.map(month => (
-                            <option key={month} value={month}>
-                                {month}
-                            </option>
-                        ))}
-                    </select>
-                    </>
-                    :
-                    <></>
-                    }
-                    {searchSpan === "week" || searchSpan === "most recent" ? 
-                    <>
-                    <select className="sb-inputs" defaultValue={dayOfTheMonth} onChange={event => {
-                    setSearchDay(event.target.value)
-                    }}>
-                        {daysOfTheMonth.map(day => (
-                            <option key={day} value={day}>
-                                {day}
-                            </option>
-                        ))}
-                    </select>
-                    </>
-                    :
-                    <></>
-                    }
-                    <select className="sb-inputs" value={searchYear} onChange={event => {
-                    setSearchYear(event.target.value)
-                    console.log(searchYear)
-                    }}>
-                        {yearArray.reverse().map(year => (
-                            <option key={year} value={year}>
-                                {year}
-                            </option>
-                        ))}
-                    </select>
+                            <MenuItem value="most recent">One Day</MenuItem>
+                            <MenuItem value="week">Weekly</MenuItem>
+                            <MenuItem value="month">Monthly</MenuItem>
+                            <MenuItem value="year">Annual</MenuItem>
+                        </Select>
+                        {searchSpan === "week" || searchSpan === "most recent" || searchSpan === "month" ? 
+                        <>
+                            <Select className="sb-inputs" defaultValue={searchMonth} onChange={event => {
+                            setSearchMonth(event.target.value)
+                            let moNo = months.indexOf(event.target.value) + 1
+                            formatDay(moNo)
+                            setMonthNumber(moNo)
+                            }}>
+                            {months.map(month => (
+                                <MenuItem key={month} value={month}>
+                                    {month}
+                                </MenuItem>
+                            ))}
+                        </Select>
+                        </>
+                        :
+                        <></>
+                        }
+                        {searchSpan === "week" || searchSpan === "most recent" ? 
+                        <>
+                            <Select className="sb-inputs" defaultValue={dayOfTheMonth} onChange={event => {
+                                setSearchDay(event.target.value)
+                                }}>
+                                    {daysOfTheMonth.map(day => (
+                                        <MenuItem key={day} value={day}>
+                                            {day}
+                                        </MenuItem>
+                                    ))}
+                            </Select>
+                        </>
+                        :
+                        <></>
+                        }
+                        <Select className="sb-inputs" value={searchYear} onChange={event => {
+                            setSearchYear(event.target.value)
+                            console.log(searchYear)
+                            }}>
+                                {yearArray.reverse().map(year => (
+                                    <MenuItem key={year} value={year}>
+                                        {year}
+                                    </MenuItem>
+                                ))}
+                        </Select>
+                    </div>
                 </div>
             </div> 
             {violationStats.length ? 
