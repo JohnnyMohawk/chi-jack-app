@@ -10,6 +10,11 @@ import mapStyles from './mapStyles';
 import '../pages/Map.css'
 import CustomizedSwitches from '../ToggleSwitch'
 import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 require('dotenv').config()
 
 const containerStyle = {
@@ -112,19 +117,12 @@ const Map = () => {
     const setMyLocation = async () => {
         navigator.geolocation.getCurrentPosition(
             (position) => {
-                console.log(position)
                 setLat(parseFloat(position.coords.latitude))
                 setLng(parseFloat(position.coords.longitude))
             },
             () => null
         )
     }
-
-    // const setMyLocation = async () => {
-
-    //             console.log(navigator.geolocation.getCurrentPosition)
-
-    // }
 
     const getHoodLatLng = (selection) => {
         setLat(neighborhoodObject[selection][0])
@@ -214,7 +212,7 @@ const Map = () => {
             <CustomizedSwitches />
             <div className="search-bar-wrapper">
             <div className="search-bar">
-            <button className="sb-inputs" onClick={() => {setMyLocation()}}>My Location</button>
+            <Button className="sb-inputs" onClick={() => {setMyLocation()}}>My Location</Button>
             <select className="sb-inputs" defaultValue="Loop" onChange={event => {
                 getHoodLatLng(event.target.value)
                 }}>
