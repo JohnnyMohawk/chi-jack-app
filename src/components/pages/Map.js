@@ -12,7 +12,12 @@ import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+// import FormatAlignLeftIcon from '@mui/icons-material/FormatAlignLeft';
+// import FormatAlignCenterIcon from '@mui/icons-material/FormatAlignCenter';
+// import FormatAlignRightIcon from '@mui/icons-material/FormatAlignRight';
+// import FormatAlignJustifyIcon from '@mui/icons-material/FormatAlignJustify';
 import ToggleButton from '@mui/material/ToggleButton';
+import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 require('dotenv').config()
 
 const containerStyle = {
@@ -86,7 +91,11 @@ const Map = () => {
 
     const [arrestMade, setArrestMade] = useState("All")
 
+    // const [alignment, setAlignment] = React.useState('left');
 
+    const handleArrestToggle = (event, newView) => {
+        setArrestMade(newView);
+    };
 
     const createFormattedDate = () => {
         let formattedDate
@@ -232,7 +241,7 @@ const Map = () => {
         }, []);
     if (loadError) return "Error";
     if (!isLoaded) return "Loading...";
-
+        console.log("ARREST MADE", carjackStats)
     return (
 
         <div className="map-container">
@@ -252,7 +261,7 @@ const Map = () => {
                     <div className="search-bar">
                         <Button variant="contained" className="sb-inputs" id="my-location" size="large" onClick={() => {setMyLocation()}}>My Location</Button>
                         <FormControl sx={{ m: 0, minWidth: 238 }} size="small">
-                            <Select className="sb-inputs" id="demo-select-small" defaultValue="Loop" onChange={event => {
+                            <Select className="sb-inputs" id="demo-select-small" defaultValue="Near West Side" onChange={event => {
                                 getHoodLatLng(event.target.value)
                                 }}>
                                 {Object.keys(neighborhoodObject).sort().map(neighborhood => (
@@ -315,6 +324,25 @@ const Map = () => {
                                 ))}
                         </Select>
                     </div>
+                </div>
+                <div className="crime-toggle-bar">
+                    <ToggleButtonGroup
+                        className='arrest-view'
+                        value={arrestMade}
+                        exclusive
+                        onChange={handleArrestToggle}
+                        aria-label="arrest-view-toggle"
+                    >
+                        <ToggleButton value="All" aria-label="all crimes" color="warning" className='arrest-all'>
+                            All
+                        </ToggleButton>
+                        <ToggleButton value="Yes" aria-label="crimes with arrest" color="warning" className='arrest-toggle'>
+                            Arrest Made
+                        </ToggleButton>
+                        <ToggleButton value="No" aria-label="crimes with no arrest" color="warning" className='arrest-toggle'>
+                            No Arrest Made
+                        </ToggleButton>
+                    </ToggleButtonGroup>
                 </div>
                 <div className="crime-toggle-bar">
                     <ToggleButton

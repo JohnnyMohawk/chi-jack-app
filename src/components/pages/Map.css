@@ -90,6 +90,21 @@
     margin: 5px 10px !important;
 }
 
+.arrest-view {
+    height: 40px !important;
+    -webkit-filter: invert(100%) !important;
+    filter: invert(100%) !important;
+    /* width: 530px; */
+}
+
+.arrest-all {
+    width: 60px;
+}
+
+.arrest-toggle {
+    width: 150px;
+}
+
 .crime-view:checked {
     /* background-color: rgba(0, 255, 255, 0.371) !important; */
     border: 1px solid green !important;
