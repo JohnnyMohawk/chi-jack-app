@@ -249,7 +249,8 @@ const Map = () => {
             <div className="control-panel-wrap">
                 <h2 className="search-results">Your Results:&nbsp;</h2>
                 <div className="cj-number-wrapper">
-                    <h2 className="carjack-numbers heart" id="cj-num-id">{totalCrimes}&nbsp;</h2>
+                    <h2 className="carjack-numbers heart" id="cj-num-id">{totalCrimeCount()}&nbsp;</h2>
+                    {/* <h2 className="carjack-numbers heart" id="cj-num-id">{homicideStats.length + sexAssaultStats.length + robberyStats.length + batteryStats.length + assaultStats.length + violationStats.length + carjackStats.length + shotsFiredStats.length + gunPossessionStats.length + ammoViolationStats.length + gunSaleStats.length + gunInSchoolStats.length + gunAttackOnCopsStats.length + attackOnCopsStats.length}&nbsp;</h2> */}
                     <h2 className="search-params">{`Gun Crimes
                         ${searchSpan === "month" ? "in " + fullMonths[months.indexOf(searchMonth)] : ""}
                         ${searchSpan === "week" ? "on the week ending "+ fullMonths[months.indexOf(searchMonth)] + " " + searchDay : ""}
