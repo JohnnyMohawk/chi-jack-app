@@ -116,10 +116,12 @@ const Map = () => {
                 let completeDate = searchYear + "-0" + monthNumber + "-" + searchDay
                 let arrayOfDays = createWeekArr(completeDate)
                 formattedDate = arrayOfDays
+                console.log(formattedDate)
             }else{
                 let completeDate = searchYear + "-" + monthNumber + "-" + searchDay
                 let arrayOfDays = createWeekArr(completeDate)
                 formattedDate = arrayOfDays
+                console.log(formattedDate)
             }
         }else if(searchSpan === "year"){
             formattedDate = searchYear
@@ -194,6 +196,27 @@ const Map = () => {
         setCarjackStats(filterApiCallData(carjackings, formattedDate, searchSpan, arrestMade))
         
         console.log("FUCKKKKKK", filterApiCallData(gunViolations, formattedDate, searchSpan, arrestMade))
+        console.log("SHITTTTTT", filterApiCallData(carjackings, formattedDate, searchSpan, arrestMade))
+    }
+
+    const totalCrimeCount = () => {
+        let count = 0
+        if(showHomicide === true) {count += homicideStats.length}
+        if(showAssault === true) {count += assaultStats.length}
+        if(showSexAssault === true) {count +=  sexAssaultStats.length}
+        if(showRobbery === true) {count +=  robberyStats.length}
+        if(showBattery === true) {count +=  batteryStats.length}
+        if(showViolation === true) {count +=  violationStats.length}
+        if(showShotsFired === true) {count +=  shotsFiredStats.length}
+        if(showGunPossession === true) {count +=  gunPossessionStats.length}
+        if(showAmmoViolation === true) {count +=  ammoViolationStats.length}
+        if(showGunSale === true) {count +=  gunSaleStats.length}
+        if(showGunInSchool === true) {count +=  gunInSchoolStats.length}
+        if(showGunAttackOnCops === true) {count +=  gunAttackOnCopsStats.length}
+        if(showAttackOnCops === true) {count +=  attackOnCopsStats.length}
+        if(showCarjack === true) {count +=  carjackStats.length}
+        
+        return count
     }
 
     useEffect(() => {
@@ -215,14 +238,14 @@ const Map = () => {
         }, []);
     if (loadError) return "Error";
     if (!isLoaded) return "Loading...";
-
+        console.log(totalCrimeCount())
     return (
 
         <div className="map-container">
             <div className="control-panel-wrap">
                 <h2 className="search-results">Your Results:&nbsp;</h2>
                 <div className="cj-number-wrapper">
-                    {/* <h2 className="carjack-numbers heart" id="cj-num-id">{homicideStats.length + sexAssaultStats.length + robberyStats.length + batteryStats.length + assaultStats.length + violationStats.length + carjackStats.length + shotsFiredStats.length + gunPossessionStats.length + ammoViolationStats.length + gunSaleStats.length + gunInSchoolStats.length + gunAttackOnCopsStats.length + attackOnCopsStats.length + carjackStats.length}&nbsp;</h2> */}
+                    <h2 className="carjack-numbers heart" id="cj-num-id">{homicideStats.length + sexAssaultStats.length + robberyStats.length + batteryStats.length + assaultStats.length + violationStats.length + carjackStats.length + shotsFiredStats.length + gunPossessionStats.length + ammoViolationStats.length + gunSaleStats.length + gunInSchoolStats.length + gunAttackOnCopsStats.length + attackOnCopsStats.length}&nbsp;</h2>
                     <h2 className="search-params">{`Gun Crimes
                         ${searchSpan === "month" ? "in " + fullMonths[months.indexOf(searchMonth)] : ""}
                         ${searchSpan === "week" ? "on the week ending "+ fullMonths[months.indexOf(searchMonth)] + " " + searchDay : ""}
@@ -456,16 +479,6 @@ const Map = () => {
                     </ToggleButton>
                 </div>
             </div> 
-            {/* <div>
-            <ToggleButton
-                value="check"
-                selected={selected}
-                onChange={() => {
-                    setSelected(!selected);
-                }}>
-                Homicides
-            </ToggleButton>
-            </div> */}
             {violationStats.length ? 
             <>
                 <div className="map-text">

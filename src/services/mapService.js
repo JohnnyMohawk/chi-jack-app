@@ -76,7 +76,8 @@ export const filterApiCallData = (data, formattedDate, searchSpan, arrestMade) =
         }
     }else if(searchSpan === "week") {
         filteredData = data.filter(crime => (crime.date.includes(formattedDate[0]) || crime.date.includes(formattedDate[1]) || crime.date.includes(formattedDate[2]) || crime.date.includes(formattedDate[3]) || crime.date.includes(formattedDate[4]) || crime.date.includes(formattedDate[5]) || crime.date.includes(formattedDate[6])))
-        if(arrestMade === "all"){
+        console.log("ASSSSSS", filteredData)
+        if(arrestMade === "All"){
             console.log(filteredData)
             return filteredData
         }else if(arrestMade === "Yes"){
