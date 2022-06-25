@@ -1,24 +1,9 @@
 .map-container {
-    /* height: 90vh;
-    width: 100vw;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    object-fit: contain;
-    padding-top: 20px;
-    background: linear-gradient(
-    90deg,
-    rgb(26, 23, 23) 0%,
-    rgb(28, 27, 27) 100%
-    ); */
     position: relative;
 }
 
 .control-panel-wrap {
     width:400px;
-    /* display: flex;
-    flex-direction: column;
-    align-items: left; */
     position: absolute;
     left: 0;
     padding-left: 50px;
@@ -31,39 +16,15 @@
     margin-bottom: -10px;
 }
 
-/* .lottie-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    overflow: hidden;
-} */
-
-/* .lottie-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    object-fit: cover;
-    width: 100%;
-    height: 100%;
-    align-self: flex-end;
-    margin-bottom: -38px;
-} */
-
 .cj-number-wrapper {
     display: flex;
     flex-direction: row;
     align-items: center;
 }
 
-/* .map-title {
-    font-size: 45px;
-    color: #fff;
-} */
-
 .search-results {
-    margin: 0 0 5px 20px;
-    font-size: 25px;
+    margin: 0 0 5px 0;
+    font-size: 23px;
     color: #fff;
 }
 
@@ -74,27 +35,23 @@
 
 .carjack-numbers,
 #cj-num-id {
-    margin-left: 20px;
     color: tomato;
     font-size: 30px;
     animation: heart-pulse 0.9s infinite ease-out;
 }
 
 .crime-view {
-    /* color: rgba(0, 255, 255, 0.371) !important; */
-    /* border: 1px solid #fff !important; */
     height: 40px !important;
     -webkit-filter: invert(100%) !important;
     filter: invert(100%) !important;
     min-width: 170px;
-    margin: 5px 10px !important;
+    margin: 5px 13px !important;
 }
 
 .arrest-view {
     height: 40px !important;
     -webkit-filter: invert(100%) !important;
     filter: invert(100%) !important;
-    /* width: 530px; */
 }
 
 .arrest-all {
@@ -102,11 +59,10 @@
 }
 
 .arrest-toggle {
-    width: 150px;
+    width: 154px;
 }
 
 .crime-view:checked {
-    /* background-color: rgba(0, 255, 255, 0.371) !important; */
     border: 1px solid green !important;
     height: 40px !important;
 }
@@ -123,15 +79,13 @@
     }
 }
 
-/* .force-space {
-    color: transparent;
-} */
-
-/* .search-bar-wrap {
+.search-bar {
     display: flex;
     flex-direction: column;
     align-items: center;
-} */
+    justify-content: center;
+    margin: 0 auto;
+}
 
 .crime-toggle-bar {
     display: flex;
@@ -140,22 +94,22 @@
     margin-top: 10px;
     align-items: center;
     justify-content: center;
-    /* width: 400px; */
 }
 
 #my-location {
-    min-width: 150px;
+    min-width: 135px;
+    margin: 0 2px;
 }
 
 .sb-inputs {
-    /* margin: 5px; */
-    /* margin-top: 8px; */
-    /* padding: 6px; */
-    /* font-size: 16px; */
-    /* background-color: rgb(251, 158, 158) !important; */
-    /* border-radius: 5px; */
     height: 40px !important;
-    /* min-width: 200px !important; */
+    font-size: 12px !important;
+}
+
+.hoodSelect {
+    margin-left: 12px !important;
+    font-size: 12px !important;
+    height: 40px !important;
 }
 
 .map-text {
@@ -164,16 +118,6 @@
     right: 0;
     top: 0;
     margin-top: -2px;
-    /* color: rgb(22, 33, 62); */
-    /* background-color: #fff; */
-    /* border-top: 1px solid rgb(65, 65, 65); */
-}
-
-.user-map-text {
-    /* margin-top: 20px; */
-    /* display: flex; */
-    /* flex-direction: row; */
-    /* align-items: center; */
 }
 
 .info-window {

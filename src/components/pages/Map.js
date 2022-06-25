@@ -12,10 +12,6 @@ import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-// import FormatAlignLeftIcon from '@mui/icons-material/FormatAlignLeft';
-// import FormatAlignCenterIcon from '@mui/icons-material/FormatAlignCenter';
-// import FormatAlignRightIcon from '@mui/icons-material/FormatAlignRight';
-// import FormatAlignJustifyIcon from '@mui/icons-material/FormatAlignJustify';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 require('dotenv').config()
@@ -77,6 +73,7 @@ const Map = () => {
     const [showAttackOnCops, setShowAttackOnCops] = useState(false)
     const [showCarjack, setShowCarjack] = useState(false)
     const [totalCrimes, setTotalCrimes] = useState(0)
+    const [pageTitle, setPageTitle] = useState(0)
 
     const [lat, setLat] = useState(null)
     const [lng, setLng] = useState(null)
@@ -90,8 +87,6 @@ const Map = () => {
     const [daysOfTheMonth, setDaysOfTheMonth] = useState(getDaysInMonth(currentMonth, currentYear))
 
     const [arrestMade, setArrestMade] = useState("All")
-
-    // const [alignment, setAlignment] = React.useState('left');
 
     const handleArrestToggle = (event, newView) => {
         console.log("NEW VIEW", newView, totalCrimes)
@@ -218,6 +213,25 @@ const Map = () => {
         return count
     }
 
+    const dynamicTitle = () => {
+        if(showHomicide === false && 
+            showAssault === false &&
+            showSexAssault === false &&
+            showRobbery === false &&
+            showBattery === false &&
+            showViolation === false &&
+            showShotsFired === false &&
+            showGunPossession === false &&
+            showAmmoViolation === false &&
+            showGunSale === false &&
+            showGunInSchool === false &&
+            showGunAttackOnCops === false &&
+            showAttackOnCops === false &&
+            showCarjack === false){
+                return "Select below for gun crime stats:"
+            }else return "Your Results:"
+    }
+
     useEffect(() => {
         getHoodLatLng("Near West Side")
     }, [])
@@ -232,6 +246,7 @@ const Map = () => {
     }, [searchSpan, searchYear, searchMonth, searchDay, arrestMade])
 
     useEffect(() => {
+        setPageTitle(dynamicTitle())
         let crimes = totalCrimeCount()
         setTotalCrimes(crimes)
     }, [showHomicide, showAssault, showSexAssault, showBattery, showRobbery, showViolation, showShotsFired, showGunPossession, showAmmoViolation, showGunSale, showGunInSchool, showGunAttackOnCops, showAttackOnCops, showCarjack, arrestMade])
@@ -247,10 +262,9 @@ const Map = () => {
 
         <div className="map-container">
             <div className="control-panel-wrap">
-                <h2 className="search-results">Your Results:&nbsp;</h2>
+                <h2 className="search-results">{pageTitle}&nbsp;</h2>
                 <div className="cj-number-wrapper">
                     <h2 className="carjack-numbers heart" id="cj-num-id">{totalCrimeCount()}&nbsp;</h2>
-                    {/* <h2 className="carjack-numbers heart" id="cj-num-id">{homicideStats.length + sexAssaultStats.length + robberyStats.length + batteryStats.length + assaultStats.length + violationStats.length + carjackStats.length + shotsFiredStats.length + gunPossessionStats.length + ammoViolationStats.length + gunSaleStats.length + gunInSchoolStats.length + gunAttackOnCopsStats.length + attackOnCopsStats.length}&nbsp;</h2> */}
                     <h2 className="search-params">{`Gun Crimes
                         ${searchSpan === "month" ? "in " + fullMonths[months.indexOf(searchMonth)] : ""}
                         ${searchSpan === "week" ? "on the week ending "+ fullMonths[months.indexOf(searchMonth)] + " " + searchDay : ""}
@@ -263,7 +277,7 @@ const Map = () => {
                     <div className="search-bar">
                         <Button variant="contained" className="sb-inputs" id="my-location" size="large" onClick={() => {setMyLocation()}}>My Location</Button>
                         <FormControl sx={{ m: 0, minWidth: 238 }} size="small">
-                            <Select className="sb-inputs" id="demo-select-small" defaultValue="Near West Side" onChange={event => {
+                            <Select className="sb-inputs" id="hoodSelect" defaultValue="Near West Side" onChange={event => {
                                 getHoodLatLng(event.target.value)
                                 }}>
                                 {Object.keys(neighborhoodObject).sort().map(neighborhood => (
@@ -275,7 +289,7 @@ const Map = () => {
                         </FormControl>
                     </div>
                     <div className="search-bar">
-                        <Select className="sb-inputs" defaultValue={searchSpan} onChange={event => {
+                        <Select className="sb-inputs" id='timeSpan' defaultValue={searchSpan} onChange={event => {
                         setSearchSpan(event.target.value)
                         }}>
                             <MenuItem value="most recent">One Day</MenuItem>
@@ -285,7 +299,7 @@ const Map = () => {
                         </Select>
                         {searchSpan === "week" || searchSpan === "most recent" || searchSpan === "month" ? 
                         <>
-                            <Select className="sb-inputs" defaultValue={searchMonth} onChange={event => {
+                            <Select className="sb-inputs" id='monthSelect' defaultValue={searchMonth} onChange={event => {
                             setSearchMonth(event.target.value)
                             let moNo = months.indexOf(event.target.value) + 1
                             formatDay(moNo)
@@ -303,7 +317,7 @@ const Map = () => {
                         }
                         {searchSpan === "week" || searchSpan === "most recent" ? 
                         <>
-                            <Select className="sb-inputs" defaultValue={dayOfTheMonth} onChange={event => {
+                            <Select className="sb-inputs" id='daySelect' defaultValue={dayOfTheMonth} onChange={event => {
                                 setSearchDay(event.target.value)
                                 }}>
                                     {daysOfTheMonth.map(day => (
@@ -316,7 +330,7 @@ const Map = () => {
                         :
                         <></>
                         }
-                        <Select className="sb-inputs" value={searchYear} onChange={event => {
+                        <Select className="sb-inputs" id='yearSelect' value={searchYear} onChange={event => {
                             setSearchYear(event.target.value)
                             }}>
                                 {yearArray.reverse().map(year => (
