@@ -94,6 +94,7 @@ const Map = () => {
     // const [alignment, setAlignment] = React.useState('left');
 
     const handleArrestToggle = (event, newView) => {
+        console.log("NEW VIEW", newView, totalCrimes)
         setArrestMade(newView);
     };
 
@@ -228,12 +229,12 @@ const Map = () => {
     useEffect(() => {
         yearMonthArray()
         serverSideApiCall()
-    }, [searchSpan, searchYear, searchMonth, searchDay])
+    }, [searchSpan, searchYear, searchMonth, searchDay, arrestMade])
 
     useEffect(() => {
         let crimes = totalCrimeCount()
         setTotalCrimes(crimes)
-    }, [showHomicide, showAssault, showSexAssault, showBattery, showRobbery, showViolation, showShotsFired, showGunPossession, showAmmoViolation, showGunSale, showGunInSchool, showGunAttackOnCops, showAttackOnCops, showCarjack])
+    }, [showHomicide, showAssault, showSexAssault, showBattery, showRobbery, showViolation, showShotsFired, showGunPossession, showAmmoViolation, showGunSale, showGunInSchool, showGunAttackOnCops, showAttackOnCops, showCarjack, arrestMade])
 
     const mapRef = React.useRef();
         const onMapLoad = React.useCallback((map) => {
@@ -241,7 +242,7 @@ const Map = () => {
         }, []);
     if (loadError) return "Error";
     if (!isLoaded) return "Loading...";
-        console.log("ARREST MADE", carjackStats)
+        console.log("ARREST MADE", arrestMade, totalCrimes)
     return (
 
         <div className="map-container">
