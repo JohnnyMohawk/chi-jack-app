@@ -271,12 +271,6 @@ export const attackOnCops = async() => {
     return [...data1, ...data2, ...data3, ...data4, ...data5]
 }
 
-export const airGunCrime = async() => {
-    let res = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=2900&$limit=50000&$offset=0')
-    let data = await res.json()
-    return data
-}
-
 export const carjackApiCall = async() => {
     let res1 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=0325&$limit=50000&$offset=0')
     let res2 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=0326&$limit=50000&$offset=0')

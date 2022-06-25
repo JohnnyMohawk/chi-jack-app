@@ -5,16 +5,13 @@ import carSafety from '../../assets/animations/carSafety.json'
 import {formatDay, getDaysInMonth, createWeekArr, yearRange, neighborhoodObject, removeZeros, fullMonths, months, 
         homicideApiCall, sexAssaultApiCall, robberyApiCall, batteryApiCall, assaultApiCall, gunViolationApiCall, 
         gunFireViolation, gunNoFireViolation, ammoViolation, illegalGunSale, gunInSchool, gunAttackOnCops, attackOnCops, 
-        airGunCrime, carjackApiCall, filterApiCallData} from '../../services/mapService.js'
+        carjackApiCall, filterApiCallData} from '../../services/mapService.js'
 import mapStyles from './mapStyles';
 import '../pages/Map.css'
-import CustomizedSwitches from '../ToggleSwitch'
 import Button from '@mui/material/Button';
-import Box from '@mui/material/Box';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-// import CheckIcon from '@mui/icons-material/Check';
 import ToggleButton from '@mui/material/ToggleButton';
 require('dotenv').config()
 
@@ -58,7 +55,6 @@ const Map = () => {
     const [gunInSchoolStats, setGunInSchoolStats] = useState([])
     const [gunAttackOnCopsStats, setGunAttackOnCopsStats] = useState([])
     const [attackOnCopsStats, setAttackOnCopsStats] = useState([])
-    const [airGunCrimeStats, setAirGunCrimeStats] = useState([])
     const [carjackStats, setCarjackStats] = useState([])
 
     const [showHomicide, setShowHomicide] = useState(false)
@@ -74,8 +70,8 @@ const Map = () => {
     const [showGunInSchool, setShowGunInSchool] = useState(false)
     const [showGunAttackOnCops, setShowGunAttackOnCops] = useState(false)
     const [showAttackOnCops, setShowAttackOnCops] = useState(false)
-    const [showAirGunCrime, setShowAirGunCrime] = useState(false)
     const [showCarjack, setShowCarjack] = useState(false)
+    const [totalCrimes, setTotalCrimes] = useState(0)
 
     const [lat, setLat] = useState(null)
     const [lng, setLng] = useState(null)
@@ -116,12 +112,10 @@ const Map = () => {
                 let completeDate = searchYear + "-0" + monthNumber + "-" + searchDay
                 let arrayOfDays = createWeekArr(completeDate)
                 formattedDate = arrayOfDays
-                console.log(formattedDate)
             }else{
                 let completeDate = searchYear + "-" + monthNumber + "-" + searchDay
                 let arrayOfDays = createWeekArr(completeDate)
                 formattedDate = arrayOfDays
-                console.log(formattedDate)
             }
         }else if(searchSpan === "year"){
             formattedDate = searchYear
@@ -177,7 +171,6 @@ const Map = () => {
         let gunInSchools = await gunInSchool()
         let gunAttackOnCop = await gunAttackOnCops()
         let attackOnCop = await attackOnCops()
-        let airGunCrimes = await airGunCrime()
         let carjackings = await carjackApiCall()
         setHomicideStats(filterApiCallData(homicides, formattedDate, searchSpan, arrestMade))
         setSexAssaultStats(filterApiCallData(sexualAssaults, formattedDate, searchSpan, arrestMade))
@@ -192,11 +185,7 @@ const Map = () => {
         setGunInSchoolStats(filterApiCallData(gunInSchools, formattedDate, searchSpan, arrestMade))
         setGunAttackOnCopsStats(filterApiCallData(gunAttackOnCop, formattedDate, searchSpan, arrestMade))
         setAttackOnCopsStats(filterApiCallData(attackOnCop, formattedDate, searchSpan, arrestMade))
-        setAirGunCrimeStats(filterApiCallData(airGunCrimes, formattedDate, searchSpan, arrestMade))
         setCarjackStats(filterApiCallData(carjackings, formattedDate, searchSpan, arrestMade))
-        
-        console.log("FUCKKKKKK", filterApiCallData(gunViolations, formattedDate, searchSpan, arrestMade))
-        console.log("SHITTTTTT", filterApiCallData(carjackings, formattedDate, searchSpan, arrestMade))
     }
 
     const totalCrimeCount = () => {
@@ -220,7 +209,7 @@ const Map = () => {
     }
 
     useEffect(() => {
-        getHoodLatLng("Loop")
+        getHoodLatLng("Near West Side")
     }, [])
 
     useEffect(() => {
@@ -232,20 +221,25 @@ const Map = () => {
         serverSideApiCall()
     }, [searchSpan, searchYear, searchMonth, searchDay])
 
+    useEffect(() => {
+        let crimes = totalCrimeCount()
+        setTotalCrimes(crimes)
+    }, [showHomicide, showAssault, showSexAssault, showBattery, showRobbery, showViolation, showShotsFired, showGunPossession, showAmmoViolation, showGunSale, showGunInSchool, showGunAttackOnCops, showAttackOnCops, showCarjack])
+
     const mapRef = React.useRef();
         const onMapLoad = React.useCallback((map) => {
             mapRef.current = map;
         }, []);
     if (loadError) return "Error";
     if (!isLoaded) return "Loading...";
-        console.log(totalCrimeCount())
+
     return (
 
         <div className="map-container">
             <div className="control-panel-wrap">
                 <h2 className="search-results">Your Results:&nbsp;</h2>
                 <div className="cj-number-wrapper">
-                    <h2 className="carjack-numbers heart" id="cj-num-id">{homicideStats.length + sexAssaultStats.length + robberyStats.length + batteryStats.length + assaultStats.length + violationStats.length + carjackStats.length + shotsFiredStats.length + gunPossessionStats.length + ammoViolationStats.length + gunSaleStats.length + gunInSchoolStats.length + gunAttackOnCopsStats.length + attackOnCopsStats.length}&nbsp;</h2>
+                    <h2 className="carjack-numbers heart" id="cj-num-id">{totalCrimes}&nbsp;</h2>
                     <h2 className="search-params">{`Gun Crimes
                         ${searchSpan === "month" ? "in " + fullMonths[months.indexOf(searchMonth)] : ""}
                         ${searchSpan === "week" ? "on the week ending "+ fullMonths[months.indexOf(searchMonth)] + " " + searchDay : ""}
@@ -254,7 +248,6 @@ const Map = () => {
                         ${searchYear}`}
                     </h2>
                 </div>
-                {/* <CustomizedSwitches /> */}
                 <div className="search-bar-wrap">
                     <div className="search-bar">
                         <Button variant="contained" className="sb-inputs" id="my-location" size="large" onClick={() => {setMyLocation()}}>My Location</Button>
@@ -314,7 +307,6 @@ const Map = () => {
                         }
                         <Select className="sb-inputs" value={searchYear} onChange={event => {
                             setSearchYear(event.target.value)
-                            console.log(searchYear)
                             }}>
                                 {yearArray.reverse().map(year => (
                                     <MenuItem key={year} value={year}>
@@ -718,24 +710,6 @@ const Map = () => {
                                 }}
                                 icon={{
                                     url: `/attack-on-police.png`,
-                                    origin: new window.google.maps.Point(0, 0),
-                                    anchor: new window.google.maps.Point(15, 15),
-                                    scaledSize: new window.google.maps.Size(70, 70),
-                                }}
-                            />
-                        ))}
-                        {showAirGunCrime === true && airGunCrimeStats?.map((airguns) => (
-                            <Marker 
-                                key={airguns.id} 
-                                position={{ 
-                                    lat: parseFloat(airguns.latitude), 
-                                    lng: parseFloat(airguns.longitude) 
-                                }}
-                                onClick={() => {
-                                    setSelectedCrime(airguns)
-                                }}
-                                icon={{
-                                    url: `/airgun-crime.png`,
                                     origin: new window.google.maps.Point(0, 0),
                                     anchor: new window.google.maps.Point(15, 15),
                                     scaledSize: new window.google.maps.Size(70, 70),
