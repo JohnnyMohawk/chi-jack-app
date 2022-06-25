@@ -80,6 +80,22 @@
     animation: heart-pulse 0.9s infinite ease-out;
 }
 
+.crime-view {
+    /* color: rgba(0, 255, 255, 0.371) !important; */
+    /* border: 1px solid #fff !important; */
+    height: 40px !important;
+    -webkit-filter: invert(100%) !important;
+    filter: invert(100%) !important;
+    min-width: 170px;
+    margin: 5px 10px !important;
+}
+
+.crime-view:checked {
+    /* background-color: rgba(0, 255, 255, 0.371) !important; */
+    border: 1px solid green !important;
+    height: 40px !important;
+}
+
 @keyframes heart-pulse {
     0% {
         transform: scale(1);
@@ -102,11 +118,15 @@
     align-items: center;
 } */
 
-/* .search-bar {
+.crime-toggle-bar {
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
+    margin-top: 10px;
     align-items: center;
-} */
+    justify-content: center;
+    /* width: 400px; */
+}
 
 #my-location {
     min-width: 150px;

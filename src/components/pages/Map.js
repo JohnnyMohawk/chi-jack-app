@@ -14,6 +14,8 @@ import Box from '@mui/material/Box';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+// import CheckIcon from '@mui/icons-material/Check';
+import ToggleButton from '@mui/material/ToggleButton';
 require('dotenv').config()
 
 const containerStyle = {
@@ -58,6 +60,23 @@ const Map = () => {
     const [attackOnCopsStats, setAttackOnCopsStats] = useState([])
     const [airGunCrimeStats, setAirGunCrimeStats] = useState([])
     const [carjackStats, setCarjackStats] = useState([])
+
+    const [showHomicide, setShowHomicide] = useState(false)
+    const [showSexAssault, setShowSexAssault] = useState(false)
+    const [showRobbery, setShowRobbery] = useState(false)
+    const [showBattery, setShowBattery] = useState(false)
+    const [showAssault, setShowAssault] = useState(false)
+    const [showViolation, setShowViolation] = useState(false)
+    const [showShotsFired, setShowShotsFired] = useState(false)
+    const [showGunPossession, setShowGunPossession] = useState(false)
+    const [showAmmoViolation, setShowAmmoViolation] = useState(false)
+    const [showGunSale, setShowGunSale] = useState(false)
+    const [showGunInSchool, setShowGunInSchool] = useState(false)
+    const [showGunAttackOnCops, setShowGunAttackOnCops] = useState(false)
+    const [showAttackOnCops, setShowAttackOnCops] = useState(false)
+    const [showAirGunCrime, setShowAirGunCrime] = useState(false)
+    const [showCarjack, setShowCarjack] = useState(false)
+
     const [lat, setLat] = useState(null)
     const [lng, setLng] = useState(null)
     const [selectedCrime, setSelectedCrime] = useState(null)
@@ -68,6 +87,7 @@ const Map = () => {
     const [searchMonth, setSearchMonth] = useState(months[currentMonth])
     const [monthNumber, setMonthNumber] = useState(months.indexOf(searchDate.split(' ')[1]) + 1)
     const [daysOfTheMonth, setDaysOfTheMonth] = useState(getDaysInMonth(currentMonth, currentYear))
+
     const [arrestMade, setArrestMade] = useState("All")
 
 
@@ -172,6 +192,8 @@ const Map = () => {
         setAttackOnCopsStats(filterApiCallData(attackOnCop, formattedDate, searchSpan, arrestMade))
         setAirGunCrimeStats(filterApiCallData(airGunCrimes, formattedDate, searchSpan, arrestMade))
         setCarjackStats(filterApiCallData(carjackings, formattedDate, searchSpan, arrestMade))
+        
+        console.log("FUCKKKKKK", filterApiCallData(gunViolations, formattedDate, searchSpan, arrestMade))
     }
 
     useEffect(() => {
@@ -200,7 +222,7 @@ const Map = () => {
             <div className="control-panel-wrap">
                 <h2 className="search-results">Your Results:&nbsp;</h2>
                 <div className="cj-number-wrapper">
-                    <h2 className="carjack-numbers heart" id="cj-num-id">{homicideStats.length + sexAssaultStats.length + robberyStats.length + batteryStats.length + assaultStats.length + violationStats.length + carjackStats.length + shotsFiredStats.length + gunPossessionStats.length + ammoViolationStats.length + gunSaleStats.length + gunInSchoolStats.length + gunAttackOnCopsStats.length + attackOnCopsStats.length + airGunCrimeStats.length}&nbsp;</h2>
+                    {/* <h2 className="carjack-numbers heart" id="cj-num-id">{homicideStats.length + sexAssaultStats.length + robberyStats.length + batteryStats.length + assaultStats.length + violationStats.length + carjackStats.length + shotsFiredStats.length + gunPossessionStats.length + ammoViolationStats.length + gunSaleStats.length + gunInSchoolStats.length + gunAttackOnCopsStats.length + attackOnCopsStats.length + carjackStats.length}&nbsp;</h2> */}
                     <h2 className="search-params">{`Gun Crimes
                         ${searchSpan === "month" ? "in " + fullMonths[months.indexOf(searchMonth)] : ""}
                         ${searchSpan === "week" ? "on the week ending "+ fullMonths[months.indexOf(searchMonth)] + " " + searchDay : ""}
@@ -279,7 +301,171 @@ const Map = () => {
                         </Select>
                     </div>
                 </div>
+                <div className="crime-toggle-bar">
+                    <ToggleButton
+                        className='crime-view'
+                        color="warning"
+                        value="check"
+                        selected={showHomicide}
+                        onChange={() => {
+                            setShowHomicide(!showHomicide);
+                        }}>
+                        Homicides
+                    </ToggleButton>
+                    <ToggleButton
+                        className='crime-view'
+                        color="warning"
+                        value="check"
+                        selected={showAssault}
+                        onChange={() => {
+                            setShowAssault(!showAssault);
+                        }}>
+                        Assaults
+                    </ToggleButton>
+                </div>
+                <div className="crime-toggle-bar">
+                    <ToggleButton
+                        className='crime-view'
+                        color="warning"
+                        value="check"
+                        selected={showSexAssault}
+                        onChange={() => {
+                            setShowSexAssault(!showSexAssault);
+                        }}>
+                        Sex. Assaults
+                    </ToggleButton>
+                    <ToggleButton
+                        className='crime-view'
+                        color="warning"
+                        value="check"
+                        selected={showRobbery}
+                        onChange={() => {
+                            setShowRobbery(!showRobbery);
+                        }}>
+                        Robberies
+                    </ToggleButton>
+                </div>
+                <div className="crime-toggle-bar">
+                    <ToggleButton
+                        className='crime-view'
+                        color="warning"
+                        value="check"
+                        selected={showBattery}
+                        onChange={() => {
+                            setShowBattery(!showBattery);
+                        }}>
+                        Batteries
+                    </ToggleButton>
+                    <ToggleButton
+                        className='crime-view'
+                        color="warning"
+                        value="check"
+                        selected={showViolation}
+                        onChange={() => {
+                            setShowViolation(!showViolation);
+                        }}>
+                        Gun Violations
+                    </ToggleButton>
+                </div>
+                <div className="crime-toggle-bar">
+                    <ToggleButton
+                        className='crime-view'
+                        color="warning"
+                        value="check"
+                        selected={showShotsFired}
+                        onChange={() => {
+                            setShowShotsFired(!showShotsFired);
+                        }}>
+                        Shots Fired
+                    </ToggleButton>
+                    <ToggleButton
+                        className='crime-view'
+                        color="warning"
+                        value="check"
+                        selected={showGunPossession}
+                        onChange={() => {
+                            setShowGunPossession(!showGunPossession);
+                        }}>
+                        Gun Possession
+                    </ToggleButton>
+                </div>
+                <div className="crime-toggle-bar">
+                    <ToggleButton
+                        className='crime-view'
+                        color="warning"
+                        value="check"
+                        selected={showAmmoViolation}
+                        onChange={() => {
+                            setShowAmmoViolation(!showAmmoViolation);
+                        }}>
+                        Ammo Violation
+                    </ToggleButton>
+                    <ToggleButton
+                        className='crime-view'
+                        color="warning"
+                        value="check"
+                        selected={showGunSale}
+                        onChange={() => {
+                            setShowGunSale(!showGunSale);
+                        }}>
+                        Illegal Gun Sales
+                    </ToggleButton>
+                </div>
+                <div className="crime-toggle-bar">
+                    <ToggleButton
+                        className='crime-view'
+                        color="warning"
+                        value="check"
+                        selected={showGunInSchool}
+                        onChange={() => {
+                            setShowGunInSchool(!showGunInSchool);
+                        }}>
+                        Gun in School
+                    </ToggleButton>
+                    <ToggleButton
+                        className='crime-view'
+                        color="warning"
+                        value="check"
+                        selected={showGunAttackOnCops}
+                        onChange={() => {
+                            setShowGunAttackOnCops(!showGunAttackOnCops);
+                        }}>
+                        Shots on Cops
+                    </ToggleButton>
+                </div>
+                <div className="crime-toggle-bar">
+                    <ToggleButton
+                        className='crime-view'
+                        color="warning"
+                        value="check"
+                        selected={showAttackOnCops}
+                        onChange={() => {
+                            setShowAttackOnCops(!showAttackOnCops);
+                        }}>
+                        Attack on Cops
+                    </ToggleButton>
+                    <ToggleButton
+                        className='crime-view'
+                        color="warning"
+                        value="check"
+                        selected={showCarjack}
+                        onChange={() => {
+                            setShowCarjack(!showCarjack);
+                        }}>
+                        Carjackings
+                    </ToggleButton>
+                </div>
             </div> 
+            {/* <div>
+            <ToggleButton
+                value="check"
+                selected={selected}
+                onChange={() => {
+                    setSelected(!selected);
+                }}>
+                Homicides
+            </ToggleButton>
+            </div> */}
             {violationStats.length ? 
             <>
                 <div className="map-text">
@@ -291,7 +477,7 @@ const Map = () => {
                         options={options}
                         onLoad={onMapLoad}
                     >
-                        {homicideStats?.map((homicide) => (
+                        {showHomicide === true && homicideStats?.map((homicide) => (
                             <Marker 
                                 key={homicide.id} 
                                 position={{ 
@@ -309,7 +495,7 @@ const Map = () => {
                                 }}
                             />
                         ))}
-                        {sexAssaultStats?.map((sexAssault) => (
+                        {showSexAssault === true && sexAssaultStats?.map((sexAssault) => (
                             <Marker 
                                 key={sexAssault.id} 
                                 position={{ 
@@ -327,7 +513,7 @@ const Map = () => {
                                 }}
                             />
                         ))}
-                        {robberyStats?.map((robbery) => (
+                        {showRobbery === true && robberyStats?.map((robbery) => (
                             <Marker 
                                 key={robbery.id} 
                                 position={{ 
@@ -345,7 +531,7 @@ const Map = () => {
                                 }}
                             />
                         ))}
-                        {batteryStats?.map((battery) => (
+                        {showBattery === true && batteryStats?.map((battery) => (
                             <Marker 
                                 key={battery.id} 
                                 position={{ 
@@ -363,7 +549,7 @@ const Map = () => {
                                 }}
                             />
                         ))}
-                        {assaultStats?.map((assault) => (
+                        {showAssault === true && assaultStats?.map((assault) => (
                             <Marker 
                                 key={assault.id} 
                                 position={{ 
@@ -381,7 +567,7 @@ const Map = () => {
                                 }}
                             />
                         ))}
-                        {violationStats?.map((violation) => (
+                        {showViolation === true && violationStats?.map((violation) => (
                             <Marker 
                                 key={violation.id} 
                                 position={{ 
@@ -399,7 +585,7 @@ const Map = () => {
                                 }}
                             />
                         ))}
-                        {shotsFiredStats?.map((shots) => (
+                        {showShotsFired === true && shotsFiredStats?.map((shots) => (
                             <Marker 
                                 key={shots.id} 
                                 position={{ 
@@ -417,7 +603,7 @@ const Map = () => {
                                 }}
                             />
                         ))}
-                        {gunPossessionStats?.map((gun) => (
+                        {showGunPossession === true && gunPossessionStats?.map((gun) => (
                             <Marker 
                                 key={gun.id} 
                                 position={{ 
@@ -435,7 +621,7 @@ const Map = () => {
                                 }}
                             />
                         ))}
-                        {ammoViolationStats?.map((ammo) => (
+                        {showAmmoViolation === true && ammoViolationStats?.map((ammo) => (
                             <Marker 
                                 key={ammo.id} 
                                 position={{ 
@@ -453,7 +639,7 @@ const Map = () => {
                                 }}
                             />
                         ))}
-                        {gunSaleStats?.map((sale) => (
+                        {showGunSale === true && gunSaleStats?.map((sale) => (
                             <Marker 
                                 key={sale.id} 
                                 position={{ 
@@ -471,7 +657,7 @@ const Map = () => {
                                 }}
                             />
                         ))}
-                        {gunInSchoolStats?.map((guns) => (
+                        {showGunInSchool === true && gunInSchoolStats?.map((guns) => (
                             <Marker 
                                 key={guns.id} 
                                 position={{ 
@@ -489,7 +675,7 @@ const Map = () => {
                                 }}
                             />
                         ))}
-                        {gunAttackOnCopsStats?.map((attacks) => (
+                        {showGunAttackOnCops === true && gunAttackOnCopsStats?.map((attacks) => (
                             <Marker 
                                 key={attacks.id} 
                                 position={{ 
@@ -507,7 +693,7 @@ const Map = () => {
                                 }}
                             />
                         ))}
-                        {attackOnCopsStats?.map((attacks) => (
+                        {showAttackOnCops === true && attackOnCopsStats?.map((attacks) => (
                             <Marker 
                                 key={attacks.id} 
                                 position={{ 
@@ -525,7 +711,7 @@ const Map = () => {
                                 }}
                             />
                         ))}
-                        {airGunCrimeStats?.map((airguns) => (
+                        {showAirGunCrime === true && airGunCrimeStats?.map((airguns) => (
                             <Marker 
                                 key={airguns.id} 
                                 position={{ 
@@ -537,6 +723,24 @@ const Map = () => {
                                 }}
                                 icon={{
                                     url: `/airgun-crime.png`,
+                                    origin: new window.google.maps.Point(0, 0),
+                                    anchor: new window.google.maps.Point(15, 15),
+                                    scaledSize: new window.google.maps.Size(70, 70),
+                                }}
+                            />
+                        ))}
+                        {showCarjack === true && carjackStats?.map((carjacking) => (
+                            <Marker 
+                                key={carjacking.id} 
+                                position={{ 
+                                    lat: parseFloat(carjacking.latitude), 
+                                    lng: parseFloat(carjacking.longitude) 
+                                }}
+                                onClick={() => {
+                                    setSelectedCrime(carjacking)
+                                }}
+                                icon={{
+                                    url: `/carjacking.png`,
                                     origin: new window.google.maps.Point(0, 0),
                                     anchor: new window.google.maps.Point(15, 15),
                                     scaledSize: new window.google.maps.Size(70, 70),
