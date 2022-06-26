@@ -14,6 +14,8 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
+import LegendModal from '../LegendModal'
+
 require('dotenv').config()
 
 const containerStyle = {
@@ -89,8 +91,9 @@ const Map = () => {
     const [arrestMade, setArrestMade] = useState("All")
 
     const handleArrestToggle = (event, newView) => {
-        console.log("NEW VIEW", newView, totalCrimes)
-        setArrestMade(newView);
+        if(newView !== null) {
+            setArrestMade(newView)
+        }
     };
 
     const createFormattedDate = () => {
@@ -228,9 +231,21 @@ const Map = () => {
             showGunAttackOnCops === false &&
             showAttackOnCops === false &&
             showCarjack === false){
-                return "Select below for gun crime stats:"
-            }else return "Your Results:"
+                return "Select"
+            }else return "Results"
     }
+
+    const style = {
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        width: 400,
+        bgcolor: 'background.paper',
+        border: '2px solid #000',
+        boxShadow: 24,
+        p: 4,
+    };
 
     useEffect(() => {
         getHoodLatLng("Near West Side")
@@ -247,8 +262,7 @@ const Map = () => {
 
     useEffect(() => {
         setPageTitle(dynamicTitle())
-        let crimes = totalCrimeCount()
-        setTotalCrimes(crimes)
+        setTotalCrimes(totalCrimeCount())
     }, [showHomicide, showAssault, showSexAssault, showBattery, showRobbery, showViolation, showShotsFired, showGunPossession, showAmmoViolation, showGunSale, showGunInSchool, showGunAttackOnCops, showAttackOnCops, showCarjack, arrestMade])
 
     const mapRef = React.useRef();
@@ -258,11 +272,22 @@ const Map = () => {
     if (loadError) return "Error";
     if (!isLoaded) return "Loading...";
         console.log("ARREST MADE", arrestMade, totalCrimes)
-    return (
+    
+    const userPageResponse = () => {
+        if(window.innerWidth >= 1000){
+            window.location.reload()
+        }else if(window.innerWidth <= 1000){
+            window.location.reload()
+        }
+    }
+
+    window.addEventListener('resize', userPageResponse);
+    
+        return window.innerWidth >= 1000 ? (
 
         <div className="map-container">
             <div className="control-panel-wrap">
-                <h2 className="search-results">{pageTitle}&nbsp;</h2>
+                {pageTitle === "Select" ? <h2 className="search-select">Select below for gun crime stats:&nbsp;</h2> : <h2 className="search-results">Your Results:&nbsp;</h2>}
                 <div className="cj-number-wrapper">
                     <h2 className="carjack-numbers heart" id="cj-num-id">{totalCrimeCount()}&nbsp;</h2>
                     <h2 className="search-params">{`Gun Crimes
@@ -513,6 +538,9 @@ const Map = () => {
                         }}>
                         Carjackings
                     </ToggleButton>
+                </div>
+                <div className="crime-toggle-bar">
+                    <LegendModal />
                 </div>
             </div> 
             {violationStats.length ? 
@@ -803,8 +831,8 @@ const Map = () => {
             </>
             :
             <>
-                <div className="lottie-wrapper">
-                    <div className="lottie-container">
+                <div className="lottieWrapper">
+                    <div className="lottieContainer">
                         <h1 className="loading-title">Loading... Please Wait</h1>
                         <Lottie
                             loop
@@ -817,7 +845,9 @@ const Map = () => {
             </>
             }
         </div>
-    ) 
+    ) : (
+<></>
+    )
 }
 
 export default Map
