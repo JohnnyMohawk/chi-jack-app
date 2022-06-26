@@ -22,7 +22,7 @@ function HeroSection() {
                 Shy Jack
                 <i class="fas fa-car-crash"></i>
             </Link>
-            <h2>City of Chicago Carjacking Data Visualizer</h2>
+            <h2>City of Chicago Gun Crime Data Visualizer</h2>
             <p className="slogan">Just Data <i class="fas fa-database"></i> No Spin</p>
             <div className="hero-btns">
                 <Button className="btns" buttonStyle="btn--outline" buttonSize="btn--large" to="/map">Map Data</Button>
@@ -36,7 +36,7 @@ function HeroSection() {
                 Shy Jack
                 <i class="fas fa-car-crash"></i>
             </Link>
-            <h2>City of Chicago Carjacking Data Visualizer</h2>
+            <h2>City of Chicago Gun Crime Data Visualizer</h2>
             <p className="slogan">Just Data <i class="fas fa-database"></i> No Spin</p>
             <div className="hero-btns">
                 <Button className="btns" buttonStyle="btn--outline" buttonSize="btn--large" to="/map">Map Data</Button>

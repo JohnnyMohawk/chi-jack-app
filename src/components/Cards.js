@@ -20,7 +20,6 @@ function Cards() {
 
     useEffect(() => {
         serverSideApiCall()
-        newsService.mediastackApiCall()
     }, [])
     console.log(news)
     return (
