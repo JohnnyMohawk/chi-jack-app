@@ -303,17 +303,19 @@ const Map = () => {
 
         <div className="map-container">
             <div className="control-panel-wrap">
-                {pageTitle === "Select" ? <h2 className="search-select">Select below for gun crime stats:&nbsp;</h2> : <h2 className="search-results">Your Results:&nbsp;</h2>}
-                <div className="cj-number-wrapper">
-                    <h2 className="carjack-numbers heart" id="cj-num-id">{totalCrimeCount()}&nbsp;</h2>
-                    <h2 className="search-params">{`Gun Crimes
-                        ${searchSpan === "month" ? "in " + fullMonths[months.indexOf(searchMonth)] : ""}
-                        ${searchSpan === "week" ? "on the week ending "+ fullMonths[months.indexOf(searchMonth)] + " " + searchDay : ""}
-                        ${searchSpan === "most recent" ? "on " + fullMonths[months.indexOf(searchMonth)] + " " +  searchDay : ""}
-                        ${searchSpan === "year" ? "in " : ""}
-                        ${searchYear}`}
-                    </h2>
-                </div>
+                <div className="main-title-results">
+                    {pageTitle === "Select" ? <h2 className="search-select">Select below for gun crime stats:&nbsp;</h2> : <h2 className="search-results">Your Results:&nbsp;</h2>}
+                    {pageTitle !== "Select" ? <div className="cj-number-wrapper">
+                            <h2 className="carjack-numbers heart" id="cj-num-id">{totalCrimeCount()}&nbsp;</h2>
+                            <h2 className="search-params">{`Gun Crimes
+                                ${searchSpan === "month" ? "in " + fullMonths[months.indexOf(searchMonth)] : ""}
+                                ${searchSpan === "week" ? "on the week ending "+ fullMonths[months.indexOf(searchMonth)] + " " + searchDay : ""}
+                                ${searchSpan === "most recent" ? "on " + fullMonths[months.indexOf(searchMonth)] + " " +  searchDay : ""}
+                                ${searchSpan === "year" ? "in " : ""}
+                                ${searchYear}`}
+                            </h2>
+                        </div> : <></>}
+                    </div>
                 <div className="search-bar-wrap">
                     <div className="search-bar">
                         <Button variant="contained" className="sb-inputs" id="my-location" size="large" onClick={() => {setMyLocation()}}>My Location</Button>
@@ -1152,8 +1154,8 @@ const Map = () => {
                                 <h2>{removeZeros(selectedCrime.block.split(''))}</h2>
                                 <h3>{new Date(selectedCrime.date.split('T')[0]).toDateString()}</h3>
                                 <h3>{"At "+selectedCrime.date.split('T')[1].split(':')[0]+":"+selectedCrime.date.split('T')[1].split(':')[1]+" Hours"}</h3>
-                                <h3>{selectedCrime.primary_type}</h3>
-                                <h3>{selectedCrime.description}</h3>
+                                <h4>{selectedCrime.primary_type}</h4>
+                                <h5>{selectedCrime.description}</h5>
                                 <h5>{selectedCrime.location_description}</h5>
                             </div>
                         </InfoWindow>
