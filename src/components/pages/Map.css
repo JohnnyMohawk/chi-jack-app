@@ -3,11 +3,50 @@
     height: 715px !important;
 }
 
+.map-container-mobile {
+    position: relative;
+}
+
+.search-modal {
+    position: absolute;
+    bottom: 1%;
+    /* right: 15%; */
+    left: 5%;
+    /* margin: 0 auto; */
+}
+
 .control-panel-wrap {
     width:400px;
     position: absolute;
     left: 0;
     padding-left: 50px;
+}
+
+.control-modal-wrap {
+    margin-top: 151px;
+    padding: 0;
+    width:100vw;
+    position: absolute;
+    left: 0;
+    background-color: rgba(86, 86, 86, 0.5);
+
+    -webkit-backdrop-filter: blur(2px);
+    backdrop-filter: blur(2px);
+    /* padding-left: 50px; */
+}
+
+.map-title-results {
+    height: 71px;
+    background-color: rgba(86, 86, 86, 0.5);
+    padding: 10px ;
+    width: 100vw;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+
+    -webkit-backdrop-filter: blur(2px);
+    backdrop-filter: blur(2px);
 }
 
 .loading-title {
@@ -55,8 +94,23 @@
     margin: 5px 13px !important;
 }
 
+.crime-view-mobile {
+    height: 35px !important;
+    -webkit-filter: invert(100%) !important;
+    filter: invert(100%) !important;
+    min-width: 170px;
+    margin: 0px 13px !important;
+}
+
 .arrest-view {
     height: 40px !important;
+    -webkit-filter: invert(100%) !important;
+    filter: invert(100%) !important;
+}
+
+.arrest-view-mobile {
+    margin-top: -8px;
+    height: 35px !important;
     -webkit-filter: invert(100%) !important;
     filter: invert(100%) !important;
 }
@@ -74,10 +128,16 @@
     height: 40px !important;
 }
 
+.loading-title {
+    padding-bottom: 10px;
+}
+
 .lottieWrapper {
     position: absolute;
     right: 0;
+    top: 0;
     padding-right: 5vw;
+    /* padding-top: 10px; */
 }
 
 .lottieContainer {
@@ -87,8 +147,8 @@
     justify-content: center;
     object-fit: cover;
     width: 100%;
-    height: 100%;
-    align-self: flex-end;
+    height: 90%;
+    /* align-self: flex-end; */
     margin-bottom: -38px;
 }
 
@@ -117,6 +177,15 @@
     flex-direction: row;
     justify-content: space-between;
     margin-top: 10px;
+    align-items: center;
+    justify-content: center;
+}
+
+.crime-legend {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 3px;
     align-items: center;
     justify-content: center;
 }
@@ -173,6 +242,12 @@
 
     #cj-num-id {
         font-size: 36px;
+    }
+}
+
+@media screen and (max-width: 960px) {
+    .sb-inputs {
+        height: 35px !important;
     }
 }
 

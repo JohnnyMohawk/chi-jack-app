@@ -14,6 +14,9 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import Modal from '@mui/material/Modal';
 import LegendModal from '../LegendModal'
 
 require('dotenv').config()
@@ -25,7 +28,7 @@ const containerStyle = {
 
 const mobileContainerStyle = {
     width: '100vw',
-    height: '90vh'
+    height: '88vh'
 }
 
 const options = {
@@ -92,6 +95,10 @@ const Map = () => {
     const [searchMonth, setSearchMonth] = useState(months[currentMonth])
     const [monthNumber, setMonthNumber] = useState(months.indexOf(searchDate.split(' ')[1]) + 1)
     const [daysOfTheMonth, setDaysOfTheMonth] = useState(getDaysInMonth(currentMonth, currentYear))
+
+    const [open, setOpen] = React.useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
 
     const [arrestMade, setArrestMade] = useState("All")
 
@@ -288,7 +295,7 @@ const Map = () => {
 
     window.addEventListener('resize', userPageResponse);
     
-        return window.innerWidth >= 1000 ? (
+        return window.innerWidth > 960 ? (
 
         <div className="map-container">
             <div className="control-panel-wrap">
@@ -843,7 +850,7 @@ const Map = () => {
                             loop
                             animationData={carSafety}
                             play
-                            style={{ width: 'calc(100vw - 550px)', height: 700 }}
+                            style={{ width: 'calc(100vw - 550px)', height: 650 }}
                         />
                     </div>
                 </div>
@@ -851,8 +858,22 @@ const Map = () => {
             }
         </div>
     ) : (
-        <>
+        <div className="map-container-mobile">
             <div className="map-mobile">
+                <div className="map-title-results">
+                    {pageTitle === "Select" ? <h2 className="search-select">Set search for gun crime stats:&nbsp;</h2> : 
+                    <h2 className="search-results">Your Results:&nbsp;</h2>}
+                    {pageTitle !== "Select" ? <div className="cj-number-wrapper">
+                        <h2 className="carjack-numbers heart" id="cj-num-id">{totalCrimeCount()}&nbsp;</h2>
+                        <h2 className="search-params">{`Gun Crimes
+                            ${searchSpan === "month" ? "in " + fullMonths[months.indexOf(searchMonth)] : ""}
+                            ${searchSpan === "week" ? "on the week ending "+ fullMonths[months.indexOf(searchMonth)] + " " + searchDay : ""}
+                            ${searchSpan === "most recent" ? "on " + fullMonths[months.indexOf(searchMonth)] + " " +  searchDay : ""}
+                            ${searchSpan === "year" ? "in " : ""}
+                            ${searchYear}`}
+                        </h2>
+                    </div> : <></>}
+                </div>
                 <GoogleMap
                     className="map-canvas"
                     mapContainerStyle={mobileContainerStyle}
@@ -1135,7 +1156,263 @@ const Map = () => {
                     )}
                 </GoogleMap>
             </div>
-        </>
+            <div className="search-modal">
+                <Button variant="contained" onClick={handleOpen}>Set Search</Button>
+                <Modal
+                    open={open}
+                    onClose={handleClose}
+                    aria-labelledby="modal-modal-title"
+                    aria-describedby="modal-modal-description"
+                >
+                    <div className="control-modal-wrap">
+                        <div className="search-bar-wrap">
+                            <div className="search-bar">
+                                <Button variant="contained" className="sb-inputs" id="my-location" size="large" onClick={() => {setMyLocation()}}>My Location</Button>
+                                <FormControl sx={{ m: 0, minWidth: 232 }} size="small">
+                                    <Select className="sb-inputs" id="hoodSelect" defaultValue="Near West Side" onChange={event => {
+                                        getHoodLatLng(event.target.value)
+                                        }}>
+                                        {Object.keys(neighborhoodObject).sort().map(neighborhood => (
+                                            <MenuItem key={neighborhood} value={neighborhood}>
+                                                {neighborhood}
+                                            </MenuItem>
+                                        ))}
+                                    </Select>
+                                </FormControl>
+                            </div>
+                            <div className="search-bar">
+                                <Select className="sb-inputs" id='timeSpan' defaultValue={searchSpan} onChange={event => {
+                                setSearchSpan(event.target.value)
+                                }}>
+                                    <MenuItem value="most recent">One Day</MenuItem>
+                                    <MenuItem value="week">Weekly</MenuItem>
+                                    <MenuItem value="month">Monthly</MenuItem>
+                                    <MenuItem value="year">Annual</MenuItem>
+                                </Select>
+                                {searchSpan === "week" || searchSpan === "most recent" || searchSpan === "month" ? 
+                                <>
+                                    <Select className="sb-inputs" id='monthSelect' defaultValue={searchMonth} onChange={event => {
+                                    setSearchMonth(event.target.value)
+                                    let moNo = months.indexOf(event.target.value) + 1
+                                    formatDay(moNo)
+                                    setMonthNumber(moNo)
+                                    }}>
+                                    {months.map(month => (
+                                        <MenuItem key={month} value={month}>
+                                            {month}
+                                        </MenuItem>
+                                    ))}
+                                </Select>
+                                </>
+                                :
+                                <></>
+                                }
+                                {searchSpan === "week" || searchSpan === "most recent" ? 
+                                <>
+                                    <Select className="sb-inputs" id='daySelect' defaultValue={dayOfTheMonth} onChange={event => {
+                                        setSearchDay(event.target.value)
+                                        }}>
+                                            {daysOfTheMonth.map(day => (
+                                                <MenuItem key={day} value={day}>
+                                                    {day}
+                                                </MenuItem>
+                                            ))}
+                                    </Select>
+                                </>
+                                :
+                                <></>
+                                }
+                                <Select className="sb-inputs" id='yearSelect' value={searchYear} onChange={event => {
+                                    setSearchYear(event.target.value)
+                                    }}>
+                                        {yearArray.reverse().map(year => (
+                                            <MenuItem key={year} value={year}>
+                                                {year}
+                                            </MenuItem>
+                                        ))}
+                                </Select>
+                            </div>
+                        </div>
+                        <div className="crime-toggle-bar">
+                            <ToggleButtonGroup
+                                className='arrest-view-mobile'
+                                value={arrestMade}
+                                exclusive
+                                onChange={handleArrestToggle}
+                                aria-label="arrest-view-toggle"
+                            >
+                                <ToggleButton value="All" aria-label="all crimes" color="warning" className='arrest-all'>
+                                    All
+                                </ToggleButton>
+                                <ToggleButton value="Yes" aria-label="crimes with arrest" color="warning" className='arrest-toggle'>
+                                    Arrest Made
+                                </ToggleButton>
+                                <ToggleButton value="No" aria-label="crimes with no arrest" color="warning" className='arrest-toggle'>
+                                    No Arrest Made
+                                </ToggleButton>
+                            </ToggleButtonGroup>
+                        </div>
+                        <div className="crime-toggle-bar">
+                            <ToggleButton
+                                className='crime-view-mobile'
+                                color="warning"
+                                value="check"
+                                selected={showHomicide}
+                                onChange={() => {
+                                    setShowHomicide(!showHomicide);
+                                }}>
+                                Homicides
+                            </ToggleButton>
+                            <ToggleButton
+                                className='crime-view-mobile'
+                                color="warning"
+                                value="check"
+                                selected={showAssault}
+                                onChange={() => {
+                                    setShowAssault(!showAssault);
+                                }}>
+                                Assaults
+                            </ToggleButton>
+                        </div>
+                        <div className="crime-toggle-bar">
+                            <ToggleButton
+                                className='crime-view-mobile'
+                                color="warning"
+                                value="check"
+                                selected={showSexAssault}
+                                onChange={() => {
+                                    setShowSexAssault(!showSexAssault);
+                                }}>
+                                Sex. Assaults
+                            </ToggleButton>
+                            <ToggleButton
+                                className='crime-view-mobile'
+                                color="warning"
+                                value="check"
+                                selected={showRobbery}
+                                onChange={() => {
+                                    setShowRobbery(!showRobbery);
+                                }}>
+                                Robberies
+                            </ToggleButton>
+                        </div>
+                        <div className="crime-toggle-bar">
+                            <ToggleButton
+                                className='crime-view-mobile'
+                                color="warning"
+                                value="check"
+                                selected={showBattery}
+                                onChange={() => {
+                                    setShowBattery(!showBattery);
+                                }}>
+                                Batteries
+                            </ToggleButton>
+                            <ToggleButton
+                                className='crime-view-mobile'
+                                color="warning"
+                                value="check"
+                                selected={showViolation}
+                                onChange={() => {
+                                    setShowViolation(!showViolation);
+                                }}>
+                                Gun Violations
+                            </ToggleButton>
+                        </div>
+                        <div className="crime-toggle-bar">
+                            <ToggleButton
+                                className='crime-view-mobile'
+                                color="warning"
+                                value="check"
+                                selected={showShotsFired}
+                                onChange={() => {
+                                    setShowShotsFired(!showShotsFired);
+                                }}>
+                                Shots Fired
+                            </ToggleButton>
+                            <ToggleButton
+                                className='crime-view-mobile'
+                                color="warning"
+                                value="check"
+                                selected={showGunPossession}
+                                onChange={() => {
+                                    setShowGunPossession(!showGunPossession);
+                                }}>
+                                Gun Possession
+                            </ToggleButton>
+                        </div>
+                        <div className="crime-toggle-bar">
+                            <ToggleButton
+                                className='crime-view-mobile'
+                                color="warning"
+                                value="check"
+                                selected={showAmmoViolation}
+                                onChange={() => {
+                                    setShowAmmoViolation(!showAmmoViolation);
+                                }}>
+                                Ammo Violation
+                            </ToggleButton>
+                            <ToggleButton
+                                className='crime-view-mobile'
+                                color="warning"
+                                value="check"
+                                selected={showGunSale}
+                                onChange={() => {
+                                    setShowGunSale(!showGunSale);
+                                }}>
+                                Illegal Gun Sales
+                            </ToggleButton>
+                        </div>
+                        <div className="crime-toggle-bar">
+                            <ToggleButton
+                                className='crime-view-mobile'
+                                color="warning"
+                                value="check"
+                                selected={showGunInSchool}
+                                onChange={() => {
+                                    setShowGunInSchool(!showGunInSchool);
+                                }}>
+                                Gun in School
+                            </ToggleButton>
+                            <ToggleButton
+                                className='crime-view-mobile'
+                                color="warning"
+                                value="check"
+                                selected={showGunAttackOnCops}
+                                onChange={() => {
+                                    setShowGunAttackOnCops(!showGunAttackOnCops);
+                                }}>
+                                Shots on Cops
+                            </ToggleButton>
+                        </div>
+                        <div className="crime-toggle-bar">
+                            <ToggleButton
+                                className='crime-view-mobile'
+                                color="warning"
+                                value="check"
+                                selected={showAttackOnCops}
+                                onChange={() => {
+                                    setShowAttackOnCops(!showAttackOnCops);
+                                }}>
+                                Attack on Cops
+                            </ToggleButton>
+                            <ToggleButton
+                                className='crime-view-mobile'
+                                color="warning"
+                                value="check"
+                                selected={showCarjack}
+                                onChange={() => {
+                                    setShowCarjack(!showCarjack);
+                                }}>
+                                Carjackings
+                            </ToggleButton>
+                        </div>
+                        <div className="crime-legend">
+                            <LegendModal />
+                        </div>
+                    </div>
+                </Modal>
+            </div>
+        </div>
     )
 }
 
