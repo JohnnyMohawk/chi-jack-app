@@ -55,6 +55,12 @@
     margin-bottom: -10px;
 }
 
+.loading-title-mobile {
+    font-size: 35px;
+    padding-top: 70px;
+    margin-bottom: -15px;
+}
+
 .cj-number-wrapper {
     display: flex;
     flex-direction: row;

@@ -257,10 +257,6 @@ const Map = () => {
         p: 4,
     };
 
-    // useEffect(() => {
-    //     getHoodLatLng("Near West Side")
-    // }, [])
-
     useEffect(() => {
         if(window.innerWidth > 960){
             getHoodLatLng("Near West Side")
@@ -880,6 +876,8 @@ const Map = () => {
                         </h2>
                     </div> : <></>}
                 </div>
+                {violationStats.length ? 
+                <>
                 <GoogleMap
                     className="map-canvas"
                     mapContainerStyle={mobileContainerStyle}
@@ -1161,6 +1159,22 @@ const Map = () => {
                         </InfoWindow>
                     )}
                 </GoogleMap>
+                </> : 
+                <>
+                    <div className="mobileLottieWrapper">
+                    <div className="mobileLottieContainer">
+                        <h1 className="loading-title-mobile">Loading... Please Wait</h1>
+                        <Lottie
+                            loop
+                            animationData={carSafety}
+                            play
+                            // style={{ width: 400, height: 495 }}
+                            style={{ width: 400, height: '170vw' }}
+                        />
+                    </div>
+                </div>
+                </>
+                }
             </div>
             <div className="search-modal">
                 <Button variant="contained" onClick={handleOpen}>Set Search</Button>
