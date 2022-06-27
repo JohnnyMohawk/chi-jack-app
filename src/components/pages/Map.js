@@ -14,8 +14,6 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import LegendModal from '../LegendModal'
 
@@ -259,8 +257,14 @@ const Map = () => {
         p: 4,
     };
 
+    // useEffect(() => {
+    //     getHoodLatLng("Near West Side")
+    // }, [])
+
     useEffect(() => {
-        getHoodLatLng("Near West Side")
+        if(window.innerWidth > 960){
+            getHoodLatLng("Near West Side")
+        }else getHoodLatLng("Lower West Side")
     }, [])
 
     useEffect(() => {
@@ -878,7 +882,7 @@ const Map = () => {
                     className="map-canvas"
                     mapContainerStyle={mobileContainerStyle}
                     center={{lat: lat, lng: lng}}
-                    zoom={13}
+                    zoom={12}
                     options={options}
                     onLoad={onMapLoad}
                 >
@@ -896,7 +900,7 @@ const Map = () => {
                                 url: `/homicide.png`,
                                 origin: new window.google.maps.Point(0, 0),
                                 anchor: new window.google.maps.Point(15, 15),
-                                scaledSize: new window.google.maps.Size(70, 70),
+                                scaledSize: new window.google.maps.Size(50, 50),
                             }}
                         />
                     ))}
@@ -1150,7 +1154,7 @@ const Map = () => {
                                 <h3>{"At "+selectedCrime.date.split('T')[1].split(':')[0]+":"+selectedCrime.date.split('T')[1].split(':')[1]+" Hours"}</h3>
                                 <h3>{selectedCrime.primary_type}</h3>
                                 <h3>{selectedCrime.description}</h3>
-                                <h3>{selectedCrime.location_description}</h3>
+                                <h5>{selectedCrime.location_description}</h5>
                             </div>
                         </InfoWindow>
                     )}

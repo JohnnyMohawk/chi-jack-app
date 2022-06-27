@@ -23,7 +23,7 @@
 }
 
 .control-modal-wrap {
-    margin-top: 151px;
+    margin-top: 140px;
     padding: 0;
     width:100vw;
     position: absolute;
@@ -36,9 +36,9 @@
 }
 
 .map-title-results {
-    height: 71px;
+    height: 60px;
     background-color: rgba(86, 86, 86, 0.5);
-    padding: 10px ;
+    padding: 7px 10px ;
     width: 100vw;
     position: absolute;
     top: 0;
@@ -222,7 +222,7 @@
 
 .info-window > h3 {
     font-family: 'Josefin Sans', sans-serif;
-    line-height: 4px;
+    /* line-height: 56px; */
     margin-top: 10px;
 }
 
