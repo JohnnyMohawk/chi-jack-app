@@ -1168,8 +1168,7 @@ const Map = () => {
                             loop
                             animationData={carSafety}
                             play
-                            // style={{ width: 400, height: 495 }}
-                            style={{ width: 400, height: '170vw' }}
+                            style={{ width: 400, height: '75vh' }}
                         />
                     </div>
                 </div>
