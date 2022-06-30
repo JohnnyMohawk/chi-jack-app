@@ -90,17 +90,6 @@ export const filterApiCallData = (data, formattedDate, searchSpan, arrestMade) =
     }
 }
 
-// export const filterApiCallData = (data, formattedDate, searchSpan) => {
-//     if(searchSpan !== "week"){
-//         let filteredData = data.filter(crime => crime.date.includes(formattedDate))
-//         console.log("CRIKEY", filteredData.filter(crime => crime.arrest === true))
-//         return data.filter(crime => crime.date.includes(formattedDate))
-//     }else if(searchSpan === "week") {
-//         console.log("DEUCES", data.filter(crime => (crime.date.includes(formattedDate[0]) || crime.date.includes(formattedDate[1]) || crime.date.includes(formattedDate[2]) || crime.date.includes(formattedDate[3]) || crime.date.includes(formattedDate[4]) || crime.date.includes(formattedDate[5]) || crime.date.includes(formattedDate[6]))))
-//         return data.filter(crime => (crime.date.includes(formattedDate[0]) || crime.date.includes(formattedDate[1]) || crime.date.includes(formattedDate[2]) || crime.date.includes(formattedDate[3]) || crime.date.includes(formattedDate[4]) || crime.date.includes(formattedDate[5]) || crime.date.includes(formattedDate[6])))
-//     }
-// }
-
 export const homicideApiCall = async(props) => {
     let res1 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=0110&$limit=50000&$offset=0')
     let res2 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=0130&$limit=50000&$offset=0')

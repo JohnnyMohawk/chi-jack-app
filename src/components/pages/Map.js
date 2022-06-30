@@ -208,54 +208,53 @@ const Map = () => {
 
     const totalCrimeCount = () => {
         let count = 0
-        if(showHomicide === true) {count += homicideStats.length}
-        if(showAssault === true) {count += assaultStats.length}
-        if(showSexAssault === true) {count +=  sexAssaultStats.length}
-        if(showRobbery === true) {count +=  robberyStats.length}
-        if(showBattery === true) {count +=  batteryStats.length}
-        if(showViolation === true) {count +=  violationStats.length}
-        if(showShotsFired === true) {count +=  shotsFiredStats.length}
-        if(showGunPossession === true) {count +=  gunPossessionStats.length}
-        if(showAmmoViolation === true) {count +=  ammoViolationStats.length}
-        if(showGunSale === true) {count +=  gunSaleStats.length}
-        if(showGunInSchool === true) {count +=  gunInSchoolStats.length}
-        if(showGunAttackOnCops === true) {count +=  gunAttackOnCopsStats.length}
-        if(showAttackOnCops === true) {count +=  attackOnCopsStats.length}
-        if(showCarjack === true) {count +=  carjackStats.length}
-        
+        if(showHomicide) {count += homicideStats.length}
+        if(showAssault) {count += assaultStats.length}
+        if(showSexAssault) {count +=  sexAssaultStats.length}
+        if(showRobbery) {count +=  robberyStats.length}
+        if(showBattery) {count +=  batteryStats.length}
+        if(showViolation) {count +=  violationStats.length}
+        if(showShotsFired) {count +=  shotsFiredStats.length}
+        if(showGunPossession) {count +=  gunPossessionStats.length}
+        if(showAmmoViolation) {count +=  ammoViolationStats.length}
+        if(showGunSale) {count +=  gunSaleStats.length}
+        if(showGunInSchool) {count +=  gunInSchoolStats.length}
+        if(showGunAttackOnCops) {count +=  gunAttackOnCopsStats.length}
+        if(showAttackOnCops) {count +=  attackOnCopsStats.length}
+        if(showCarjack) {count +=  carjackStats.length}
         return count
     }
 
     const dynamicTitle = () => {
-        if(showHomicide === false && 
-            showAssault === false &&
-            showSexAssault === false &&
-            showRobbery === false &&
-            showBattery === false &&
-            showViolation === false &&
-            showShotsFired === false &&
-            showGunPossession === false &&
-            showAmmoViolation === false &&
-            showGunSale === false &&
-            showGunInSchool === false &&
-            showGunAttackOnCops === false &&
-            showAttackOnCops === false &&
-            showCarjack === false){
+        if(!showHomicide && 
+            !showAssault &&
+            !showSexAssault &&
+            !showRobbery &&
+            !showBattery &&
+            !showViolation &&
+            !showShotsFired &&
+            !showGunPossession &&
+            !showAmmoViolation &&
+            !showGunSale &&
+            !showGunInSchool &&
+            !showGunAttackOnCops &&
+            !showAttackOnCops &&
+            !showCarjack){
                 return "Select"
             }else return "Results"
     }
 
-    const style = {
-        position: 'absolute',
-        top: '50%',
-        left: '50%',
-        transform: 'translate(-50%, -50%)',
-        width: 400,
-        bgcolor: 'background.paper',
-        border: '2px solid #000',
-        boxShadow: 24,
-        p: 4,
-    };
+    // const style = {
+    //     position: 'absolute',
+    //     top: '50%',
+    //     left: '50%',
+    //     transform: 'translate(-50%, -50%)',
+    //     width: 400,
+    //     bgcolor: 'background.paper',
+    //     border: '2px solid #000',
+    //     boxShadow: 24,
+    //     p: 4,
+    // };
 
     useEffect(() => {
         if(window.innerWidth > 960){
