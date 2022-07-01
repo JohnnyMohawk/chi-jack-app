@@ -291,7 +291,7 @@ const Map = () => {
             window.location.reload()
         }
     }
-console.log("LOOOOOOKKKKK", searchYear, monthNumber, setMonthNumber, searchMonth, searchSpan, searchDay)
+console.log("LOOOOOOKKKKK", searchYear, monthNumber, searchMonth, searchSpan, searchDay, setMonthNumber)
     window.addEventListener('resize', userPageResponse);
     
         return window.innerWidth > 960 ? (
