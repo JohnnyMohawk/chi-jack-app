@@ -8,14 +8,14 @@ import {formatDay, getDaysInMonth, createWeekArr, yearRange, neighborhoodObject,
         carjackApiCall, filterApiCallData} from '../../services/mapService.js'
 import mapStyles from './mapStyles';
 import '../pages/Map.css'
-import Button from '@mui/material/Button';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
-import ToggleButton from '@mui/material/ToggleButton';
-import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
-import Modal from '@mui/material/Modal';
-import LegendModal from '../LegendModal';
+// import Button from '@mui/material/Button';
+// import MenuItem from '@mui/material/MenuItem';
+// import FormControl from '@mui/material/FormControl';
+// import Select from '@mui/material/Select';
+// import ToggleButton from '@mui/material/ToggleButton';
+// import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
+// import Modal from '@mui/material/Modal';
+// import LegendModal from '../LegendModal';
 
 
 import ControlPanel from '../ControlPanel'
@@ -83,82 +83,82 @@ const Map = () => {
     const [showGunAttackOnCops, setShowGunAttackOnCops] = useState(false)
     const [showAttackOnCops, setShowAttackOnCops] = useState(false)
     const [showCarjack, setShowCarjack] = useState(false)
-    const [totalCrimes, setTotalCrimes] = useState(0)
-    const [pageTitle, setPageTitle] = useState(0)
+    // const [totalCrimes, setTotalCrimes] = useState(0)
+    // const [pageTitle, setPageTitle] = useState(0)
 
     const [lat, setLat] = useState(null)
     const [lng, setLng] = useState(null)
     const [selectedCrime, setSelectedCrime] = useState(null)
-    const [searchSpan, setSearchSpan] = useState("month")
-    const [yearArray, setYearArray] = useState([])
-    const [searchDay, setSearchDay] = useState(dayOfTheMonth)
-    const [searchYear, setSearchYear] = useState(searchDate.split(' ')[3])
-    const [searchMonth, setSearchMonth] = useState(months[currentMonth])
-    const [monthNumber, setMonthNumber] = useState(months.indexOf(searchDate.split(' ')[1]) + 1)
-    const [daysOfTheMonth, setDaysOfTheMonth] = useState(getDaysInMonth(currentMonth, currentYear))
+    // const [searchSpan, setSearchSpan] = useState("month")
+    // const [yearArray, setYearArray] = useState([])
+    // const [searchDay, setSearchDay] = useState(dayOfTheMonth)
+    // const [searchYear, setSearchYear] = useState(searchDate.split(' ')[3])
+    // const [searchMonth, setSearchMonth] = useState(months[currentMonth])
+    // const [monthNumber, setMonthNumber] = useState(months.indexOf(searchDate.split(' ')[1]) + 1)
+    // const [daysOfTheMonth, setDaysOfTheMonth] = useState(getDaysInMonth(currentMonth, currentYear))
 
-    const [open, setOpen] = React.useState(false);
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
+    // const [open, setOpen] = React.useState(false);
+    // const handleOpen = () => setOpen(true);
+    // const handleClose = () => setOpen(false);
 
-    const [arrestMade, setArrestMade] = useState("All")
+    // const [arrestMade, setArrestMade] = useState("All")
 
-    const handleArrestToggle = (event, newView) => {
-        if(newView !== null) {
-            setArrestMade(newView)
-        }
-    };
+    // const handleArrestToggle = (event, newView) => {
+    //     if(newView !== null) {
+    //         setArrestMade(newView)
+    //     }
+    // };
 
-    const createFormattedDate = () => {
-        let formattedDate
-        let formDateArr = []
-        let dateArr = searchDate.split(" ")
-        dateArr.shift()
-        formDateArr.push(searchYear + "-")
-        months.forEach((month, i) => {
-            if(searchMonth === month){
-                let dateMonth = i + 1
-                setMonthNumber(dateMonth)
-                formDateArr.push(monthNumber + "-" + dateArr[1])
-            }
-        });
-        if(searchSpan === "month"){
-            if(monthNumber < 10){
-                formattedDate = searchYear + "-0" + monthNumber
-            }else{
-                formattedDate = searchYear + "-" + monthNumber
-            }
-        }else if(searchSpan === "week"){
-            if(monthNumber < 10){
-                let completeDate = searchYear + "-0" + monthNumber + "-" + searchDay
-                let arrayOfDays = createWeekArr(completeDate)
-                formattedDate = arrayOfDays
-            }else{
-                let completeDate = searchYear + "-" + monthNumber + "-" + searchDay
-                let arrayOfDays = createWeekArr(completeDate)
-                formattedDate = arrayOfDays
-            }
-        }else if(searchSpan === "year"){
-            formattedDate = searchYear
-        }else if(searchSpan === "most recent"){
-            if(monthNumber < 10){
-                formattedDate = searchYear + "-0" + monthNumber + "-" + searchDay
-            }else{
-                formattedDate = searchYear + "-" + monthNumber + "-" + searchDay
-            }
-        }
-        return formattedDate
-    }
+    // const createFormattedDate = () => {
+    //     let formattedDate
+    //     let formDateArr = []
+    //     let dateArr = searchDate.split(" ")
+    //     dateArr.shift()
+    //     formDateArr.push(searchYear + "-")
+    //     months.forEach((month, i) => {
+    //         if(searchMonth === month){
+    //             let dateMonth = i + 1
+    //             setMonthNumber(dateMonth)
+    //             formDateArr.push(monthNumber + "-" + dateArr[1])
+    //         }
+    //     });
+    //     if(searchSpan === "month"){
+    //         if(monthNumber < 10){
+    //             formattedDate = searchYear + "-0" + monthNumber
+    //         }else{
+    //             formattedDate = searchYear + "-" + monthNumber
+    //         }
+    //     }else if(searchSpan === "week"){
+    //         if(monthNumber < 10){
+    //             let completeDate = searchYear + "-0" + monthNumber + "-" + searchDay
+    //             let arrayOfDays = createWeekArr(completeDate)
+    //             formattedDate = arrayOfDays
+    //         }else{
+    //             let completeDate = searchYear + "-" + monthNumber + "-" + searchDay
+    //             let arrayOfDays = createWeekArr(completeDate)
+    //             formattedDate = arrayOfDays
+    //         }
+    //     }else if(searchSpan === "year"){
+    //         formattedDate = searchYear
+    //     }else if(searchSpan === "most recent"){
+    //         if(monthNumber < 10){
+    //             formattedDate = searchYear + "-0" + monthNumber + "-" + searchDay
+    //         }else{
+    //             formattedDate = searchYear + "-" + monthNumber + "-" + searchDay
+    //         }
+    //     }
+    //     return formattedDate
+    // }
 
-    const setMyLocation = async () => {
-        navigator.geolocation.getCurrentPosition(
-            (position) => {
-                setLat(parseFloat(position.coords.latitude))
-                setLng(parseFloat(position.coords.longitude))
-            },
-            () => null
-        )
-    }
+    // const setMyLocation = async () => {
+    //     navigator.geolocation.getCurrentPosition(
+    //         (position) => {
+    //             setLat(parseFloat(position.coords.latitude))
+    //             setLng(parseFloat(position.coords.longitude))
+    //         },
+    //         () => null
+    //     )
+    // }
 
     const getHoodLatLng = (selection) => {
         setLat(neighborhoodObject[selection][0])
@@ -172,81 +172,81 @@ const Map = () => {
         }
     }
 
-    const yearMonthArray = () => {
-        setYearArray(yearRange(2001, new Date().getFullYear()))
-        setDaysOfTheMonth(getDaysInMonth(months.indexOf(searchMonth), searchYear))
-    }
+    // const yearMonthArray = () => {
+    //     setYearArray(yearRange(2001, new Date().getFullYear()))
+    //     setDaysOfTheMonth(getDaysInMonth(months.indexOf(searchMonth), searchYear))
+    // }
 
-    const serverSideApiCall = async() => {
-        let formattedDate = createFormattedDate()
-        let homicides = await homicideApiCall()
-        let sexualAssaults = await sexAssaultApiCall()
-        let robberies = await robberyApiCall()
-        let batteries = await batteryApiCall()
-        let assaults = await assaultApiCall()
-        let gunViolations = await gunViolationApiCall()
-        let gunFireViolations = await gunFireViolation()
-        let gunPossessionViolations = await gunNoFireViolation()
-        let ammoViolations = await ammoViolation()
-        let illegalGunSales = await illegalGunSale()
-        let gunInSchools = await gunInSchool()
-        let gunAttackOnCop = await gunAttackOnCops()
-        let attackOnCop = await attackOnCops()
-        let carjackings = await carjackApiCall()
-        setHomicideStats(filterApiCallData(homicides, formattedDate, searchSpan, arrestMade))
-        setSexAssaultStats(filterApiCallData(sexualAssaults, formattedDate, searchSpan, arrestMade))
-        setRobberyStats(filterApiCallData(robberies, formattedDate, searchSpan, arrestMade))
-        setBatteryStats(filterApiCallData(batteries, formattedDate, searchSpan, arrestMade))
-        setAssaultStats(filterApiCallData(assaults, formattedDate, searchSpan, arrestMade))
-        setViolationStats(filterApiCallData(gunViolations, formattedDate, searchSpan, arrestMade))
-        setShotsFiredStats(filterApiCallData(gunFireViolations, formattedDate, searchSpan, arrestMade))
-        setGunPossessionStats(filterApiCallData(gunPossessionViolations, formattedDate, searchSpan, arrestMade))
-        setAmmoViolationStats(filterApiCallData(ammoViolations, formattedDate, searchSpan, arrestMade))
-        setGunSaleStats(filterApiCallData(illegalGunSales, formattedDate, searchSpan, arrestMade))
-        setGunInSchoolStats(filterApiCallData(gunInSchools, formattedDate, searchSpan, arrestMade))
-        setGunAttackOnCopsStats(filterApiCallData(gunAttackOnCop, formattedDate, searchSpan, arrestMade))
-        setAttackOnCopsStats(filterApiCallData(attackOnCop, formattedDate, searchSpan, arrestMade))
-        setCarjackStats(filterApiCallData(carjackings, formattedDate, searchSpan, arrestMade))
-    }
+    // const serverSideApiCall = async() => {
+    //     let formattedDate = createFormattedDate()
+    //     let homicides = await homicideApiCall()
+    //     let sexualAssaults = await sexAssaultApiCall()
+    //     let robberies = await robberyApiCall()
+    //     let batteries = await batteryApiCall()
+    //     let assaults = await assaultApiCall()
+    //     let gunViolations = await gunViolationApiCall()
+    //     let gunFireViolations = await gunFireViolation()
+    //     let gunPossessionViolations = await gunNoFireViolation()
+    //     let ammoViolations = await ammoViolation()
+    //     let illegalGunSales = await illegalGunSale()
+    //     let gunInSchools = await gunInSchool()
+    //     let gunAttackOnCop = await gunAttackOnCops()
+    //     let attackOnCop = await attackOnCops()
+    //     let carjackings = await carjackApiCall()
+    //     setHomicideStats(filterApiCallData(homicides, formattedDate, searchSpan, arrestMade))
+    //     setSexAssaultStats(filterApiCallData(sexualAssaults, formattedDate, searchSpan, arrestMade))
+    //     setRobberyStats(filterApiCallData(robberies, formattedDate, searchSpan, arrestMade))
+    //     setBatteryStats(filterApiCallData(batteries, formattedDate, searchSpan, arrestMade))
+    //     setAssaultStats(filterApiCallData(assaults, formattedDate, searchSpan, arrestMade))
+    //     setViolationStats(filterApiCallData(gunViolations, formattedDate, searchSpan, arrestMade))
+    //     setShotsFiredStats(filterApiCallData(gunFireViolations, formattedDate, searchSpan, arrestMade))
+    //     setGunPossessionStats(filterApiCallData(gunPossessionViolations, formattedDate, searchSpan, arrestMade))
+    //     setAmmoViolationStats(filterApiCallData(ammoViolations, formattedDate, searchSpan, arrestMade))
+    //     setGunSaleStats(filterApiCallData(illegalGunSales, formattedDate, searchSpan, arrestMade))
+    //     setGunInSchoolStats(filterApiCallData(gunInSchools, formattedDate, searchSpan, arrestMade))
+    //     setGunAttackOnCopsStats(filterApiCallData(gunAttackOnCop, formattedDate, searchSpan, arrestMade))
+    //     setAttackOnCopsStats(filterApiCallData(attackOnCop, formattedDate, searchSpan, arrestMade))
+    //     setCarjackStats(filterApiCallData(carjackings, formattedDate, searchSpan, arrestMade))
+    // }
 
-    const totalCrimeCount = () => {
-        let count = 0
-        if(showHomicide) {count += homicideStats.length}
-        if(showAssault) {count += assaultStats.length}
-        if(showSexAssault) {count +=  sexAssaultStats.length}
-        if(showRobbery) {count +=  robberyStats.length}
-        if(showBattery) {count +=  batteryStats.length}
-        if(showViolation) {count +=  violationStats.length}
-        if(showShotsFired) {count +=  shotsFiredStats.length}
-        if(showGunPossession) {count +=  gunPossessionStats.length}
-        if(showAmmoViolation) {count +=  ammoViolationStats.length}
-        if(showGunSale) {count +=  gunSaleStats.length}
-        if(showGunInSchool) {count +=  gunInSchoolStats.length}
-        if(showGunAttackOnCops) {count +=  gunAttackOnCopsStats.length}
-        if(showAttackOnCops) {count +=  attackOnCopsStats.length}
-        if(showCarjack) {count +=  carjackStats.length}
+    // const totalCrimeCount = () => {
+    //     let count = 0
+    //     if(showHomicide) {count += homicideStats.length}
+    //     if(showAssault) {count += assaultStats.length}
+    //     if(showSexAssault) {count +=  sexAssaultStats.length}
+    //     if(showRobbery) {count +=  robberyStats.length}
+    //     if(showBattery) {count +=  batteryStats.length}
+    //     if(showViolation) {count +=  violationStats.length}
+    //     if(showShotsFired) {count +=  shotsFiredStats.length}
+    //     if(showGunPossession) {count +=  gunPossessionStats.length}
+    //     if(showAmmoViolation) {count +=  ammoViolationStats.length}
+    //     if(showGunSale) {count +=  gunSaleStats.length}
+    //     if(showGunInSchool) {count +=  gunInSchoolStats.length}
+    //     if(showGunAttackOnCops) {count +=  gunAttackOnCopsStats.length}
+    //     if(showAttackOnCops) {count +=  attackOnCopsStats.length}
+    //     if(showCarjack) {count +=  carjackStats.length}
         
-        return count
-    }
+    //     return count
+    // }
 
-    const dynamicTitle = () => {
-        if(!showHomicide && 
-            !showAssault &&
-            !showSexAssault &&
-            !showRobbery &&
-            !showBattery &&
-            !showViolation &&
-            !showShotsFired &&
-            !showGunPossession &&
-            !showAmmoViolation &&
-            !showGunSale &&
-            !showGunInSchool &&
-            !showGunAttackOnCops &&
-            !showAttackOnCops &&
-            !showCarjack){
-                return "Select"
-            }else return "Results"
-    }
+    // const dynamicTitle = () => {
+    //     if(!showHomicide && 
+    //         !showAssault &&
+    //         !showSexAssault &&
+    //         !showRobbery &&
+    //         !showBattery &&
+    //         !showViolation &&
+    //         !showShotsFired &&
+    //         !showGunPossession &&
+    //         !showAmmoViolation &&
+    //         !showGunSale &&
+    //         !showGunInSchool &&
+    //         !showGunAttackOnCops &&
+    //         !showAttackOnCops &&
+    //         !showCarjack){
+    //             return "Select"
+    //         }else return "Results"
+    // }
 
     // const style = {
     //     position: 'absolute',
@@ -270,15 +270,15 @@ const Map = () => {
         mapCenterOnSelect()
     }, [selectedCrime])
 
-    useEffect(() => {
-        yearMonthArray()
-        serverSideApiCall()
-    }, [searchSpan, searchYear, searchMonth, searchDay, arrestMade])
+    // useEffect(() => {
+    //     yearMonthArray()
+    //     // serverSideApiCall()
+    // }, [searchSpan, searchYear, searchMonth, searchDay, arrestMade])
 
-    useEffect(() => {
-        setPageTitle(dynamicTitle())
-        setTotalCrimes(totalCrimeCount())
-    }, [showHomicide, showAssault, showSexAssault, showBattery, showRobbery, showViolation, showShotsFired, showGunPossession, showAmmoViolation, showGunSale, showGunInSchool, showGunAttackOnCops, showAttackOnCops, showCarjack, arrestMade])
+    // useEffect(() => {
+    //     setPageTitle(dynamicTitle())
+    //     setTotalCrimes(totalCrimeCount())
+    // }, [showHomicide, showAssault, showSexAssault, showBattery, showRobbery, showViolation, showShotsFired, showGunPossession, showAmmoViolation, showGunSale, showGunInSchool, showGunAttackOnCops, showAttackOnCops, showCarjack, arrestMade])
 
     const mapRef = React.useRef();
         const onMapLoad = React.useCallback((map) => {
@@ -286,7 +286,6 @@ const Map = () => {
         }, []);
     if (loadError) return "Error";
     if (!isLoaded) return "Loading...";
-        console.log("ARREST MADE", arrestMade, totalCrimes)
     
     const userPageResponse = () => {
         if(window.innerWidth >= 1000){
@@ -563,7 +562,7 @@ const Map = () => {
                     <LegendModal />
                 </div>
             </div>  */}
-            {violationStats.length ? 
+            {violationStats ? 
             <>
                 <div className="map-text">
                     <GoogleMap
@@ -867,7 +866,7 @@ const Map = () => {
         </div>
     ) : (
         <div className="map-container-mobile">
-            <div className="map-mobile">
+            {/* <div className="map-mobile">
                 <div className="map-title-results">
                     {pageTitle === "Select" ? <h2 className="search-select">Set search for gun crime stats:&nbsp;</h2> : 
                     <h2 className="search-results">Your Results:&nbsp;</h2>}
@@ -883,7 +882,7 @@ const Map = () => {
                     </div> : <></>}
                 </div>
                 {violationStats.length ? 
-                <>
+                <> */}
                 <GoogleMap
                     className="map-canvas"
                     mapContainerStyle={mobileContainerStyle}
@@ -1165,7 +1164,7 @@ const Map = () => {
                         </InfoWindow>
                     )}
                 </GoogleMap>
-                </> : 
+                {/* </> : 
                 <>
                     <div className="mobileLottieWrapper">
                     <div className="mobileLottieContainer">
@@ -1436,7 +1435,7 @@ const Map = () => {
                         </div>
                     </div>
                 </Modal>
-            </div>
+            </div> */}
         </div>
     )
 }
