@@ -1,4 +1,5 @@
-export const createFormattedDate = (props) => {
+export const createFormattedDate = ({searchYear, monthNumber, setMonthNumber, searchMonth, searchSpan, searchDay}) => {
+    console.log("PROPS", searchYear, monthNumber, setMonthNumber, searchMonth, searchSpan, searchDay)
     const today = new Date()
     today.setDate(today.getDate() - 8)
     let searchDate = today.toDateString()
@@ -6,37 +7,37 @@ export const createFormattedDate = (props) => {
     let formDateArr = []
     let dateArr = searchDate.split(" ")
     dateArr.shift()
-    formDateArr.push(props.searchYear + "-")
+    formDateArr.push(searchYear + "-")
     months.forEach((month, i) => {
-        if(props.searchMonth === month){
+        if(searchMonth === month){
             let dateMonth = i + 1
-            props.setMonthNumber(dateMonth)
-            formDateArr.push(props.monthNumber + "-" + dateArr[1])
+            setMonthNumber(dateMonth)
+            formDateArr.push(monthNumber + "-" + dateArr[1])
         }
     });
-    if(props.searchSpan === "month"){
-        if(props.monthNumber < 10){
-            formattedDate = props.searchYear + "-0" + props.monthNumber
+    if(searchSpan === "month"){
+        if(monthNumber < 10){
+            formattedDate = searchYear + "-0" + monthNumber
         }else{
-            formattedDate = props.searchYear + "-" + props.monthNumber
+            formattedDate = searchYear + "-" + monthNumber
         }
-    }else if(props.searchSpan === "week"){
-        if(props.monthNumber < 10){
-            let completeDate = props.searchYear + "-0" + props.monthNumber + "-" + props.searchDay
+    }else if(searchSpan === "week"){
+        if(monthNumber < 10){
+            let completeDate = searchYear + "-0" + monthNumber + "-" + searchDay
             let arrayOfDays = createWeekArr(completeDate)
             formattedDate = arrayOfDays
         }else{
-            let completeDate = props.searchYear + "-" + props.monthNumber + "-" + props.searchDay
+            let completeDate = searchYear + "-" + monthNumber + "-" + searchDay
             let arrayOfDays = createWeekArr(completeDate)
             formattedDate = arrayOfDays
         }
-    }else if(props.searchSpan === "year"){
-        formattedDate = props.searchYear
-    }else if(props.searchSpan === "most recent"){
-        if(props.monthNumber < 10){
-            formattedDate = props.searchYear + "-0" + props.monthNumber + "-" + props.searchDay
+    }else if(searchSpan === "year"){
+        formattedDate = searchYear
+    }else if(searchSpan === "most recent"){
+        if(monthNumber < 10){
+            formattedDate = searchYear + "-0" + monthNumber + "-" + searchDay
         }else{
-            formattedDate = props.searchYear + "-" + props.monthNumber + "-" + props.searchDay
+            formattedDate = searchYear + "-" + monthNumber + "-" + searchDay
         }
     }
     return formattedDate
