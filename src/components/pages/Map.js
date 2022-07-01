@@ -5,7 +5,7 @@ import carSafety from '../../assets/animations/carSafety.json'
 import {formatDay, getDaysInMonth, createWeekArr, yearRange, neighborhoodObject, removeZeros, fullMonths, months, 
         homicideApiCall, sexAssaultApiCall, robberyApiCall, batteryApiCall, assaultApiCall, gunViolationApiCall, 
         gunFireViolation, gunNoFireViolation, ammoViolation, illegalGunSale, gunInSchool, gunAttackOnCops, attackOnCops, 
-        carjackApiCall, filterApiCallData} from '../../services/mapService.js'
+        carjackApiCall, filterApiCallData, createFormattedDate} from '../../services/mapService.js'
 import mapStyles from './mapStyles';
 import '../pages/Map.css'
 import Button from '@mui/material/Button';
@@ -106,46 +106,46 @@ const Map = () => {
         }
     };
 
-    const createFormattedDate = () => {
-        let formattedDate
-        let formDateArr = []
-        let dateArr = searchDate.split(" ")
-        dateArr.shift()
-        formDateArr.push(searchYear + "-")
-        months.forEach((month, i) => {
-            if(searchMonth === month){
-                let dateMonth = i + 1
-                setMonthNumber(dateMonth)
-                formDateArr.push(monthNumber + "-" + dateArr[1])
-            }
-        });
-        if(searchSpan === "month"){
-            if(monthNumber < 10){
-                formattedDate = searchYear + "-0" + monthNumber
-            }else{
-                formattedDate = searchYear + "-" + monthNumber
-            }
-        }else if(searchSpan === "week"){
-            if(monthNumber < 10){
-                let completeDate = searchYear + "-0" + monthNumber + "-" + searchDay
-                let arrayOfDays = createWeekArr(completeDate)
-                formattedDate = arrayOfDays
-            }else{
-                let completeDate = searchYear + "-" + monthNumber + "-" + searchDay
-                let arrayOfDays = createWeekArr(completeDate)
-                formattedDate = arrayOfDays
-            }
-        }else if(searchSpan === "year"){
-            formattedDate = searchYear
-        }else if(searchSpan === "most recent"){
-            if(monthNumber < 10){
-                formattedDate = searchYear + "-0" + monthNumber + "-" + searchDay
-            }else{
-                formattedDate = searchYear + "-" + monthNumber + "-" + searchDay
-            }
-        }
-        return formattedDate
-    }
+    // const createFormattedDate = () => {
+    //     let formattedDate
+    //     let formDateArr = []
+    //     let dateArr = searchDate.split(" ")
+    //     dateArr.shift()
+    //     formDateArr.push(searchYear + "-")
+    //     months.forEach((month, i) => {
+    //         if(searchMonth === month){
+    //             let dateMonth = i + 1
+    //             setMonthNumber(dateMonth)
+    //             formDateArr.push(monthNumber + "-" + dateArr[1])
+    //         }
+    //     });
+    //     if(searchSpan === "month"){
+    //         if(monthNumber < 10){
+    //             formattedDate = searchYear + "-0" + monthNumber
+    //         }else{
+    //             formattedDate = searchYear + "-" + monthNumber
+    //         }
+    //     }else if(searchSpan === "week"){
+    //         if(monthNumber < 10){
+    //             let completeDate = searchYear + "-0" + monthNumber + "-" + searchDay
+    //             let arrayOfDays = createWeekArr(completeDate)
+    //             formattedDate = arrayOfDays
+    //         }else{
+    //             let completeDate = searchYear + "-" + monthNumber + "-" + searchDay
+    //             let arrayOfDays = createWeekArr(completeDate)
+    //             formattedDate = arrayOfDays
+    //         }
+    //     }else if(searchSpan === "year"){
+    //         formattedDate = searchYear
+    //     }else if(searchSpan === "most recent"){
+    //         if(monthNumber < 10){
+    //             formattedDate = searchYear + "-0" + monthNumber + "-" + searchDay
+    //         }else{
+    //             formattedDate = searchYear + "-" + monthNumber + "-" + searchDay
+    //         }
+    //     }
+    //     return formattedDate
+    // }
 
     const setMyLocation = async () => {
         navigator.geolocation.getCurrentPosition(
@@ -175,7 +175,7 @@ const Map = () => {
     }
 
     const serverSideApiCall = async() => {
-        let formattedDate = createFormattedDate()
+        let formattedDate = createFormattedDate(searchYear, monthNumber, setMonthNumber, searchMonth, searchSpan, searchYear, searchDay)
         let homicides = await homicideApiCall()
         let sexualAssaults = await sexAssaultApiCall()
         let robberies = await robberyApiCall()

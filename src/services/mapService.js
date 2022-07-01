@@ -1,3 +1,48 @@
+export const createFormattedDate = (props) => {
+    const today = new Date()
+    today.setDate(today.getDate() - 8)
+    let searchDate = today.toDateString()
+    let formattedDate
+    let formDateArr = []
+    let dateArr = searchDate.split(" ")
+    dateArr.shift()
+    formDateArr.push(props.searchYear + "-")
+    months.forEach((month, i) => {
+        if(props.searchMonth === month){
+            let dateMonth = i + 1
+            props.setMonthNumber(dateMonth)
+            formDateArr.push(props.monthNumber + "-" + dateArr[1])
+        }
+    });
+    if(props.searchSpan === "month"){
+        if(props.monthNumber < 10){
+            formattedDate = props.searchYear + "-0" + props.monthNumber
+        }else{
+            formattedDate = props.searchYear + "-" + props.monthNumber
+        }
+    }else if(props.searchSpan === "week"){
+        if(props.monthNumber < 10){
+            let completeDate = props.searchYear + "-0" + props.monthNumber + "-" + props.searchDay
+            let arrayOfDays = createWeekArr(completeDate)
+            formattedDate = arrayOfDays
+        }else{
+            let completeDate = props.searchYear + "-" + props.monthNumber + "-" + props.searchDay
+            let arrayOfDays = createWeekArr(completeDate)
+            formattedDate = arrayOfDays
+        }
+    }else if(props.searchSpan === "year"){
+        formattedDate = props.searchYear
+    }else if(props.searchSpan === "most recent"){
+        if(props.monthNumber < 10){
+            formattedDate = props.searchYear + "-0" + props.monthNumber + "-" + props.searchDay
+        }else{
+            formattedDate = props.searchYear + "-" + props.monthNumber + "-" + props.searchDay
+        }
+    }
+    return formattedDate
+}
+
+
 export const formatDate = (date) => {
     var d = new Date(date),
         month = '' + (d.getMonth() + 1),
