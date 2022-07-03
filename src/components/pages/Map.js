@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef, useCallback } from 'react'
 import { GoogleMap, Marker, useLoadScript, InfoWindow } from '@react-google-maps/api';
 import Lottie from 'react-lottie-player'
 import carSafety from '../../assets/animations/carSafety.json'
 import {formatDay, getDaysInMonth, createWeekArr, yearRange, neighborhoodObject, removeZeros, fullMonths, months, 
         homicideApiCall, sexAssaultApiCall, robberyApiCall, batteryApiCall, assaultApiCall, gunViolationApiCall, 
         gunFireViolation, gunNoFireViolation, ammoViolation, illegalGunSale, gunInSchool, gunAttackOnCops, attackOnCops, 
-        carjackApiCall, filterApiCallData} from '../../services/mapService.js'
+        carjackApiCall, filterApiCallData, createFormattedDate} from '../../services/mapService.js'
 import mapStyles from './mapStyles';
 import '../pages/Map.css'
 import Button from '@mui/material/Button';
@@ -98,59 +98,20 @@ const Map = () => {
     const [searchMonth, setSearchMonth] = useState(months[currentMonth])
     const [monthNumber, setMonthNumber] = useState(months.indexOf(searchDate.split(' ')[1]) + 1)
     const [daysOfTheMonth, setDaysOfTheMonth] = useState(getDaysInMonth(currentMonth, currentYear))
+    const [arrestMade, setArrestMade] = useState("All")
+    
+    const [open, setOpen] = useState(false);
+    
 
-    const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
-    const [arrestMade, setArrestMade] = useState("All")
 
     const handleArrestToggle = (event, newView) => {
         if(newView !== null) {
             setArrestMade(newView)
         }
     };
-
-    const createFormattedDate = () => {
-        let formattedDate
-        let formDateArr = []
-        let dateArr = searchDate.split(" ")
-        dateArr.shift()
-        formDateArr.push(searchYear + "-")
-        months.forEach((month, i) => {
-            if(searchMonth === month){
-                let dateMonth = i + 1
-                setMonthNumber(dateMonth)
-                formDateArr.push(monthNumber + "-" + dateArr[1])
-            }
-        });
-        if(searchSpan === "month"){
-            if(monthNumber < 10){
-                formattedDate = searchYear + "-0" + monthNumber
-            }else{
-                formattedDate = searchYear + "-" + monthNumber
-            }
-        }else if(searchSpan === "week"){
-            if(monthNumber < 10){
-                let completeDate = searchYear + "-0" + monthNumber + "-" + searchDay
-                let arrayOfDays = createWeekArr(completeDate)
-                formattedDate = arrayOfDays
-            }else{
-                let completeDate = searchYear + "-" + monthNumber + "-" + searchDay
-                let arrayOfDays = createWeekArr(completeDate)
-                formattedDate = arrayOfDays
-            }
-        }else if(searchSpan === "year"){
-            formattedDate = searchYear
-        }else if(searchSpan === "most recent"){
-            if(monthNumber < 10){
-                formattedDate = searchYear + "-0" + monthNumber + "-" + searchDay
-            }else{
-                formattedDate = searchYear + "-" + monthNumber + "-" + searchDay
-            }
-        }
-        return formattedDate
-    }
 
     const setMyLocation = async () => {
         navigator.geolocation.getCurrentPosition(
@@ -180,7 +141,7 @@ const Map = () => {
     }
 
     const serverSideApiCall = async() => {
-        let formattedDate = createFormattedDate()
+        let formattedDate = createFormattedDate(searchDate, searchYear,searchMonth, setMonthNumber, monthNumber, searchSpan, searchDay)
         let homicides = await homicideApiCall()
         let sexualAssaults = await sexAssaultApiCall()
         let robberies = await robberyApiCall()
@@ -249,18 +210,6 @@ const Map = () => {
             }else return "Results"
     }
 
-    // const style = {
-    //     position: 'absolute',
-    //     top: '50%',
-    //     left: '50%',
-    //     transform: 'translate(-50%, -50%)',
-    //     width: 400,
-    //     bgcolor: 'background.paper',
-    //     border: '2px solid #000',
-    //     boxShadow: 24,
-    //     p: 4,
-    // };
-
     useEffect(() => {
         if(window.innerWidth > 960){
             getHoodLatLng("Near West Side")
@@ -281,13 +230,12 @@ const Map = () => {
         setTotalCrimes(totalCrimeCount())
     }, [showHomicide, showAssault, showSexAssault, showBattery, showRobbery, showViolation, showShotsFired, showGunPossession, showAmmoViolation, showGunSale, showGunInSchool, showGunAttackOnCops, showAttackOnCops, showCarjack, arrestMade])
 
-    const mapRef = React.useRef();
-        const onMapLoad = React.useCallback((map) => {
+    const mapRef = useRef();
+        const onMapLoad = useCallback((map) => {
             mapRef.current = map;
         }, []);
     if (loadError) return "Error";
     if (!isLoaded) return "Loading...";
-        console.log("ARREST MADE", arrestMade, totalCrimes)
     
     const userPageResponse = () => {
         if(window.innerWidth >= 1000){
@@ -303,269 +251,24 @@ const Map = () => {
 
         <div className="map-container">
             <div className="control-panel-wrap">
-                <SearchResults pageTitle={pageTitle} totalCrimeCount={totalCrimeCount} searchSpan={searchSpan} searchYear={searchYear} fullMonths={fullMonths} months={months} searchMonth={searchMonth} searchDay={searchDay} />
-                {/* <div className="main-title-results">
-                    {pageTitle === "Select" ? <h2 className="search-select">Select below for gun crime stats:&nbsp;</h2> : <h2 className="search-results">Your Results:&nbsp;</h2>}
-                    {pageTitle !== "Select" ? <div className="cj-number-wrapper">
-                        <h2 className="carjack-numbers heart" id="cj-num-id">{totalCrimeCount()}&nbsp;</h2>
-                        <h2 className="search-params">{`Gun Crimes
-                            ${searchSpan === "month" ? "in " + fullMonths[months.indexOf(searchMonth)] : ""}
-                            ${searchSpan === "week" ? "on the week ending "+ fullMonths[months.indexOf(searchMonth)] + " " + searchDay : ""}
-                            ${searchSpan === "most recent" ? "on " + fullMonths[months.indexOf(searchMonth)] + " " +  searchDay : ""}
-                            ${searchSpan === "year" ? "in " : ""}
-                            ${searchYear}`}
-                        </h2>
-                    </div> : <></>}
-                </div> */}
+                <SearchResults pageTitle={pageTitle} totalCrimeCount={totalCrimeCount} searchSpan={searchSpan} searchYear={searchYear} 
+                    fullMonths={fullMonths} months={months} searchMonth={searchMonth} searchDay={searchDay} />
                 <div className="search-bar-wrap">
                     <LocationSelect setMyLocation={setMyLocation} getHoodLatLng={getHoodLatLng} />
-                    {/* <div className="search-bar">
-                        <Button variant="contained" className="sb-inputs" id="my-location" size="large" onClick={() => {setMyLocation()}}>My Location</Button>
-                        <FormControl sx={{ m: 0, minWidth: 238 }} size="small">
-                            <Select className="sb-inputs" id="hoodSelect" defaultValue="Near West Side" onChange={event => {
-                                getHoodLatLng(event.target.value)
-                                }}>
-                                {Object.keys(neighborhoodObject).sort().map(neighborhood => (
-                                    <MenuItem key={neighborhood} value={neighborhood}>
-                                        {neighborhood}
-                                    </MenuItem>
-                                ))}
-                            </Select>
-                        </FormControl>
-                    </div> */}
-                    <SearchSpan searchSpan={searchSpan} setSearchSpan={setSearchSpan} setSearchMonth={setSearchMonth} searchMonth={searchMonth} months={months} formatDay={formatDay} setMonthNumber={setMonthNumber} setSearchDay={setSearchDay} dayOfTheMonth={dayOfTheMonth} daysOfTheMonth={daysOfTheMonth} searchYear={searchYear} setSearchYear={setSearchYear} yearArray={yearArray} />
-                    {/* <div className="search-bar">
-                        <Select className="sb-inputs" id='timeSpan' defaultValue={searchSpan} onChange={event => {
-                        setSearchSpan(event.target.value)
-                        }}>
-                            <MenuItem value="most recent">One Day</MenuItem>
-                            <MenuItem value="week">Weekly</MenuItem>
-                            <MenuItem value="month">Monthly</MenuItem>
-                            <MenuItem value="year">Annual</MenuItem>
-                        </Select>
-                        {searchSpan === "week" || searchSpan === "most recent" || searchSpan === "month" ? 
-                        <>
-                            <Select className="sb-inputs" id='monthSelect' defaultValue={searchMonth} onChange={event => {
-                            setSearchMonth(event.target.value)
-                            let moNo = months.indexOf(event.target.value) + 1
-                            formatDay(moNo)
-                            setMonthNumber(moNo)
-                            }}>
-                            {months.map(month => (
-                                <MenuItem key={month} value={month}>
-                                    {month}
-                                </MenuItem>
-                            ))}
-                        </Select>
-                        </>
-                        :
-                        <></>
-                        }
-                        {searchSpan === "week" || searchSpan === "most recent" ? 
-                        <>
-                            <Select className="sb-inputs" id='daySelect' defaultValue={dayOfTheMonth} onChange={event => {
-                                setSearchDay(event.target.value)
-                                }}>
-                                    {daysOfTheMonth.map(day => (
-                                        <MenuItem key={day} value={day}>
-                                            {day}
-                                        </MenuItem>
-                                    ))}
-                            </Select>
-                        </>
-                        :
-                        <></>
-                        }
-                        <Select className="sb-inputs" id='yearSelect' value={searchYear} onChange={event => {
-                            setSearchYear(event.target.value)
-                            }}>
-                                {yearArray.reverse().map(year => (
-                                    <MenuItem key={year} value={year}>
-                                        {year}
-                                    </MenuItem>
-                                ))}
-                        </Select>
-                    </div> */}
+                    <SearchSpan searchSpan={searchSpan} setSearchSpan={setSearchSpan} setSearchMonth={setSearchMonth} searchMonth={searchMonth} 
+                        months={months} formatDay={formatDay} setMonthNumber={setMonthNumber} setSearchDay={setSearchDay} dayOfTheMonth={dayOfTheMonth} 
+                        daysOfTheMonth={daysOfTheMonth} searchYear={searchYear} setSearchYear={setSearchYear} yearArray={yearArray} />
                 </div>
                 <ArrestToggle arrestMade={arrestMade} handleArrestToggle={handleArrestToggle} />
-                {/* <div className="crime-toggle-bar">
-                    <ToggleButtonGroup
-                        className='arrest-view'
-                        value={arrestMade}
-                        exclusive
-                        onChange={handleArrestToggle}
-                        aria-label="arrest-view-toggle"
-                    >
-                        <ToggleButton value="All" aria-label="all crimes" color="warning" className='arrest-all'>
-                            All
-                        </ToggleButton>
-                        <ToggleButton value="Yes" aria-label="crimes with arrest" color="warning" className='arrest-toggle'>
-                            Arrest Made
-                        </ToggleButton>
-                        <ToggleButton value="No" aria-label="crimes with no arrest" color="warning" className='arrest-toggle'>
-                            No Arrest Made
-                        </ToggleButton>
-                    </ToggleButtonGroup>
-                </div> */}
-                <CrimeToggle showHomicide={showHomicide} setShowHomicide={setShowHomicide} showAssault={showAssault} setShowAssault={setShowAssault} showSexAssault={showSexAssault} setShowSexAssault={setShowSexAssault} showRobbery={showRobbery} 
-    setShowRobbery={setShowRobbery} showBattery={showBattery} setShowBattery={setShowBattery} showViolation={showViolation} setShowViolation={setShowViolation} showShotsFired={showShotsFired} setShowShotsFired={setShowShotsFired} 
-    showGunPossession={showGunPossession} setShowGunPossession={setShowGunPossession} showAmmoViolation={showAmmoViolation} setShowAmmoViolation={setShowAmmoViolation} showGunSale={showGunSale} setShowGunSale={setShowGunSale} 
-    showGunInSchool={showGunInSchool} setShowGunInSchool={setShowGunInSchool} showGunAttackOnCops={showGunAttackOnCops} setShowGunAttackOnCops={setShowGunAttackOnCops} showAttackOnCops={showAttackOnCops} setShowAttackOnCops={setShowAttackOnCops} 
-    showCarjack={showCarjack} setShowCarjack={setShowCarjack} />
-                {/* <div className="crime-toggle-bar">
-                    <ToggleButton
-                        className='crime-view'
-                        color="warning"
-                        value="check"
-                        selected={showHomicide}
-                        onChange={() => {
-                            setShowHomicide(!showHomicide);
-                        }}>
-                        Homicides
-                    </ToggleButton>
-                    <ToggleButton
-                        className='crime-view'
-                        color="warning"
-                        value="check"
-                        selected={showAssault}
-                        onChange={() => {
-                            setShowAssault(!showAssault);
-                        }}>
-                        Assaults
-                    </ToggleButton>
-                </div>
-                <div className="crime-toggle-bar">
-                    <ToggleButton
-                        className='crime-view'
-                        color="warning"
-                        value="check"
-                        selected={showSexAssault}
-                        onChange={() => {
-                            setShowSexAssault(!showSexAssault);
-                        }}>
-                        Sex. Assaults
-                    </ToggleButton>
-                    <ToggleButton
-                        className='crime-view'
-                        color="warning"
-                        value="check"
-                        selected={showRobbery}
-                        onChange={() => {
-                            setShowRobbery(!showRobbery);
-                        }}>
-                        Robberies
-                    </ToggleButton>
-                </div>
-                <div className="crime-toggle-bar">
-                    <ToggleButton
-                        className='crime-view'
-                        color="warning"
-                        value="check"
-                        selected={showBattery}
-                        onChange={() => {
-                            setShowBattery(!showBattery);
-                        }}>
-                        Batteries
-                    </ToggleButton>
-                    <ToggleButton
-                        className='crime-view'
-                        color="warning"
-                        value="check"
-                        selected={showViolation}
-                        onChange={() => {
-                            setShowViolation(!showViolation);
-                        }}>
-                        Gun Violations
-                    </ToggleButton>
-                </div>
-                <div className="crime-toggle-bar">
-                    <ToggleButton
-                        className='crime-view'
-                        color="warning"
-                        value="check"
-                        selected={showShotsFired}
-                        onChange={() => {
-                            setShowShotsFired(!showShotsFired);
-                        }}>
-                        Shots Fired
-                    </ToggleButton>
-                    <ToggleButton
-                        className='crime-view'
-                        color="warning"
-                        value="check"
-                        selected={showGunPossession}
-                        onChange={() => {
-                            setShowGunPossession(!showGunPossession);
-                        }}>
-                        Gun Possession
-                    </ToggleButton>
-                </div>
-                <div className="crime-toggle-bar">
-                    <ToggleButton
-                        className='crime-view'
-                        color="warning"
-                        value="check"
-                        selected={showAmmoViolation}
-                        onChange={() => {
-                            setShowAmmoViolation(!showAmmoViolation);
-                        }}>
-                        Ammo Violation
-                    </ToggleButton>
-                    <ToggleButton
-                        className='crime-view'
-                        color="warning"
-                        value="check"
-                        selected={showGunSale}
-                        onChange={() => {
-                            setShowGunSale(!showGunSale);
-                        }}>
-                        Illegal Gun Sales
-                    </ToggleButton>
-                </div>
-                <div className="crime-toggle-bar">
-                    <ToggleButton
-                        className='crime-view'
-                        color="warning"
-                        value="check"
-                        selected={showGunInSchool}
-                        onChange={() => {
-                            setShowGunInSchool(!showGunInSchool);
-                        }}>
-                        Gun in School
-                    </ToggleButton>
-                    <ToggleButton
-                        className='crime-view'
-                        color="warning"
-                        value="check"
-                        selected={showGunAttackOnCops}
-                        onChange={() => {
-                            setShowGunAttackOnCops(!showGunAttackOnCops);
-                        }}>
-                        Shots on Cops
-                    </ToggleButton>
-                </div>
-                <div className="crime-toggle-bar">
-                    <ToggleButton
-                        className='crime-view'
-                        color="warning"
-                        value="check"
-                        selected={showAttackOnCops}
-                        onChange={() => {
-                            setShowAttackOnCops(!showAttackOnCops);
-                        }}>
-                        Attack on Cops
-                    </ToggleButton>
-                    <ToggleButton
-                        className='crime-view'
-                        color="warning"
-                        value="check"
-                        selected={showCarjack}
-                        onChange={() => {
-                            setShowCarjack(!showCarjack);
-                        }}>
-                        Carjackings
-                    </ToggleButton>
-                </div> */}
+                <CrimeToggle showHomicide={showHomicide} setShowHomicide={setShowHomicide} showAssault={showAssault} 
+                    setShowAssault={setShowAssault} showSexAssault={showSexAssault} setShowSexAssault={setShowSexAssault} 
+                    showRobbery={showRobbery} setShowRobbery={setShowRobbery} showBattery={showBattery} setShowBattery={setShowBattery} 
+                    showViolation={showViolation} setShowViolation={setShowViolation} showShotsFired={showShotsFired} 
+                    setShowShotsFired={setShowShotsFired} showGunPossession={showGunPossession} setShowGunPossession={setShowGunPossession} 
+                    showAmmoViolation={showAmmoViolation} setShowAmmoViolation={setShowAmmoViolation} showGunSale={showGunSale} 
+                    setShowGunSale={setShowGunSale} showGunInSchool={showGunInSchool} setShowGunInSchool={setShowGunInSchool} 
+                    showGunAttackOnCops={showGunAttackOnCops} setShowGunAttackOnCops={setShowGunAttackOnCops} showAttackOnCops={showAttackOnCops} 
+                    setShowAttackOnCops={setShowAttackOnCops} showCarjack={showCarjack} setShowCarjack={setShowCarjack} />
                 <div className="crime-toggle-bar">
                     <LegendModal />
                 </div>
@@ -875,7 +578,9 @@ const Map = () => {
     ) : (
         <div className="map-container-mobile">
             <div className="map-mobile">
-                <div className="map-title-results">
+                <SearchResults pageTitle={pageTitle} totalCrimeCount={totalCrimeCount} searchSpan={searchSpan} searchYear={searchYear} 
+                    fullMonths={fullMonths} months={months} searchMonth={searchMonth} searchDay={searchDay} />
+                {/* <div className="map-title-results">
                     {pageTitle === "Select" ? <h2 className="search-select">Set search for gun crime stats:&nbsp;</h2> : 
                     <h2 className="search-results">Your Results:&nbsp;</h2>}
                     {pageTitle !== "Select" ? <div className="cj-number-wrapper">
@@ -888,7 +593,7 @@ const Map = () => {
                             ${searchYear}`}
                         </h2>
                     </div> : <></>}
-                </div>
+                </div> */}
                 {violationStats.length ? 
                 <>
                 <GoogleMap
@@ -1199,7 +904,8 @@ const Map = () => {
                     <div className="control-modal-wrap">
                         <div className="search-bar-wrap">
                             <div className="search-bar">
-                                <Button variant="contained" className="sb-inputs" id="my-location" size="large" onClick={() => {setMyLocation()}}>My Location</Button>
+                                <LocationSelect setMyLocation={setMyLocation} getHoodLatLng={getHoodLatLng} />
+                                {/* <Button variant="contained" className="sb-inputs" id="my-location" size="large" onClick={() => {setMyLocation()}}>My Location</Button>
                                 <FormControl sx={{ m: 0, minWidth: 232 }} size="small">
                                     <Select className="sb-inputs" id="hoodSelect" defaultValue="Near West Side" onChange={event => {
                                         getHoodLatLng(event.target.value)
@@ -1210,10 +916,13 @@ const Map = () => {
                                             </MenuItem>
                                         ))}
                                     </Select>
-                                </FormControl>
+                                </FormControl> */}
                             </div>
                             <div className="search-bar">
-                                <Select className="sb-inputs" id='timeSpan' defaultValue={searchSpan} onChange={event => {
+                                <SearchSpan searchSpan={searchSpan} setSearchSpan={setSearchSpan} setSearchMonth={setSearchMonth} searchMonth={searchMonth} 
+                                    months={months} formatDay={formatDay} setMonthNumber={setMonthNumber} setSearchDay={setSearchDay} dayOfTheMonth={dayOfTheMonth} 
+                                    daysOfTheMonth={daysOfTheMonth} searchYear={searchYear} setSearchYear={setSearchYear} yearArray={yearArray} />
+                                {/* <Select className="sb-inputs" id='timeSpan' defaultValue={searchSpan} onChange={event => {
                                 setSearchSpan(event.target.value)
                                 }}>
                                     <MenuItem value="most recent">One Day</MenuItem>
@@ -1262,10 +971,11 @@ const Map = () => {
                                                 {year}
                                             </MenuItem>
                                         ))}
-                                </Select>
+                                </Select> */}
                             </div>
                         </div>
-                        <div className="crime-toggle-bar">
+                        <ArrestToggle arrestMade={arrestMade} handleArrestToggle={handleArrestToggle} />
+                        {/* <div className="crime-toggle-bar">
                             <ToggleButtonGroup
                                 className='arrest-view-mobile'
                                 value={arrestMade}
@@ -1283,8 +993,17 @@ const Map = () => {
                                     No Arrest Made
                                 </ToggleButton>
                             </ToggleButtonGroup>
-                        </div>
-                        <div className="crime-toggle-bar">
+                        </div> */}
+                        <CrimeToggle showHomicide={showHomicide} setShowHomicide={setShowHomicide} showAssault={showAssault} 
+                            setShowAssault={setShowAssault} showSexAssault={showSexAssault} setShowSexAssault={setShowSexAssault} 
+                            showRobbery={showRobbery} setShowRobbery={setShowRobbery} showBattery={showBattery} setShowBattery={setShowBattery} 
+                            showViolation={showViolation} setShowViolation={setShowViolation} showShotsFired={showShotsFired} 
+                            setShowShotsFired={setShowShotsFired} showGunPossession={showGunPossession} setShowGunPossession={setShowGunPossession} 
+                            showAmmoViolation={showAmmoViolation} setShowAmmoViolation={setShowAmmoViolation} showGunSale={showGunSale} 
+                            setShowGunSale={setShowGunSale} showGunInSchool={showGunInSchool} setShowGunInSchool={setShowGunInSchool} 
+                            showGunAttackOnCops={showGunAttackOnCops} setShowGunAttackOnCops={setShowGunAttackOnCops} showAttackOnCops={showAttackOnCops} 
+                            setShowAttackOnCops={setShowAttackOnCops} showCarjack={showCarjack} setShowCarjack={setShowCarjack} />
+                        {/* <div className="crime-toggle-bar">
                             <ToggleButton
                                 className='crime-view-mobile'
                                 color="warning"
@@ -1437,7 +1156,7 @@ const Map = () => {
                                 }}>
                                 Carjackings
                             </ToggleButton>
-                        </div>
+                        </div> */}
                         <div className="crime-legend">
                             <LegendModal />
                         </div>

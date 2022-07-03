@@ -6,10 +6,10 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { neighborhoodObject } from '../services/mapService';
 
-export default function LocationSelect({setMyLocation, getHoodLatLng}) {
+export default function LocationSelect({setMyLocation, getHoodLatLng, setLat, setLng}) {
     return (
         <div className="search-bar">
-            <Button variant="contained" className="sb-inputs" id="my-location" size="large" onClick={() => {setMyLocation()}}>My Location</Button>
+            <Button variant="contained" className="sb-inputs" id="my-location" size="large" onClick={() => {setMyLocation(setLat, setLng)}}>My Location</Button>
             <FormControl sx={{ m: 0, minWidth: 238 }} size="small">
                 <Select className="sb-inputs" id="hoodSelect" defaultValue="Near West Side" onChange={event => {
                     getHoodLatLng(event.target.value)
