@@ -281,3 +281,44 @@ export const neighborhoodObject = {'Select Neighborhood': [41.881952, -87.629439
 
 export const fullMonths = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
 export const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+
+export const createFormattedDate = (searchDate, searchYear,searchMonth, setMonthNumber, monthNumber, searchSpan, searchDay) => {
+    let formattedDate
+    let formDateArr = []
+    let dateArr = searchDate.split(" ")
+    dateArr.shift()
+    formDateArr.push(searchYear + "-")
+    months.forEach((month, i) => {
+        if(searchMonth === month){
+            let dateMonth = i + 1
+            setMonthNumber(dateMonth)
+            formDateArr.push(monthNumber + "-" + dateArr[1])
+        }
+    });
+    if(searchSpan === "month"){
+        if(monthNumber < 10){
+            formattedDate = searchYear + "-0" + monthNumber
+        }else{
+            formattedDate = searchYear + "-" + monthNumber
+        }
+    }else if(searchSpan === "week"){
+        if(monthNumber < 10){
+            let completeDate = searchYear + "-0" + monthNumber + "-" + searchDay
+            let arrayOfDays = createWeekArr(completeDate)
+            formattedDate = arrayOfDays
+        }else{
+            let completeDate = searchYear + "-" + monthNumber + "-" + searchDay
+            let arrayOfDays = createWeekArr(completeDate)
+            formattedDate = arrayOfDays
+        }
+    }else if(searchSpan === "year"){
+        formattedDate = searchYear
+    }else if(searchSpan === "most recent"){
+        if(monthNumber < 10){
+            formattedDate = searchYear + "-0" + monthNumber + "-" + searchDay
+        }else{
+            formattedDate = searchYear + "-" + monthNumber + "-" + searchDay
+        }
+    }
+    return formattedDate
+}
