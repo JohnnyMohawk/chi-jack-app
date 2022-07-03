@@ -65,6 +65,7 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+    margin-top: -6px;
 }
 
 .search-results {
@@ -172,7 +173,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin: 0 auto;
+    margin: 5px auto 0 auto;
 }
 
 .crime-toggle-bar {
@@ -240,7 +241,7 @@
     }
     .map-container > h2,
     .search-params {
-        font-size: 28px;
+        font-size: 22px;
         margin-bottom: 5px;
     }
 
@@ -337,10 +338,15 @@
 
     .search-params {
         font-size: 14px;
+        margin-top: 7px;
     }
 
     .force-space {
         font-size: 4px;
+    }
+
+    .search-select {
+        font-size: 21px;
     }
 
 }

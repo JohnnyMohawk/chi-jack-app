@@ -16,7 +16,7 @@ import SearchResults from '../SearchResults'
 import SearchSpan from '../SearchSpan'
 import ArrestToggle from '../ArrestToggle'
 import CrimeToggle from '../CrimeToggle'
-import MapDesktop from '../MapDesktop'
+import MapComponent from '../MapComponent'
 
 require('dotenv').config()
 
@@ -224,7 +224,8 @@ const Map = () => {
     useEffect(() => {
         setPageTitle(dynamicTitle())
         setTotalCrimes(totalCrimeCount())
-    }, [showHomicide, showAssault, showSexAssault, showBattery, showRobbery, showViolation, showShotsFired, showGunPossession, showAmmoViolation, showGunSale, showGunInSchool, showGunAttackOnCops, showAttackOnCops, showCarjack, arrestMade])
+    }, [showHomicide, showAssault, showSexAssault, showBattery, showRobbery, showViolation, showShotsFired, showGunPossession, 
+        showAmmoViolation, showGunSale, showGunInSchool, showGunAttackOnCops, showAttackOnCops, showCarjack, arrestMade])
 
     const mapRef = useRef();
         const onMapLoad = useCallback((map) => {
@@ -268,11 +269,16 @@ const Map = () => {
             {violationStats.length ? 
             <>
                 <div className="map-text">
-                    <MapDesktop containerStyle={containerStyle} lat={lat} lng={lng} options={options} onMapLoad={onMapLoad} setSelectedCrime={setSelectedCrime} selectedCrime={selectedCrime} showHomicide={showHomicide} 
-                        homicideStats={homicideStats} showSexAssault={showSexAssault} sexAssaultStats={sexAssaultStats} showRobbery={showRobbery} robberyStats={robberyStats} showBattery={showBattery} batteryStats={batteryStats} showAssault={showAssault} assaultStats={assaultStats} 
-                        showViolation={showViolation} violationStats={violationStats} showShotsFired={showShotsFired} shotsFiredStats={shotsFiredStats} showGunPossession={showGunPossession} gunPossessionStats={gunPossessionStats} showAmmoViolation={showAmmoViolation} 
-                        ammoViolationStats={ammoViolationStats} showGunSale={showGunSale} gunSaleStats={gunSaleStats} showGunInSchool={showGunInSchool} gunInSchoolStats={gunInSchoolStats} showGunAttackOnCops={showGunAttackOnCops} gunAttackOnCopsStats={gunAttackOnCopsStats} 
-                        showAttackOnCops={showAttackOnCops} attackOnCopsStats={attackOnCopsStats} showCarjack={showCarjack} carjackStats={carjackStats} />
+                    <MapComponent containerStyle={containerStyle} lat={lat} lng={lng} options={options} onMapLoad={onMapLoad} 
+                        setSelectedCrime={setSelectedCrime} selectedCrime={selectedCrime} showHomicide={showHomicide} 
+                        homicideStats={homicideStats} showSexAssault={showSexAssault} sexAssaultStats={sexAssaultStats} 
+                        showRobbery={showRobbery} robberyStats={robberyStats} showBattery={showBattery} batteryStats={batteryStats} 
+                        showAssault={showAssault} assaultStats={assaultStats} showViolation={showViolation} violationStats={violationStats} 
+                        showShotsFired={showShotsFired} shotsFiredStats={shotsFiredStats} showGunPossession={showGunPossession} 
+                        gunPossessionStats={gunPossessionStats} showAmmoViolation={showAmmoViolation} ammoViolationStats={ammoViolationStats} 
+                        showGunSale={showGunSale} gunSaleStats={gunSaleStats} showGunInSchool={showGunInSchool} gunInSchoolStats={gunInSchoolStats} 
+                        showGunAttackOnCops={showGunAttackOnCops} gunAttackOnCopsStats={gunAttackOnCopsStats} showAttackOnCops={showAttackOnCops} 
+                        attackOnCopsStats={attackOnCopsStats} showCarjack={showCarjack} carjackStats={carjackStats} />
                 </div>
             </>
             :
@@ -298,11 +304,15 @@ const Map = () => {
                     fullMonths={fullMonths} months={months} searchMonth={searchMonth} searchDay={searchDay} />
                 {violationStats.length ? 
                 <>
-                <MapDesktop containerStyle={mobileContainerStyle} lat={lat} lng={lng} options={options} onMapLoad={onMapLoad} setSelectedCrime={setSelectedCrime} selectedCrime={selectedCrime} showHomicide={showHomicide} 
-                        homicideStats={homicideStats} showSexAssault={showSexAssault} sexAssaultStats={sexAssaultStats} showRobbery={showRobbery} robberyStats={robberyStats} showBattery={showBattery} batteryStats={batteryStats} showAssault={showAssault} assaultStats={assaultStats} 
-                        showViolation={showViolation} violationStats={violationStats} showShotsFired={showShotsFired} shotsFiredStats={shotsFiredStats} showGunPossession={showGunPossession} gunPossessionStats={gunPossessionStats} showAmmoViolation={showAmmoViolation} 
-                        ammoViolationStats={ammoViolationStats} showGunSale={showGunSale} gunSaleStats={gunSaleStats} showGunInSchool={showGunInSchool} gunInSchoolStats={gunInSchoolStats} showGunAttackOnCops={showGunAttackOnCops} gunAttackOnCopsStats={gunAttackOnCopsStats} 
-                        showAttackOnCops={showAttackOnCops} attackOnCopsStats={attackOnCopsStats} showCarjack={showCarjack} carjackStats={carjackStats} />
+                <MapComponent containerStyle={mobileContainerStyle} lat={lat} lng={lng} options={options} onMapLoad={onMapLoad} 
+                    setSelectedCrime={setSelectedCrime} selectedCrime={selectedCrime} showHomicide={showHomicide} homicideStats={homicideStats} 
+                    showSexAssault={showSexAssault} sexAssaultStats={sexAssaultStats} showRobbery={showRobbery} robberyStats={robberyStats} 
+                    showBattery={showBattery} batteryStats={batteryStats} showAssault={showAssault} assaultStats={assaultStats} 
+                    showViolation={showViolation} violationStats={violationStats} showShotsFired={showShotsFired} shotsFiredStats={shotsFiredStats} 
+                    showGunPossession={showGunPossession} gunPossessionStats={gunPossessionStats} showAmmoViolation={showAmmoViolation} 
+                    ammoViolationStats={ammoViolationStats} showGunSale={showGunSale} gunSaleStats={gunSaleStats} showGunInSchool={showGunInSchool} 
+                    gunInSchoolStats={gunInSchoolStats} showGunAttackOnCops={showGunAttackOnCops} gunAttackOnCopsStats={gunAttackOnCopsStats} 
+                    showAttackOnCops={showAttackOnCops} attackOnCopsStats={attackOnCopsStats} showCarjack={showCarjack} carjackStats={carjackStats} />
                 </> : 
                 <>
                     <div className="mobileLottieWrapper">
