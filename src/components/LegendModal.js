@@ -1,4 +1,5 @@
 import * as React from 'react';
+import './pages/Map.css';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
@@ -22,7 +23,7 @@ export default function BasicModal() {
     const handleClose = () => setOpen(false);
 
     return (
-        <div>
+        <div className="crime-legend">
             <Button onClick={handleOpen}>Map Legend</Button>
             <Modal
                 open={open}

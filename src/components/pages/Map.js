@@ -253,12 +253,12 @@ const Map = () => {
             <div className="control-panel-wrap">
                 <SearchResults pageTitle={pageTitle} totalCrimeCount={totalCrimeCount} searchSpan={searchSpan} searchYear={searchYear} 
                     fullMonths={fullMonths} months={months} searchMonth={searchMonth} searchDay={searchDay} />
-                <div className="search-bar-wrap">
+                {/* <div className="search-bar-wrap"> */}
                     <LocationSelect setMyLocation={setMyLocation} getHoodLatLng={getHoodLatLng} />
                     <SearchSpan searchSpan={searchSpan} setSearchSpan={setSearchSpan} setSearchMonth={setSearchMonth} searchMonth={searchMonth} 
                         months={months} formatDay={formatDay} setMonthNumber={setMonthNumber} setSearchDay={setSearchDay} dayOfTheMonth={dayOfTheMonth} 
                         daysOfTheMonth={daysOfTheMonth} searchYear={searchYear} setSearchYear={setSearchYear} yearArray={yearArray} />
-                </div>
+                {/* </div> */}
                 <ArrestToggle arrestMade={arrestMade} handleArrestToggle={handleArrestToggle} />
                 <CrimeToggle showHomicide={showHomicide} setShowHomicide={setShowHomicide} showAssault={showAssault} 
                     setShowAssault={setShowAssault} showSexAssault={showSexAssault} setShowSexAssault={setShowSexAssault} 
@@ -269,9 +269,9 @@ const Map = () => {
                     setShowGunSale={setShowGunSale} showGunInSchool={showGunInSchool} setShowGunInSchool={setShowGunInSchool} 
                     showGunAttackOnCops={showGunAttackOnCops} setShowGunAttackOnCops={setShowGunAttackOnCops} showAttackOnCops={showAttackOnCops} 
                     setShowAttackOnCops={setShowAttackOnCops} showCarjack={showCarjack} setShowCarjack={setShowCarjack} />
-                <div className="crime-toggle-bar">
+                {/* <div className="crime-toggle-bar"> */}
                     <LegendModal />
-                </div>
+                {/* </div> */}
             </div> 
             {violationStats.length ? 
             <>
@@ -902,8 +902,8 @@ const Map = () => {
                     aria-describedby="modal-modal-description"
                 >
                     <div className="control-modal-wrap">
-                        <div className="search-bar-wrap">
-                            <div className="search-bar">
+                        {/* <div className="search-bar-wrap"> */}
+                            {/* <div className="search-bar"> */}
                                 <LocationSelect setMyLocation={setMyLocation} getHoodLatLng={getHoodLatLng} />
                                 {/* <Button variant="contained" className="sb-inputs" id="my-location" size="large" onClick={() => {setMyLocation()}}>My Location</Button>
                                 <FormControl sx={{ m: 0, minWidth: 232 }} size="small">
@@ -917,8 +917,8 @@ const Map = () => {
                                         ))}
                                     </Select>
                                 </FormControl> */}
-                            </div>
-                            <div className="search-bar">
+                            {/* </div> */}
+                            {/* <div className="search-bar"> */}
                                 <SearchSpan searchSpan={searchSpan} setSearchSpan={setSearchSpan} setSearchMonth={setSearchMonth} searchMonth={searchMonth} 
                                     months={months} formatDay={formatDay} setMonthNumber={setMonthNumber} setSearchDay={setSearchDay} dayOfTheMonth={dayOfTheMonth} 
                                     daysOfTheMonth={daysOfTheMonth} searchYear={searchYear} setSearchYear={setSearchYear} yearArray={yearArray} />
@@ -972,8 +972,8 @@ const Map = () => {
                                             </MenuItem>
                                         ))}
                                 </Select> */}
-                            </div>
-                        </div>
+                            {/* </div> */}
+                        {/* </div> */}
                         <ArrestToggle arrestMade={arrestMade} handleArrestToggle={handleArrestToggle} />
                         {/* <div className="crime-toggle-bar">
                             <ToggleButtonGroup
@@ -1157,9 +1157,9 @@ const Map = () => {
                                 Carjackings
                             </ToggleButton>
                         </div> */}
-                        <div className="crime-legend">
+                        {/* <div className="crime-legend"> */}
                             <LegendModal />
-                        </div>
+                        {/* </div> */}
                     </div>
                 </Modal>
             </div>
