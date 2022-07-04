@@ -265,6 +265,38 @@
     font-size: 8px;
 }
 
+.closeButtonLegend {
+    border: none;
+    font-size: 25px;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.closeButtonLegendWrap {
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+    margin-bottom: -30px !important;
+    background-color: none;
+}
+
+.closeButtonMobile {
+    border: none;
+    font-size: 25px;
+    padding-right: 20px;
+    color: #fff;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.closeButtonMobileWrap {
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+    margin-top: -30px !important;
+    background-color: none;
+}
+
 @media screen and (max-width: 1100px) {
     .map-title {
         font-size: 41px;
@@ -379,4 +411,21 @@
         font-size: 21px;
     }
 
+}
+
+@media screen and (max-height: 700px) {
+
+    .iconIUCRList {
+        margin-top: 0px;
+    }
+    
+    .crimeLogo {
+        width: 40px;
+        height: 40px;
+        margin-right: 20px;
+    }
+
+    .crimeSpecs {
+        font-size: 7px;
+    }
 }

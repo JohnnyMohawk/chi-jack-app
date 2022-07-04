@@ -17,6 +17,7 @@ import SearchSpan from '../SearchSpan'
 import ArrestToggle from '../ArrestToggle'
 import CrimeToggle from '../CrimeToggle'
 import MapComponent from '../MapComponent'
+import { FaTimesCircle } from 'react-icons/fa'
 
 require('dotenv').config()
 
@@ -353,6 +354,9 @@ const Map = () => {
                             showGunAttackOnCops={showGunAttackOnCops} setShowGunAttackOnCops={setShowGunAttackOnCops} showAttackOnCops={showAttackOnCops} 
                             setShowAttackOnCops={setShowAttackOnCops} showCarjack={showCarjack} setShowCarjack={setShowCarjack} />
                         <LegendModal />
+                        <div className='closeButtonMobileWrap'>
+                            <button className='closeButtonMobile' onClick={handleClose}><FaTimesCircle /></button>
+                        </div>
                     </div>
                 </Modal>
             </div>

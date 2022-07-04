@@ -6,6 +6,7 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import { crimeObjArr } from '../services/mapService'
 import IconInfo from './IconInfo';
+import { FaTimesCircle } from 'react-icons/fa'
 
 const style = {
     position: 'absolute',
@@ -42,10 +43,12 @@ export default function BasicModal() {
                 <Typography id="modal-modal-subtitle" component="h2">
                     Lists all Illinois Uniform Crime Reporting (IUCR) codes for each map icon.
                 </Typography>
-                {/* <IconInfo icon={crimeObjArr[0].icon} title={crimeObjArr[0].title} specs={crimeObjArr[0].specs} /> */}
                 {crimeObjArr.map((crimeIcon) => (
                     <IconInfo icon={crimeIcon.icon} title={crimeIcon.title} specs={crimeIcon.specs} />
                 ))}
+                <div className='closeButtonLegendWrap'>
+                    <button className='closeButtonLegend' onClick={handleClose}><FaTimesCircle /></button>
+                </div>
                 </Box>
             </Modal>
         </div>
