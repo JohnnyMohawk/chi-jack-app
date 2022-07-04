@@ -4,6 +4,8 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
+import { crimeObjArr } from '../services/mapService'
+import IconInfo from './IconInfo';
 
 const style = {
     position: 'absolute',
@@ -17,11 +19,13 @@ const style = {
     p: 4,
 };
 
+
 export default function BasicModal() {
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
+    console.log(crimeObjArr[0])
     return (
         <div className="crime-legend">
             <Button onClick={handleOpen}>Map Legend</Button>
@@ -33,11 +37,15 @@ export default function BasicModal() {
             >
                 <Box sx={style}>
                 <Typography id="modal-modal-title" variant="h6" component="h2">
-                    Text in a modal
+                    Gun Crimes Icon Legend
                 </Typography>
-                <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                    Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+                <Typography id="modal-modal-subtitle" component="h2">
+                    Lists all Illinois Uniform Crime Reporting (IUCR) codes for each map icon.
                 </Typography>
+                {/* <IconInfo icon={crimeObjArr[0].icon} title={crimeObjArr[0].title} specs={crimeObjArr[0].specs} /> */}
+                {crimeObjArr.map((crimeIcon) => (
+                    <IconInfo icon={crimeIcon.icon} title={crimeIcon.title} specs={crimeIcon.specs} />
+                ))}
                 </Box>
             </Modal>
         </div>

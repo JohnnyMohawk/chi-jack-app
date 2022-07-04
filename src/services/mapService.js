@@ -322,3 +322,84 @@ export const createFormattedDate = (searchDate, searchYear,searchMonth, setMonth
     }
     return formattedDate
 }
+
+export const crimeObjArr = [
+    {
+        icon: '/homicide.png',
+        title: 'Homicides',
+        specs: '110: FIRST DEGREE MURDER, 130: SECOND DEGREE MURDER, 141: INVOLUNTARY MANSLAUGHTER, 142: RECKLESS HOMICIDE',
+    },
+    {
+        icon: '/gun-assault.png',
+        title: 'Assaults & Sexual Assaults',
+        specs: `51A: AGG.-HANDGUN, 51B: AGG.-OTHER FIREARM, 555: AGG.-PROTECTED EMPLOYEE-HANDGUN, 
+                556: AGG.-PROTECTED EMPLOYEE-OTHER FIREARM, 261: AGG.-CRIMINAL SEXUAL ASSAULT-HANDGUN, 
+                262: AGG.CRIMINAL SEXUAL ASSAULT-OTHER FIREARM, 271: ATT. AGG.-CRIMINAL SEXUAL ASSAULT-HANDGUN, 
+                272: ATT. AGG.-CRIMINAL SEXUAL ASSAULT-OTHER FIREARM`,
+    },
+    {
+        icon: '/gun-robbery.png',
+        title: 'Robberies',
+        specs: `31A: ARMED ROBBERY-HANDGUN, 31B: ARMED ROBBERY-OTHER FIREARM, 33A: ATT.-ARMED ROBBERY-HANDGUN, 
+                33B: ATT.-ARMED ROBBERY-OTHER FIREARM`,
+    },
+    {
+        icon: '/gun-battery.png',
+        title: 'Batteries',
+        specs: `41A: AGG.-BATTERY-HANDGUN, 41B: AGG.-BATTERY-OTHER FIREARM, 480: AGG.-BATTERY PROTECTED EMPLOYEE-HANDGUN, 
+                481: AGG.-BATTERY PROTECTED EMPLOYEE-OTHER FIREARM, 488: AGG.-DOMESTIC BATTERY-HANDGUN, 
+                489: AGG.-DOMESTIC BATTERY-OTHER FIREARM, 490: AGG.-RITUAL MUTILATION-HANDGUN, 
+                491: AGG.-RITUAL MUTILATION-OTHER FIREARM,`,
+    },
+    {
+        icon: '/gun-firing.png',
+        title: 'Shots Fired',
+        specs: `141A: UNLAWFUL USE-HANDGUN, 141B: UNLAWFUL USE-OTHER FIREARM, 1477: RECKLESS FIREARM DISCHARGE`,
+    },
+    {
+        icon: '/gun-no-fire.png',
+        title: 'Gun Possession',
+        specs: `143A: UNLAWFUL POSSESSION-HANDGUN, 143B: UNLAWFUL POSSESSION-OTHER FIREARM, 1450: DEFACE ID MARKS OF FIREARM, 
+                1460: POSSESS FIREARM / AMMO-NO FOID CARD`,
+    },
+    {
+        icon: '/ammo-violation.png',
+        title: 'Ammo Violations',
+        specs: `143C: UNLAWFUL POSSESSION-AMMO, 1475: SALE OF METAL PIERCING BULLETS, 1476: USE OF METAL PIERCING BULLETS`,
+    },
+    {
+        icon: '/gun-sale.png',
+        title: 'Illegal Gun Sales',
+        specs: `142A: UNLAWFUL SALE-HANDGUN, 142B: UNLAWFUL SALE-OTHER FIREARM`,
+    },
+    {
+        icon: '/gun-in-school.png',
+        title: 'Guns in Schools',
+        specs: `1435: UNLAWFUL SALE-DELIVERY OF FIREARM AT SCHOOL`,
+    },
+    {
+        icon: '/shots-on-police.png',
+        title: 'Shots on Police',
+        specs: `450: AGG.-BATTERY POLICE OFFICER-HANDGUN, 451: AGG.-BATTERY POLICE OFFICER-OTHER FIREARM, 550: AGG. ASSAULT POLICE OFFICER-HANDGUN, 
+                551: AGG. ASSAULT POLICE OFFICER-OTHER FIREARM,`,
+    },
+    {
+        icon: '/attack-on-police.png',
+        title: 'Attacks on Police',
+        specs: `452: AGG. BATTERY POLICE OFFICER-KNIFE, 453: AGG. BATTERY POLICE OFFICER-OTHER DANGEROUS WEAPON, 
+                552: AGG. ASSAULT POLICE OFFICER-KNIFE, 553: AGG. ASSAULT POLICE OFFICER-OTHER DANGEROUS WEAPON, 
+                3710: INTERE W/ PUB. OFFICER-RESIST/OBSTRUCT/DISARM OFFICER,`,
+    },
+    {
+        icon: '/carjacking.png',
+        title: 'Carjackings',
+        specs: `325: VEHICULAR HIJACKING, 326: AGG. VEHICULAR HIJACKING`,
+    },
+    {
+        icon: '/gun-law-violation.png',
+        title: 'FOID & CC Violations',
+        specs: `1478: CC LICENSE VIOLATION-PROHIBITED PLACES, 1479: CC LICENSE VIOLATION-ARMED WHILE UNDER THE INFLUENCE, 
+                1480: CC LICENSE VIOLATION-OTHER, 1481: CC LICENSE REVOCATION, 5008: FIREARM REGISTRATION VIOLATION, 
+                5110: GUN OFFENDER-DUTY TO REGISTER, 5111: GUN OFFENDER-ANNUAL REGISTRATION, 5112: GUN OFFENDER-DUTY TO REPORT CHANGE OF INFORMATION`,
+    },
+]
