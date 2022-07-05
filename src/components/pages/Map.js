@@ -68,6 +68,8 @@ const Map = () => {
     const [attackOnCopsStats, setAttackOnCopsStats] = useState([])
     const [carjackStats, setCarjackStats] = useState([])
 
+    const [allGunCrimeStats, setAllGunCrimeStats] = useState([...homicideStats, ...sexAssaultStats, ...robberyStats, ...batteryStats, ...assaultStats, ...violationStats, ...shotsFiredStats, ...gunPossessionStats, ...ammoViolationStats, ...gunSaleStats, ...gunInSchoolStats, ...gunAttackOnCopsStats, ...attackOnCopsStats, ...carjackStats])
+
     const [showHomicide, setShowHomicide] = useState(false)
     const [showSexAssault, setShowSexAssault] = useState(false)
     const [showRobbery, setShowRobbery] = useState(false)
@@ -225,6 +227,7 @@ const Map = () => {
     useEffect(() => {
         setPageTitle(dynamicTitle())
         setTotalCrimes(totalCrimeCount())
+        setAllGunCrimeStats([...homicideStats, ...sexAssaultStats, ...robberyStats, ...batteryStats, ...assaultStats, ...violationStats, ...shotsFiredStats, ...gunPossessionStats, ...ammoViolationStats, ...gunSaleStats, ...gunInSchoolStats, ...gunAttackOnCopsStats, ...attackOnCopsStats, ...carjackStats])
     }, [showHomicide, showAssault, showSexAssault, showBattery, showRobbery, showViolation, showShotsFired, showGunPossession, 
         showAmmoViolation, showGunSale, showGunInSchool, showGunAttackOnCops, showAttackOnCops, showCarjack, arrestMade])
 
@@ -244,7 +247,7 @@ const Map = () => {
     }
 
     window.addEventListener('resize', userPageResponse);
-    
+    console.log("GUN CRIME STATS", allGunCrimeStats)
     return window.innerWidth > 960 ? (
 
         <div className="map-container">

@@ -90,6 +90,21 @@ export const filterApiCallData = (data, formattedDate, searchSpan, arrestMade) =
     }
 }
 
+export const filterApiCallGraph = (data, arrestMade) => {
+    let filteredData = data
+    if(arrestMade === "All"){
+        console.log(filteredData)
+        return filteredData
+    }else if(arrestMade === "Yes"){
+        console.log(filteredData.filter(crime => crime.arrest === true))
+        return filteredData.filter(crime => crime.arrest === true)
+    }else if(arrestMade === "No"){
+        console.log(filteredData.filter(crime => crime.arrest === false))
+        return filteredData.filter(crime => crime.arrest === false)
+    }
+
+}
+
 export const homicideApiCall = async(props) => {
     let res1 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=0110&$limit=50000&$offset=0')
     let res2 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=0130&$limit=50000&$offset=0')

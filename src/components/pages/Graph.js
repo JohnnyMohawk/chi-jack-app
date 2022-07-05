@@ -2,22 +2,128 @@ import React, {useState, useEffect} from "react"
 import Lottie from 'react-lottie-player'
 import dataAnimation from '../../assets/animations/dataAnimation.json'
 import {Bar, Doughnut, Line, Pie, PolarArea, Radar} from 'react-chartjs-2'
-import {formatDay, yearRange} from '../../services/mapService.js'
-import '../pages/Graph.css'
+import {formatDay, getDaysInMonth, yearRange, neighborhoodObject, fullMonths, months, 
+    homicideApiCall, sexAssaultApiCall, robberyApiCall, batteryApiCall, assaultApiCall, gunViolationApiCall, 
+    gunFireViolation, gunNoFireViolation, ammoViolation, illegalGunSale, gunInSchool, gunAttackOnCops, attackOnCops, 
+    carjackApiCall, filterApiCallGraph, createFormattedDate} from '../../services/mapService.js'
+import '../pages/GunGraph.css'
+
+
+import Button from '@mui/material/Button';
+import Modal from '@mui/material/Modal';
+import LegendModal from '../LegendModal'
+import LocationSelect from '../LocationSelect'
+import SearchResults from '../SearchResults'
+import SearchSpan from '../SearchSpan'
+import ArrestToggle from '../ArrestToggle'
+import CrimeToggle from '../CrimeToggle'
+import { FaTimesCircle } from 'react-icons/fa'
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
+
 
 function Graph() {
 
     const currentYear = new Date().getFullYear()
     const yearArr = yearRange(2001, currentYear)
+    const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+
+
     const [searchYear, setSearchYear] = useState(currentYear)
     const [yearArray, setYearArray] = useState([])
     const [annualCjData, setAnnualCjData] = useState(null)
     const [monthlyCjData, setMonthlyCjData] = useState(null)
     const [graphType, setGraphType] = useState('bar')
     const [searchSpan, setSearchSpan] = useState("year")
-    const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 
-    const makeApiCall = async() => {
+
+
+    const [homicideStats, setHomicideStats] = useState([])
+    const [sexAssaultStats, setSexAssaultStats] = useState([])
+    const [robberyStats, setRobberyStats] = useState([])
+    const [batteryStats, setBatteryStats] = useState([])
+    const [assaultStats, setAssaultStats] = useState([])
+    const [violationStats, setViolationStats] = useState([])
+    const [shotsFiredStats, setShotsFiredStats] = useState([])
+    const [gunPossessionStats, setGunPossessionStats] = useState([])
+    const [ammoViolationStats, setAmmoViolationStats] = useState([])
+    const [gunSaleStats, setGunSaleStats] = useState([])
+    const [gunInSchoolStats, setGunInSchoolStats] = useState([])
+    const [gunAttackOnCopsStats, setGunAttackOnCopsStats] = useState([])
+    const [attackOnCopsStats, setAttackOnCopsStats] = useState([])
+    const [carjackStats, setCarjackStats] = useState([])
+    const [arrestMade, setArrestMade] = useState("All")
+
+
+    const [showHomicide, setShowHomicide] = useState(true)
+    const [showSexAssault, setShowSexAssault] = useState(true)
+    const [showRobbery, setShowRobbery] = useState(true)
+    const [showBattery, setShowBattery] = useState(true)
+    const [showAssault, setShowAssault] = useState(true)
+    const [showViolation, setShowViolation] = useState(true)
+    const [showShotsFired, setShowShotsFired] = useState(true)
+    const [showGunPossession, setShowGunPossession] = useState(true)
+    const [showAmmoViolation, setShowAmmoViolation] = useState(true)
+    const [showGunSale, setShowGunSale] = useState(true)
+    const [showGunInSchool, setShowGunInSchool] = useState(true)
+    const [showGunAttackOnCops, setShowGunAttackOnCops] = useState(true)
+    const [showAttackOnCops, setShowAttackOnCops] = useState(true)
+    const [showCarjack, setShowCarjack] = useState(true)
+
+
+    const [allGunCrimeStats, setAllGunCrimeStats] = useState(
+        [
+            ...(showHomicide ? homicideStats : []), 
+            ...(showSexAssault ? sexAssaultStats : []), 
+            ...(showRobbery ? robberyStats : []), 
+            ...(showBattery ? batteryStats : []), 
+            ...(showAssault ? assaultStats : []), 
+            ...(showViolation ? violationStats : []), 
+            ...(showShotsFired ? shotsFiredStats : []), 
+            ...(showGunPossession ? gunPossessionStats : []), 
+            ...(showAmmoViolation ? ammoViolationStats : []), 
+            ...(showGunSale ? gunSaleStats : []), 
+            ...(showGunInSchool ? gunInSchoolStats : []), 
+            ...(showGunAttackOnCops ? gunAttackOnCopsStats : []), 
+            ...(showAttackOnCops ? attackOnCopsStats : []), 
+            ...(showCarjack ? carjackStats : [])
+        ]
+    )
+
+
+
+    const serverSideApiCall = async() => {
+        let homicides = await homicideApiCall()
+        let sexualAssaults = await sexAssaultApiCall()
+        let robberies = await robberyApiCall()
+        let batteries = await batteryApiCall()
+        let assaults = await assaultApiCall()
+        let gunViolations = await gunViolationApiCall()
+        let gunFireViolations = await gunFireViolation()
+        let gunPossessionViolations = await gunNoFireViolation()
+        let ammoViolations = await ammoViolation()
+        let illegalGunSales = await illegalGunSale()
+        let gunInSchools = await gunInSchool()
+        let gunAttackOnCop = await gunAttackOnCops()
+        let attackOnCop = await attackOnCops()
+        let carjackings = await carjackApiCall()
+        setHomicideStats(filterApiCallGraph(homicides, arrestMade))
+        setSexAssaultStats(filterApiCallGraph(sexualAssaults, arrestMade))
+        setRobberyStats(filterApiCallGraph(robberies, arrestMade))
+        setBatteryStats(filterApiCallGraph(batteries, arrestMade))
+        setAssaultStats(filterApiCallGraph(assaults, arrestMade))
+        setViolationStats(filterApiCallGraph(gunViolations, arrestMade))
+        setShotsFiredStats(filterApiCallGraph(gunFireViolations, arrestMade))
+        setGunPossessionStats(filterApiCallGraph(gunPossessionViolations, arrestMade))
+        setAmmoViolationStats(filterApiCallGraph(ammoViolations, arrestMade))
+        setGunSaleStats(filterApiCallGraph(illegalGunSales, arrestMade))
+        setGunInSchoolStats(filterApiCallGraph(gunInSchools, arrestMade))
+        setGunAttackOnCopsStats(filterApiCallGraph(gunAttackOnCop, arrestMade))
+        setAttackOnCopsStats(filterApiCallGraph(attackOnCop, arrestMade))
+        setCarjackStats(filterApiCallGraph(carjackings, arrestMade))
+    }
+
+    const filterApiCallMonthsOrYears = async() => {
         let annualDataObj = {}
         let monthDataObj = {}
         let res1 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=0325&$limit=50000&$offset=0')
@@ -35,51 +141,71 @@ function Graph() {
         setMonthlyCjData(monthDataObj)
     }
 
+    const handleArrestToggle = (event, newView) => {
+        if(newView !== null) {
+            setArrestMade(newView)
+        }
+    };
+
 
     useEffect(() => {
         setYearArray(yearArr)
     }, [])
 
     useEffect(() => {
-        makeApiCall()
+        filterApiCallMonthsOrYears()
+        // serverSideApiCall()
     }, [graphType, searchSpan, searchYear])
 
     return annualCjData ? (
         <>
-            <div className="graph-container">
-                <h1>Chicago Carjacking Data Visualizer</h1>
-                <div className="search-bar">
-                    <select defaultValue={graphType} onChange={event => {
-                    setGraphType(event.target.value)
+            <div className="map-container">
+
+
+                <div className="control-panel-wrap">
+                
+                    <Select className="sb-inputs" defaultValue={graphType} onChange={event => {
+                        setGraphType(event.target.value)
                     }}>
-                        <option value="bar">Bar Graph</option>
-                        <option value="doughnut">Doughnut Chart</option>
-                        <option value="line">Line Graph</option>
-                        <option value="pie">Pie Chart</option>
-                        <option value="polar">Polar Area Chart</option>
-                        <option value="radar">Radar Graph</option>
-                    </select>
-                    <select defaultValue={searchSpan} onChange={event => {
-                    setSearchSpan(event.target.value)
+                        <MenuItem value="bar">Bar Graph</MenuItem>
+                        <MenuItem value="doughnut">Doughnut Chart</MenuItem>
+                        <MenuItem value="line">Line Graph</MenuItem>
+                        <MenuItem value="pie">Pie Chart</MenuItem>
+                        <MenuItem value="polar">Polar Area Chart</MenuItem>
+                        <MenuItem value="radar">Radar Graph</MenuItem>
+                    </Select>
+                    <Select className="sb-inputs" defaultValue={searchSpan} onChange={event => {
+                        setSearchSpan(event.target.value)
                     }}>
-                        <option value="year">All Years</option>
-                        <option value="month">Single Year</option>
-                    </select>
+                        <MenuItem value="year">All Years</MenuItem>
+                        <MenuItem value="month">Single Year</MenuItem>
+                    </Select>
                     {searchSpan === "month" ?
-                    <select defaultValue={searchYear} onChange={event => {
-                    setSearchYear(event.target.value)
-                    }}>
-                        {yearArray.reverse().map(year => (
-                            <option key={year} value={year}>
-                                {year}
-                            </option>
-                        ))}
-                    </select>
-                    :
-                    <></>
+                        <Select className="sb-inputs" defaultValue={searchYear} onChange={event => {
+                            setSearchYear(event.target.value)
+                        }}>
+                            {yearArray.reverse().map(year => (
+                                <MenuItem key={year} value={year}>
+                                    {year}
+                                </MenuItem>
+                            ))}
+                        </Select>
+                        :
+                        <></>
                     }
-                </div>
-                <div className="graph-text">
+
+                    <ArrestToggle arrestMade={arrestMade} handleArrestToggle={handleArrestToggle} />
+                    <CrimeToggle showHomicide={showHomicide} setShowHomicide={setShowHomicide} showAssault={showAssault} 
+                        setShowAssault={setShowAssault} showSexAssault={showSexAssault} setShowSexAssault={setShowSexAssault} 
+                        showRobbery={showRobbery} setShowRobbery={setShowRobbery} showBattery={showBattery} setShowBattery={setShowBattery} 
+                        showViolation={showViolation} setShowViolation={setShowViolation} showShotsFired={showShotsFired} 
+                        setShowShotsFired={setShowShotsFired} showGunPossession={showGunPossession} setShowGunPossession={setShowGunPossession} 
+                        showAmmoViolation={showAmmoViolation} setShowAmmoViolation={setShowAmmoViolation} showGunSale={showGunSale} 
+                        setShowGunSale={setShowGunSale} showGunInSchool={showGunInSchool} setShowGunInSchool={setShowGunInSchool} 
+                        showGunAttackOnCops={showGunAttackOnCops} setShowGunAttackOnCops={setShowGunAttackOnCops} showAttackOnCops={showAttackOnCops} 
+                        setShowAttackOnCops={setShowAttackOnCops} showCarjack={showCarjack} setShowCarjack={setShowCarjack} />
+                </div> 
+                <div className="map-text">
                     {graphType === "bar" &&  searchSpan === "year" ? <Bar
                         data={{
                         labels: Object.keys(annualCjData),
