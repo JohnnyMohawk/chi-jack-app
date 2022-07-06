@@ -93,13 +93,13 @@ export const filterApiCallData = (data, formattedDate, searchSpan, arrestMade) =
 export const filterApiCallGraph = (data, arrestMade) => {
     let filteredData = data
     if(arrestMade === "All"){
-        console.log(filteredData)
+        console.log("BOOOOYA", filteredData)
         return filteredData
     }else if(arrestMade === "Yes"){
-        console.log(filteredData.filter(crime => crime.arrest === true))
+        console.log("BOOOOYA", filteredData.filter(crime => crime.arrest === true))
         return filteredData.filter(crime => crime.arrest === true)
     }else if(arrestMade === "No"){
-        console.log(filteredData.filter(crime => crime.arrest === false))
+        console.log("BOOOOYA", filteredData.filter(crime => crime.arrest === false))
         return filteredData.filter(crime => crime.arrest === false)
     }
 

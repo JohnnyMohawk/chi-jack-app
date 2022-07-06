@@ -55,38 +55,38 @@ function Graph() {
     const [arrestMade, setArrestMade] = useState("All")
 
 
-    const [showHomicide, setShowHomicide] = useState(true)
-    const [showSexAssault, setShowSexAssault] = useState(true)
-    const [showRobbery, setShowRobbery] = useState(true)
-    const [showBattery, setShowBattery] = useState(true)
-    const [showAssault, setShowAssault] = useState(true)
-    const [showViolation, setShowViolation] = useState(true)
-    const [showShotsFired, setShowShotsFired] = useState(true)
-    const [showGunPossession, setShowGunPossession] = useState(true)
-    const [showAmmoViolation, setShowAmmoViolation] = useState(true)
-    const [showGunSale, setShowGunSale] = useState(true)
-    const [showGunInSchool, setShowGunInSchool] = useState(true)
-    const [showGunAttackOnCops, setShowGunAttackOnCops] = useState(true)
-    const [showAttackOnCops, setShowAttackOnCops] = useState(true)
-    const [showCarjack, setShowCarjack] = useState(true)
+    const [showHomicide, setShowHomicide] = useState(false)
+    const [showSexAssault, setShowSexAssault] = useState(false)
+    const [showRobbery, setShowRobbery] = useState(false)
+    const [showBattery, setShowBattery] = useState(false)
+    const [showAssault, setShowAssault] = useState(false)
+    const [showViolation, setShowViolation] = useState(false)
+    const [showShotsFired, setShowShotsFired] = useState(false)
+    const [showGunPossession, setShowGunPossession] = useState(false)
+    const [showAmmoViolation, setShowAmmoViolation] = useState(false)
+    const [showGunSale, setShowGunSale] = useState(false)
+    const [showGunInSchool, setShowGunInSchool] = useState(false)
+    const [showGunAttackOnCops, setShowGunAttackOnCops] = useState(false)
+    const [showAttackOnCops, setShowAttackOnCops] = useState(false)
+    const [showCarjack, setShowCarjack] = useState(false)
 
 
     const [allGunCrimeStats, setAllGunCrimeStats] = useState(
         [
-            ...(showHomicide ? homicideStats : []), 
-            ...(showSexAssault ? sexAssaultStats : []), 
-            ...(showRobbery ? robberyStats : []), 
-            ...(showBattery ? batteryStats : []), 
-            ...(showAssault ? assaultStats : []), 
-            ...(showViolation ? violationStats : []), 
-            ...(showShotsFired ? shotsFiredStats : []), 
-            ...(showGunPossession ? gunPossessionStats : []), 
-            ...(showAmmoViolation ? ammoViolationStats : []), 
-            ...(showGunSale ? gunSaleStats : []), 
-            ...(showGunInSchool ? gunInSchoolStats : []), 
-            ...(showGunAttackOnCops ? gunAttackOnCopsStats : []), 
-            ...(showAttackOnCops ? attackOnCopsStats : []), 
-            ...(showCarjack ? carjackStats : [])
+            ...homicideStats, 
+            ...sexAssaultStats, 
+            ...robberyStats, 
+            ...batteryStats, 
+            ...assaultStats, 
+            ...violationStats, 
+            ...shotsFiredStats, 
+            ...gunPossessionStats, 
+            ...ammoViolationStats, 
+            ...gunSaleStats, 
+            ...gunInSchoolStats, 
+            ...gunAttackOnCopsStats, 
+            ...attackOnCopsStats, 
+            ...carjackStats,
         ]
     )
 
@@ -121,21 +121,39 @@ function Graph() {
         setGunAttackOnCopsStats(filterApiCallGraph(gunAttackOnCop, arrestMade))
         setAttackOnCopsStats(filterApiCallGraph(attackOnCop, arrestMade))
         setCarjackStats(filterApiCallGraph(carjackings, arrestMade))
+        setAllGunCrimeStats(
+            [
+                ...(showHomicide ? homicideStats : []), 
+                ...(showSexAssault ? sexAssaultStats : []), 
+                ...(showRobbery ? robberyStats : []), 
+                ...(showBattery ? batteryStats : []), 
+                ...(showAssault ? assaultStats : []), 
+                ...(showViolation ? violationStats : []), 
+                ...(showShotsFired ? shotsFiredStats : []), 
+                ...(showGunPossession ? gunPossessionStats : []), 
+                ...(showAmmoViolation ? ammoViolationStats : []), 
+                ...(showGunSale ? gunSaleStats : []), 
+                ...(showGunInSchool ? gunInSchoolStats : []), 
+                ...(showGunAttackOnCops ? gunAttackOnCopsStats : []), 
+                ...(showAttackOnCops ? attackOnCopsStats : []), 
+                ...(showCarjack ? carjackStats : [])
+            ]
+        )
     }
 
     const filterApiCallMonthsOrYears = async() => {
         let annualDataObj = {}
         let monthDataObj = {}
-        let res1 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=0325&$limit=50000&$offset=0')
-        let res2 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=0326&$limit=50000&$offset=0')
-        let data1 = await res1.json()
-        let data2 = await res2.json()
-        let data = [...data1, ...data2]
+        // let res1 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=0325&$limit=50000&$offset=0')
+        // let res2 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=0326&$limit=50000&$offset=0')
+        // let data1 = await res1.json()
+        // let data2 = await res2.json()
+        // let data = [...data1, ...data2]
         yearArr.forEach(year => {
-            annualDataObj[year] = data.filter(crime => crime.date.includes(year)).length
+            annualDataObj[year] = allGunCrimeStats.filter(crime => crime.date.includes(year)).length
         });
         months.forEach((month, i) => {
-            monthDataObj[month] = data.filter(crime => crime.date.includes(`${searchYear}-${formatDay(i + 1)}`)).length
+            monthDataObj[month] = allGunCrimeStats.filter(crime => crime.date.includes(`${searchYear}-${formatDay(i + 1)}`)).length
         });
         setAnnualCjData(annualDataObj)
         setMonthlyCjData(monthDataObj)
@@ -147,17 +165,57 @@ function Graph() {
         }
     };
 
-
     useEffect(() => {
         setYearArray(yearArr)
     }, [])
 
     useEffect(() => {
-        filterApiCallMonthsOrYears()
-        // serverSideApiCall()
-    }, [graphType, searchSpan, searchYear])
+        serverSideApiCall()
+    }, [arrestMade])
 
-    return annualCjData ? (
+    useEffect(() => {
+        setAllGunCrimeStats(
+            [
+                ...(showHomicide ? homicideStats : []), 
+                ...(showSexAssault ? sexAssaultStats : []), 
+                ...(showRobbery ? robberyStats : []), 
+                ...(showBattery ? batteryStats : []), 
+                ...(showAssault ? assaultStats : []), 
+                ...(showViolation ? violationStats : []), 
+                ...(showShotsFired ? shotsFiredStats : []), 
+                ...(showGunPossession ? gunPossessionStats : []), 
+                ...(showAmmoViolation ? ammoViolationStats : []), 
+                ...(showGunSale ? gunSaleStats : []), 
+                ...(showGunInSchool ? gunInSchoolStats : []), 
+                ...(showGunAttackOnCops ? gunAttackOnCopsStats : []), 
+                ...(showAttackOnCops ? attackOnCopsStats : []), 
+                ...(showCarjack ? carjackStats : [])
+            ]
+        )
+    }, [
+            showHomicide, 
+            showSexAssault, 
+            showRobbery, 
+            showBattery, 
+            showAssault, 
+            showViolation, 
+            showShotsFired, 
+            showGunPossession, 
+            showAmmoViolation, 
+            showGunSale, 
+            showGunInSchool, 
+            showGunAttackOnCops, 
+            showAttackOnCops, 
+            showCarjack,
+        ]
+    )
+
+    useEffect(() => {
+        filterApiCallMonthsOrYears()
+        console.log("XXXXXX", allGunCrimeStats)
+    }, [graphType, searchSpan, searchYear, allGunCrimeStats])
+
+    return homicideStats.length ? (
         <>
             <div className="map-container">
 
