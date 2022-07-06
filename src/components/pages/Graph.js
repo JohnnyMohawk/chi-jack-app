@@ -141,14 +141,29 @@ function Graph() {
         )
     }
 
+    const allGunCrimes = () => {
+        let gunCrimeArr = [
+            ...(showHomicide ? homicideStats : []), 
+            ...(showSexAssault ? sexAssaultStats : []), 
+            ...(showRobbery ? robberyStats : []), 
+            ...(showBattery ? batteryStats : []), 
+            ...(showAssault ? assaultStats : []), 
+            ...(showViolation ? violationStats : []), 
+            ...(showShotsFired ? shotsFiredStats : []), 
+            ...(showGunPossession ? gunPossessionStats : []), 
+            ...(showAmmoViolation ? ammoViolationStats : []), 
+            ...(showGunSale ? gunSaleStats : []), 
+            ...(showGunInSchool ? gunInSchoolStats : []), 
+            ...(showGunAttackOnCops ? gunAttackOnCopsStats : []), 
+            ...(showAttackOnCops ? attackOnCopsStats : []), 
+            ...(showCarjack ? carjackStats : [])
+        ]
+        return gunCrimeArr
+    }
+
     const filterApiCallMonthsOrYears = async() => {
         let annualDataObj = {}
         let monthDataObj = {}
-        // let res1 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=0325&$limit=50000&$offset=0')
-        // let res2 = await fetch('https://data.cityofchicago.org/resource/ijzp-q8t2.json?iucr=0326&$limit=50000&$offset=0')
-        // let data1 = await res1.json()
-        // let data2 = await res2.json()
-        // let data = [...data1, ...data2]
         yearArr.forEach(year => {
             annualDataObj[year] = allGunCrimeStats.filter(crime => crime.date.includes(year)).length
         });
@@ -207,14 +222,15 @@ function Graph() {
             showGunAttackOnCops, 
             showAttackOnCops, 
             showCarjack,
+            arrestMade,
         ]
     )
 
     useEffect(() => {
         filterApiCallMonthsOrYears()
-        console.log("XXXXXX", allGunCrimeStats)
-    }, [graphType, searchSpan, searchYear, allGunCrimeStats])
-
+        // console.log("XXXXXX", allGunCrimeStats)
+    }, [graphType, searchSpan, searchYear, allGunCrimeStats, arrestMade])
+    console.log(arrestMade, allGunCrimeStats)
     return homicideStats.length ? (
         <>
             <div className="map-container">

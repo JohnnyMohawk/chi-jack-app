@@ -227,7 +227,7 @@ const Map = () => {
     useEffect(() => {
         setPageTitle(dynamicTitle())
         setTotalCrimes(totalCrimeCount())
-        setAllGunCrimeStats([...homicideStats, ...sexAssaultStats, ...robberyStats, ...batteryStats, ...assaultStats, ...violationStats, ...shotsFiredStats, ...gunPossessionStats, ...ammoViolationStats, ...gunSaleStats, ...gunInSchoolStats, ...gunAttackOnCopsStats, ...attackOnCopsStats, ...carjackStats])
+        // setAllGunCrimeStats([...homicideStats, ...sexAssaultStats, ...robberyStats, ...batteryStats, ...assaultStats, ...violationStats, ...shotsFiredStats, ...gunPossessionStats, ...ammoViolationStats, ...gunSaleStats, ...gunInSchoolStats, ...gunAttackOnCopsStats, ...attackOnCopsStats, ...carjackStats])
     }, [showHomicide, showAssault, showSexAssault, showBattery, showRobbery, showViolation, showShotsFired, showGunPossession, 
         showAmmoViolation, showGunSale, showGunInSchool, showGunAttackOnCops, showAttackOnCops, showCarjack, arrestMade])
 
