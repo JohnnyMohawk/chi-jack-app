@@ -262,8 +262,8 @@ function Graph() {
 
     return homicideStats.length ? (
         <>
-            <div className="map-container">
-                <div className="control-panel-wrap">
+            <div className="graph-container">
+                <div className="graph-panel-wrap">
                     <SearchResultsGraph pageTitle={pageTitle} totalCrimeCount={allGunCrimes} searchSpan={searchSpan} searchYear={searchYear} 
                         fullMonths={fullMonths} />
                     <GraphSelect setGraphType={setGraphType} graphType={graphType} searchSpan={searchSpan} setSearchSpan={setSearchSpan} 
@@ -279,7 +279,7 @@ function Graph() {
                         showGunAttackOnCops={showGunAttackOnCops} setShowGunAttackOnCops={setShowGunAttackOnCops} showAttackOnCops={showAttackOnCops} 
                         setShowAttackOnCops={setShowAttackOnCops} showCarjack={showCarjack} setShowCarjack={setShowCarjack} />
                 </div> 
-                <div className="map-text">
+                <div className="graph-section">
                     {graphType === "bar" &&  searchSpan === "year" ? <Bar
                         data={{
                         labels: Object.keys(annualCjData),

@@ -1,8 +1,21 @@
-.map-container {
+.graph-container {
     position: relative;
+    height: 715px !important;
+    height: 90vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    object-fit: contain;
+    padding-top: 50px;
+    background: linear-gradient(
+    90deg,
+    rgb(26, 23, 23) 0%,
+    rgb(28, 27, 27) 100%
+    );
 }
 
-.map-container-mobile {
+.graph-container-mobile {
     position: relative;
 }
 
@@ -12,7 +25,7 @@
     left: 5%;
 }
 
-.control-panel-wrap {
+.graph-panel-wrap {
     width:400px;
     position: absolute;
     left: 0;
@@ -30,8 +43,8 @@
     backdrop-filter: blur(2px);
 }
 
-.main-title-results {
-    height: 60px;
+.graph-title-results {
+    height: 90px;
 }
 
 .loading-title {
@@ -71,11 +84,12 @@
     color: #fff;
 }
 
-.carjack-numbers,
-#cj-num-id {
+.graph-numbers,
+#graph-total {
     color: tomato;
     font-size: 30px;
     animation: heart-pulse 0.9s infinite ease-out;
+    margin-bottom: 10px;
 }
 
 .crime-view {
@@ -132,7 +146,7 @@
         transform: scale(1);
     }
     50% {
-        transform: scale(1.08);
+        transform: scale(1.015);
     }
     100% {
         transform: scale(1);
@@ -187,7 +201,7 @@
     height: 40px !important;
 }
 
-.map-text {
+.graph-section {
     overflow: auto;
     position: absolute;
     right: 0;
@@ -284,7 +298,7 @@
     .map-title {
         font-size: 41px;
     }
-    .map-container > h2,
+    .graph-container > h2,
     .search-params {
         font-size: 22px;
         margin-bottom: 5px;
@@ -338,7 +352,7 @@
         font-size: 32px;
     }
 
-    .map-container > h2,
+    .graph-container > h2,
     .search-params {
         font-size: 22px;
         margin-bottom: 5px;
@@ -369,7 +383,7 @@
 }
 
 @media screen and (max-width: 550px) {
-    .map-container {
+    .graph-container {
         max-width: 100vw;
     }
 
