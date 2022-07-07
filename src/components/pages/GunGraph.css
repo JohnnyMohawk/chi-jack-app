@@ -1,5 +1,11 @@
-.map-container {
+.graph-container {
     position: relative;
+    height: 715px !important;
+    background: linear-gradient(
+    90deg,
+    rgb(26, 23, 23) 0%,
+    rgb(28, 27, 27) 100%
+    );
 }
 
 .map-container-mobile {
@@ -284,7 +290,7 @@
     .map-title {
         font-size: 41px;
     }
-    .map-container > h2,
+    .graph-container > h2,
     .search-params {
         font-size: 22px;
         margin-bottom: 5px;
@@ -338,7 +344,7 @@
         font-size: 32px;
     }
 
-    .map-container > h2,
+    .graph-container > h2,
     .search-params {
         font-size: 22px;
         margin-bottom: 5px;
@@ -369,7 +375,7 @@
 }
 
 @media screen and (max-width: 550px) {
-    .map-container {
+    .graph-container {
         max-width: 100vw;
     }
 

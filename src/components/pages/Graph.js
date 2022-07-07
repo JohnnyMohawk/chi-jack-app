@@ -262,8 +262,8 @@ function Graph() {
 
     return homicideStats.length ? (
         <>
-            <div className="map-container">
-                <div className="control-panel-wrap">
+            <div className="graph-container">
+                <div className="graph-control-wrap">
                     <SearchResultsGraph pageTitle={pageTitle} totalCrimeCount={allGunCrimes} searchSpan={searchSpan} searchYear={searchYear} 
                         fullMonths={fullMonths} />
                     <GraphSelect setGraphType={setGraphType} graphType={graphType} searchSpan={searchSpan} setSearchSpan={setSearchSpan} 
