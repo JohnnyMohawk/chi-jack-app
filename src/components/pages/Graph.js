@@ -13,10 +13,12 @@ import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import LegendModal from '../LegendModal'
 import LocationSelect from '../LocationSelect'
-import SearchResults from '../SearchResults'
+import SearchResultsGraph from '../SearchResultsGraph'
 import SearchSpan from '../SearchSpan'
 import ArrestToggle from '../ArrestToggle'
 import CrimeToggle from '../CrimeToggle'
+import GraphSelect from "../GraphSelect"
+
 import { FaTimesCircle } from 'react-icons/fa'
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
@@ -53,6 +55,7 @@ function Graph() {
     const [attackOnCopsStats, setAttackOnCopsStats] = useState([])
     const [carjackStats, setCarjackStats] = useState([])
     const [arrestMade, setArrestMade] = useState("All")
+    const [pageTitle, setPageTitle] = useState("")
 
 
     const [showHomicide, setShowHomicide] = useState(false)
@@ -165,10 +168,10 @@ function Graph() {
         let annualDataObj = {}
         let monthDataObj = {}
         yearArr.forEach(year => {
-            annualDataObj[year] = allGunCrimeStats.filter(crime => crime.date.includes(year)).length
+            annualDataObj[year] = allGunCrimes().filter(crime => crime.date.includes(year)).length
         });
         months.forEach((month, i) => {
-            monthDataObj[month] = allGunCrimeStats.filter(crime => crime.date.includes(`${searchYear}-${formatDay(i + 1)}`)).length
+            monthDataObj[month] = allGunCrimes().filter(crime => crime.date.includes(`${searchYear}-${formatDay(i + 1)}`)).length
         });
         setAnnualCjData(annualDataObj)
         setMonthlyCjData(monthDataObj)
@@ -178,6 +181,25 @@ function Graph() {
         if(newView !== null) {
             setArrestMade(newView)
         }
+    };
+
+    const dynamicTitle = () => {
+        if(!showHomicide && 
+            !showAssault &&
+            !showSexAssault &&
+            !showRobbery &&
+            !showBattery &&
+            !showViolation &&
+            !showShotsFired &&
+            !showGunPossession &&
+            !showAmmoViolation &&
+            !showGunSale &&
+            !showGunInSchool &&
+            !showGunAttackOnCops &&
+            !showAttackOnCops &&
+            !showCarjack){
+                return "Select"
+        }else return "Results"
     };
 
     useEffect(() => {
@@ -228,46 +250,24 @@ function Graph() {
 
     useEffect(() => {
         filterApiCallMonthsOrYears()
-        // console.log("XXXXXX", allGunCrimeStats)
     }, [graphType, searchSpan, searchYear, allGunCrimeStats, arrestMade])
-    console.log(arrestMade, allGunCrimeStats)
+
+    useEffect(() => {
+        setPageTitle(dynamicTitle())
+    }, [showHomicide, showAssault, showSexAssault, showBattery, showRobbery, showViolation, showShotsFired, showGunPossession, 
+        showAmmoViolation, showGunSale, showGunInSchool, showGunAttackOnCops, showAttackOnCops, showCarjack, arrestMade])
+
+
+    console.log(allGunCrimes().length)
+
     return homicideStats.length ? (
         <>
             <div className="map-container">
-
-
                 <div className="control-panel-wrap">
-                
-                    <Select className="sb-inputs" defaultValue={graphType} onChange={event => {
-                        setGraphType(event.target.value)
-                    }}>
-                        <MenuItem value="bar">Bar Graph</MenuItem>
-                        <MenuItem value="doughnut">Doughnut Chart</MenuItem>
-                        <MenuItem value="line">Line Graph</MenuItem>
-                        <MenuItem value="pie">Pie Chart</MenuItem>
-                        <MenuItem value="polar">Polar Area Chart</MenuItem>
-                        <MenuItem value="radar">Radar Graph</MenuItem>
-                    </Select>
-                    <Select className="sb-inputs" defaultValue={searchSpan} onChange={event => {
-                        setSearchSpan(event.target.value)
-                    }}>
-                        <MenuItem value="year">All Years</MenuItem>
-                        <MenuItem value="month">Single Year</MenuItem>
-                    </Select>
-                    {searchSpan === "month" ?
-                        <Select className="sb-inputs" defaultValue={searchYear} onChange={event => {
-                            setSearchYear(event.target.value)
-                        }}>
-                            {yearArray.reverse().map(year => (
-                                <MenuItem key={year} value={year}>
-                                    {year}
-                                </MenuItem>
-                            ))}
-                        </Select>
-                        :
-                        <></>
-                    }
-
+                    <SearchResultsGraph pageTitle={pageTitle} totalCrimeCount={allGunCrimes} searchSpan={searchSpan} searchYear={searchYear} 
+                        fullMonths={fullMonths} />
+                    <GraphSelect setGraphType={setGraphType} graphType={graphType} searchSpan={searchSpan} setSearchSpan={setSearchSpan} 
+                        searchYear={searchYear} setSearchYear={setSearchYear} yearArray={yearArray} />
                     <ArrestToggle arrestMade={arrestMade} handleArrestToggle={handleArrestToggle} />
                     <CrimeToggle showHomicide={showHomicide} setShowHomicide={setShowHomicide} showAssault={showAssault} 
                         setShowAssault={setShowAssault} showSexAssault={showSexAssault} setShowSexAssault={setShowSexAssault} 
