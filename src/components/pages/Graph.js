@@ -257,10 +257,19 @@ function Graph() {
     }, [showHomicide, showAssault, showSexAssault, showBattery, showRobbery, showViolation, showShotsFired, showGunPossession, 
         showAmmoViolation, showGunSale, showGunInSchool, showGunAttackOnCops, showAttackOnCops, showCarjack, arrestMade])
 
+    const userPageResponse = () => {
+        if(window.innerWidth >= 1000){
+            window.location.reload()
+        }else if(window.innerWidth <= 1000){
+            window.location.reload()
+        }
+    }
+
+    window.addEventListener('resize', userPageResponse);
 
     console.log(allGunCrimes().length)
 
-    return homicideStats.length ? (
+    return window.innerWidth > 960 ? (
         <>
             <div className="graph-container">
                 <div className="graph-panel-wrap">
@@ -279,6 +288,7 @@ function Graph() {
                         showGunAttackOnCops={showGunAttackOnCops} setShowGunAttackOnCops={setShowGunAttackOnCops} showAttackOnCops={showAttackOnCops} 
                         setShowAttackOnCops={setShowAttackOnCops} showCarjack={showCarjack} setShowCarjack={setShowCarjack} />
                 </div> 
+                { homicideStats.length ?
                 <div className="graph-section">
                     {graphType === "bar" &&  searchSpan === "year" ? <Bar
                         data={{
@@ -897,6 +907,21 @@ function Graph() {
                     /> :
                     <></>}
                 </div>
+                : 
+                <>
+                    <div className="lottieWrapper">
+                        <div className="lottieContainer">
+                            <h1 className="loading-title">Loading... Please Wait</h1>
+                            <Lottie
+                                loop
+                                animationData={dataAnimation}
+                                play
+                                style={{ width: 'calc(100vw - 550px)', height: 650 }}
+                            />
+                        </div>
+                    </div>
+                </>
+                }
             </div>
         </>
     ):
