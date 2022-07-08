@@ -1,20 +1,13 @@
 import React, {useState, useEffect} from "react"
 import Lottie from 'react-lottie-player'
 import dataAnimation from '../../assets/animations/dataAnimation.json'
-import {Bar, Doughnut, Line, Pie, PolarArea, Radar} from 'react-chartjs-2'
-import {formatDay, getDaysInMonth, yearRange, neighborhoodObject, fullMonths, months, 
-    homicideApiCall, sexAssaultApiCall, robberyApiCall, batteryApiCall, assaultApiCall, gunViolationApiCall, 
-    gunFireViolation, gunNoFireViolation, ammoViolation, illegalGunSale, gunInSchool, gunAttackOnCops, attackOnCops, 
-    carjackApiCall, filterApiCallGraph, createFormattedDate} from '../../services/mapService.js'
+import {formatDay, yearRange, fullMonths, homicideApiCall, sexAssaultApiCall, robberyApiCall, batteryApiCall, assaultApiCall, 
+    gunViolationApiCall, gunFireViolation, gunNoFireViolation, ammoViolation, illegalGunSale, gunInSchool, gunAttackOnCops, 
+    attackOnCops, carjackApiCall, filterApiCallGraph} from '../../services/mapService.js'
 import '../pages/GunGraph.css'
-
-
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
-import LegendModal from '../LegendModal'
-import LocationSelect from '../LocationSelect'
 import SearchResultsGraph from '../SearchResultsGraph'
-import SearchSpan from '../SearchSpan'
 import ArrestToggle from '../ArrestToggle'
 import CrimeToggle from '../CrimeToggle'
 import GraphSelect from "../GraphSelect"
@@ -23,11 +16,8 @@ import DonutGraph from "../DonutGraph"
 import LineGraph from "../LineGraph"
 import PieGraph from "../PieGraph"
 import PolarGraph from "../PolarGraph"
-
-import { FaTimesCircle } from 'react-icons/fa'
-import MenuItem from '@mui/material/MenuItem';
-import Select from '@mui/material/Select';
 import RadarGraph from "../RadarGraph"
+import { FaTimesCircle } from 'react-icons/fa'
 
 
 function Graph() {
@@ -36,16 +26,12 @@ function Graph() {
     const yearArr = yearRange(2001, currentYear)
     const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 
-
     const [searchYear, setSearchYear] = useState(currentYear)
     const [yearArray, setYearArray] = useState([])
     const [annualCjData, setAnnualCjData] = useState(null)
     const [monthlyCjData, setMonthlyCjData] = useState(null)
     const [graphType, setGraphType] = useState('bar')
     const [searchSpan, setSearchSpan] = useState("year")
-
-
-
     const [homicideStats, setHomicideStats] = useState([])
     const [sexAssaultStats, setSexAssaultStats] = useState([])
     const [robberyStats, setRobberyStats] = useState([])
@@ -62,8 +48,6 @@ function Graph() {
     const [carjackStats, setCarjackStats] = useState([])
     const [arrestMade, setArrestMade] = useState("All")
     const [pageTitle, setPageTitle] = useState("")
-
-
     const [showHomicide, setShowHomicide] = useState(false)
     const [showSexAssault, setShowSexAssault] = useState(false)
     const [showRobbery, setShowRobbery] = useState(false)
@@ -78,8 +62,6 @@ function Graph() {
     const [showGunAttackOnCops, setShowGunAttackOnCops] = useState(false)
     const [showAttackOnCops, setShowAttackOnCops] = useState(false)
     const [showCarjack, setShowCarjack] = useState(false)
-
-
     const [allGunCrimeStats, setAllGunCrimeStats] = useState(
         [
             ...homicideStats, 
@@ -100,12 +82,8 @@ function Graph() {
     )
 
     const [open, setOpen] = useState(false);
-    
-
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
-
-
 
     const serverSideApiCall = async() => {
         let homicides = await homicideApiCall()
@@ -241,24 +219,8 @@ function Graph() {
                 ...(showCarjack ? carjackStats : [])
             ]
         )
-    }, [
-            showHomicide, 
-            showSexAssault, 
-            showRobbery, 
-            showBattery, 
-            showAssault, 
-            showViolation, 
-            showShotsFired, 
-            showGunPossession, 
-            showAmmoViolation, 
-            showGunSale, 
-            showGunInSchool, 
-            showGunAttackOnCops, 
-            showAttackOnCops, 
-            showCarjack,
-            arrestMade,
-        ]
-    )
+    }, [showHomicide, showSexAssault, showRobbery, showBattery, showAssault, showViolation, showShotsFired, showGunPossession, 
+            showAmmoViolation, showGunSale, showGunInSchool, showGunAttackOnCops, showAttackOnCops, showCarjack, arrestMade])
 
     useEffect(() => {
         filterApiCallMonthsOrYears()
@@ -351,7 +313,6 @@ function Graph() {
                 fullMonths={fullMonths} />
             {violationStats.length ? 
             <>
-
                 <div className="graph-section">
                     {graphType === "bar" &&  searchSpan === "year" ? 
                     <BarGraph Data={annualCjData} searchYear={0} /> : <></>}
@@ -378,7 +339,6 @@ function Graph() {
                     {graphType === "radar" &&  searchSpan === "month" ? 
                     <RadarGraph Data={monthlyCjData} searchYear={searchYear} /> : <></>}
                 </div>
-
             </> : 
             <>
                 <div className="mobileLottieWrapper">
