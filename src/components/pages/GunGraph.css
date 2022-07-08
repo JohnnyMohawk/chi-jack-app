@@ -17,6 +17,12 @@
 
 .graph-container-mobile {
     position: relative;
+    background: linear-gradient(
+    90deg,
+    rgb(26, 23, 23) 0%,
+    rgb(28, 27, 27) 100%
+    );
+    height: 90vh;
 }
 
 .search-modal {
@@ -32,9 +38,9 @@
     padding-left: 50px;
 }
 
-.control-modal-wrap {
-    margin-top: 140px;
-    padding: 0;
+.control-modal-wrap-graph {
+    margin-top: 160px;
+    padding: 20px 0;
     width:100vw;
     position: absolute;
     left: 0;
@@ -277,7 +283,7 @@
     background-color: none;
 }
 
-.closeButtonMobile {
+.closeButtonMobileGraph {
     border: none;
     font-size: 25px;
     padding-right: 20px;
@@ -286,11 +292,11 @@
     cursor: pointer;
 }
 
-.closeButtonMobileWrap {
+.closeButtonMobileWrapGraph {
     display: flex;
     flex-direction: row;
     justify-content: right;
-    margin-top: -30px !important;
+    margin-top: 10px !important;
     background-color: none;
 }
 
@@ -318,17 +324,15 @@
         height: 35px !important;
     }
 
-    .main-title-results {
+    .graph-title-results {
         height: 60px;
-        background-color: rgba(86, 86, 86, 0.5);
+        background-color: rgb(26, 23, 23);
         padding: 7px 10px ;
         width: 100vw;
         position: absolute;
         top: 0;
         left: 0;
         z-index: 1;
-        -webkit-backdrop-filter: blur(2px);
-        backdrop-filter: blur(2px);
     }
 
     .arrest-view {
@@ -344,6 +348,19 @@
         filter: invert(100%) !important;
         min-width: 170px;
         margin: 0px 13px !important;
+    }
+
+    .graph-section {
+        width: 100vw;
+        position: absolute;
+        left: 0;
+        height: 82vh;
+        margin-top: 40px;
+    }
+
+    .cj-number-header {
+        display: flex;
+        flex-direction: row;
     }
 }
 

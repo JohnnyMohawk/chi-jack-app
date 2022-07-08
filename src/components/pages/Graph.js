@@ -18,10 +18,16 @@ import SearchSpan from '../SearchSpan'
 import ArrestToggle from '../ArrestToggle'
 import CrimeToggle from '../CrimeToggle'
 import GraphSelect from "../GraphSelect"
+import BarGraph from "../BarGraph"
+import DonutGraph from "../DonutGraph"
+import LineGraph from "../LineGraph"
+import PieGraph from "../PieGraph"
+import PolarGraph from "../PolarGraph"
 
 import { FaTimesCircle } from 'react-icons/fa'
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
+import RadarGraph from "../RadarGraph"
 
 
 function Graph() {
@@ -92,6 +98,12 @@ function Graph() {
             ...carjackStats,
         ]
     )
+
+    const [open, setOpen] = useState(false);
+    
+
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
 
 
 
@@ -290,622 +302,30 @@ function Graph() {
                 </div> 
                 { homicideStats.length ?
                 <div className="graph-section">
-                    {graphType === "bar" &&  searchSpan === "year" ? <Bar
-                        data={{
-                        labels: Object.keys(annualCjData),
-                        datasets: [
-                            {
-                            label: 'Annual Carjackings in Chicago',
-                            data: Object.values(annualCjData),
-                            backgroundColor: [
-                                'rgba(255,0,0, 0.5)',
-                                'rgba(0,255,0, 0.5)',
-                                'rgba(0,0,255, 0.5)',
-                                'rgba(0,255,255, 0.5)',
-                                'rgba(255,0,255, 0.5)',
-                                'rgba(192,192,192, 0.5)',
-                                'rgba(128,128,128, 0.5)',
-                                'rgba(128,0,0, 0.5)',
-                                'rgba(128,128,0, 0.5)',
-                                'rgba(0,40,70, 0.5)',
-                                'rgba(128,0,128, 0.5)',
-                                'rgba(0,128,128, 0.5)',
-                                'rgba(0,0,128, 0.5)',
-                                'rgba(255,127,80, 0.5)',
-                                'rgba(95,50,130, 0.5)',
-                                'rgba(184,134,11, 0.5)',
-                                'rgba(34,139,34, 0.5)',
-                                'rgba(0,128,128, 0.5)',
-                                'rgba(255,105,180, 0.5)',
-                                'rgba(245,222,179, 0.5)',
-                                'rgba(139,69,19, 0.5)',
-                                'rgba(188,143,143, 0.5)',
-                                'rgba(112,128,144, 0.5)',
-                                'rgba(240,255,240, 0.5)',
-                            ],
-                            },
-                        ],
-                        }}
-                        height={400}
-                        width={600}
-                        options={{
-                        maintainAspectRatio: false,
-                        scales: {
-                            y: {
-                                grid: {
-                                    drawTicks: false,
-                                    color: "rgb(65, 65, 65)"
-                                }
-                            },
-                        },
-                        legend: {
-                            labels: {
-                            fontSize: 25,
-                            },
-                        },
-                        }}
-                    /> :
-                    <></>}
-                    {graphType === "bar" &&  searchSpan === "month" ? <Bar
-                        data={{
-                        labels: Object.keys(monthlyCjData),
-                        datasets: [
-                            {
-                            label: `Carjackings in Chicago by Month: ${searchYear}`,
-                            data: Object.values(monthlyCjData),
-                            backgroundColor: [
-                                'rgba(255,0,0, 0.5)',
-                                'rgba(0,255,0, 0.5)',
-                                'rgba(0,0,255, 0.5)',
-                                'rgba(0,255,255, 0.5)',
-                                'rgba(255,0,255, 0.5)',
-                                'rgba(192,192,192, 0.5)',
-                                'rgba(128,128,128, 0.5)',
-                                'rgba(128,0,0, 0.5)',
-                                'rgba(128,128,0, 0.5)',
-                                'rgba(0,40,70, 0.5)',
-                                'rgba(128,0,128, 0.5)',
-                                'rgba(0,128,128, 0.5)',
-                                'rgba(0,0,128, 0.5)',
-                                'rgba(255,127,80, 0.5)',
-                                'rgba(95,50,130, 0.5)',
-                                'rgba(184,134,11, 0.5)',
-                                'rgba(34,139,34, 0.5)',
-                                'rgba(0,128,128, 0.5)',
-                                'rgba(255,105,180, 0.5)',
-                                'rgba(245,222,179, 0.5)',
-                                'rgba(139,69,19, 0.5)',
-                                'rgba(188,143,143, 0.5)',
-                                'rgba(112,128,144, 0.5)',
-                                'rgba(240,255,240, 0.5)',
-                            ],
-                            },
-                        ],
-                        }}
-                        height={400}
-                        width={600}
-                        options={{
-                        maintainAspectRatio: false,
-                        scales: {
-                            y: {
-                                grid: {
-                                    drawTicks: false,
-                                    color: "rgb(65, 65, 65)"
-                                }
-                            },
-                        },
-                        legend: {
-                            labels: {
-                            fontSize: 25,
-                            },
-                        },
-                        }}
-                    /> :
-                    <></>}
-                    {graphType === "doughnut" &&  searchSpan === "year" ? <Doughnut
-                        data={{
-                        labels: Object.keys(annualCjData),
-                        datasets: [
-                            {
-                            label: 'Annual Carjackings in Chicago',
-                            data: Object.values(annualCjData),
-                            backgroundColor: [
-                                'rgba(255,0,0, 0.5)',
-                                'rgba(0,255,0, 0.5)',
-                                'rgba(0,0,255, 0.5)',
-                                'rgba(0,255,255, 0.5)',
-                                'rgba(255,0,255, 0.5)',
-                                'rgba(192,192,192, 0.5)',
-                                'rgba(128,128,128, 0.5)',
-                                'rgba(128,0,0, 0.5)',
-                                'rgba(128,128,0, 0.5)',
-                                'rgba(0,40,70, 0.5)',
-                                'rgba(128,0,128, 0.5)',
-                                'rgba(0,128,128, 0.5)',
-                                'rgba(0,0,128, 0.5)',
-                                'rgba(255,127,80, 0.5)',
-                                'rgba(95,50,130, 0.5)',
-                                'rgba(184,134,11, 0.5)',
-                                'rgba(34,139,34, 0.5)',
-                                'rgba(0,128,128, 0.5)',
-                                'rgba(255,105,180, 0.5)',
-                                'rgba(245,222,179, 0.5)',
-                                'rgba(139,69,19, 0.5)',
-                                'rgba(188,143,143, 0.5)',
-                                'rgba(112,128,144, 0.5)',
-                                'rgba(240,255,240, 0.5)',
-                            ],
-                            },
-                        ],
-                        }}
-                        height={400}
-                        width={600}
-                        options={{
-                        maintainAspectRatio: false,
-                        scales: {
-                        },
-                        legend: {
-                            labels: {
-                            fontSize: 25,
-                            },
-                        },
-                        }}
-                    /> :
-                    <></>}
-                    {graphType === "doughnut" &&  searchSpan === "month" ? <Doughnut
-                        data={{
-                        labels: Object.keys(monthlyCjData),
-                        datasets: [
-                            {
-                            label: `Carjackings in Chicago by Month: ${searchYear}`,
-                            data: Object.values(monthlyCjData),
-                            backgroundColor: [
-                                'rgba(255,0,0, 0.5)',
-                                'rgba(0,255,0, 0.5)',
-                                'rgba(0,0,255, 0.5)',
-                                'rgba(0,255,255, 0.5)',
-                                'rgba(255,0,255, 0.5)',
-                                'rgba(192,192,192, 0.5)',
-                                'rgba(128,128,128, 0.5)',
-                                'rgba(128,0,0, 0.5)',
-                                'rgba(128,128,0, 0.5)',
-                                'rgba(0,40,70, 0.5)',
-                                'rgba(128,0,128, 0.5)',
-                                'rgba(0,128,128, 0.5)',
-                                'rgba(0,0,128, 0.5)',
-                                'rgba(255,127,80, 0.5)',
-                                'rgba(95,50,130, 0.5)',
-                                'rgba(184,134,11, 0.5)',
-                                'rgba(34,139,34, 0.5)',
-                                'rgba(0,128,128, 0.5)',
-                                'rgba(255,105,180, 0.5)',
-                                'rgba(245,222,179, 0.5)',
-                                'rgba(139,69,19, 0.5)',
-                                'rgba(188,143,143, 0.5)',
-                                'rgba(112,128,144, 0.5)',
-                                'rgba(240,255,240, 0.5)',
-                            ],
-                            },
-                        ],
-                        }}
-                        height={400}
-                        width={600}
-                        options={{
-                        maintainAspectRatio: false,
-                        scales: {
-                        },
-                        legend: {
-                            labels: {
-                            fontSize: 25,
-                            },
-                        },
-                        }}
-                    /> :
-                    <></>}
-                    {graphType === "line" &&  searchSpan === "year" ? <Line
-                        data={{
-                        labels: Object.keys(annualCjData),
-                        datasets: [
-                            {
-                            label: 'Annual Carjackings in Chicago',
-                            data: Object.values(annualCjData),
-                            borderColor: [
-                                'rgba(255,0,0, 1)',
-                            ],
-                            borderWidth: 4,
-                            },
-                        ],
-                        }}
-                        height={400}
-                        width={600}
-                        options={{
-                        maintainAspectRatio: false,
-                        scales: {
-                            y: {
-                                grid: {
-                                    drawTicks: false,
-                                    color: "rgb(65, 65, 65)"
-                                }
-                            },
-                        },
-                        legend: {
-                            labels: {
-                            fontSize: 25,
-                            },
-                        },
-                        }}
-                    /> :
-                    <></>}
-                    {graphType === "line" &&  searchSpan === "month" ? <Line
-                        data={{
-                        labels: Object.keys(monthlyCjData),
-                        datasets: [
-                            {
-                            label: `Carjackings in Chicago by Month: ${searchYear}`,
-                            data: Object.values(monthlyCjData),
-                            borderColor: [
-                                'rgba(255,0,0, 1)',
-                            ],
-                            borderWidth: 4,
-                            },
-                        ],
-                        }}
-                        height={400}
-                        width={600}
-                        options={{
-                        maintainAspectRatio: false,
-                        scales: {
-                            y: {
-                                grid: {
-                                    drawTicks: false,
-                                    color: "rgb(65, 65, 65)"
-                                }
-                            },
-                        },
-                        legend: {
-                            labels: {
-                            fontSize: 25,
-                            },
-                        },
-                        }}
-                    /> :
-                    <></>}
-                    {graphType === "pie" &&  searchSpan === "year" ? <Pie
-                        data={{
-                        labels: Object.keys(annualCjData),
-                        datasets: [
-                            {
-                            label: 'Annual Carjackings in Chicago',
-                            data: Object.values(annualCjData),
-                            backgroundColor: [
-                                'rgba(255,0,0, 0.5)',
-                                'rgba(0,255,0, 0.5)',
-                                'rgba(0,0,255, 0.5)',
-                                'rgba(0,255,255, 0.5)',
-                                'rgba(255,0,255, 0.5)',
-                                'rgba(192,192,192, 0.5)',
-                                'rgba(128,128,128, 0.5)',
-                                'rgba(128,0,0, 0.5)',
-                                'rgba(128,128,0, 0.5)',
-                                'rgba(0,40,70, 0.5)',
-                                'rgba(128,0,128, 0.5)',
-                                'rgba(0,128,128, 0.5)',
-                                'rgba(0,0,128, 0.5)',
-                                'rgba(255,127,80, 0.5)',
-                                'rgba(95,50,130, 0.5)',
-                                'rgba(184,134,11, 0.5)',
-                                'rgba(34,139,34, 0.5)',
-                                'rgba(0,128,128, 0.5)',
-                                'rgba(255,105,180, 0.5)',
-                                'rgba(245,222,179, 0.5)',
-                                'rgba(139,69,19, 0.5)',
-                                'rgba(188,143,143, 0.5)',
-                                'rgba(112,128,144, 0.5)',
-                                'rgba(240,255,240, 0.5)',
-                            ],
-                            },
-                        ],
-                        }}
-                        height={400}
-                        width={600}
-                        options={{
-                        maintainAspectRatio: false,
-                        scales: {
-                        },
-                        legend: {
-                            labels: {
-                            fontSize: 25,
-                            },
-                        },
-                        }}
-                    /> :
-                    <></>}
-                    {graphType === "pie" &&  searchSpan === "month" ? <Pie
-                        data={{
-                        labels: Object.keys(monthlyCjData),
-                        datasets: [
-                            {
-                            label: `Carjackings in Chicago by Month: ${searchYear}`,
-                            data: Object.values(monthlyCjData),
-                            backgroundColor: [
-                                'rgba(255,0,0, 0.5)',
-                                'rgba(0,255,0, 0.5)',
-                                'rgba(0,0,255, 0.5)',
-                                'rgba(0,255,255, 0.5)',
-                                'rgba(255,0,255, 0.5)',
-                                'rgba(192,192,192, 0.5)',
-                                'rgba(128,128,128, 0.5)',
-                                'rgba(128,0,0, 0.5)',
-                                'rgba(128,128,0, 0.5)',
-                                'rgba(0,40,70, 0.5)',
-                                'rgba(128,0,128, 0.5)',
-                                'rgba(0,128,128, 0.5)',
-                                'rgba(0,0,128, 0.5)',
-                                'rgba(255,127,80, 0.5)',
-                                'rgba(95,50,130, 0.5)',
-                                'rgba(184,134,11, 0.5)',
-                                'rgba(34,139,34, 0.5)',
-                                'rgba(0,128,128, 0.5)',
-                                'rgba(255,105,180, 0.5)',
-                                'rgba(245,222,179, 0.5)',
-                                'rgba(139,69,19, 0.5)',
-                                'rgba(188,143,143, 0.5)',
-                                'rgba(112,128,144, 0.5)',
-                                'rgba(240,255,240, 0.5)',
-                            ],
-                            },
-                        ],
-                        }}
-                        height={400}
-                        width={600}
-                        options={{
-                        maintainAspectRatio: false,
-                        scales: {
-                        },
-                        legend: {
-                            labels: {
-                            fontSize: 25,
-                            },
-                        },
-                        }}
-                    /> :
-                    <></>}
-                    {graphType === "polar" &&  searchSpan === "year" ? <PolarArea
-                        data={{
-                        labels: Object.keys(annualCjData),
-                        datasets: [
-                            {
-                            label: 'Annual Carjackings in Chicago',
-                            data: Object.values(annualCjData),
-                            backgroundColor: [
-                                'rgba(255,0,0, 0.5)',
-                                'rgba(0,255,0, 0.5)',
-                                'rgba(0,0,255, 0.5)',
-                                'rgba(0,255,255, 0.5)',
-                                'rgba(255,0,255, 0.5)',
-                                'rgba(192,192,192, 0.5)',
-                                'rgba(128,128,128, 0.5)',
-                                'rgba(128,0,0, 0.5)',
-                                'rgba(128,128,0, 0.5)',
-                                'rgba(0,40,70, 0.5)',
-                                'rgba(128,0,128, 0.5)',
-                                'rgba(0,128,128, 0.5)',
-                                'rgba(0,0,128, 0.5)',
-                                'rgba(255,127,80, 0.5)',
-                                'rgba(95,50,130, 0.5)',
-                                'rgba(184,134,11, 0.5)',
-                                'rgba(34,139,34, 0.5)',
-                                'rgba(0,128,128, 0.5)',
-                                'rgba(255,105,180, 0.5)',
-                                'rgba(245,222,179, 0.5)',
-                                'rgba(139,69,19, 0.5)',
-                                'rgba(188,143,143, 0.5)',
-                                'rgba(112,128,144, 0.5)',
-                                'rgba(240,255,240, 0.5)',
-                            ],
-                            borderColor: [
-                                'rgba(255,0,0, 1)',
-                                'rgba(0,255,0, 1)',
-                                'rgba(0,0,255, 1)',
-                                'rgba(0,255,255, 1)',
-                                'rgba(255,0,255, 1)',
-                                'rgba(192,192,192, 1)',
-                                'rgba(128,128,128, 1)',
-                                'rgba(128,0,0, 1)',
-                                'rgba(128,128,0, 1)',
-                                'rgba(0,40,70, 1)',
-                                'rgba(128,0,128, 1)',
-                                'rgba(0,128,128, 1)',
-                                'rgba(0,0,128, 1)',
-                                'rgba(255,127,80, 1)',
-                                'rgba(95,50,130, 1)',
-                                'rgba(184,134,11, 1)',
-                                'rgba(34,139,34, 1)',
-                                'rgba(0,128,128, 1)',
-                                'rgba(255,105,180, 1)',
-                                'rgba(245,222,179, 1)',
-                                'rgba(139,69,19, 1)',
-                                'rgba(188,143,143, 1)',
-                                'rgba(112,128,144, 1)',
-                                'rgba(240,255,240, 1)',
-                            ],
-                            borderWidth: 1,
-                            },
-                        ],
-                        }}
-                        height={400}
-                        width={600}
-                        options={{
-                        maintainAspectRatio: false,
-                        scales: {
-                            r: {
-                                grid: {
-                                    color: "rgb(65, 65, 65)"
-                                }
-                            }
-                        },
-                        legend: {
-                            labels: {
-                            fontSize: 25,
-                            },
-                        },
-                        }}
-                    /> :
-                    <></>}
-                    {graphType === "polar" &&  searchSpan === "month" ? <PolarArea
-                        data={{
-                        labels: Object.keys(monthlyCjData),
-                        datasets: [
-                            {
-                            label: `Carjackings in Chicago by Month: ${searchYear}`,
-                            data: Object.values(monthlyCjData),
-                            backgroundColor: [
-                                'rgba(255,0,0, 0.5)',
-                                'rgba(0,255,0, 0.5)',
-                                'rgba(0,0,255, 0.5)',
-                                'rgba(0,255,255, 0.5)',
-                                'rgba(255,0,255, 0.5)',
-                                'rgba(192,192,192, 0.5)',
-                                'rgba(128,128,128, 0.5)',
-                                'rgba(128,0,0, 0.5)',
-                                'rgba(128,128,0, 0.5)',
-                                'rgba(0,40,70, 0.5)',
-                                'rgba(128,0,128, 0.5)',
-                                'rgba(0,128,128, 0.5)',
-                                'rgba(0,0,128, 0.5)',
-                                'rgba(255,127,80, 0.5)',
-                                'rgba(95,50,130, 0.5)',
-                                'rgba(184,134,11, 0.5)',
-                                'rgba(34,139,34, 0.5)',
-                                'rgba(0,128,128, 0.5)',
-                                'rgba(255,105,180, 0.5)',
-                                'rgba(245,222,179, 0.5)',
-                                'rgba(139,69,19, 0.5)',
-                                'rgba(188,143,143, 0.5)',
-                                'rgba(112,128,144, 0.5)',
-                                'rgba(240,255,240, 0.5)',
-                            ],
-                            borderColor: [
-                                'rgba(255,0,0, 1)',
-                                'rgba(0,255,0, 1)',
-                                'rgba(0,0,255, 1)',
-                                'rgba(0,255,255, 1)',
-                                'rgba(255,0,255, 1)',
-                                'rgba(192,192,192, 1)',
-                                'rgba(128,128,128, 1)',
-                                'rgba(128,0,0, 1)',
-                                'rgba(128,128,0, 1)',
-                                'rgba(0,40,70, 1)',
-                                'rgba(128,0,128, 1)',
-                                'rgba(0,128,128, 1)',
-                                'rgba(0,0,128, 1)',
-                                'rgba(255,127,80, 1)',
-                                'rgba(95,50,130, 1)',
-                                'rgba(184,134,11, 1)',
-                                'rgba(34,139,34, 1)',
-                                'rgba(0,128,128, 1)',
-                                'rgba(255,105,180, 1)',
-                                'rgba(245,222,179, 1)',
-                                'rgba(139,69,19, 1)',
-                                'rgba(188,143,143, 1)',
-                                'rgba(112,128,144, 1)',
-                                'rgba(240,255,240, 1)',
-                            ],
-                            borderWidth: 1,
-                            },
-                        ],
-                        }}
-                        height={400}
-                        width={600}
-                        options={{
-                        maintainAspectRatio: false,
-                        scales: {
-                            r: {
-                                grid: {
-                                    color: "rgb(65, 65, 65)"
-                                }
-                            }
-                        },
-                        legend: {
-                            labels: {
-                            fontSize: 25,
-                            },
-                        },
-                        }}
-                    /> :
-                    <></>}
-                    {graphType === "radar" &&  searchSpan === "month" ? <Radar
-                        data={{
-                        labels: Object.keys(monthlyCjData),
-                        datasets: [
-                            {
-                            label: `Carjackings in Chicago by Month: ${searchYear}`,
-                            data: Object.values(monthlyCjData),
-                            backgroundColor: [
-                                'rgba(255, 99, 132, 0.2)',
-                            ],
-                            borderColor: [
-                                'red',
-                            ],
-                            borderWidth: 4,
-                            },
-                        ],
-                        }}
-                        height={400}
-                        width={600}
-                        options={{
-                        maintainAspectRatio: false,
-                        scales: {
-                            r: {
-                                grid: {
-                                    color: "rgb(65, 65, 65)"
-                                }
-                            }
-                        },
-                        legend: {
-                            labels: {
-                            fontSize: 25,
-                            },
-                        },
-                        }}
-                    /> :
-                    <></>}
-                    {graphType === "radar" &&  searchSpan === "year" ? <Radar
-                        data={{
-                        labels: Object.keys(annualCjData),
-                        datasets: [
-                            {
-                            label: 'Annual Carjackings in Chicago',
-                            data: Object.values(annualCjData),
-                            backgroundColor: [
-                                'rgba(255, 99, 132, 0.2)',
-                            ],
-                            borderColor: [
-                                'red',
-                            ],
-                            borderWidth: 4,
-                            },
-                        ],
-                        }}
-                        height={400}
-                        width={600}
-                        options={{
-                        maintainAspectRatio: false,
-                        scales: {
-                            r: {
-                                grid: {
-                                    color: "rgb(65, 65, 65)"
-                                }
-                            }
-                        },
-                        legend: {
-                            labels: {
-                            fontSize: 25,
-                            },
-                        },
-                        }}
-                    /> :
-                    <></>}
+                    {graphType === "bar" &&  searchSpan === "year" ? 
+                    <BarGraph Data={annualCjData} searchYear={0} /> : <></>}
+                    {graphType === "bar" &&  searchSpan === "month" ? 
+                    <BarGraph Data={monthlyCjData} searchYear={searchYear} /> : <></>}
+                    {graphType === "doughnut" &&  searchSpan === "year" ? 
+                    <DonutGraph Data={annualCjData} searchYear={0} /> : <></>}
+                    {graphType === "doughnut" &&  searchSpan === "month" ? 
+                    <DonutGraph Data={monthlyCjData} searchYear={searchYear} /> : <></>}
+                    {graphType === "line" &&  searchSpan === "year" ? 
+                    <LineGraph Data={annualCjData} searchYear={0} /> : <></>}
+                    {graphType === "line" &&  searchSpan === "month" ? 
+                    <LineGraph Data={monthlyCjData} searchYear={searchYear} /> : <></>}
+                    {graphType === "pie" &&  searchSpan === "year" ? 
+                    <PieGraph Data={annualCjData} searchYear={0} /> : <></>}
+                    {graphType === "pie" &&  searchSpan === "month" ? 
+                    <PieGraph Data={monthlyCjData} searchYear={searchYear} /> : <></>}
+                    {graphType === "polar" &&  searchSpan === "year" ? 
+                    <PolarGraph Data={annualCjData} searchYear={0} /> : <></>}
+                    {graphType === "polar" &&  searchSpan === "month" ? 
+                    <PolarGraph Data={monthlyCjData} searchYear={searchYear} /> : <></>}
+                    {graphType === "radar" &&  searchSpan === "year" ? 
+                    <RadarGraph Data={annualCjData} searchYear={0} /> : <></>}
+                    {graphType === "radar" &&  searchSpan === "month" ? 
+                    <RadarGraph Data={monthlyCjData} searchYear={searchYear} /> : <></>}
                 </div>
                 : 
                 <>
@@ -925,17 +345,84 @@ function Graph() {
             </div>
         </>
     ):
-    <>
-        <div className="map-container">
-        <h1 className="">Loading... Please Wait</h1>
-            <Lottie
-                loop
-                animationData={dataAnimation}
-                play
-                style={{ width: 700, height: 700 }}
-            />
+    <div className="graph-container-mobile">
+        <div className="graph-mobile">
+            <SearchResultsGraph pageTitle={pageTitle} totalCrimeCount={allGunCrimes} searchSpan={searchSpan} searchYear={searchYear} 
+                fullMonths={fullMonths} />
+            {violationStats.length ? 
+            <>
+
+                <div className="graph-section">
+                    {graphType === "bar" &&  searchSpan === "year" ? 
+                    <BarGraph Data={annualCjData} searchYear={0} /> : <></>}
+                    {graphType === "bar" &&  searchSpan === "month" ? 
+                    <BarGraph Data={monthlyCjData} searchYear={searchYear} /> : <></>}
+                    {graphType === "doughnut" &&  searchSpan === "year" ? 
+                    <DonutGraph Data={annualCjData} searchYear={0} /> : <></>}
+                    {graphType === "doughnut" &&  searchSpan === "month" ? 
+                    <DonutGraph Data={monthlyCjData} searchYear={searchYear} /> : <></>}
+                    {graphType === "line" &&  searchSpan === "year" ? 
+                    <LineGraph Data={annualCjData} searchYear={0} /> : <></>}
+                    {graphType === "line" &&  searchSpan === "month" ? 
+                    <LineGraph Data={monthlyCjData} searchYear={searchYear} /> : <></>}
+                    {graphType === "pie" &&  searchSpan === "year" ? 
+                    <PieGraph Data={annualCjData} searchYear={0} /> : <></>}
+                    {graphType === "pie" &&  searchSpan === "month" ? 
+                    <PieGraph Data={monthlyCjData} searchYear={searchYear} /> : <></>}
+                    {graphType === "polar" &&  searchSpan === "year" ? 
+                    <PolarGraph Data={annualCjData} searchYear={0} /> : <></>}
+                    {graphType === "polar" &&  searchSpan === "month" ? 
+                    <PolarGraph Data={monthlyCjData} searchYear={searchYear} /> : <></>}
+                    {graphType === "radar" &&  searchSpan === "year" ? 
+                    <RadarGraph Data={annualCjData} searchYear={0} /> : <></>}
+                    {graphType === "radar" &&  searchSpan === "month" ? 
+                    <RadarGraph Data={monthlyCjData} searchYear={searchYear} /> : <></>}
+                </div>
+
+            </> : 
+            <>
+                <div className="mobileLottieWrapper">
+                    <div className="mobileLottieContainer">
+                        <h1 className="loading-title-mobile">Loading... Please Wait</h1>
+                        <Lottie
+                            loop
+                            animationData={dataAnimation}
+                            play
+                            style={{ width: 400, height: '75vh' }}
+                        />
+                    </div>
+                </div>
+            </>
+            }
         </div>
-    </>
+        <div className="search-modal">
+            <Button variant="contained" onClick={handleOpen}>Set Search</Button>
+            <Modal
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+            >
+                <div className="control-modal-wrap-graph">
+                    <GraphSelect setGraphType={setGraphType} graphType={graphType} searchSpan={searchSpan} setSearchSpan={setSearchSpan} 
+                        searchYear={searchYear} setSearchYear={setSearchYear} yearArray={yearArray} />
+                    <ArrestToggle arrestMade={arrestMade} handleArrestToggle={handleArrestToggle} />
+                    <CrimeToggle showHomicide={showHomicide} setShowHomicide={setShowHomicide} showAssault={showAssault} 
+                        setShowAssault={setShowAssault} showSexAssault={showSexAssault} setShowSexAssault={setShowSexAssault} 
+                        showRobbery={showRobbery} setShowRobbery={setShowRobbery} showBattery={showBattery} setShowBattery={setShowBattery} 
+                        showViolation={showViolation} setShowViolation={setShowViolation} showShotsFired={showShotsFired} 
+                        setShowShotsFired={setShowShotsFired} showGunPossession={showGunPossession} setShowGunPossession={setShowGunPossession} 
+                        showAmmoViolation={showAmmoViolation} setShowAmmoViolation={setShowAmmoViolation} showGunSale={showGunSale} 
+                        setShowGunSale={setShowGunSale} showGunInSchool={showGunInSchool} setShowGunInSchool={setShowGunInSchool} 
+                        showGunAttackOnCops={showGunAttackOnCops} setShowGunAttackOnCops={setShowGunAttackOnCops} showAttackOnCops={showAttackOnCops} 
+                        setShowAttackOnCops={setShowAttackOnCops} showCarjack={showCarjack} setShowCarjack={setShowCarjack} />
+                    <div className='closeButtonMobileWrapGraph'>
+                        <button className='closeButtonMobileGraph' onClick={handleClose}><FaTimesCircle /></button>
+                    </div>
+                </div>
+            </Modal>
+        </div>
+    </div>
 
 }
 
