@@ -80,11 +80,8 @@ function Footer(props) {
                         Shy Jack<i class="fas fa-car-crash"></i>
                     </Link>
                 </div>
-                <small className="website-rights">John Nelson-Alden © 2021</small>
+                <small className="website-rights">John Nelson-Alden © {new Date().getFullYear()}</small>
                 <div className="social-icons">
-                    <a className="social-icon-link instagram" href="https://www.instagram.com/ShyJack312/" target="_blank" rel="noopennernoreferrer">
-                        <i className="fab fa-instagram" />
-                    </a>
                     <a className="social-icon-link youtube" href="https://www.youtube.com/channel/UCICVa9m2nDCVNuIIUzW9nmg" target="_blank" rel="noopennernoreferrer">
                         <i className="fab fa-youtube" />
                     </a>

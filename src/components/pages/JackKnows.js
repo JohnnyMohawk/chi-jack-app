@@ -15,8 +15,7 @@ function JackKnows () {
                 <div className="how-text">
                     <p>
                         Shy Jack taps into the Chicago Police Department's CLEAR (Citizen Law Enforcement Analysis and Reporting) 
-                        system. This dataset reflects reported incidents of crime (with the exception of murders where data exists 
-                        for each victim) that have occurred in the City of Chicago from 2001 to present, minus the most recent seven 
+                        system. This dataset reflects reported incidents of crime that have occurred in the City of Chicago from 2001 to present, minus the most recent seven 
                         days. In order to protect the privacy of crime victims, addresses are shown at the block level only and 
                         specific locations are not identified. Should you have questions about this dataset, you may contact the 
                         Research & Development Division of the Chicago Police Department at

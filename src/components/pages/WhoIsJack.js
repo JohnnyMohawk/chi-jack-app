@@ -31,7 +31,7 @@ function WhoIsJack () {
                     Chicago is a great city, but that greatness has been earned and is a status that must be dutifully maintained. 
                     Maintaining greatness requires internal reflection and identifying all weaknesses and problems and making 
                     conscious efforts to improve them. Like any city, Chicago has its share of problems that must be addressed. 
-                    The numbers are clear that carjacking is one issue that is on track to be the worst in decades. Now that we have 
+                    The numbers are clear that homicides, carjackings, and general gun crimes are on track to be a worse problem than in past decades. Now that we have 
                     identified this, we must attempt to fully understand the trends by analyzing the shape of the data.
                     </p>
                     <p>
