@@ -2,33 +2,23 @@ import React, { useState, useEffect, useRef, useCallback } from 'react'
 import { useLoadScript } from '@react-google-maps/api';
 import Lottie from 'react-lottie-player'
 import carSafety from '../../assets/animations/carSafety.json'
-import {formatDay, getDaysInMonth, yearRange, neighborhoodObject, fullMonths, months, 
+import {formatDay, getDaysInMonth, yearRange, neighborhoodObject, months, 
         homicideApiCall, sexAssaultApiCall, robberyApiCall, batteryApiCall, assaultApiCall, gunViolationApiCall, 
         gunFireViolation, gunNoFireViolation, ammoViolation, illegalGunSale, gunInSchool, gunAttackOnCops, attackOnCops, 
-        carjackApiCall, filterApiCallData, createFormattedDate, createWeekArr} from '../../services/mapService.js'
+        carjackApiCall, filterApiCallData, createFormattedDate} from '../../services/mapService.js'
 import mapStyles from './mapStyles';
-// import '../pages/Map.css'
+import mapStyles1 from './mapStyles1';
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import LegendModal from '../LegendModal'
-import LocationSelect from '../LocationSelect'
-import SearchResults from '../SearchResults'
 import SearchSpan from '../SearchSpan'
 import ArrestToggle from '../ArrestToggle'
 import CrimeToggle from '../CrimeToggle'
 import MapComponent from '../MapComponent'
 import { FaTimesCircle } from 'react-icons/fa'
 
-
-
-// import React, { useState, useEffect } from 'react'
-// import { GoogleMap, Marker, useLoadScript, InfoWindow } from '@react-google-maps/api';
-// import Lottie from 'react-lottie-player'
-// import carSafety from '../../assets/animations/carSafety.json'
-// import {formatDay, getDaysInMonth, createWeekArr, yearRange, neighborhoodObject, removeZeros, months} from '../../services/mapService.js'
 import * as authService from '../../services/authService'
-// import mapStyles from './mapStyles';
-import mapStyles1 from './mapStyles1';
+
 import '../pages/UserPage.css'
 require('dotenv').config()
 
@@ -268,62 +258,6 @@ const UserPage = (props) => {
 
         <div className="map-container">
             <h1 className="user-page-title">{user.name}'s Dashboard</h1>
-            {/* <h4>Select What Data To Display</h4>
-            <div className="search-bar-wrapper">
-                <div className="search-bar">
-                    <select className="sb-inputs" defaultValue="week" onChange={event => {
-                    setSearchSpan(event.target.value)
-                    }}>
-                        <option value="most recent">One Day</option>
-                        <option value="week">Weekly</option>
-                        <option value="month">Monthly</option>
-                        <option value="year">Annual</option>
-                    </select>
-                    {searchSpan === "week" || searchSpan === "most recent" || searchSpan === "month" ? 
-                    <>
-                        <select className="sb-inputs" defaultValue={searchMonth} onChange={event => {
-                        setSearchMonth(event.target.value)
-                        let moNo = months.indexOf(event.target.value) + 1
-                        formatDay(moNo)
-                        setMonthNumber(moNo)
-                        }}>
-                        {months.map(month => (
-                            <option key={month} value={month}>
-                                {month}
-                            </option>
-                        ))}
-                    </select>
-                    </>
-                    :
-                    <></>
-                    }
-                    {searchSpan === "week" || searchSpan === "most recent" ? 
-                    <>
-                    <select className="sb-inputs" defaultValue={dayOfTheMonth} onChange={event => {
-                    setSearchDay(event.target.value)
-                    }}>
-                        {daysOfTheMonth.map(day => (
-                            <option key={day} value={day}>
-                                {day}
-                            </option>
-                        ))}
-                    </select>
-                    </>
-                    :
-                    <></>
-                    }
-                    <select className="sb-inputs" value={searchYear} onChange={event => {
-                    setSearchYear(event.target.value)
-                    }}>
-                        {yearArray.reverse().map(year => (
-                            <option key={year} value={year}>
-                                {year}
-                            </option>
-                        ))}
-                    </select>
-                </div>
-            </div>  */}
-
             {homicideStats.length ? 
             <>
             {window.innerWidth >= 960 ? 
@@ -345,54 +279,6 @@ const UserPage = (props) => {
                             showGunAttackOnCops={showGunAttackOnCops} gunAttackOnCopsStats={gunAttackOnCopsStats} showAttackOnCops={showAttackOnCops} 
                             attackOnCopsStats={attackOnCopsStats} showCarjack={showCarjack} carjackStats={carjackStats} />
                     </div>
-                    
-                    {/* <GoogleMap
-                        className="map-canvas"
-                        mapContainerStyle={{
-                            width: '33.3vw',
-                            height: '68vh'
-                        }}
-                        center={{lat: neighborhoodObject[user.homeHood][0], lng: neighborhoodObject[user.homeHood][1]}}
-                        zoom={14}
-                        options={options}
-                        onLoad={onMapLoad}
-                    >
-                        {carjackings?.map((jacking) => (
-                            <Marker 
-                                key={jacking.id} 
-                                position={{ 
-                                    lat: parseFloat(jacking.latitude), 
-                                    lng: parseFloat(jacking.longitude) 
-                                }}
-                                onClick={() => {
-                                    setSelectedCrime(jacking)
-                                }}
-                                icon={{
-                                    url: `/carjacking-red.png`,
-                                    origin: new window.google.maps.Point(0, 0),
-                                    anchor: new window.google.maps.Point(15, 15),
-                                    scaledSize: new window.google.maps.Size(70, 70),
-                                }}
-                            />
-                        ))}
-                        {selectedCrime && (
-                            <InfoWindow
-                                position={{ 
-                                    lat: parseFloat(selectedCrime.latitude), 
-                                    lng: parseFloat(selectedCrime.longitude) 
-                                }}
-                                onCloseClick={() => {
-                                    setSelectedCrime(null)
-                                }}
-                            >
-                                <div className="info-window">
-                                    <h2>{removeZeros(selectedCrime.block.split(''))}</h2>
-                                    <h3>{new Date(selectedCrime.date.split('T')[0]).toDateString()}</h3>
-                                    <h3>{"At "+selectedCrime.date.split('T')[1].split(':')[0]+":"+selectedCrime.date.split('T')[1].split(':')[1]+" Hours"}</h3>
-                                </div>
-                            </InfoWindow>
-                        )}
-                    </GoogleMap> */}
                 </div>
                 <div className="hood-map">
                     <div className="hood-name-title">
@@ -410,56 +296,6 @@ const UserPage = (props) => {
                             showGunAttackOnCops={showGunAttackOnCops} gunAttackOnCopsStats={gunAttackOnCopsStats} showAttackOnCops={showAttackOnCops} 
                             attackOnCopsStats={attackOnCopsStats} showCarjack={showCarjack} carjackStats={carjackStats} />
                     </div>
-                    {/* <GoogleMap
-                        className="map-canvas"
-                        mapContainerStyle={{
-                            width: '33.3vw',
-                            height: '68vh'
-                        }}
-                        center={{lat: neighborhoodObject[user.workHood][0], lng: neighborhoodObject[user.workHood][1]}}
-                        zoom={14}
-                        options={{
-                            styles: mapStyles1,
-                            disableDefaultUI: true,
-                        }}
-                        onLoad={onMapLoad}
-                    >
-                        {carjackings?.map((jacking) => (
-                            <Marker 
-                                key={jacking.id} 
-                                position={{ 
-                                    lat: parseFloat(jacking.latitude), 
-                                    lng: parseFloat(jacking.longitude) 
-                                }}
-                                onClick={() => {
-                                    setSelectedCrime(jacking)
-                                }}
-                                icon={{
-                                    url: `/carjack-icon-black-outline.png`,
-                                    origin: new window.google.maps.Point(0, 0),
-                                    anchor: new window.google.maps.Point(15, 15),
-                                    scaledSize: new window.google.maps.Size(70, 70),
-                                }}
-                            />
-                        ))}
-                        {selectedCrime && (
-                            <InfoWindow
-                                position={{ 
-                                    lat: parseFloat(selectedCrime.latitude), 
-                                    lng: parseFloat(selectedCrime.longitude) 
-                                }}
-                                onCloseClick={() => {
-                                    setSelectedCrime(null)
-                                }}
-                            >
-                                <div className="info-window">
-                                    <h2>{removeZeros(selectedCrime.block.split(''))}</h2>
-                                    <h3>{new Date(selectedCrime.date.split('T')[0]).toDateString()}</h3>
-                                    <h3>{"At "+selectedCrime.date.split('T')[1].split(':')[0]+":"+selectedCrime.date.split('T')[1].split(':')[1]+" Hours"}</h3>
-                                </div>
-                            </InfoWindow>
-                        )}
-                    </GoogleMap> */}
                 </div>
                 <div className="hood-map">
                     <div className="hood-name-title">
@@ -477,83 +313,36 @@ const UserPage = (props) => {
                             showGunAttackOnCops={showGunAttackOnCops} gunAttackOnCopsStats={gunAttackOnCopsStats} showAttackOnCops={showAttackOnCops} 
                             attackOnCopsStats={attackOnCopsStats} showCarjack={showCarjack} carjackStats={carjackStats} />
                     </div>
-                    {/* <GoogleMap
-                        className="map-canvas"
-                        mapContainerStyle={{
-                            width: '33.3vw',
-                            height: '68vh'
-                        }}
-                        center={{lat: neighborhoodObject[user.checkHood][0], lng: neighborhoodObject[user.checkHood][1]}}
-                        zoom={14}
-                        options={options}
-                        onLoad={onMapLoad}
-                    >
-                        {carjackings?.map((jacking) => (
-                            <Marker 
-                                key={jacking.id} 
-                                position={{ 
-                                    lat: parseFloat(jacking.latitude), 
-                                    lng: parseFloat(jacking.longitude) 
-                                }}
-                                onClick={() => {
-                                    setSelectedCrime(jacking)
-                                }}
-                                icon={{
-                                    url: `/carjacking-red.png`,
-                                    origin: new window.google.maps.Point(0, 0),
-                                    anchor: new window.google.maps.Point(15, 15),
-                                    scaledSize: new window.google.maps.Size(70, 70),
-                                }}
-                            />
-                        ))}
-                        {selectedCrime && (
-                            <InfoWindow
-                                position={{ 
-                                    lat: parseFloat(selectedCrime.latitude), 
-                                    lng: parseFloat(selectedCrime.longitude) 
-                                }}
-                                onCloseClick={() => {
-                                    setSelectedCrime(null)
-                                }}
-                            >
-                                <div className="info-window">
-                                    <h2>{removeZeros(selectedCrime.block.split(''))}</h2>
-                                    <h3>{new Date(selectedCrime.date.split('T')[0]).toDateString()}</h3>
-                                    <h3>{"At "+selectedCrime.date.split('T')[1].split(':')[0]+":"+selectedCrime.date.split('T')[1].split(':')[1]+" Hours"}</h3>
-                                </div>
-                            </InfoWindow>
-                        )}
-                    </GoogleMap> */}
                 </div>
                 <div className="search-modal">
-                <Button variant="contained" onClick={handleOpen}>Set Search</Button>
-                <Modal
-                    open={open}
-                    onClose={handleClose}
-                    aria-labelledby="modal-modal-title"
-                    aria-describedby="modal-modal-description"
-                >
-                    <div className="control-modal-wrap">
-                        <SearchSpan searchSpan={searchSpan} setSearchSpan={setSearchSpan} setSearchMonth={setSearchMonth} searchMonth={searchMonth} 
-                            months={months} formatDay={formatDay} setMonthNumber={setMonthNumber} setSearchDay={setSearchDay} dayOfTheMonth={dayOfTheMonth} 
-                            daysOfTheMonth={daysOfTheMonth} searchYear={searchYear} setSearchYear={setSearchYear} yearArray={yearArray} />
-                        <ArrestToggle arrestMade={arrestMade} handleArrestToggle={handleArrestToggle} />
-                        <CrimeToggle showHomicide={showHomicide} setShowHomicide={setShowHomicide} showAssault={showAssault} 
-                            setShowAssault={setShowAssault} showSexAssault={showSexAssault} setShowSexAssault={setShowSexAssault} 
-                            showRobbery={showRobbery} setShowRobbery={setShowRobbery} showBattery={showBattery} setShowBattery={setShowBattery} 
-                            showViolation={showViolation} setShowViolation={setShowViolation} showShotsFired={showShotsFired} 
-                            setShowShotsFired={setShowShotsFired} showGunPossession={showGunPossession} setShowGunPossession={setShowGunPossession} 
-                            showAmmoViolation={showAmmoViolation} setShowAmmoViolation={setShowAmmoViolation} showGunSale={showGunSale} 
-                            setShowGunSale={setShowGunSale} showGunInSchool={showGunInSchool} setShowGunInSchool={setShowGunInSchool} 
-                            showGunAttackOnCops={showGunAttackOnCops} setShowGunAttackOnCops={setShowGunAttackOnCops} showAttackOnCops={showAttackOnCops} 
-                            setShowAttackOnCops={setShowAttackOnCops} showCarjack={showCarjack} setShowCarjack={setShowCarjack} />
-                        <LegendModal />
-                        <div className='closeButtonMobileWrap'>
-                            <button className='closeButtonMobile' onClick={handleClose}><FaTimesCircle /></button>
+                    <Button variant="contained" onClick={handleOpen}>Set Search</Button>
+                    <Modal
+                        open={open}
+                        onClose={handleClose}
+                        aria-labelledby="modal-modal-title"
+                        aria-describedby="modal-modal-description"
+                    >
+                        <div className="control-modal-wrap">
+                            <SearchSpan searchSpan={searchSpan} setSearchSpan={setSearchSpan} setSearchMonth={setSearchMonth} searchMonth={searchMonth} 
+                                months={months} formatDay={formatDay} setMonthNumber={setMonthNumber} setSearchDay={setSearchDay} dayOfTheMonth={dayOfTheMonth} 
+                                daysOfTheMonth={daysOfTheMonth} searchYear={searchYear} setSearchYear={setSearchYear} yearArray={yearArray} />
+                            <ArrestToggle arrestMade={arrestMade} handleArrestToggle={handleArrestToggle} />
+                            <CrimeToggle showHomicide={showHomicide} setShowHomicide={setShowHomicide} showAssault={showAssault} 
+                                setShowAssault={setShowAssault} showSexAssault={showSexAssault} setShowSexAssault={setShowSexAssault} 
+                                showRobbery={showRobbery} setShowRobbery={setShowRobbery} showBattery={showBattery} setShowBattery={setShowBattery} 
+                                showViolation={showViolation} setShowViolation={setShowViolation} showShotsFired={showShotsFired} 
+                                setShowShotsFired={setShowShotsFired} showGunPossession={showGunPossession} setShowGunPossession={setShowGunPossession} 
+                                showAmmoViolation={showAmmoViolation} setShowAmmoViolation={setShowAmmoViolation} showGunSale={showGunSale} 
+                                setShowGunSale={setShowGunSale} showGunInSchool={showGunInSchool} setShowGunInSchool={setShowGunInSchool} 
+                                showGunAttackOnCops={showGunAttackOnCops} setShowGunAttackOnCops={setShowGunAttackOnCops} showAttackOnCops={showAttackOnCops} 
+                                setShowAttackOnCops={setShowAttackOnCops} showCarjack={showCarjack} setShowCarjack={setShowCarjack} />
+                            <LegendModal />
+                            <div className='closeButtonMobileWrap'>
+                                <button className='closeButtonMobile' onClick={handleClose}><FaTimesCircle /></button>
+                            </div>
                         </div>
-                    </div>
-                </Modal>
-            </div>
+                    </Modal>
+                </div>
             </div>
             
             :
@@ -562,6 +351,47 @@ const UserPage = (props) => {
                 <div className="hood-map">
                     <div className="hood-name-title">
                         <h3 className="user-hoods-h3">{user.homeHood}</h3>
+                        <div className="search-modal">
+                        <Button variant="contained" onClick={handleOpen}>Set Search</Button>
+                        <Modal
+                            open={open}
+                            onClose={handleClose}
+                            aria-labelledby="modal-modal-title"
+                            aria-describedby="modal-modal-description"
+                        >
+                            <div className="control-modal-wrap">
+                                <SearchSpan searchSpan={searchSpan} setSearchSpan={setSearchSpan} setSearchMonth={setSearchMonth} searchMonth={searchMonth} 
+                                    months={months} formatDay={formatDay} setMonthNumber={setMonthNumber} setSearchDay={setSearchDay} dayOfTheMonth={dayOfTheMonth} 
+                                    daysOfTheMonth={daysOfTheMonth} searchYear={searchYear} setSearchYear={setSearchYear} yearArray={yearArray} />
+                                <ArrestToggle arrestMade={arrestMade} handleArrestToggle={handleArrestToggle} />
+                                <CrimeToggle showHomicide={showHomicide} setShowHomicide={setShowHomicide} showAssault={showAssault} 
+                                    setShowAssault={setShowAssault} showSexAssault={showSexAssault} setShowSexAssault={setShowSexAssault} 
+                                    showRobbery={showRobbery} setShowRobbery={setShowRobbery} showBattery={showBattery} setShowBattery={setShowBattery} 
+                                    showViolation={showViolation} setShowViolation={setShowViolation} showShotsFired={showShotsFired} 
+                                    setShowShotsFired={setShowShotsFired} showGunPossession={showGunPossession} setShowGunPossession={setShowGunPossession} 
+                                    showAmmoViolation={showAmmoViolation} setShowAmmoViolation={setShowAmmoViolation} showGunSale={showGunSale} 
+                                    setShowGunSale={setShowGunSale} showGunInSchool={showGunInSchool} setShowGunInSchool={setShowGunInSchool} 
+                                    showGunAttackOnCops={showGunAttackOnCops} setShowGunAttackOnCops={setShowGunAttackOnCops} showAttackOnCops={showAttackOnCops} 
+                                    setShowAttackOnCops={setShowAttackOnCops} showCarjack={showCarjack} setShowCarjack={setShowCarjack} />
+                                <LegendModal />
+                                <div className='closeButtonMobileWrap'>
+                                    <button className='closeButtonMobile' onClick={handleClose}><FaTimesCircle /></button>
+                                </div>
+                            </div>
+                        </Modal>
+                    </div>
+                    </div>
+                    <div className="user-map-text">
+                        <MapComponent containerStyle={mobileContainerStyle} lat={neighborhoodObject[user.homeHood][0]} lng={neighborhoodObject[user.homeHood][1]} options={options} onMapLoad={onMapLoad} 
+                            setSelectedCrime={setSelectedCrime} selectedCrime={selectedCrime} showHomicide={showHomicide} 
+                            homicideStats={homicideStats} showSexAssault={showSexAssault} sexAssaultStats={sexAssaultStats} 
+                            showRobbery={showRobbery} robberyStats={robberyStats} showBattery={showBattery} batteryStats={batteryStats} 
+                            showAssault={showAssault} assaultStats={assaultStats} showViolation={showViolation} violationStats={violationStats} 
+                            showShotsFired={showShotsFired} shotsFiredStats={shotsFiredStats} showGunPossession={showGunPossession} 
+                            gunPossessionStats={gunPossessionStats} showAmmoViolation={showAmmoViolation} ammoViolationStats={ammoViolationStats} 
+                            showGunSale={showGunSale} gunSaleStats={gunSaleStats} showGunInSchool={showGunInSchool} gunInSchoolStats={gunInSchoolStats} 
+                            showGunAttackOnCops={showGunAttackOnCops} gunAttackOnCopsStats={gunAttackOnCopsStats} showAttackOnCops={showAttackOnCops} 
+                            attackOnCopsStats={attackOnCopsStats} showCarjack={showCarjack} carjackStats={carjackStats} />
                     </div>
                     {/* <GoogleMap
                         className="map-canvas"
@@ -615,6 +445,18 @@ const UserPage = (props) => {
                     <div className="hood-name-title">
                         <h3 className="user-hoods-h3">{user.workHood}</h3>
                     </div>
+                    <div className="user-map-text">
+                        <MapComponent containerStyle={mobileContainerStyle} lat={neighborhoodObject[user.workHood][0]} lng={neighborhoodObject[user.workHood][1]} options={options2} onMapLoad={onMapLoad} 
+                            setSelectedCrime={setSelectedCrime2} selectedCrime={selectedCrime2} showHomicide={showHomicide} 
+                            homicideStats={homicideStats} showSexAssault={showSexAssault} sexAssaultStats={sexAssaultStats} 
+                            showRobbery={showRobbery} robberyStats={robberyStats} showBattery={showBattery} batteryStats={batteryStats} 
+                            showAssault={showAssault} assaultStats={assaultStats} showViolation={showViolation} violationStats={violationStats} 
+                            showShotsFired={showShotsFired} shotsFiredStats={shotsFiredStats} showGunPossession={showGunPossession} 
+                            gunPossessionStats={gunPossessionStats} showAmmoViolation={showAmmoViolation} ammoViolationStats={ammoViolationStats} 
+                            showGunSale={showGunSale} gunSaleStats={gunSaleStats} showGunInSchool={showGunInSchool} gunInSchoolStats={gunInSchoolStats} 
+                            showGunAttackOnCops={showGunAttackOnCops} gunAttackOnCopsStats={gunAttackOnCopsStats} showAttackOnCops={showAttackOnCops} 
+                            attackOnCopsStats={attackOnCopsStats} showCarjack={showCarjack} carjackStats={carjackStats} />
+                    </div>
                     {/* <GoogleMap
                         className="map-canvas"
                         mapContainerStyle={{
@@ -669,6 +511,18 @@ const UserPage = (props) => {
                 <div className="hood-map">
                     <div className="hood-name-title">
                         <h3 className="user-hoods-h3">{user.checkHood}</h3>
+                    </div>
+                    <div className="user-map-text">
+                        <MapComponent containerStyle={mobileContainerStyle} lat={neighborhoodObject[user.checkHood][0]} lng={neighborhoodObject[user.checkHood][1]} options={options} onMapLoad={onMapLoad} 
+                            setSelectedCrime={setSelectedCrime3} selectedCrime={selectedCrime3} showHomicide={showHomicide} 
+                            homicideStats={homicideStats} showSexAssault={showSexAssault} sexAssaultStats={sexAssaultStats} 
+                            showRobbery={showRobbery} robberyStats={robberyStats} showBattery={showBattery} batteryStats={batteryStats} 
+                            showAssault={showAssault} assaultStats={assaultStats} showViolation={showViolation} violationStats={violationStats} 
+                            showShotsFired={showShotsFired} shotsFiredStats={shotsFiredStats} showGunPossession={showGunPossession} 
+                            gunPossessionStats={gunPossessionStats} showAmmoViolation={showAmmoViolation} ammoViolationStats={ammoViolationStats} 
+                            showGunSale={showGunSale} gunSaleStats={gunSaleStats} showGunInSchool={showGunInSchool} gunInSchoolStats={gunInSchoolStats} 
+                            showGunAttackOnCops={showGunAttackOnCops} gunAttackOnCopsStats={gunAttackOnCopsStats} showAttackOnCops={showAttackOnCops} 
+                            attackOnCopsStats={attackOnCopsStats} showCarjack={showCarjack} carjackStats={carjackStats} />
                     </div>
                     {/* <GoogleMap
                         className="map-canvas"

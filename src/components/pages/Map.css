@@ -235,6 +235,11 @@
     align-items: center;
 }
 
+.crimeLocDesc,
+.crimeDesc {
+    line-height: 14px !important;
+}
+
 #modal-modal-title {
     margin: -20px 0 -8px 0;
 }

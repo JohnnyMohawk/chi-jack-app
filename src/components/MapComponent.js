@@ -285,8 +285,8 @@ export default function MapDesktop({containerStyle, lat, lng, options, onMapLoad
                         <h3>{new Date(selectedCrime.date.split('T')[0]).toDateString()}</h3>
                         <h3>{"At "+selectedCrime.date.split('T')[1].split(':')[0]+":"+selectedCrime.date.split('T')[1].split(':')[1]+" Hours"}</h3>
                         <h3>{selectedCrime.primary_type}</h3>
-                        <h3>{selectedCrime.description}</h3>
-                        <h3>{selectedCrime.location_description}</h3>
+                        <h3 className='crimeDesc'>{selectedCrime.description}</h3>
+                        <h3 className='crimeLocDesc'>{selectedCrime.location_description}</h3>
                     </div>
                 </InfoWindow>
             )}

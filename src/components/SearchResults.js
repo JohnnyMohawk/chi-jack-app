@@ -24,7 +24,7 @@ export default function SearchResults({pageTitle, totalCrimeCount, searchSpan, s
         <div className="main-title-results">
             {pageTitle === "Select" ? <h2 className="search-select">{TitleWords()}&nbsp;</h2> : <h2 className="search-results">Your Results:&nbsp;</h2>}
             {pageTitle !== "Select" ? <div className="cj-number-wrapper">
-                <h2 className="carjack-numbers heart" id="cj-num-id">{totalCrimeCount()}&nbsp;</h2>
+                <h2 className="carjack-numbers heart" id="cj-num-id">{totalCrimeCount().toLocaleString("en-US")}&nbsp;</h2>
                 <h2 className="search-params">{`Gun Crimes
                     ${searchSpan === "month" ? "in " + fullMonths[months.indexOf(searchMonth)] : ""}
                     ${searchSpan === "week" ? "on the week ending "+ fullMonths[months.indexOf(searchMonth)] + " " + searchDay : ""}
