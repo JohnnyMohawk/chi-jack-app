@@ -25,6 +25,7 @@ function HeroSection() {
             <h2>City of Chicago Gun Crime Data Visualizer</h2>
             <p className="slogan">Just Data <i class="fas fa-database"></i> No Spin</p>
             <div className="hero-btns">
+                <Button className="btns" buttonStyle="btn--primary" buttonSize="btn--large" to="/graph">The Data</Button>
                 <Button className="btns" buttonStyle="btn--outline" buttonSize="btn--large" to="/map">Map Data</Button>
                 <Button className="btns" buttonStyle="btn--primary" buttonSize="btn--large" to="/graph">Graph Data</Button>
             </div>

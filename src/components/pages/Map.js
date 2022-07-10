@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react'
 import { useLoadScript } from '@react-google-maps/api';
 import Lottie from 'react-lottie-player'
-import carSafety from '../../assets/animations/carSafety.json'
+import searchMap from '../../assets/animations/searchMap.json'
 import {formatDay, getDaysInMonth, yearRange, neighborhoodObject, fullMonths, months, 
         homicideApiCall, sexAssaultApiCall, robberyApiCall, batteryApiCall, assaultApiCall, gunViolationApiCall, 
         gunFireViolation, gunNoFireViolation, ammoViolation, illegalGunSale, gunInSchool, gunAttackOnCops, attackOnCops, 
@@ -288,7 +288,7 @@ const Map = () => {
                         <h1 className="loading-title">Loading... Please Wait</h1>
                         <Lottie
                             loop
-                            animationData={carSafety}
+                            animationData={searchMap}
                             play
                             style={{ width: 'calc(100vw - 550px)', height: 650 }}
                         />
@@ -320,7 +320,7 @@ const Map = () => {
                         <h1 className="loading-title-mobile">Loading... Please Wait</h1>
                         <Lottie
                             loop
-                            animationData={carSafety}
+                            animationData={searchMap}
                             play
                             style={{ width: 400, height: '75vh' }}
                         />
