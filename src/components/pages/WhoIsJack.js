@@ -14,44 +14,46 @@ function WhoIsJack () {
             <div className="about-container">
                 <h1>Who is Shy Jack?</h1>
                 <div className="about-text">
-                    <p>
-                    Hi, I’m John Nelson-Alden. I am a lifelong Chicagoan and I love this city. Chicagoans are a proud and diverse 
-                    bunch and we don’t always agree amongst ourselves… However, there is one thing we DO all agree on: Chicago 
-                    politics is and always has been corrupt! We often feel our representatives do not represent the citizens of the 
-                    city. We are presented half truths and fabrications as fact and simplistic political agendas are promoted as 
-                    solutions to complex societal problems. 
+                    <p className='whoIsJackCopy'>
+                        Hi, I’m John Nelson-Alden. I am a lifelong Chicagoan and I love this city. As most Chicagoans know however, Chicago 
+                        politics is and always has been corrupt. The politicians lie with statistics. We are presented half truths and 
+                        fabrications as fact and simplistic political agendas are promoted as solutions to complex societal problems. 
+                    </p>
+                    <p className='whoIsJackCopy'>
+                        I created Shy Jack to bring important data directly to the people of Chicago, free of any 
+                        political or ideological spin. The raw, unmanipulated data can be mapped and graphed according to the users 
+                        search parameters, providing access to easily understandable visual representations of the data that 
+                        matters to them.
+                    </p>
+                    
+                    <p className='whoIsJackCopy'>
+                        Chicago has its share of problems that must be addressed. 
+                        The numbers are clear that homicides, carjackings, and general gun crimes are on track to be a worse problem 
+                        than in past decades. Shy Jack’s data modeler is designed to explore these issues. The user-friendly interface sorts, filters, maps and 
+                        graphs all data that applies to the following crimes committed in Chicago:
+                    </p>
+                    <p className='whoIsJackCopy list'>
+                        <strong>Murder:</strong> 1st degree murder, 2nd degree murder, involuntary manslaughter, and reckless homicide.<br></br>
+                        <strong>Assault:</strong> All assaults committed with a firearm.<br></br>
+                        <strong>Sexual Assault:</strong> All sexual assaults committed with a firearm.<br></br>
+                        <strong>Robbery:</strong> All robberies committed with a firearm.<br></br>
+                        <strong>Battery:</strong> All batteries committed with a firearm.<br></br>
+                        <strong>Unlawful Use:</strong> All unlawful firearm use and reckless firearm discharge reports.<br></br>
+                        <strong>Unlawful Possession:</strong> All unlawful firearm possession reports.<br></br>
+                        <strong>Ammunition Violations:</strong> All unlawful ammo possession and banned ammo sales / possession.<br></br>
+                        <strong>Illegal Gun Sales:</strong> All unlawful firearm sales.<br></br>
+                        <strong>Guns in Schools:</strong> All reports of firearm sales / possession / use in schools.<br></br>
+                        <strong>License & Registration Violations:</strong> All firearm license and registration violations.<br></br>
+                        <strong>Gun Attacks on Police:</strong> All assaults and batteries of police officers involving a firearm.<br></br>
+                        <strong>Attacks on Police:</strong> All assaults and batteries of police officers not involving a firearm.<br></br>
+                        <strong>Carjackings:</strong> All instances of vehicular hijacking.<br></br>
                     </p>
                     <p>
-                    I created Shy Jack to bring important data directly to the great people of the City of Chicago, free of any 
-                    political or ideological spin. The raw, unmanipulated data can be mapped and graphed according to the users 
-                    search parameters, providing them access to easily understandable visual representations of the data that 
-                    matters to them.
-                    </p>
-                    <p>
-                    Chicago is a great city, but that greatness has been earned and is a status that must be dutifully maintained. 
-                    Maintaining greatness requires internal reflection and identifying all weaknesses and problems and making 
-                    conscious efforts to improve them. Like any city, Chicago has its share of problems that must be addressed. 
-                    The numbers are clear that homicides, carjackings, and general gun crimes are on track to be a worse problem than in past decades. Now that we have 
-                    identified this, we must attempt to fully understand the trends by analyzing the shape of the data.
-                    </p>
-                    <p>
-                    There are a lot of different stories about what is going on with crime in my city, coming from a lot of different 
-                    camps with different political agendas. Shy Jack is here to tell the true story, the story of the numbers. Numbers 
-                    don’t lie, politicians do. This is a tool to focus attention on the often overlooked macrotrends in the data. 
-                    Shy Jack is not here to propose solutions or take any political stance on these issues. Shy Jack is simply a broker 
-                    of honest information. Please do not mistake this honesty for negativity. It is meant to assist Chicago in the 
-                    process of perpetual improvement that has transformed the swampy shores of Lake Michigan into one of the finest 
-                    cities on the planet.
-                    </p>
-                    <p>
-                    “Eventually, I think Chicago will be the most beautiful great city left in the world.” ―Frank Lloyd Wright
-                    </p>
-                    <p>
-                    How does&nbsp;
-                    <Link to="/how-it-works" className="inline-logo">
-                        Shy Jack<i class="fas fa-car-crash"></i>
-                    </Link> 
-                    &nbsp;work?
+                        How does&nbsp;
+                        <Link to="/how-it-works" className="inline-logo">
+                            Shy Jack<i class="fas fa-car-crash"></i>
+                        </Link> 
+                        &nbsp;work?
                     </p>
                 </div>
             </div>

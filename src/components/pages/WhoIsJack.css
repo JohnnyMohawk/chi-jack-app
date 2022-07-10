@@ -29,12 +29,16 @@
     
 }
 
-p {
+.whoIsJackCopy {
     padding: 0 20px;
-    margin-bottom: 16px;
+    margin-bottom: 8px;
     font-family: 'Roboto', sans-serif;
-    line-height: 24px;
+    line-height: 20px;
     color: black;
+}
+
+.list {
+    padding-left: 40px;
 }
 
 .inline-logo {
