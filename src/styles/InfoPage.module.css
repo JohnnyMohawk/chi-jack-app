@@ -1,0 +1,114 @@
+.infoPageContainer {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    object-fit: contain;
+    padding-top: 30px;
+    background: linear-gradient(
+    90deg,
+    rgb(26, 23, 23) 0%,
+    rgb(28, 27, 27) 100%
+    );
+}
+
+.infoPageTitle {
+    color: #fff;
+    font-size: 45px;
+}
+
+.infoPageText {
+    max-width: 850px;
+    overflow: auto;
+    margin: 8px 150px;
+    color: rgb(22, 33, 62);
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 30px 30px 20px 40px;
+    
+}
+
+.whoIsJackCopy {
+    padding: 0 20px;
+    margin-bottom: 8px;
+    font-family: 'Roboto', sans-serif;
+    line-height: 20px;
+    color: black;
+}
+
+.list {
+    padding: 0 20px;
+    margin-bottom: 8px;
+    font-family: 'Roboto', sans-serif;
+    line-height: 16px;
+    color: black;
+    padding-left: 40px;
+
+}
+
+.inlineLogo {
+    font-family: 'Racing Sans One', cursive;
+    color: black;
+    text-decoration: none;
+    transition: 0.3s ease-out;
+}
+
+.inlineLogo:hover {
+    font-size: 17px;
+    color: tomato;
+    transition: 0.3s ease-out;
+}
+
+.infoPageSubtitle {
+    font-family: 'Roboto', sans-serif;
+    color: black;
+    margin-bottom: 6px;
+}
+
+.infoPageCopy {
+    padding: 0 20px;
+    margin-bottom: 6px;
+    font-family: 'Roboto', sans-serif;
+    line-height: 24px;
+    color: black;
+}
+
+.infoPageList {
+    margin: 0 40px;
+}
+
+.infoPageLink {
+    color: black !important;
+    text-decoration: none;
+    transition: 0.3s ease-out;
+}
+
+.infoPageLink:hover {
+    color: tomato;
+    transition: 0.3s ease-out;
+}
+
+.infoPageLink:visited {
+    color: black !important;
+    text-decoration: none;
+    transition: 0.3s ease-out;
+}
+
+.infoPageListItem {
+    margin-bottom: 6px;
+    font-family: 'Roboto', sans-serif;
+    line-height: 16px;
+    color: black;
+}
+
+@media screen and (max-width: 768px) {
+    .infoPageTitle {
+        font-size: 34px;
+    }
+
+    .infoPageText {
+        margin: 15px 20px;
+        max-width: 90vw;
+    }
+}

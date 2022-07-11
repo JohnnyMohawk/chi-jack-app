@@ -1,0 +1,35 @@
+.cityView {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    align-self: flex-end;
+    margin-bottom: -38px;
+}
+
+.skylineContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+    background-color: rgba(105,200,228,255);
+}
+
+.sosTitle {
+    margin-top: 10px;
+    color: #fff;
+    font-family: 'Monoton', cursive;
+    font-size: 70px;
+    transition: all 0.5s ease-out;
+}
+
+@media screen and (max-width: 960px) {
+        .sosTitle {
+        font-size: 38px;
+        margin-top: 60px;
+        transition: all 0.5s ease-out;
+    }
+}

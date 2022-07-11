@@ -1,7 +1,8 @@
 import React, {useEffect} from "react";
 import Lottie from 'react-lottie-player'
 import cityView from '../../assets/animations/cityView.json'
-import '../pages/SaveOurCity.css'
+import styles from '../../styles/SaveOurCity.module.css'
+
 
 function SaveOurCity() {
 
@@ -11,9 +12,9 @@ function SaveOurCity() {
 
     return (
         <>
-        <div className="skyline-container">
-            <h1 className="sos-title">Love Your Neighbor</h1>
-            <div className="city-view">
+        <div className={styles.skylineContainer}>
+            <h1 className={styles.sosTitle}>Love Your Neighbor</h1>
+            <div className={styles.cityView}>
                 <Lottie
                 loop
                 animationData={cityView}
