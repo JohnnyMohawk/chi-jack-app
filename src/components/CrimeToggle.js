@@ -1,6 +1,6 @@
 import React from 'react'
 import ToggleButton from '@mui/material/ToggleButton';
-import './pages/Map.css'
+import styles from '../styles/CrimeToggleComp.module.css'
 
 export default function CrimeToggle({
     showHomicide, setShowHomicide, showAssault, setShowAssault, showSexAssault, setShowSexAssault, showRobbery, 
@@ -10,9 +10,9 @@ export default function CrimeToggle({
     showCarjack, setShowCarjack}) {
   return (
     <>
-        <div className="crime-toggle-bar">
+        <div className={styles.crimeToggleBar}>
             <ToggleButton
-                className='crime-view'
+                className={styles.crimeView}
                 color="warning"
                 value="check"
                 selected={showHomicide}
@@ -22,7 +22,7 @@ export default function CrimeToggle({
                 Homicides
             </ToggleButton>
             <ToggleButton
-                className='crime-view'
+                className={styles.crimeView}
                 color="warning"
                 value="check"
                 selected={showAssault}
@@ -32,9 +32,9 @@ export default function CrimeToggle({
                 Assaults
             </ToggleButton>
         </div>
-        <div className="crime-toggle-bar">
+        <div className={styles.crimeToggleBar}>
             <ToggleButton
-                className='crime-view'
+                className={styles.crimeView}
                 color="warning"
                 value="check"
                 selected={showSexAssault}
@@ -44,7 +44,7 @@ export default function CrimeToggle({
                 Sex. Assaults
             </ToggleButton>
             <ToggleButton
-                className='crime-view'
+                className={styles.crimeView}
                 color="warning"
                 value="check"
                 selected={showRobbery}
@@ -54,9 +54,9 @@ export default function CrimeToggle({
                 Robberies
             </ToggleButton>
         </div>
-        <div className="crime-toggle-bar">
+        <div className={styles.crimeToggleBar}>
             <ToggleButton
-                className='crime-view'
+                className={styles.crimeView}
                 color="warning"
                 value="check"
                 selected={showBattery}
@@ -66,7 +66,7 @@ export default function CrimeToggle({
                 Batteries
             </ToggleButton>
             <ToggleButton
-                className='crime-view'
+                className={styles.crimeView}
                 color="warning"
                 value="check"
                 selected={showViolation}
@@ -76,9 +76,9 @@ export default function CrimeToggle({
                 Gun Violations
             </ToggleButton>
         </div>
-        <div className="crime-toggle-bar">
+        <div className={styles.crimeToggleBar}>
             <ToggleButton
-                className='crime-view'
+                className={styles.crimeView}
                 color="warning"
                 value="check"
                 selected={showShotsFired}
@@ -88,7 +88,7 @@ export default function CrimeToggle({
                 Shots Fired
             </ToggleButton>
             <ToggleButton
-                className='crime-view'
+                className={styles.crimeView}
                 color="warning"
                 value="check"
                 selected={showGunPossession}
@@ -98,9 +98,9 @@ export default function CrimeToggle({
                 Gun Possession
             </ToggleButton>
         </div>
-        <div className="crime-toggle-bar">
+        <div className={styles.crimeToggleBar}>
             <ToggleButton
-                className='crime-view'
+                className={styles.crimeView}
                 color="warning"
                 value="check"
                 selected={showAmmoViolation}
@@ -110,7 +110,7 @@ export default function CrimeToggle({
                 Ammo Violation
             </ToggleButton>
             <ToggleButton
-                className='crime-view'
+                className={styles.crimeView}
                 color="warning"
                 value="check"
                 selected={showGunSale}
@@ -120,9 +120,9 @@ export default function CrimeToggle({
                 Illegal Gun Sales
             </ToggleButton>
         </div>
-        <div className="crime-toggle-bar">
+        <div className={styles.crimeToggleBar}>
             <ToggleButton
-                className='crime-view'
+                className={styles.crimeView}
                 color="warning"
                 value="check"
                 selected={showGunInSchool}
@@ -132,7 +132,7 @@ export default function CrimeToggle({
                 Gun in School
             </ToggleButton>
             <ToggleButton
-                className='crime-view'
+                className={styles.crimeView}
                 color="warning"
                 value="check"
                 selected={showGunAttackOnCops}
@@ -142,9 +142,9 @@ export default function CrimeToggle({
                 Shots on Cops
             </ToggleButton>
         </div>
-        <div className="crime-toggle-bar">
+        <div className={styles.crimeToggleBar}>
             <ToggleButton
-                className='crime-view'
+                className={styles.crimeView}
                 color="warning"
                 value="check"
                 selected={showAttackOnCops}
@@ -154,7 +154,7 @@ export default function CrimeToggle({
                 Attack on Cops
             </ToggleButton>
             <ToggleButton
-                className='crime-view'
+                className={styles.crimeView}
                 color="warning"
                 value="check"
                 selected={showCarjack}

@@ -1,0 +1,31 @@
+.crimeToggleBar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 10px;
+    align-items: center;
+    justify-content: center;
+}
+
+.crimeView {
+    height: 40px !important;
+    -webkit-filter: invert(100%) !important;
+    filter: invert(100%) !important;
+    min-width: 170px;
+    margin: 5px 13px !important;
+}
+
+/* .crimeView:checked {
+    border: 1px solid green !important;
+    height: 40px !important;
+} */
+
+@media screen and (max-width: 960px) {
+    .crimeView {
+        height: 35px !important;
+        -webkit-filter: invert(100%) !important;
+        filter: invert(100%) !important;
+        min-width: 170px;
+        margin: 0px 13px !important;
+    }
+}

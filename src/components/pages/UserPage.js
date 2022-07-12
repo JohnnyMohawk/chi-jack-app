@@ -19,8 +19,6 @@ import { FaTimesCircle } from 'react-icons/fa'
 
 import * as authService from '../../services/authService'
 
-// import '../pages/UserPage.css'
-
 import styles from '../../styles/UserPage.module.css'
 
 require('dotenv').config()
