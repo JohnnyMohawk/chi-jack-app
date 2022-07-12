@@ -1,13 +1,13 @@
 import React from 'react'
-import './pages/Map.css'
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
+import styles from '../styles/SearchSpanComp.module.css'
 
 
 export default function SearchSpan({searchSpan, setSearchSpan, setSearchMonth, searchMonth, months, formatDay, setMonthNumber, setSearchDay, dayOfTheMonth, daysOfTheMonth, searchYear, setSearchYear, yearArray}) {
     return (
-        <div className="search-bar">
-            <Select className="sb-inputs" id='timeSpan' defaultValue={searchSpan} onChange={event => {
+        <div className={styles.searchBar}>
+            <Select className={styles.sbInputs} id='timeSpan' defaultValue={searchSpan} onChange={event => {
             setSearchSpan(event.target.value)
             }}>
                 <MenuItem value="most recent">One Day</MenuItem>
@@ -17,7 +17,7 @@ export default function SearchSpan({searchSpan, setSearchSpan, setSearchMonth, s
             </Select>
             {searchSpan === "week" || searchSpan === "most recent" || searchSpan === "month" ? 
             <>
-                <Select className="sb-inputs" id='monthSelect' defaultValue={searchMonth} onChange={event => {
+                <Select className={styles.sbInputs} id='monthSelect' defaultValue={searchMonth} onChange={event => {
                 setSearchMonth(event.target.value)
                 let moNo = months.indexOf(event.target.value) + 1
                 formatDay(moNo)
@@ -35,7 +35,7 @@ export default function SearchSpan({searchSpan, setSearchSpan, setSearchMonth, s
             }
             {searchSpan === "week" || searchSpan === "most recent" ? 
             <>
-                <Select className="sb-inputs" id='daySelect' defaultValue={dayOfTheMonth} onChange={event => {
+                <Select className={styles.sbInputs} id='daySelect' defaultValue={dayOfTheMonth} onChange={event => {
                     setSearchDay(event.target.value)
                     }}>
                         {daysOfTheMonth.map(day => (
@@ -48,7 +48,7 @@ export default function SearchSpan({searchSpan, setSearchSpan, setSearchMonth, s
             :
             <></>
             }
-            <Select className="sb-inputs" id='yearSelect' value={searchYear} onChange={event => {
+            <Select className={styles.sbInputs} id='yearSelect' value={searchYear} onChange={event => {
                 setSearchYear(event.target.value)
                 }}>
                     {yearArray.reverse().map(year => (
