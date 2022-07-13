@@ -4,7 +4,6 @@ import dataAnimation from '../../assets/animations/dataAnimation.json'
 import {formatDay, yearRange, fullMonths, homicideApiCall, sexAssaultApiCall, robberyApiCall, batteryApiCall, assaultApiCall, 
     gunViolationApiCall, gunFireViolation, gunNoFireViolation, ammoViolation, illegalGunSale, gunInSchool, gunAttackOnCops, 
     attackOnCops, carjackApiCall, filterApiCallGraph} from '../../services/mapService.js'
-// import '../pages/GunGraph.css'
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import SearchResultsGraph from '../SearchResultsGraph'

@@ -14,6 +14,42 @@
     );
 }
 
+.userPageTitle {
+    font-size: 45px;
+    color: #fff;
+}
+
+.userMapText {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-top: 1px solid rgb(65, 65, 65);
+}
+
+.hoodNameTitle {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.userHoodsH3 {
+    font-family: 'Josefin Sans', sans-serif;
+    color: #fff;
+    margin: 6px 0 4px 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.searchModal {
+    position: absolute;
+    bottom: 1%;
+    left: 5%;
+}
+
 .controlModalWrap {
     margin-top: 195px;
     padding: 20px 0;
@@ -22,10 +58,12 @@
     backdrop-filter: blur(2px);
 }
 
-.searchModal {
-    position: absolute;
-    bottom: 1%;
-    left: 5%;
+.closeButtonMobileWrap {
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+    margin-top: -30px !important;
+    background-color: none;
 }
 
 .closeButtonMobile {
@@ -37,25 +75,15 @@
     cursor: pointer;
 }
 
-.closeButtonMobileWrap {
-
+.userMapTextMobile {
+    margin-top: 12px;
     display: flex;
-    flex-direction: row;
-    justify-content: right;
-    margin-top: -30px !important;
-    background-color: none;
-}
-
-.userPageTitle {
-    font-size: 45px;
-    color: #fff;
-}
-
-.loadingTitle {
-    font-size: 45px;
-    color: #fff;
-    margin-top: 10px;
-    margin-bottom: -10px;
+    flex-direction: column;
+    align-items: center;
+    border-top: 1px solid rgb(65, 65, 65);
+    height: 100vh;
+    overflow: scroll;
+    margin-bottom: -45px;
 }
 
 .lottieWrapper {
@@ -77,116 +105,16 @@
     margin-bottom: -38px;
 }
 
-
-.mapContainer > h4 {
+.loadingTitle {
+    font-size: 45px;
     color: #fff;
-}
-
-.search-bar-wrapper {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
-
-.search-bar {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
-
-.sb-inputs {
-    margin: 5px;
-    margin-top: 8px;
-    padding: 6px;
-    font-size: 16px;
-    background-color: rgb(207, 207, 207);
-    border-radius: 5px;
-}
-
-.hoodNameTitle {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-}
-
-/* .hoodNameTitle > h3 {
-    color: #fff;
-    margin: 6px 0 4px 0;
-} */
-
-.userHoodsH3 {
-    font-family: 'Josefin Sans', sans-serif;
-    color: #fff;
-    margin: 6px 0 4px 0;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-}
-
-/* .hoodNameTitle > .userHoodsH3 {
-    font-family: 'Josefin Sans', sans-serif;
-} */
-/* 
-.hoodNameTitle-mid > h3 {
-    color: #fff;
-    margin: 6px 0 4px 0;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-} */
-
-.userMapText {
     margin-top: 10px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    border-top: 1px solid rgb(65, 65, 65);
+    margin-bottom: -10px;
 }
 
-.userMapTextMobile {
-    margin-top: 12px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border-top: 1px solid rgb(65, 65, 65);
-    height: 100vh;
-    overflow: scroll;
-    margin-bottom: -45px;
-}
-
-.info-window {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.info-window > h3 {
-    font-family: 'Josefin Sans', sans-serif;
-    line-height: 4px;
-    margin-top: 10px;
-}
-
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 960px) {
     .userPageTitle {
         font-size: 32px;
-    }
-
-    .search-bar-wrapper {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .sb-inputs {
-        margin: 3px;
-    }
-
-    .searchModal {
-        z-index: 1;
-        margin-bottom: 30px;
     }
 
     .controlModalWrap {
@@ -194,4 +122,12 @@
         padding: 20px 0;
     }
 
+    .searchModal {
+        z-index: 1;
+        margin-bottom: 30px;
+    }
+    
+    .loadingTitle {
+        font-size: 35px;
+    }
 }
