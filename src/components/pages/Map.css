@@ -1,4 +1,4 @@
-.map-container {
+/* .map-container {
     position: relative;
     height: 715px !important;
 }
@@ -29,7 +29,10 @@
     background-color: rgba(86, 86, 86, 0.5);
     -webkit-backdrop-filter: blur(2px);
     backdrop-filter: blur(2px);
-}
+} */
+
+
+
 
 /* .map-title-results {
     height: 60px;
@@ -44,7 +47,10 @@
     backdrop-filter: blur(2px);
 } */
 
-.main-title-results {
+
+
+
+/* .main-title-results {
     height: 60px;
 }
 
@@ -98,7 +104,11 @@
     filter: invert(100%) !important;
     min-width: 170px;
     margin: 5px 13px !important;
-}
+} */
+
+
+
+
 
 /* .crime-view-mobile {
     height: 35px !important;
@@ -108,11 +118,17 @@
     margin: 0px 13px !important;
 } */
 
-.arrest-view {
+
+
+
+/* .arrest-view {
     height: 40px !important;
     -webkit-filter: invert(100%) !important;
     filter: invert(100%) !important;
-}
+} */
+
+
+
 
 /* .arrest-view-mobile {
     margin-top: -8px;
@@ -121,7 +137,7 @@
     filter: invert(100%) !important;
 } */
 
-.arrest-all {
+/* .arrest-all {
     width: 60px;
 }
 
@@ -252,7 +268,6 @@
     display: flex;
     flex-direction: row;
     margin-top: 0px;
-    /* justify-content: center; */
     align-items: center;
 }
 
@@ -433,4 +448,4 @@
     .crimeSpecs {
         font-size: 7px;
     }
-}
+} */

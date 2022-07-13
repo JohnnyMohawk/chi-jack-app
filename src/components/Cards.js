@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react"
 import CardItem from "./CardItem"
-import './Cards.css'
+import '../styles/Cards.css'
 import * as newsService from '../services/newsService'
 
 
@@ -30,43 +30,6 @@ function Cards() {
             <h1>Chicago Carjackings in the News</h1>
             <div className='cards__container'>
                 <div className='cards__wrapper'>
-                    {/* <ul className='cards__items'>
-                        <CardItem 
-                        src={news[pages[counter][0]].image}
-                            text={news[pages[counter][0]].description}
-                            label={`${news[pages[counter][0]].source} ${new Date(news[pages[counter][0]].published_at).toDateString()}`}
-                            path={news[pages[counter][0]].url}
-                        />
-                        <CardItem 
-                            src={news[pages[counter][1]].image}
-                            text={news[pages[counter][1]].description}
-                            label={`${news[pages[counter][1]].source} ${new Date(news[pages[counter][1]].published_at).toDateString()}`}
-                            path={news[pages[counter][1]].url}
-                        />
-                    </ul>
-                    <ul className='cards__items'>
-                        <CardItem 
-                            src={news[pages[counter][2]].image}
-                            text={news[pages[counter][2]].description}
-                            label={`${news[pages[counter][2]].source} ${new Date(news[pages[counter][2]].published_at).toDateString()}`}
-                            path={news[pages[counter][2]].url}
-                        />
-                        <CardItem 
-                            src={news[pages[counter][3]].image}
-                            text={news[pages[counter][3]].description}
-                            label={`${news[pages[counter][3]].source} ${new Date(news[pages[counter][3]].published_at).toDateString()}`}
-                            path={news[pages[counter][3]].url}
-                        />
-                        <CardItem 
-                            src={news[pages[counter][4]].image}
-                            text={news[pages[counter][4]].description}
-                            label={`${news[pages[counter][4]].source} ${new Date(news[pages[counter][4]].published_at).toDateString()}`}
-                            path={news[pages[counter][4]].url}
-                        />
-                    </ul> */}
-
-
-
                     <ul className='cards__items'>
                         <CardItem 
                         src={news.articles[pages[counter][0]].urlToImage}
