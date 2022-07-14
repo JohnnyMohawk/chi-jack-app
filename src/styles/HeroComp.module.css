@@ -1,4 +1,4 @@
-/* video {
+.video {
     object-fit: cover;
     width: 100%;
     height: 100%;
@@ -6,16 +6,16 @@
     z-index: -1;
 }
 
-.mobile-background {
+.mobileBackground {
     object-fit: fill;
     margin-top: 140px;
     width: 100%;
-    height: 100vh;
+    /* height: 100vh; */
     position: fixed;
     z-index: -1;
 }
 
-.hero-container {
+.heroContainer {
     height: 100vh;
     width: 100%;
     display: flex;
@@ -26,7 +26,7 @@
     object-fit: contain;
 }
 
-.hero-logo {
+.heroLogo {
     color: #fff;
     font-family: 'Racing Sans One', cursive;
     font-size: 120px;
@@ -35,13 +35,13 @@
     transition: all 0.2s ease-in;
 }
 
-.hero-logo:hover {
+.heroLogo:hover {
     color: tomato;
     font-size: 122px;
     transition: all 0.2s ease-in;
 }
 
-.hero-container > h2 {
+.heroContainer > h2 {
     color: #fff;
     font-size: 32px;
     transition: all 0.2s ease-in;
@@ -54,21 +54,25 @@
     font-family: 'Josefin Sans', sans-serif;
 }
 
-.hero-btns {
+.heroBtns {
     margin-top: 14px;
     display: flex;
     flex-direction: row;
 }
 
-.hero-btns .btn {
+.heroBtns .btn {
     margin: 6px;
 }
 
-.hero-logo {
+#midBtn {
+    padding: 0 6px;
+}
+
+.heroLogo {
     animation: transitionIn 2s;
 }
 
-.hero-container > h2 {
+.heroContainer > h2 {
     animation: transitionIn 3s;
 }
 
@@ -76,7 +80,7 @@
     animation: transitionIn 4s;
 }
 
-.hero-container > .hero-btns {
+.heroContainer > .heroBtns {
     animation: transitionIn 5s;
 }
 
@@ -95,69 +99,69 @@
 }
 
 @media screen and (max-width: 960px) {
-    .hero-logo {
+    .heroLogo {
         font-size: 90px;
         transition: all 0.2s ease-in;
     }
 
-    .hero-logo:hover {
+    .heroLogo:hover {
         font-size: 92px;
         transition: all 0.2s ease-in;
     }
     
-    .hero-container > h2 {
+    .heroContainer > h2 {
         font-size: 24px;
         transition: all 0.2s ease-in;
     }
 }
 
 @media screen and (max-width: 768px) {
-    .hero-logo {
+    .heroLogo {
         font-size: 70px;
     }
 
-    .hero-logo:hover {
+    .heroLogo:hover {
         font-size: 72px;
         transition: all 0.2s ease-in;
     }
     
-    .hero-container > h2 {
+    .heroContainer > h2 {
         font-size: 19px;
     }
     
 }
 
 @media screen and (max-width: 500px) {
-    .hero-logo {
+    .heroLogo {
         font-size: 50px;
         margin-top: 30vh;
     }
 
-    .hero-logo:hover {
+    .heroLogo:hover {
         font-size: 52px;
         transition: all 0.2s ease-in;
     }
 
-    .hero-container > h2 {
+    .heroContainer > h2 {
         font-size: 13px;
     }
 
-    .hero-btns {
+    .heroBtns {
         margin-top: 14px;
         display: flex;
         flex-direction: column;
     }
     
-    .hero-btns .btn {
+    .heroBtns .btn {
         margin: 0 0 14px 0;
         min-width: 60vw;
     }
 
-    .hero-logo {
+    .heroLogo {
         animation: none;
     }
     
-    .hero-container > h2 {
+    .heroContainer > h2 {
         animation: none;
     }
     
@@ -165,8 +169,8 @@
         animation: none;
     }
     
-    .hero-container > .hero-btns {
+    .heroContainer > .heroBtns {
         animation: none;
     }
 
-} */
+}

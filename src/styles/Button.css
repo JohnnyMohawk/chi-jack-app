@@ -34,6 +34,7 @@
     padding: 12px 14px;
     font-size: 20px;
     min-width: 130px;
+    margin: 0 6px;
 }
 
 .btn--medium:hover, 
@@ -47,4 +48,13 @@
     background: tomato;
     color: #fff;
     transition: all 0.3s ease-out;
+}
+
+@media screen and (max-width: 500px) {
+    .btn--large {
+        padding: 12px 14px;
+        font-size: 20px;
+        min-width: 60vw;
+        margin: 6px 0;
+    }
 }
