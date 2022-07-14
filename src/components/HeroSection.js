@@ -1,6 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { Button } from './Button'
+import { ModalButton } from './ModalButton'
+// import { AboutDataModal } from './AboutDataModal'
+import AboutDataModal from './AboutDataModal'
 import './HeroSection.css'
 
 function HeroSection() {
@@ -25,14 +28,14 @@ function HeroSection() {
             <h2>City of Chicago Gun Crime Data Visualizer</h2>
             <p className="slogan">Just Data <i class="fas fa-database"></i> No Spin</p>
             <div className="hero-btns">
-                <Button className="btns" buttonStyle="btn--primary" buttonSize="btn--large" to="/graph">The Data</Button>
+                <AboutDataModal />
                 <Button className="btns" buttonStyle="btn--outline" buttonSize="btn--large" to="/map">Map Data</Button>
                 <Button className="btns" buttonStyle="btn--primary" buttonSize="btn--large" to="/graph">Graph Data</Button>
             </div>
         </div>
     ) : (
         <div className="hero-container">
-            <img src="/images/skyline-still-mobile1.png" className="mobile-background" />
+            <img src="/images/skyline-still-mobile1.png" className="mobile-background" alt='chicago skyline' />
             <Link to='/map' className='hero-logo'>
                 Shy Jack
                 <i class="fas fa-car-crash"></i>
@@ -40,6 +43,7 @@ function HeroSection() {
             <h2>City of Chicago Gun Crime Data Visualizer</h2>
             <p className="slogan">Just Data <i class="fas fa-database"></i> No Spin</p>
             <div className="hero-btns">
+                <AboutDataModal />
                 <Button className="btns" buttonStyle="btn--outline" buttonSize="btn--large" to="/map">Map Data</Button>
                 <Button className="btns" buttonStyle="btn--primary" buttonSize="btn--large" to="/graph">Graph Data</Button>
             </div>
