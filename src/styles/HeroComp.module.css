@@ -10,7 +10,6 @@
     object-fit: fill;
     margin-top: 140px;
     width: 100%;
-    /* height: 100vh; */
     position: fixed;
     z-index: -1;
 }
@@ -62,10 +61,6 @@
 
 .heroBtns .btn {
     margin: 6px;
-}
-
-#midBtn {
-    padding: 0 6px;
 }
 
 .heroLogo {

@@ -33,7 +33,7 @@ function JackKnows () {
                         misleading, or illegal conduct of other users, links, or third parties and that the risk of injury from the 
                         foregoing rests entirely with the user. Data are updated daily. To access a list of 
                         Chicago Police Department - Illinois Uniform Crime Reporting (IUCR) codes,&nbsp;  
-                        <a className={styles.infoPageLink} href="http://data.cityofchicago.org/Public-Safety/Chicago-Police-Department-Illinois-Uniform-Crime-R/c7ck-438e" target="_blank" rel="noopennernoreferrer">CLICK HERE</a>
+                        <a className={styles.infoPageLink} href="http://data.cityofchicago.org/Public-Safety/Chicago-Police-Department-Illinois-Uniform-Crime-R/c7ck-438e" target="_blank" rel="noreferrer">CLICK HERE</a>
                     </p>
                 </div>
             </div>

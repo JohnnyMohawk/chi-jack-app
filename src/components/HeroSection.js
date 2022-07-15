@@ -2,7 +2,6 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { Button } from './Button'
 import AboutDataModal from './AboutDataModal'
-// import './HeroSection.css'
 import styles from '../styles/HeroComp.module.css'
 
 function HeroSection() {
