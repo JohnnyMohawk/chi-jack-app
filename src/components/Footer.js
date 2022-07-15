@@ -2,7 +2,6 @@ import React, {useState, useEffect} from 'react'
 import * as emailService from '../services/emailService'
 import { Link, useHistory } from 'react-router-dom'
 import { Button } from './Button'
-import './Footer.css'
 import styles from '../styles/FooterComp.module.css'
 
 
