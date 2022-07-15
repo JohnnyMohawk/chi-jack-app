@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from './Button';
-import LoginModal from './LoginModal';
+import SignUpModal from './SignUpModal';
 
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
@@ -145,10 +145,7 @@ function Navbar({ user, handleLogout, handleSignupOrLogin }) {
                     >
                         <Box sx={style}>
                         <Typography className={styles.legendHeader}  variant="h6" component="h2" lineHeight={1}>
-                            Gun Crimes Icon Legend
-                        </Typography>
-                        <Typography id="modal-modal-subtitle" component="h2" lineHeight={1}>
-                            Lists all Illinois Uniform Crime Reporting (IUCR) codes for each map icon.
+                            Log In
                         </Typography>
                         <LoginForm handleSignupOrLogin={handleSignupOrLogin} handleClose={handleClose} closeMobileMenu={closeMobileMenu} />
                         <div className={styles.closeButtonLegendWrap}>
@@ -166,19 +163,23 @@ function Navbar({ user, handleLogout, handleSignupOrLogin }) {
                     {/* <LoginModal className='nav-item' handleSignupOrLogin={handleSignupOrLogin} closeMobileMenu={closeMobileMenu} /> */}
                 </li>
                 <li>
-                    <Link
+                    {/* <Link
                         to='/sign-up'
                         className='nav-links-mobile'
                         onClick={closeMobileMenu}
                     >
                         Sign Up
-                    </Link>
+                    </Link> */}
+                    <div className='nav-links-mobile'>
+                        <SignUpModal handleSignupOrLogin={handleSignupOrLogin} closeMobileMenu={closeMobileMenu} />
+                    </div>
                 </li>
             </ul>
             )}
             {button && 
                 <div>
-                    {user ? <Button buttonStyle='btn--outline' onClick={handleLogout} to="/">LOG OUT</Button> : <Button buttonStyle='btn--outline' to="sign-up">SIGN UP</Button>}
+                    {/* {user ? <Button buttonStyle='btn--outline' onClick={handleLogout} to="/">LOG OUT</Button> : <Button buttonStyle='btn--outline' to="sign-up">SIGN UP</Button>} */}
+                    {user ? <Button buttonStyle='btn--outline' onClick={handleLogout} to="/">LOG OUT</Button> : <SignUpModal handleSignupOrLogin={handleSignupOrLogin} closeMobileMenu={closeMobileMenu} />}
                 </div>
             }
             </div>
