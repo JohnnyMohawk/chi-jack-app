@@ -1,14 +1,3 @@
-.container {
-    /* display: flex; */
-    /* flex-flow: column; */
-    /* align-items: flex-start; */
-}
-
-.label,
-.button {
-    /* margin-right: .5rem; */
-}
-
 .inputContainer {
     margin-bottom: 1rem;
     display: flex;
@@ -36,26 +25,6 @@
 select {
     margin-left: -2px;
 }
-
-.signup-form-container {
-    /* height: 100vh; */
-    /* width: 100%; */
-    /* display: flex;
-    flex-direction: column;
-    align-items: center;
-    object-fit: contain;
-    padding-top: 20px;
-    background: linear-gradient(
-    90deg,
-    rgb(26, 23, 23) 0%,
-    rgb(28, 27, 27) 100%
-    ); */
-}
-
-/* .signup-form-container > h1 {
-    font-size: 45px;
-    color: #fff;
-} */
 
 .buttonContainerWrapper {
     margin: 0 auto;
