@@ -82,7 +82,7 @@ const Map = () => {
     const [showGunInSchool, setShowGunInSchool] = useState(false)
     const [showGunAttackOnCops, setShowGunAttackOnCops] = useState(false)
     const [showAttackOnCops, setShowAttackOnCops] = useState(false)
-    const [showCarjack, setShowCarjack] = useState(false)
+    const [showCarjack, setShowCarjack] = useState(true)
     const [totalCrimes, setTotalCrimes] = useState(0)
     const [pageTitle, setPageTitle] = useState(0)
 

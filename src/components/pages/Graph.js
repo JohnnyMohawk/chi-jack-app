@@ -61,7 +61,7 @@ function Graph() {
     const [showGunInSchool, setShowGunInSchool] = useState(false)
     const [showGunAttackOnCops, setShowGunAttackOnCops] = useState(false)
     const [showAttackOnCops, setShowAttackOnCops] = useState(false)
-    const [showCarjack, setShowCarjack] = useState(false)
+    const [showCarjack, setShowCarjack] = useState(true)
     const [allGunCrimeStats, setAllGunCrimeStats] = useState(
         [
             ...homicideStats, 

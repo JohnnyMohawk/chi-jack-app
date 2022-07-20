@@ -35,7 +35,7 @@ function Footer(props) {
         <div className={styles.footerContainer}>
             <section className={styles.footerSubscription}>
                 <p className={styles.footerSubscriptionHeading}>
-                Join Shy Jack's newsletter to receive important updates on issues involving Chicago carjackings, policing and policy.
+                Join Shy Jack's newsletter to receive important updates on issues involving Chicago gun crimes, policing and policy.
                 </p>
                 <p className={styles.footerSubscriptionText}>
                     You can unsubscribe at any time.
