@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 import * as emailService from '../services/emailService'
 import { Link, useHistory } from 'react-router-dom'
 import { Button } from './Button'
+import MailchimpFormContainer from "./MailchimpSubscribe";
 import styles from '../styles/FooterComp.module.css'
 
 
@@ -40,7 +41,7 @@ function Footer(props) {
                     You can unsubscribe at any time.
                 </p>
                 <div className={styles.inputAreas}>
-                    <form
+                    {/* <form
                         autoComplete="off"
                         onSubmit={handleSubmit}
                     >
@@ -54,7 +55,8 @@ function Footer(props) {
                             value={formData.email}
                             onChange={handleChange} />
                         <Button to="/sign-up" onClick={handleSubmit} buttonStyle='btn--outline' buttonSize="btn--medium">Subscribe</Button>
-                    </form>
+                    </form> */}
+                    <MailchimpFormContainer />
                 </div>
             </section>
             <div className={styles.footerLinks}>
