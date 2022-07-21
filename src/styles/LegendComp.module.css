@@ -73,6 +73,7 @@
     font-size: 25px;
     background-color: transparent;
     cursor: pointer;
+    color: black !important;
 }
 
 .closeButtonLegendWrap {
