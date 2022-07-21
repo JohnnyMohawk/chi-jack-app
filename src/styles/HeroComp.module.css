@@ -172,11 +172,11 @@
 
 @media screen and (max-height: 670px) {
     .mobileBackground {
-        margin-top: 200px;
+        margin-top: 230px;
     }
 
     .heroLogo {
         animation: none;
-        margin-top: 430px;
+        margin-top: 330px;
     }
 }
