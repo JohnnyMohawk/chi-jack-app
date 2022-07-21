@@ -169,3 +169,14 @@
     }
 
 }
+
+@media screen and (max-height: 670px) {
+    .mobileBackground {
+        margin-top: 200px;
+    }
+
+    .heroLogo {
+        animation: none;
+        margin-top: 430px;
+    }
+}
