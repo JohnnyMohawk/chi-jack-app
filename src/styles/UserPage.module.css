@@ -118,7 +118,7 @@
     }
 
     .controlModalWrap {
-        margin-top: 177px;
+        margin-top: 110px;
         padding: 20px 0;
     }
 
@@ -129,5 +129,32 @@
     
     .loadingTitle {
         font-size: 35px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .mapContainer {
+        padding: 8px 0;
+    }
+
+    .userPageTitle {
+        font-size: 26px;
+        width: 95vw;
+    }
+
+    .userMapTextMobile {
+        margin-top: 4px;
+    }
+
+    .userMapText {
+        margin-top: 0;
+    }
+
+    .userHoodsH3 {
+        margin: 4px 0 0 0;
+    }
+
+    .searchModal {
+        margin-bottom: 110px;
     }
 }

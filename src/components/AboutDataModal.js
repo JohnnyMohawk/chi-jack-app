@@ -61,7 +61,7 @@ export default function AboutDataModal() {
                         <u><strong>Carjackings:</strong></u> All instances of vehicular hijacking.<br></br>
                     </p>
                     <p className={styles.note}>
-                        *****<br></br>All instances of murder & carjackings are included in the dataset. For all other crimes, only instances committed with a firearm are included<br></br>*****
+                        All instances of murder & carjackings are included in the dataset. For all other crimes, only instances committed with a firearm are included.
                     </p>
                     <div className={styles.closeButtonLegendWrap}>
                         <button className={styles.closeButtonLegend} onClick={handleClose}><FaTimesCircle /></button>

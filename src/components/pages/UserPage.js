@@ -29,7 +29,7 @@ const containerStyle = {
 
 const mobileContainerStyle = {
     width: '100vw',
-    height: '75vh'
+    height: '65vh'
 }
 
 const options = {
