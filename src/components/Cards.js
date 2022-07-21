@@ -27,7 +27,7 @@ function Cards() {
         news ? 
         <>
         <div className='cards'>
-            <h1>Chicago Carjackings in the News</h1>
+            <h1>Chicago Gun Crime in the News</h1>
             <div className='cards__container'>
                 <div className='cards__wrapper'>
                     <ul className='cards__items'>

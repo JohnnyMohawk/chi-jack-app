@@ -87,7 +87,7 @@ function Footer(props) {
                     <a className={styles.socialIconLink} href="https://www.youtube.com/channel/UCICVa9m2nDCVNuIIUzW9nmg" target="_blank" rel="noreferrer">
                         <i className="fab fa-youtube" />
                     </a>
-                    <a className={styles.socialIconLink} href="https://twitter.com/ShyJack312" target="_blank" rel="noreferrer">
+                    <a className={styles.socialIconLink} href="https://twitter.com/_JohnnyMohawk" target="_blank" rel="noreferrer">
                         <i className="fab fa-twitter" />
                     </a>
                     <a className={styles.socialIconLink} href="https://www.linkedin.com/in/john-nelson-alden/" target="_blank" rel="noreferrer">
