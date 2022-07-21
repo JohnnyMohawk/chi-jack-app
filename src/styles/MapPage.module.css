@@ -32,6 +32,10 @@
     padding-right: 5vw;
 }
 
+.mobileLottieContainer {
+    margin-top: -11px;
+}
+
 .lottieContainer {
     display: flex;
     flex-direction: column;
