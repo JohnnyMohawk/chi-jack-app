@@ -324,7 +324,7 @@ const Map = () => {
                                 loop
                                 animationData={searchMap}
                                 play
-                                style={{ width: 400, height: '75vh' }}
+                                style={{ width: 400, height: '62vh' }}
                             />
                         </div>
                     </div>
