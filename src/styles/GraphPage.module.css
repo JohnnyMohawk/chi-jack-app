@@ -82,7 +82,7 @@
 
 .searchModal {
     position: absolute;
-    bottom: 16%;
+    bottom: 17%;
     left: 5%;
 }
 
@@ -130,7 +130,7 @@
     }
 
     .graphSection {
-        height: 64vh;
+        height: 63vh;
     }
 
     .mobileLottieContainer {
