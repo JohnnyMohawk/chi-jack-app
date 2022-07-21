@@ -2,7 +2,8 @@ import React, {useState, useEffect} from 'react'
 import * as emailService from '../services/emailService'
 import { Link, useHistory } from 'react-router-dom'
 import { Button } from './Button'
-import './Footer.css'
+import MailchimpFormContainer from "./MailchimpSubscribe";
+import styles from '../styles/FooterComp.module.css'
 
 
 function Footer(props) {
@@ -31,16 +32,16 @@ function Footer(props) {
         }, [formData])
 
     return (
-        <div className="footer-container">
-            <section className="footer-subscription">
-                <p className="footer-subscription-heading">
-                Join Shy Jack's newsletter to receive important updates on issues involving Chicago carjackings, policing and policy.
+        <div className={styles.footerContainer}>
+            <section className={styles.footerSubscription}>
+                <p className={styles.footerSubscriptionHeading}>
+                Join Shy Jack's newsletter to receive important updates on issues involving Chicago gun crimes, policing and policy.
                 </p>
-                <p className="footer-subscription-text">
+                <p className={styles.footerSubscriptionText}>
                     You can unsubscribe at any time.
                 </p>
-                <div className="input-areas">
-                    <form
+                <div className={styles.inputAreas}>
+                    {/* <form
                         autoComplete="off"
                         onSubmit={handleSubmit}
                     >
@@ -48,50 +49,48 @@ function Footer(props) {
                             type="email" 
                             name="email" 
                             placeholder="Your Email" 
-                            className="footer-input"
+                            className={styles.footerInput}
                             autoComplete="off"
                             id="email"
                             value={formData.email}
                             onChange={handleChange} />
                         <Button to="/sign-up" onClick={handleSubmit} buttonStyle='btn--outline' buttonSize="btn--medium">Subscribe</Button>
-                    </form>
+                    </form> */}
+                    <MailchimpFormContainer />
                 </div>
             </section>
-            <div className="footer-links">
-                <div className="footer-link-wrapper">
-                    <div className="footer-link-items">
+            <div className={styles.footerLinks}>
+                <div className={styles.footerLinkWrapper}>
+                    <div className={styles.footerLinkItems}>
                         <h2>About Jack</h2>
-                        <Link to="/who-is-jack" className="ft-link-class">Who is Shy Jack?</Link>
-                        <Link to="/how-it-works" className="ft-link-class">How Jack Knows?</Link>
+                        <Link to="/who-is-jack" className={styles.ftLinkClass}>Who is Shy Jack?</Link>
+                        <Link to="/how-it-works" className={styles.ftLinkClass}>How Jack Knows?</Link>
                     </div>
                 </div>
-                <div className="footer-link-wrapper">
-                    <div className="footer-link-items right">
+                <div className={styles.footerLinkWrapper}>
+                    <div className={styles.footerLinkItems} id={styles.right}>
                         <h2>Get Involved</h2>
                         <Link to="/what-to-do">What Can I Do?</Link>
                         <Link to="/save-our-city">Save Our City</Link>
                     </div>
                 </div>
             </div>
-        <section className="social-media">
-            <div className="social-media-wrap">
-                <div className="footer-logo">
-                    <Link to="/" className="social-logo">
+        <section className={styles.socialMedia}>
+            <div className={styles.socialMediaWrap}>
+                <div className={styles.footerLogo}>
+                    <Link to="/" className={styles.socialLogo}>
                         Shy Jack<i class="fas fa-car-crash"></i>
                     </Link>
                 </div>
-                <small className="website-rights">John Nelson-Alden © 2021</small>
-                <div className="social-icons">
-                    <a className="social-icon-link instagram" href="https://www.instagram.com/ShyJack312/" target="_blank" rel="noopennernoreferrer">
-                        <i className="fab fa-instagram" />
-                    </a>
-                    <a className="social-icon-link youtube" href="https://www.youtube.com/channel/UCICVa9m2nDCVNuIIUzW9nmg" target="_blank" rel="noopennernoreferrer">
+                <small className={styles.websiteRights}>John Nelson-Alden © {new Date().getFullYear()}</small>
+                <div className={styles.socialIcons}>
+                    <a className={styles.socialIconLink} href="https://www.youtube.com/channel/UCICVa9m2nDCVNuIIUzW9nmg" target="_blank" rel="noreferrer">
                         <i className="fab fa-youtube" />
                     </a>
-                    <a className="social-icon-link twitter" href="https://twitter.com/ShyJack312" target="_blank" rel="noopennernoreferrer">
+                    <a className={styles.socialIconLink} href="https://twitter.com/ShyJack312" target="_blank" rel="noreferrer">
                         <i className="fab fa-twitter" />
                     </a>
-                    <a className="social-icon-link linkedin" href="https://www.linkedin.com/in/john-nelson-alden/" target="_blank" rel="noopennernoreferrer">
+                    <a className={styles.socialIconLink} href="https://www.linkedin.com/in/john-nelson-alden/" target="_blank" rel="noreferrer">
                         <i className="fab fa-linkedin" />
                     </a>
                 </div>

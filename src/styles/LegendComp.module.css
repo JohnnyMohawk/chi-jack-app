@@ -1,0 +1,118 @@
+.dataModal {
+    display: flex;
+    flex-direction: row;
+}
+
+.whoIsJackCopy {
+    margin: 8px 0;
+    font-family: 'Roboto', sans-serif !important;
+    line-height: 18px;
+    color: black;
+}
+
+.list {
+    margin-bottom: 8px;
+    font-family: 'Roboto', sans-serif !important;
+    line-height: 16px;
+    color: black;
+}
+
+.note {
+    margin-bottom: 8px;
+    font-family: 'Roboto', sans-serif !important;
+    line-height: 14px;
+    font-size: 14.8px;
+    color: black;
+    text-align: center;
+}
+
+.legendHeader {
+    margin-top: -15px !important;
+}
+
+.crimeLegend {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 3px;
+    align-items: center;
+    justify-content: center;
+}
+
+#modal-modal-title {
+    margin: -20px 0 -8px 0;
+}
+
+#modal-modal-subtitle {
+    font-size: 10px !important;
+}
+
+.iconIUCRList {
+    display: flex;
+    flex-direction: row;
+    margin-top: 0px;
+    align-items: center;
+}
+
+.crimeLogo {
+    width: 50px;
+    height: 50px;
+    margin-right: 20px;
+}
+
+.crimeName {
+    font-size: 12px;
+}
+
+.crimeSpecs {
+    font-size: 8px;
+}
+
+.closeButtonLegend {
+    border: none;
+    font-size: 25px;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.closeButtonLegendWrap {
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+    margin-bottom: -30px !important;
+    background-color: none;
+}
+
+.closeButtonMobile {
+    border: none;
+    font-size: 25px;
+    padding-right: 20px;
+    color: #fff;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.closeButtonMobileWrap {
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+    margin-top: -30px !important;
+    background-color: none;
+}
+
+@media screen and (max-height: 700px) {
+
+    .iconIUCRList {
+        margin-top: 0px;
+    }
+    
+    .crimeLogo {
+        width: 40px;
+        height: 40px;
+        margin-right: 20px;
+    }
+
+    .crimeSpecs {
+        font-size: 7px;
+    }
+}

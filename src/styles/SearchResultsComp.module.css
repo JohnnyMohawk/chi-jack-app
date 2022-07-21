@@ -1,0 +1,143 @@
+.mainTitleResults {
+    height: 60px;
+}
+
+.graphTitleResults {
+    height: 90px;
+}
+
+.cjNumberHeader {
+    display: flex;
+    flex-direction: column;
+}
+
+.cjNumberWrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: -6px;
+}
+
+.searchResults {
+    margin: 0 0 5px 0;
+    font-size: 23px;
+    color: #fff;
+}
+
+.searchSelect {
+    margin: 0 0 5px 0;
+    font-size: 23px;
+    color: tomato;
+}
+
+.searchParams {
+    font-size: 22px;
+    color: #fff;
+}
+
+.searchParams2 {
+    font-size: 22px;
+    color: #fff;
+    margin-top: 10px;
+}
+
+.carjackNumbers,
+#cjNumId {
+    color: tomato;
+    font-size: 30px;
+    animation: heart-pulse 0.9s infinite ease-out;
+}
+
+.gunCrimeNumbers,
+#gcNumId {
+    color: tomato;
+    font-size: 30px;
+    animation: heart-pulse2 0.9s infinite ease-out;
+    z-index: 1;
+}
+
+@keyframes heart-pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.08);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes heart-pulse2 {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.02);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+@media screen and (max-width: 1100px) {
+    .searchParams {
+        font-size: 22px;
+        margin-bottom: 5px;
+    }
+
+    #cjNumId,
+    .gunCrimeNumbers,
+    #gcNumId {
+        font-size: 36px;
+    }
+}
+
+@media screen and (max-width: 960px) {
+    .mainTitleResults {
+        height: 60px;
+        background-color: rgba(86, 86, 86, 0.5);
+        padding: 7px 10px ;
+        width: 100vw;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 1;
+        -webkit-backdrop-filter: blur(2px);
+        backdrop-filter: blur(2px);
+    }
+
+    .searchSelect {
+        font-size: 21px;
+        padding: 7px 0 0 7px;
+    }
+
+    .graphTitleResults {
+        padding: 5px 0 0 10px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .searchParams,
+    .searchParams2 {
+        font-size: 22px;
+        margin-bottom: 5px;
+    }
+
+    #cjNumId,
+    .gunCrimeNumbers,
+    #gcNumId {
+        font-size: 32px;
+    }
+}
+
+@media screen and (max-width: 550px) {
+    #cjNumId {
+        font-size: 22px;
+    }
+
+    .searchParams {
+        font-size: 14px;
+        margin-top: 7px;
+    }
+}

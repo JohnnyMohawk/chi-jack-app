@@ -41,7 +41,6 @@ const SignupForm = (props) => {
 
     return (
         <div className="signup-form-container">
-        <h1>Sign Up</h1>
             <div className="signup-form-text">
                 <form
                     autoComplete="off"

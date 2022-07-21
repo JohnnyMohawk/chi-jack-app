@@ -1,0 +1,38 @@
+.graphSelectWrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 6px;
+}
+
+.graphDropDown,
+.yearDropDown,
+.yrMnthDropDown {
+    margin: 3px;
+    padding: 6px;
+    font-size: 16px;
+    background-color: rgb(207, 207, 207);
+    border-radius: 5px;
+    height: 40px !important;
+    font-size: 12px !important;
+}
+
+.yearDropDown {
+    min-width: 86px !important;
+}
+
+.yrMnthDropDown {
+    min-width: 118px !important;
+}
+
+.graphDropDown{
+    min-width: 146px !important;
+}
+
+@media screen and (max-width: 960px) {
+    .yearDropDown,
+    .yrMnthDropDown,
+    .graphDropDown {
+        height: 35px !important;
+    }
+}

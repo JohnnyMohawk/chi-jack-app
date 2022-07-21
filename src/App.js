@@ -35,7 +35,7 @@ function App(props) {
 
   return (
     <Router>
-      <NavBar history={history} user={user} handleLogout={handleLogout}/>
+      <NavBar history={history} user={user} handleLogout={handleLogout} handleSignupOrLogin={handleSignupOrLogin}/>
       <Switch>
         <Route path='/' exact component={Home} />
         <Route path='/map' component={Map} />

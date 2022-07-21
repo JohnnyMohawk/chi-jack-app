@@ -1,0 +1,22 @@
+.infoWindow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+}
+
+.infoWindow > h3,
+.infoWindow > h4,
+.infoWindow > h5 {
+    font-family: 'Josefin Sans', sans-serif;
+    margin-top: 10px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.crimeLocDesc,
+.crimeDesc {
+    line-height: 14px !important;
+}

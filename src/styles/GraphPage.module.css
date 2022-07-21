@@ -1,0 +1,131 @@
+.graphContainer {
+    position: relative;
+    height: 715px !important;
+    height: 90vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    object-fit: contain;
+    padding-top: 50px;
+    background: linear-gradient(
+    90deg,
+    rgb(26, 23, 23) 0%,
+    rgb(28, 27, 27) 100%
+    );
+}
+
+.graphPanelWrap {
+    width:400px;
+    position: absolute;
+    left: 0;
+    padding-left: 50px;
+}
+
+.graphSection {
+    overflow: auto;
+    position: absolute;
+    right: 0;
+    top: 0;
+    margin-top: -2px;
+    height: 720px;
+    width: calc(100vw - 450px);
+    overflow: auto;
+    margin-top: 10px;
+    color: rgb(22, 33, 62);
+    padding: 20px;
+    border-top: 1px solid rgb(65, 65, 65);
+}
+
+.lottieWrapper {
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding-right: 5vw;
+}
+
+.lottieContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    object-fit: cover;
+    width: 100%;
+    height: 90%;
+    margin-bottom: -38px;
+}
+
+.loadingTitle {
+    font-size: 45px;
+    color: #fff;
+    margin-top: 10px;
+    margin-bottom: -10px;
+    padding-bottom: 10px;
+}
+
+.graphContainerMobile {
+    position: relative;
+    background: linear-gradient(
+    90deg,
+    rgb(26, 23, 23) 0%,
+    rgb(28, 27, 27) 100%
+    );
+    height: 90vh;
+}
+
+.loadingTitleMobile {
+    font-size: 35px;
+    padding-top: 70px;
+    margin-bottom: -15px;
+    color: #fff;
+}
+
+.searchModal {
+    position: absolute;
+    bottom: 1%;
+    left: 5%;
+}
+
+.controlModalWrapGraph {
+    margin-top: 160px;
+    padding: 20px 0;
+    width:100vw;
+    position: absolute;
+    left: 0;
+    background-color: rgba(86, 86, 86, 0.5);
+    -webkit-backdrop-filter: blur(2px);
+    backdrop-filter: blur(2px);
+}
+
+.closeButtonMobileGraph {
+    border: none;
+    font-size: 25px;
+    padding-right: 20px;
+    color: #fff;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.closeButtonMobileWrapGraph {
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+    margin-top: 10px !important;
+    background-color: none;
+}
+
+@media screen and (max-width: 960px) {
+    .graphSection {
+        width: 100vw;
+        position: absolute;
+        left: 0;
+        height: 79vh;
+        margin-top: 65px;
+    }
+}
+
+@media screen and (max-width: 550px) {
+    .graphContainer {
+        max-width: 100vw;
+    }
+}

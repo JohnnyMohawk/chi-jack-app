@@ -1,0 +1,60 @@
+:root {
+    --primary: #fff;
+}
+
+.btn {
+    padding: 8px 20px;
+    border-radius: 2px;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    font-family: 'PT Sans', sans-serif;
+}
+
+.btn--primary {
+    background-color: var(--primary);
+    color: #242424;
+    border: 1px solid var(--primary);
+}
+
+.btn--outline {
+    background-color: transparent;
+    color: #fff;
+    padding: 8px 20px;
+    border: 1px solid var(--primary);
+    transition: all 0.3s ease-out;
+}
+
+.btn--medium {
+    padding: 8px 20px;
+    font-size: 20px;
+}
+
+.btn--large {
+    padding: 12px 14px;
+    font-size: 20px;
+    min-width: 130px;
+    margin: 0 6px;
+}
+
+.btn--medium:hover, 
+.btn--large:hover {
+    background: #fff;
+    color: tomato;
+    transition: all 0.3s ease-out;
+}
+
+.btn--primary:hover {
+    background: tomato;
+    color: #fff;
+    transition: all 0.3s ease-out;
+}
+
+@media screen and (max-width: 500px) {
+    .btn--large {
+        padding: 12px 14px;
+        font-size: 20px;
+        min-width: 60vw;
+        margin: 6px 0;
+    }
+}

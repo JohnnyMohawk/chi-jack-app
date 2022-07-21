@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react"
 import CardItem from "./CardItem"
-import './Cards.css'
+import '../styles/Cards.css'
 import * as newsService from '../services/newsService'
 
 
@@ -21,7 +21,7 @@ function Cards() {
     useEffect(() => {
         serverSideApiCall()
     }, [])
-
+    console.log(news)
     return (
         
         news ? 

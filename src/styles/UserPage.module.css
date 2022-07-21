@@ -1,0 +1,133 @@
+.mapContainer {
+    position: relative;
+    height: 90vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    object-fit: contain;
+    padding-top: 20px;
+    background: linear-gradient(
+    90deg,
+    rgb(26, 23, 23) 0%,
+    rgb(28, 27, 27) 100%
+    );
+}
+
+.userPageTitle {
+    font-size: 45px;
+    color: #fff;
+}
+
+.userMapText {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-top: 1px solid rgb(65, 65, 65);
+}
+
+.hoodNameTitle {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.userHoodsH3 {
+    font-family: 'Josefin Sans', sans-serif;
+    color: #fff;
+    margin: 6px 0 4px 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.searchModal {
+    position: absolute;
+    bottom: 1%;
+    left: 5%;
+}
+
+.controlModalWrap {
+    margin-top: 195px;
+    padding: 20px 0;
+    background-color: rgba(86, 86, 86, 0.5);
+    -webkit-backdrop-filter: blur(2px);
+    backdrop-filter: blur(2px);
+}
+
+.closeButtonMobileWrap {
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+    margin-top: -30px !important;
+    background-color: none;
+}
+
+.closeButtonMobile {
+    border: none;
+    font-size: 25px;
+    padding-right: 80px;
+    color: #fff;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.userMapTextMobile {
+    margin-top: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-top: 1px solid rgb(65, 65, 65);
+    height: 100vh;
+    overflow: scroll;
+    margin-bottom: -45px;
+}
+
+.lottieWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+}
+
+.lottieContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    align-self: flex-end;
+    margin-bottom: -38px;
+}
+
+.loadingTitle {
+    font-size: 45px;
+    color: #fff;
+    margin-top: 10px;
+    margin-bottom: -10px;
+}
+
+@media screen and (max-width: 960px) {
+    .userPageTitle {
+        font-size: 32px;
+    }
+
+    .controlModalWrap {
+        margin-top: 177px;
+        padding: 20px 0;
+    }
+
+    .searchModal {
+        z-index: 1;
+        margin-bottom: 30px;
+    }
+    
+    .loadingTitle {
+        font-size: 35px;
+    }
+}

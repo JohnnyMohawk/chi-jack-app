@@ -1,0 +1,31 @@
+.arrestView {
+    height: 40px !important;
+    -webkit-filter: invert(100%) !important;
+    filter: invert(100%) !important;
+}
+
+.arrestAll {
+    width: 60px;
+}
+
+.arrestToggle {
+    width: 154px;
+}
+
+.crimeToggleBar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 10px;
+    align-items: center;
+    justify-content: center;
+}
+
+@media screen and (max-width: 960px) {
+    .arrestView {
+        margin-top: -8px;
+        height: 35px !important;
+        -webkit-filter: invert(100%) !important;
+        filter: invert(100%) !important;
+    }
+}

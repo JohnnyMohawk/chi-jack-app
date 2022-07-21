@@ -15,40 +15,23 @@ export const todaysNews = async (news) => {
     }
 }
 
-// export const makeNewsApiCall = async() => {
-//     try {
-//         let res = await fetch('https://newsapi.org/v2/everything?q=chicago+carjacking&sortBy=publishedAt&domains=wgntv.com,abc7chicago.com,foxnews.com,nbcnews.com,nypost.com,chicagotribune.com,abcnews.go.com,chicago.suntimes.com,wbez.org,thedailybeast.com,dailycaller.com,nypost.com&apiKey=fca7629171c143338ccaa74f5c0bb383')
-//         const newsData = await res.json()
-//         console.log("Inner makeNewsApiCall Log", newsData)
-//         return (
-//             {
-//                 news: newsData,
-//                 numPages: Math.floor(newsData.articles.length / 5),
-//                 pages: chunkArray(indexArray(newsData.articles), 5),
-//             }
-//         )
-//     } catch (error) {
-//         throw error
-//     }
-// }
-
 export const makeNewsApiCall = async() => {
     let dbNews = await getNews()
     try {
         if(new Date().toISOString().split('T')[0] > new Date(dbNews.pullDate).toISOString().split('T')[0]){
-        let res = await fetch('http://newsapi.org/v2/everything?q=chicago+carjacking&sortBy=publishedAt&domains=wgntv.com,abc7chicago.com,foxnews.com,nbcnews.com,nypost.com,chicagotribune.com,abcnews.go.com,chicago.suntimes.com,wbez.org,thedailybeast.com,dailycaller.com,nypost.com&apiKey=fca7629171c143338ccaa74f5c0bb383')
-        const newsData = await res.json()
-        console.log("Inner makeNewsApiCall Log", newsData)
-        if(newsData.status === "ok"){
-            todaysNews({status: newsData.status, totalResults: newsData.totalResults, articles: newsData.articles})
-        }
-        return (
-            {
-                news: newsData,
-                numPages: Math.floor(newsData.articles.length / 5),
-                pages: chunkArray(indexArray(newsData.articles), 5),
+            let res = await fetch(`http://newsapi.org/v2/everything?q=chicago+carjacking&sortBy=publishedAt&domains=wgntv.com,abc7chicago.com,foxnews.com,nbcnews.com,nypost.com,chicagotribune.com,abcnews.go.com,chicago.suntimes.com,wbez.org,thedailybeast.com,dailycaller.com,nypost.com&apiKey=fca7629171c143338ccaa74f5c0bb383`)
+            const newsData = await res.json()
+            console.log("Inner makeNewsApiCall Log", newsData)
+            if(newsData.status === "ok"){
+                todaysNews({status: newsData.status, totalResults: newsData.totalResults, articles: newsData.articles})
             }
-        )
+            return (
+                {
+                    news: newsData,
+                    numPages: Math.floor(newsData.articles.length / 5),
+                    pages: chunkArray(indexArray(newsData.articles), 5),
+                }
+            )
         }else{
             return dbNews
         }
