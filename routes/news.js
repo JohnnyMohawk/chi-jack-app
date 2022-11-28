@@ -7,6 +7,8 @@ router.post('/', newsCtrl.create)
 
 router.get('/', newsCtrl.newsIndex)
 
+router.get('/news', newsCtrl.newsUpdate)
+
 export {
     router
 }

@@ -42,6 +42,7 @@ export const makeNewsApiCall = async() => {
 
 export const getNews = async() => {
     let res = await fetch('api/news')
+    console.log(res)
     const newsDbData = await res.json()
     console.log("Inner getNews Log", newsDbData)
     return (
