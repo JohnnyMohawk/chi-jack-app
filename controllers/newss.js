@@ -1,17 +1,21 @@
 import { News } from "../models/news.js";
-// import { makeNewsApiCall } from "../src/services/newsService.js";
 import fetch from 'node-fetch';
 import { CronJob } from "cron";
 
-// var CronJob = require('cron').CronJob;
 var job = new CronJob(
-	// '52 20 * * *',
-    '* * * * * *',
+	'0 0 * * *',
 	async function () {
-        // let boom = await fetch(`https://www.shyjack.com/api/news/`);
-        // const news = await boom.json()
-		// console.log(new Date().toLocaleString(), news);
-        console.log(new Date().toLocaleString());
+        await fetch(`https://www.shyjack.com/api/news/news`);
+	},
+	null,
+	true,
+	'America/Chicago'
+);
+
+var job2 = new CronJob(
+	'* * * * * *',
+	function() {
+		console.log('You will see this message every second');
 	},
 	null,
 	true,
@@ -55,16 +59,6 @@ const newsUpdate = async (req, res) => {
     }
 }
 
-// const create = async (req, res) => {
-//     try {
-//         const news = await new News(req.body)
-//         await news.save()
-        
-//         return res.status(201).json(news)
-//     } catch (err) {
-//         return res.status(500).json({ err: err.message })
-//     }
-// }
 
 const newsIndex = async (req, res) => {
     try {
