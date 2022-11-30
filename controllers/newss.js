@@ -1,6 +1,22 @@
 import { News } from "../models/news.js";
-import { makeNewsApiCall } from "../src/services/newsService.js";
+// import { makeNewsApiCall } from "../src/services/newsService.js";
 import fetch from 'node-fetch';
+import { CronJob } from "cron";
+
+// var CronJob = require('cron').CronJob;
+var job = new CronJob(
+	// '52 20 * * *',
+    '* * * * * *',
+	async function () {
+        // let boom = await fetch(`https://www.shyjack.com/api/news/`);
+        // const news = await boom.json()
+		// console.log(new Date().toLocaleString(), news);
+        console.log(new Date().toLocaleString());
+	},
+	null,
+	true,
+	'America/Chicago'
+);
 
 const create = async (req, res) => {
     try {
@@ -15,10 +31,28 @@ const create = async (req, res) => {
 }
 
 const newsUpdate = async (req, res) => {
-    console.log("POOOOOPPOOOOOOPOOOOO")
-    let poop = await fetch(`http://newsapi.org/v2/everything?q=chicago+gun+crime&sortBy=publishedAt&domains=wgntv.com,abc7chicago.com,foxnews.com,nbcnews.com,nypost.com,chicagotribune.com,abcnews.go.com,chicago.suntimes.com,wbez.org,thedailybeast.com,dailycaller.com,nypost.com&apiKey=fca7629171c143338ccaa74f5c0bb383`)
-    const newsData = await poop.json()
+    let newsCall = await fetch(`http://newsapi.org/v2/everything?q=chicago+gun+crime&sortBy=publishedAt&domains=wgntv.com,abc7chicago.com,foxnews.com,nbcnews.com,nypost.com,chicagotribune.com,abcnews.go.com,chicago.suntimes.com,wbez.org,thedailybeast.com,dailycaller.com,nypost.com&apiKey=fca7629171c143338ccaa74f5c0bb383`)
+    const newsData = await newsCall.json()
     console.log("Inner makeNewsApiCall Log", newsData)
+    if(newsData.status === "ok"){
+        const todaysNews = async (news) => {
+            try {
+                const res = await fetch('https://www.shyjack.com/api/news/', {
+                    method: 'POST',
+                    headers: {'content-type': 'application/json',},
+                    body: JSON.stringify(news)
+                }, { mode: 'cors' })
+                const data = await res.json()
+                return data
+            } catch (error) {
+                throw error
+            }
+        }
+        todaysNews({status: newsData.status, totalResults: newsData.totalResults, articles: newsData.articles})
+        return res.status(201).end()
+    } else {
+        return res.status(500).json({ err: newsData.status })
+    }
 }
 
 // const create = async (req, res) => {
