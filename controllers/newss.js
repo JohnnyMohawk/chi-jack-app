@@ -3,7 +3,7 @@ import fetch from 'node-fetch';
 import { CronJob } from "cron";
 
 var job = new CronJob(
-	'0 0 * * *',
+	'0 22 * * *',
 	async function () {
         await fetch(`https://www.shyjack.com/api/news/news`);
 	},
@@ -12,15 +12,6 @@ var job = new CronJob(
 	'America/Chicago'
 );
 
-var job2 = new CronJob(
-	'* * * * * *',
-	function() {
-		console.log('You will see this message every second');
-	},
-	null,
-	true,
-	'America/Chicago'
-);
 
 const create = async (req, res) => {
     try {
